@@ -1,5 +1,6 @@
-sc_somanet-base CHANGELOG
+sc_somanet-base Change Log
 ==========================
+
 
 1.0.0
 -----

@@ -14,13 +14,13 @@ Key Features
 Description
 -----------
 
-The module allows easily enabling or disabling all xSCOPE functions without removing them from the code.
+The module allows enabling/disabling xSCOPE without removing the function calls from the code.
 
 - To enable the xSCOPE use: ::
 
   #define USE_XSCOPE
 
-- To desable the xSCOPE remove the define. All xSCOPE functions will be replaced with NOPs
+- To disable the xSCOPE remove the define. All xSCOPE functions will be replaced with NOPs
 
 - This may be added to CFLAGS in your project's Makefile: ::
 

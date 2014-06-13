@@ -14,7 +14,7 @@ Key Features
 Description
 -----------
 
-The module carries out the code parameterization necessary for the various hardware configurations possible with SOMANET. Define here your COM, Core and IFM boards. Create *nodeconfig.h* in your app's top level source directory and configure the nodestack along the following lines::
+The module carries out the code parameterization necessary for the various hardware configurations possible with SOMANET. Define here your COM, Core and IFM boards. Create *nodeconfig.h* in your app's top level source directory and configure the node stack along the following lines::
       #define SOMANET_CORE c22
       #define SOMANET_COM ecat
       #define SOMANET_IFM dc100-rev-a

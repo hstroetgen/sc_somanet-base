@@ -5,11 +5,6 @@ SOMANET BASE Software Component
 :Maintainer: Synapticon
 :Description: The SOMANET BASE software component is a collection of essential modules required for the majority of SOMANET-based applications.
 
-
-...............................
-.. image:: https://s3-eu-west-1.amazonaws.com/synapticon-resources/images/logos/synapticon_fullname_blackoverwhite_280x48.png
-   :align: left
-
 Key Features
 ============
 

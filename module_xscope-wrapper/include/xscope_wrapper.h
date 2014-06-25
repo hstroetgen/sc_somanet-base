@@ -1,17 +1,15 @@
 /**
-   \file xscope_wrapper.h
-   \brief XScope wrapper with the possibility to disable all probes
-   \author Martin Schwarz <mschwarz@synapticon.com>
-*/
+ * @file xscope_wrapper.h
+ * @author Martin Schwarz <mschwarz@synapticon.com>
+ */
 
 #pragma once
 
 /**
-   \def USE_XSCOPE
-   Enable all XScope related function calls when defined. This may
-   be added to CFLAGS in your project's Makefile:
-     CFLAGS += -DUSE_XSCOPE
-*/
+ * \def USE_XSCOPE
+ * Enable all XScope related function calls when defined. This may be
+ * added to CFLAGS in your project's Makefile: CFLAGS += -DUSE_XSCOPE
+ */
 #ifdef USE_XSCOPE
 
 #include <xscope.h>

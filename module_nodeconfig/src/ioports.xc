@@ -1,9 +1,7 @@
 
 /**
- * \file ioports.xc
- * \author Martin Schwarz <mschwarz@synapticon.com>
- * \version 1.0
- * \date 10/04/2014
+ * @file ioports.xc
+ * @author Martin Schwarz <mschwarz@synapticon.com>
  */
 
 #define INCLUDE_FROM_IOPORTS_XC

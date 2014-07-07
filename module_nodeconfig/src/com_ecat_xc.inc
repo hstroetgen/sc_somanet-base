@@ -4,7 +4,7 @@
 #include <platform.h>
 
 /****************
- * COM EtherCAT
+ * COM-EtherCAT
  ****************/
  
  /* ET1100 asynchronous parallel interface */

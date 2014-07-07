@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <flash.h>
 /************
- * Core C22
+ * Core-C22
  ************/  
  /* SPI port definitions */ 
 on tile[0]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,

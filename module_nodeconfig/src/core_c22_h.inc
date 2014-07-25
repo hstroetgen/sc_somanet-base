@@ -1,7 +1,7 @@
 #pragma once
 #include <flash.h>
 /************
- * Core C22
+ * Core-C22
  ************/
 extern fl_SPIPorts p_spi_flash;
 

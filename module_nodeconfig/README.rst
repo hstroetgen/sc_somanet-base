@@ -1,4 +1,4 @@
-SOMANET NODE CONFIGURATION module
+SOMANET-Node Configuration module
 =================================
 
 :scope: General Use

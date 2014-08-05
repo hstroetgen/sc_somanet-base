@@ -1,5 +1,5 @@
-SOMANET-Node Configuration module
-=================================
+SOMANET Node Configuration
+==========================
 
 :scope: General Use
 :description: the NODE CONFIGURATION is designed to define various hardware configurations possible with different SOMANET modules
@@ -10,6 +10,7 @@ Key Features
 ------------
 
   * Code parameterization necessary for the various hardware configurations possible with SOMANET
+  * Port mappings for all SOMANET Modules
  
 Description
 -----------

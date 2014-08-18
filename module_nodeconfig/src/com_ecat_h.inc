@@ -1,8 +1,7 @@
-#pragma once
-
 /****************
- * COM-EtherCAT
+ * COM EtherCAT
  ****************/
+#pragma once
  
  /* ET1100 asynchronous parallel interface */
  extern in  port p_com_irq;

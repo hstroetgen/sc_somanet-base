@@ -1,8 +1,8 @@
-#pragma once
-
 /*******************************************
- * Ifm Drive BLDC 100 Rev B dual node setup
+ * IFM Drive DC-100 Rev. B dual node setup
  *******************************************/
+
+#pragma once
 
 /* ADC */
 extern in buffered  port:32 p_ifm_adc_misoa_node_0;

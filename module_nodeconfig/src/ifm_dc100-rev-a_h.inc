@@ -1,8 +1,8 @@
-#pragma once
+/***************************
+ * IFM Drive DC-100 Rev. A
+ ***************************/
 
-/****************************
- * Ifm Drive BLDC 100 Rev A
- ****************************/
+#pragma once
 
 /* RGB LED and green LED */
 extern out port p_ifm_leds; /* BlueGreenRed_Green */

@@ -1,11 +1,11 @@
+/***************************
+ * IFM Drive DC-100 Rev. A
+ ***************************/
+
 #pragma once
 
 #include <xs1.h>
 #include <platform.h>
-
-/**********************
- * Ifm Drive BLDC 100
- **********************/
 
 /* RGB LED and green LED */
 on stdcore[3]: out port p_ifm_leds = XS1_PORT_4B; /* BlueGreenRed_Green */

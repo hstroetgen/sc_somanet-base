@@ -1,11 +1,13 @@
+/************
+ * Core-C22
+ ************/
+
 #pragma once
 
 #include <xs1.h>
 #include <platform.h>
 #include <flash.h>
-/************
- * Core-C22
- ************/  
+
  /* SPI port definitions */ 
 on tile[0]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,
  								PORT_SPI_SS,

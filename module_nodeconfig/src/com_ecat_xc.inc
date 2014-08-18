@@ -1,12 +1,12 @@
+/****************
+ * COM EtherCAT
+ ****************/
+
 #pragma once
 
 #include <xs1.h>
 #include <platform.h>
 
-/****************
- * COM-EtherCAT
- ****************/
- 
  /* ET1100 asynchronous parallel interface */
 on stdcore[0]: in  port p_com_irq  = XS1_PORT_1I;
 on stdcore[0]: in  port p_com_busy = XS1_PORT_1J;

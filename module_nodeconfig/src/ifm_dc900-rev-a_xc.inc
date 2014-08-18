@@ -1,11 +1,11 @@
+/***************************
+ * IFM Drive DC-300 Rev. A
+ ***************************/
+
 #pragma once
 
 #include <xs1.h>
 #include <platform.h>
-
-/**********************
- * Ifm Drive BLDC 100
- **********************/
 
 /* ADC */
 on tile[3]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;

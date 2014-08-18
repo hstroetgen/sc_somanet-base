@@ -1,8 +1,8 @@
-#pragma once
+/***************************
+ * IFM Drive DC-300 Rev. A
+ ***************************/
 
-/****************************
- * Ifm Drive BLDC 100 Rev A
- ****************************/
+#pragma once
 
 /* ADC */
 extern in buffered  port:32 p_ifm_adc_misoa;

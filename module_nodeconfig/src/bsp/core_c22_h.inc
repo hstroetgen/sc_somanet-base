@@ -10,3 +10,6 @@ extern fl_SPIPorts p_spi_flash;
 
 /* RGB LED */
 extern out port p_core_leds[3]; /* = { Red, Green, Blue } */
+
+#define COM_TILE 0
+#define IFM_TILE 3

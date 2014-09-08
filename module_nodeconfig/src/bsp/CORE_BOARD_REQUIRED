@@ -5,7 +5,7 @@
  *  Please go back to your main (e.g. main.xc) file and replace "CORE_BOARD_REQUIRED"
  *  with one of the flowing board support packages:
  *  
- *    CORE_C22.inc
+ *    CORE_C22-rev-a.inc
  *    CORE_C21-rev-a.inc
  *  
  */

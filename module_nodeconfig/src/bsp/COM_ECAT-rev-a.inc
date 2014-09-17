@@ -1,6 +1,6 @@
 /****************
  * COM EtherCAT
- * Rev. 
+ * Rev. A
  ****************/
 
 #pragma once

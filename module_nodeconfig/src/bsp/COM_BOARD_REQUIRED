@@ -5,7 +5,7 @@
  *  Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED"
  *  with one of the flowing board support packages:
  *  
- *    COM_ECAT.inc
+ *    COM_ECAT-rev-a.inc
  *  
  */
 

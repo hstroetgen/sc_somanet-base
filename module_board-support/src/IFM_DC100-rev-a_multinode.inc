@@ -12,9 +12,6 @@
 /*                        NODE 1                       */
 /*******************************************************/
 
-/* RGB LED and green LED */
-on tile[IFM_TILE]: out port p_ifm_leds_0 = XS1_PORT_4B; /* BlueGreenRed_Green */
-
 /* Buttons */
 on tile[IFM_TILE]: in port p_ifm_btn1_0 = XS1_PORT_1J; /* Button 1 */
 /* Button 2 shares port with encoder (see below) */
@@ -53,9 +50,6 @@ on tile[IFM_TILE]:     port p_ifm_sda_0 = XS1_PORT_1A; /* I2C SDA */
 /*                        NODE 2                       */
 /*******************************************************/
 
-/* RGB LED and green LED */
-on tile[IFM_TILE]: out port p_ifm_leds_1 = XS1_PORT_4B; /* BlueGreenRed_Green */
-
 /* Buttons */
 on tile[IFM_TILE]: in port p_ifm_btn1_1 = XS1_PORT_1J; /* Button 1 */
 /* Button 2 shares port with encoder (see below) */
@@ -93,9 +87,6 @@ on tile[IFM_TILE]:     port p_ifm_sda_1 = XS1_PORT_1A; /* I2C SDA */
 /*******************************************************/
 /*                        NODE 3                       */
 /*******************************************************/
-
-/* RGB LED and green LED */
-on tile[IFM_TILE]: out port p_ifm_leds_2 = XS1_PORT_4B; /* BlueGreenRed_Green */
 
 /* Buttons */
 on tile[IFM_TILE]: in port p_ifm_btn1_2 = XS1_PORT_1J; /* Button 1 */

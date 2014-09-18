@@ -12,6 +12,7 @@
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
 on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
+on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
 
 /* A4935 control ports */
 on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
@@ -29,6 +30,7 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* 
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
+
 /* BLDC Motor, alternative declaration for low-side PWM */
 //on tile[IFM_TILE]: out port p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
 //					      XS1_PORT_1O,   /* Hi B */
@@ -41,7 +43,7 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* 
 on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
 on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
 
-/* Expansion Port */
+/* Expansion Ports */
 on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,
 									  XS1_PORT_1E,
 									  XS1_PORT_1J,

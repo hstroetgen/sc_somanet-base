@@ -21,7 +21,7 @@ on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
 
 /* BLDC Motor, default port mode */
 on tile[IFM_TILE]:          in  port p_ifm_hall = XS1_PORT_4E;
-on tile[IFM_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
 on tile[IFM_TILE]:          in  port p_ifm_dummy_port = XS1_PORT_16B; /* any unused port */
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
 							XS1_PORT_1O,   /* Hi B */

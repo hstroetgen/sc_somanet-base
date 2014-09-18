@@ -39,7 +39,11 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi_0[3] = { XS1_PORT_1K,   /
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo_0[3] = { XS1_PORT_1L,   /* Lo A */
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
-on tile[IFM_TILE]: in port p_ifm_encoder_0 = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]: in port p_ifm_encoder_0 = XS1_PORT_4A; /* Encoder */
+
+/* LEDs, Watchdog */
+on tile[IFM_TILE]: out port p_ifm_shared_leds_wden_0 = XS1_PORT_4B; /* BlueGreenRed_WDEN */
+on tile[IFM_TILE]: out port p_ifm_wd_tick_0 = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Port */
 on tile[IFM_TILE]: out port p_ifm_scl_0 = XS1_PORT_1E; /* I2C SCL */
@@ -76,7 +80,11 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi_1[3] = { XS1_PORT_1K,   /
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo_1[3] = { XS1_PORT_1L,   /* Lo A */
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
-on tile[IFM_TILE]: in port p_ifm_encoder_1 = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]: in port p_ifm_encoder_1 = XS1_PORT_4A; /* Encoder */
+
+/* LEDs, Watchdog */
+on tile[IFM_TILE]: out port p_ifm_shared_leds_1_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
+on tile[IFM_TILE]: out port p_ifm_wd_tick_1 = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Port */
 on tile[IFM_TILE]: out port p_ifm_scl_1 = XS1_PORT_1E; /* I2C SCL */
@@ -113,7 +121,11 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi_2[3] = { XS1_PORT_1K,   /
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo_2[3] = { XS1_PORT_1L,   /* Lo A */
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
-on tile[IFM_TILE]: in port p_ifm_encoder_2 = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]: in port p_ifm_encoder_2 = XS1_PORT_4A; /* Encoder */
+
+/* LEDs, Watchdog */
+on tile[IFM_TILE]: out port p_ifm_shared_leds_wden_2 = XS1_PORT_4B; /* BlueGreenRed_WDEN */
+on tile[IFM_TILE]: out port p_ifm_wd_tick_2 = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Port */
 on tile[IFM_TILE]: out port p_ifm_scl_2 = XS1_PORT_1E; /* I2C SCL */

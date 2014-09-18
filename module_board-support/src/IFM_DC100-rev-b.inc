@@ -37,7 +37,11 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* 
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
 
-on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
+
+/* LEDs, Watchdog */
+on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
+on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Port */
 on tile[IFM_TILE]: out port p_ifm_scl = XS1_PORT_1E; /* I2C SCL */

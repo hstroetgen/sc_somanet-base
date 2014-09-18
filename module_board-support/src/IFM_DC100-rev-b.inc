@@ -37,7 +37,7 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* 
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
 
-on tile[IFM_TILE]: in port p_ifm_encoder_btn2 = XS1_PORT_4A; /* Encoder and Button 2 */
+on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder and Button 2 */
 
 /* Expansion Port */
 on tile[IFM_TILE]: out port p_ifm_scl = XS1_PORT_1E; /* I2C SCL */

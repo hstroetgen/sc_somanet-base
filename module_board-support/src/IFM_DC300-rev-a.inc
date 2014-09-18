@@ -8,11 +8,7 @@
 #include <xs1.h>
 #include <platform.h>
 
-/* ADC */
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
-on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
-on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
+#define IFM_RESOLUTION 400
 
 /* A4935 control ports */
 on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
@@ -20,7 +16,13 @@ on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;
 on tile[IFM_TILE]: port p_ifm_ff1 = XS1_PORT_1H;
 on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
 
-/* BLDC Motor, default port mode */
+/* ADC */
+on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
+on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
+on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
+on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
+
+/* BLDC Motor */
 on tile[IFM_TILE]:          in  port p_ifm_hall = XS1_PORT_4E;
 on tile[IFM_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
 on tile[IFM_TILE]:          in  port p_ifm_dummy_port = XS1_PORT_16B; /* any unused port */

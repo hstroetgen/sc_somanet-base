@@ -8,6 +8,8 @@
 #include <xs1.h>
 #include <platform.h>
 
+#define IFM_RESOLUTION 264
+
 /* ADC */
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;

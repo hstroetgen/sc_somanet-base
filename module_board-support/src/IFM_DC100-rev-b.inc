@@ -8,6 +8,8 @@
 #include <xs1.h>
 #include <platform.h>
 
+#define IFM_RESOLUTION 740
+
 /* A4935 control ports */
 on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
 on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;

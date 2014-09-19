@@ -1,11 +1,11 @@
 /**
-   \file com_detect.xc
-   \brief Detect connected SOMANET COM module
-   \author Martin Schwarz <mschwarz@synapticon.com>
-
-   Detect the connected SOMANET COM module by measuring the discharge time of a capacitor.
-
-   Note: This is a pretty inaccurate measurement one should not rely upon in
+ * @file com_detect.xc
+ * @brief Detect connected SOMANET COM module
+ * @author Synapticon GmbH <support@synapticon.com>
+ * 
+ * Detect the connected SOMANET COM module by measuring the discharge time of a capacitor.
+ * 
+ * Note: This is a pretty inaccurate measurement one should not rely upon in
          productive environments. It is merely meant as convenience feature
          for initial firmware update.
 */

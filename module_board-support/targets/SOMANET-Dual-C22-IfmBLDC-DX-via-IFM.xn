@@ -17,27 +17,27 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash_0" />
-                        <Bootee NodeId="1" Core="0" />
-                        <Bootee NodeId="2" Core="0" />
-                        <Bootee NodeId="3" Core="0" />
+                        <Bootee NodeId="1" Tile="0" />
+                        <Bootee NodeId="2" Tile="0" />
+                        <Bootee NodeId="3" Tile="0" />
                     </Boot>
-                    <Core Number="0" Reference="tile[0]">
+                    <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_0" />
                         <Port Location="XS1_PORT_1B" Name="PORT_SPI_SS_0" />
                         <Port Location="XS1_PORT_1C" Name="PORT_SPI_CLK_0" />
                         <Port Location="XS1_PORT_1D" Name="PORT_SPI_MOSI_0" />
-                    </Core>
+                    </Tile>
                 </Node>
                 <Node Id="1" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[1]">
+                    <Tile Number="0" Reference="tile[1]">
                         <Port Location="XS1_PORT_1K" Name="LED_BLUE_0" />
                         <Port Location="XS1_PORT_1L" Name="LED_GREEN_0" />
                         <Port Location="XS1_PORT_1M" Name="LED_RED_0" />
-                    </Core>
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -49,8 +49,8 @@
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[2]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[2]">
+                    </Tile>
                 </Node>
                 <Node Id="3" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
@@ -58,8 +58,8 @@
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[3]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[3]">
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -75,27 +75,27 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash_1" />
-                        <Bootee NodeId="5" Core="4" />
-                        <Bootee NodeId="6" Core="4" />
-                        <Bootee NodeId="7" Core="4" />
+                        <Bootee NodeId="5" Tile="4" />
+                        <Bootee NodeId="6" Tile="4" />
+                        <Bootee NodeId="7" Tile="4" />
                     </Boot>
-                    <Core Number="0" Reference="tile[4]">
+                    <Tile Number="0" Reference="tile[4]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_1" />
                         <Port Location="XS1_PORT_1B" Name="PORT_SPI_SS_1" />
                         <Port Location="XS1_PORT_1C" Name="PORT_SPI_CLK_1" />
                         <Port Location="XS1_PORT_1D" Name="PORT_SPI_MOSI_1" />
-                    </Core>
+                    </Tile>
                 </Node>
                 <Node Id="5" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[5]">
+                    <Tile Number="0" Reference="tile[5]">
                         <Port Location="XS1_PORT_1K" Name="LED_BLUE_1" />
                         <Port Location="XS1_PORT_1L" Name="LED_GREEN_1" />
                         <Port Location="XS1_PORT_1M" Name="LED_RED_1" />
-                    </Core>
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -107,8 +107,8 @@
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[6]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[6]">
+                    </Tile>
                 </Node>
                 <Node Id="7" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
@@ -116,8 +116,8 @@
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[7]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[7]">
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -230,7 +230,7 @@
     </Links>
 
     <ExternalDevices>
-        <Device NodeId="0" Core="0" Class="SPIFlash" Name="bootFlash_0"
+        <Device NodeId="0" Tile="0" Class="SPIFlash" Name="bootFlash_0"
             Type="AT25DF041A">
             <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO_0" />
             <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS_0" />
@@ -238,7 +238,7 @@
             <Attribute Name="PORT_SPI_MOSI" Value="PORT_SPI_MOSI_0" />
         </Device>
 
-        <Device NodeId="4" Core="0" Class="SPIFlash" Name="bootFlash_1"
+        <Device NodeId="4" Tile="0" Class="SPIFlash" Name="bootFlash_1"
             Type="AT25DF041A">
             <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO_1" />
             <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS_1" />

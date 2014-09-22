@@ -20,23 +20,23 @@
                         <Bootee NodeID="2" />
                         <Bootee NodeID="3" />
                     </Boot>
-                    <Core Number="0" Reference="tile[0]">
+                    <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO" />
                         <Port Location="XS1_PORT_1B" Name="PORT_SPI_SS" />
                         <Port Location="XS1_PORT_1C" Name="PORT_SPI_CLK" />
                         <Port Location="XS1_PORT_1D" Name="PORT_SPI_MOSI" />
-                    </Core>
+                    </Tile>
                 </Node>
                 <Node Id="1" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[1]">
+                    <Tile Number="0" Reference="tile[1]">
                         <Port Location="XS1_PORT_1K" Name="LED_BLUE" />
                         <Port Location="XS1_PORT_1L" Name="LED_GREEN" />
                         <Port Location="XS1_PORT_1M" Name="LED_RED" />
-                    </Core>
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -47,16 +47,16 @@
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[2]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[2]">
+                    </Tile>
                 </Node>
                 <Node Id="3" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
                     </Boot>
-                    <Core Number="0" Reference="tile[3]">
-                    </Core>
+                    <Tile Number="0" Reference="tile[3]">
+                    </Tile>
                 </Node>
             </Nodes>
         </Package>
@@ -107,7 +107,7 @@
     </Links>
 
     <ExternalDevices>
-        <Device NodeId="0" Core="0" Class="SPIFlash" Name="bootFlash"
+        <Device NodeId="0" Tile="0" Class="SPIFlash" Name="bootFlash"
             Type="AT25DF041A">
             <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO" />
             <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS" />

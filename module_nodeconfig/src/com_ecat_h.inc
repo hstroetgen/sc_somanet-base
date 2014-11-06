@@ -1,7 +1,7 @@
 #pragma once
 
 /****************
- * COM EtherCAT
+ * COM-EtherCAT
  ****************/
  
  /* ET1100 asynchronous parallel interface */

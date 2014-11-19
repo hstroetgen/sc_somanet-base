@@ -170,8 +170,8 @@
             <LinkEndpoint NodeId="3" Link="XLG" />
         </Link>
         <Link Encoding="2wire" Delays="4,5" Flags="SOD">
-            <LinkEndpoint NodeID="1" Link="X0LA" />
-            <LinkEndpoint NodeID="4" Chanend="1" />
+            <LinkEndpoint NodeId="1" Link="X0LA" />
+            <LinkEndpoint NodeId="4" Chanend="1" />
         </Link>
     </Links>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding ="UTF-8"?>
+    <?xml version="1.0" encoding ="UTF-8"?>
 <Network xmlns="http://www.xmos.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
 
@@ -16,9 +16,9 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash" />
-                        <Bootee NodeID="1" />
-                        <Bootee NodeID="2" />
-                        <Bootee NodeID="3" />
+                        <Bootee NodeId="1" />
+                        <Bootee NodeId="2" />
+                        <Bootee NodeId="3" />
                     </Boot>
                     <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO" />

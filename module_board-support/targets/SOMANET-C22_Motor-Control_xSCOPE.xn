@@ -16,9 +16,9 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash" />
-                        <Bootee NodeID="1" />
-                        <Bootee NodeID="2" />
-                        <Bootee NodeID="3" />
+                        <Bootee NodeId="1" />
+                        <Bootee NodeId="2" />
+                        <Bootee NodeId="3" />
                     </Boot>
                     <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO" />
@@ -108,12 +108,12 @@
 
         <!-- XSCOPE using XLink A on Com-Connector -->
         <!-- disabled <Link Encoding="2wire" Delays="4,5" Flags="SOD"> <LinkEndpoint 
-            NodeID="0" Link="X0LA"/> <LinkEndpoint RoutingID="0x8000" Chanend="1"/> </Link> -->
+            NodeId="0" Link="X0LA"/> <LinkEndpoint RoutingID="0x8000" Chanend="1"/> </Link> -->
 
         <!-- XSCOPE using XLink A of L2-1, which actually was meant to be 
             a second link between L2-1 and L2-2 (see disabled link above) -->
         <Link Encoding="2wire" Delays="4,5" Flags="SOD">
-            <LinkEndpoint NodeID="1" Link="X0LA" />
+            <LinkEndpoint NodeId="1" Link="X0LA" />
             <LinkEndpoint RoutingID="0x8000" Chanend="1" />
         </Link>
     </Links>

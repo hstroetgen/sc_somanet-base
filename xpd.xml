@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <xpd>
     <components>
-        <component description = "the NODE CONFIGURATION is designed to define various hardware configurations possible with different SOMANET modules" type = "demoCode" scope = "General Use" path = "module_nodeconfig" local = "false" id = "module_nodeconfig" name = "SOMANET NODE CONFIGURATION module">
+        <component description = "the NODE CONFIGURATION is designed to define various hardware configurations possible with different SOMANET modules" type = "demoCode" scope = "General Use" path = "module_nodeconfig" local = "false" id = "module_nodeconfig" name = "SOMANET Node Configuration">
             <board>XK-SN-1BH12-E</board>
             <board>XK-SN-1BQ12-E</board>
             <board>SOMANET CORE C22</board>
@@ -13,6 +13,8 @@
         </component>
     </components>
     <description>The SOMANET BASE software component is a collection of essential modules required for the majority of SOMANET-based applications.</description>
+    <exclude_dir>app_test_com-detect</exclude_dir>
+    <exclude_dir>module_com-detect</exclude_dir>
     <location>git://github.com/synapticon/sc_somanet-base.git</location>
     <name>sc_somanet-base</name>
     <maintainer>Synapticon</maintainer>
@@ -24,7 +26,12 @@
     <release parenthash = "2b47ee5cbead720af9fcefd16064b821cbfb55a0" version = "1.0.1beta3" githash = "db515aa8fe90eae3d37c39a7269042199a5401b1"></release>
     <release parenthash = "db515aa8fe90eae3d37c39a7269042199a5401b1" version = "1.0.1rc0" githash = "c61053d7f43ccba1bed5fd0865786f84f0367abf"></release>
     <release parenthash = "ee3c5e2f436239f9fc41940c66879a6e5f4d30a7" version = "1.0.1rc1" githash = "93f945d2a7a92c92e5369c32234bf34cffe2aefd"></release>
-    <release parenthash = "fa17885a51efc6b3fca97ffee96c1694599aa2ac" version = "1.0.1rc2"></release>
+    <release parenthash = "fa17885a51efc6b3fca97ffee96c1694599aa2ac" version = "1.0.1rc2" githash = "033eea2c9c2696734a5bd2f8585e585d2513ced2"></release>
+    <release parenthash = "267076cbcf743d3b625cb245b71eefdcdd932cd6" version = "1.0.2alpha0" githash = "2d831b01152cb9c96bbef0f6a6da86ba5c72e700"></release>
+    <release parenthash = "2d831b01152cb9c96bbef0f6a6da86ba5c72e700" version = "1.0.2beta0" githash = "bbe08ca9987f9842f94f552d33720ad0e87c9259"></release>
+    <release parenthash = "bbe08ca9987f9842f94f552d33720ad0e87c9259" version = "1.0.2beta1" githash = "db40a34321a138f1636bdb7d754c149518b889d8"></release>
+    <release parenthash = "db40a34321a138f1636bdb7d754c149518b889d8" version = "1.0.2beta2" githash = "2d7968dfae1a4569deca2560da75966c18decc16"></release>
+    <release parenthash = "2d7968dfae1a4569deca2560da75966c18decc16" version = "1.0.2rc0"></release>
     <subpartnumber>XM-005811-SM</subpartnumber>
     <vendor>XMOS</vendor>
     <version_defines></version_defines>

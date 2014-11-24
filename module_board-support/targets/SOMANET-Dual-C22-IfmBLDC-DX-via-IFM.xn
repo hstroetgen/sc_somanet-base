@@ -17,9 +17,9 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash_0" />
-                        <Bootee NodeId="1" Tile="0" />
-                        <Bootee NodeId="2" Tile="0" />
-                        <Bootee NodeId="3" Tile="0" />
+                        <Bootee NodeId="1" />
+                        <Bootee NodeId="2" />
+                        <Bootee NodeId="3" />
                     </Boot>
                     <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_0" />
@@ -75,9 +75,9 @@
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash_1" />
-                        <Bootee NodeId="5" Tile="4" />
-                        <Bootee NodeId="6" Tile="4" />
-                        <Bootee NodeId="7" Tile="4" />
+                        <Bootee NodeId="5" />
+                        <Bootee NodeId="6" />
+                        <Bootee NodeId="7" />
                     </Boot>
                     <Tile Number="0" Reference="tile[4]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_1" />

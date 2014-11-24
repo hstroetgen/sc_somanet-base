@@ -18,9 +18,9 @@
                     RoutingId="32778">
                     <Boot>
                         <Source Location="SPI:bootFlash" />
-                        <Bootee NodeId="1" Tile="0" />
-                        <Bootee NodeId="2" Tile="0" />
-                        <Bootee NodeId="3" Tile="0" />
+                        <Bootee NodeId="1" />
+                        <Bootee NodeId="2" />
+                        <Bootee NodeId="3" />
                     </Boot>
                     <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO" />

@@ -15,8 +15,8 @@
                 <Node Id="0" InPackageId="0" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
-                        <Source Location="SPI:bootFlash" />
-                        <Bootee NodeId="1" Tile="0" />
+                        <Source Location="SPI:bootFlash_0" />
+                        <Bootee NodeId="1" />
                     </Boot>
                     <Tile Number="0" Reference="tile[0]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_0" />
@@ -45,8 +45,8 @@
                 <Node Id="2" InPackageId="0" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
-                        <Source Location="SPI:bootFlash1" />
-                        <Bootee NodeId="2" Tile="0" />
+                        <Source Location="SPI:bootFlash_1" />
+                        <Bootee NodeId="2" />
                     </Boot>
                     <Tile Number="0" Reference="tile[2]">
                         <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO_1" />
@@ -129,7 +129,7 @@
     </Links>
 
     <ExternalDevices>
-        <Device NodeId="0" Tile="0" Name="bootFlash" Class="SPIFlash"
+        <Device NodeId="0" Tile="0" Name="bootFlash_0" Class="SPIFlash"
             Type="AT25DF041A">
             <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO_0" />
             <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS_0" />
@@ -137,7 +137,7 @@
             <Attribute Name="PORT_SPI_MOSI" Value="PORT_SPI_MOSI_0" />
         </Device>
 
-        <Device NodeId="2" Tile="0" Name="bootFlash1" Class="SPIFlash"
+        <Device NodeId="2" Tile="0" Name="bootFlash_1" Class="SPIFlash"
             Type="AT25DF041A">
             <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO_1" />
             <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS_1" />

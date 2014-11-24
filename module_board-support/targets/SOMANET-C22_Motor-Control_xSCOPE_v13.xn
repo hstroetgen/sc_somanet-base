@@ -13,7 +13,7 @@
     <Packages>
         <Package Id="0" Type="XS1-LnA-128-QF124">
             <Nodes>
-                <Node Id="0" InPackageId="0" Type="XS1-L1A"
+                <Node Id="0" InPackageId="0" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
                     RoutingId="32778">
                     <Boot>
@@ -44,7 +44,7 @@
                         </Links>
                     </RoutingTable>
                 </Node>
-                <Node Id="1" InPackageId="1" Type="XS1-L1A"
+                <Node Id="1" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
                     RoutingId="32776">
                     <Boot>
@@ -76,7 +76,7 @@
 
         <Package Id="1" Type="XS1-LnA-128-QF124">
             <Nodes>
-                <Node Id="2" InPackageId="0" Type="XS1-L1A"
+                <Node Id="2" InPackageId="0" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
                     RoutingId="32780">
                     <Boot>
@@ -99,7 +99,7 @@
                         </Links>
                     </RoutingTable>
                 </Node>
-                <Node Id="3" InPackageId="1" Type="XS1-L1A"
+                <Node Id="3" InPackageId="1" Type="XS1-L8A-64"
                     Oscillator="25MHz" SystemFrequency="500MHz"
                     ReferenceFrequency="250MHz" RoutingId="32781">
                     <Boot>

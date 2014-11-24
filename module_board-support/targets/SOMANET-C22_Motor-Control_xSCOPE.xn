@@ -12,7 +12,7 @@
     <Packages>
         <Package Id="0" Type="XS1-LnA-128-QF124">
             <Nodes>
-                <Node Id="0" Type="XS1-L1A" InPackageId="0"
+                <Node Id="0" Type="XS1-L8A-64" InPackageId="0"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="SPI:bootFlash" />
@@ -27,7 +27,7 @@
                         <Port Location="XS1_PORT_1D" Name="PORT_SPI_MOSI" />
                     </Tile>
                 </Node>
-                <Node Id="1" Type="XS1-L1A" InPackageId="1"
+                <Node Id="1" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
@@ -42,7 +42,7 @@
         </Package>
         <Package Id="1" Type="XS1-LnA-128-QF124">
             <Nodes>
-                <Node Id="2" Type="XS1-L1A" InPackageId="0"
+                <Node Id="2" Type="XS1-L8A-64" InPackageId="0"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
                         <Source Location="LINK" />
@@ -50,7 +50,7 @@
                     <Tile Number="0" Reference="tile[2]">
                     </Tile>
                 </Node>
-                <Node Id="3" Type="XS1-L1A" InPackageId="1"
+                <Node Id="3" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz"
                     ReferenceFrequency="250Mhz">
                     <Boot>

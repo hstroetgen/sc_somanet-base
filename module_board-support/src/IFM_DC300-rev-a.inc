@@ -23,23 +23,16 @@ on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PO
 on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
 
 /* BLDC Motor */
-on tile[IFM_TILE]:          in  port p_ifm_hall = XS1_PORT_4E;
-on tile[IFM_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
-on tile[IFM_TILE]:          in  port p_ifm_dummy_port = XS1_PORT_16B; /* any unused port */
+on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E;
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
 							XS1_PORT_1O,   /* Hi B */
 							XS1_PORT_1M }; /* Hi C */
+
 on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
 							  XS1_PORT_1P,   /* Lo B */
 							  XS1_PORT_1N }; /* Lo C */
 
-/* BLDC Motor, alternative declaration for low-side PWM */
-//on tile[IFM_TILE]: out port p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
-//					      XS1_PORT_1O,   /* Hi B */
-//					      XS1_PORT_1M }; /* Hi C */
-//on tile[IFM_TILE]: out port p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
-//					      XS1_PORT_1P,   /* Lo B */
-//					      XS1_PORT_1N }; /* Lo C */
+on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
 
 /* LEDs, Watchdog */
 on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */

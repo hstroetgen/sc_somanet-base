@@ -10,7 +10,7 @@
     </Declarations>
 
     <Packages>
-        <Package Id="0" Type="XS1-L2A-QF124">
+        <Package Id="0" Type="XS1-LnA-128-QF124">
             <Nodes>
                 <Node Id="0" Type="XS1-L8A-64" InPackageId="0"
                     Oscillator="25MHz" SystemFrequency="500MHz">
@@ -30,7 +30,7 @@
                 <Node Id="1" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
-                        <Source Location="XMOSLINK" />
+                        <Source Location="LINK" />
                     </Boot>
                     <Tile Number="0" Reference="tile[1]">
                         <Port Location="XS1_PORT_1K" Name="LED_BLUE" />
@@ -40,12 +40,12 @@
                 </Node>
             </Nodes>
         </Package>
-        <Package Id="1" Type="XS1-L2A-QF124">
+        <Package Id="1" Type="XS1-LnA-128-QF124">
             <Nodes>
                 <Node Id="2" Type="XS1-L8A-64" InPackageId="0"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
-                        <Source Location="XMOSLINK" />
+                        <Source Location="LINK" />
                     </Boot>
                     <Tile Number="0" Reference="tile[2]">
                     </Tile>
@@ -53,7 +53,7 @@
                 <Node Id="3" Type="XS1-L8A-64" InPackageId="1"
                     Oscillator="25MHz" SystemFrequency="500MHz">
                     <Boot>
-                        <Source Location="XMOSLINK" />
+                        <Source Location="LINK" />
                     </Boot>
                     <Tile Number="0" Reference="tile[3]">
                     </Tile>
@@ -82,8 +82,11 @@
         </Link>
 
         <!-- L2-1 to L2-2 -->
-        <!-- <Link Encoding="5wire" Delays="4,4"> <LinkEndpoint NodeId="1" 
-            Link="XLA"/> <LinkEndpoint NodeId="2" Link="XLA"/> </Link> -->
+        <!-- <Link Encoding="5wire" Delays="4,4">
+            <LinkEndpoint NodeId="1" Link="XLA"/>
+            <LinkEndpoint NodeId="2" Link="XLA"/>
+        </Link> -->
+
         <Link Encoding="5wire" Delays="4,4">
             <LinkEndpoint NodeId="1" Link="XLB" />
             <LinkEndpoint NodeId="2" Link="XLB" />
@@ -107,7 +110,7 @@
             <LinkEndpoint NodeId="3" Link="XLG" />
         </Link>
 
-        <!-- XScope using XLink A of L2-1, which actually was meant to be 
+        <!-- xSCOPE using XLink A of L2-1, which is otherwise used as 
             a second link between L2-1 and L2-2 (see disabled link above) -->
         <Link Encoding="2wire" Delays="4,5" Flags="SOD">
             <LinkEndpoint NodeId="1" Link="X0LA" />

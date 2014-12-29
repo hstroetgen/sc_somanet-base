@@ -83,6 +83,11 @@
         </Link>
 
         <!-- L2-1 to L2-2 -->
+        <!-- <Link Encoding="5wire" Delays="4,4">
+            <LinkEndpoint NodeId="1" Link="XLA"/>
+            <LinkEndpoint NodeId="2" Link="XLA"/>
+        </Link> -->
+
         <Link Encoding="5wire" Delays="4,4">
             <LinkEndpoint NodeId="1" Link="XLB" />
             <LinkEndpoint NodeId="2" Link="XLB" />
@@ -106,11 +111,7 @@
             <LinkEndpoint NodeId="3" Link="XLG" />
         </Link>
 
-        <!-- XSCOPE using XLink A on Com-Connector -->
-        <!-- disabled <Link Encoding="2wire" Delays="4,5" Flags="SOD"> <LinkEndpoint 
-            NodeId="0" Link="X0LA"/> <LinkEndpoint RoutingID="0x8000" Chanend="1"/> </Link> -->
-
-        <!-- XSCOPE using XLink A of L2-1, which actually was meant to be 
+        <!-- xSCOPE using XLink A of L2-1, which is otherwise used as 
             a second link between L2-1 and L2-2 (see disabled link above) -->
         <Link Encoding="2wire" Delays="4,5" Flags="SOD">
             <LinkEndpoint NodeId="1" Link="X0LA" />

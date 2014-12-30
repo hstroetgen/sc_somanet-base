@@ -1,6 +1,12 @@
 sc_somanet-base Change Log
 ==========================
 
+2.0.0
+-----
+
+  * Drop nodeconfig.h support and switch to individual board support file including (see new module_board-support)
+  * Include SOMANET platform files (.xn files) into module_board-support (no need to copy platform files to applications)
+
 1.0.2
 -----
 

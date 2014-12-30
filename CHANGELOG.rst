@@ -1,7 +1,7 @@
 sc_somanet-base Change Log
 ==========================
 
-1.1.0
+2.0.0
 -----
 
   * Drop nodeconfig.h support and switch to individual board support file including (see new module_board-support)

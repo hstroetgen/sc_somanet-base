@@ -1,7 +1,7 @@
 SOMANET BASE Software Component 
 ...............................
 
-:Latest release: 1.0.2rc0
+:Latest release: 1.0.3
 :Maintainer: Synapticon
 :Description: The SOMANET BASE software component is a collection of essential modules required for the majority of SOMANET-based applications.
 
@@ -9,7 +9,7 @@ SOMANET BASE Software Component
 Key Features
 ============
 
-   * Ports declaration
+   * SOMANET Board support files: ports declaration, platform files
    * XScope wrapper
 
 Firmware Overview

@@ -130,10 +130,10 @@
     </ExternalDevices>
 
     <JTAGChain>
-        <JTAGDevice NodeId="0" Position="0" />
-        <JTAGDevice NodeId="1" Position="1" />
-        <JTAGDevice NodeId="2" Position="2" />
-        <JTAGDevice NodeId="3" Position="3" />
+        <JTAGDevice NodeId="0" />
+        <JTAGDevice NodeId="1" />
+        <JTAGDevice NodeId="2" />
+        <JTAGDevice NodeId="3" />
     </JTAGChain>
 
 </Network>

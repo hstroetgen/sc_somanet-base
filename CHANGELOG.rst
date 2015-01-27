@@ -1,6 +1,11 @@
 sc_somanet-base Change Log
 ==========================
 
+2.0.1
+-----
+
+  * Fix legacy attributes in platform files causing OBLAC not generate valid platform files
+
 2.0.0
 -----
 

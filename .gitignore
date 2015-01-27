@@ -1,5 +1,7 @@
+
 ## ignore xTIMEcomposer(ecipse) files
 .metadata/
+.settings/
 
 ## generic files to ignore
 *~
@@ -15,3 +17,11 @@ bin/
 
 ## ignore KDE files
 .directory
+
+#executable files
+fw_update
+slaveinfo
+
+#doxygen output
+.dox/gen/
+

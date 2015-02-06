@@ -1,6 +1,11 @@
 sc_somanet-base Change Log
 ==========================
 
+2.0.2
+-----
+
+  * Fix C22 bsp file to be interchangable with C21
+
 2.0.1
 -----
 

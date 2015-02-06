@@ -11,6 +11,7 @@
 
 /* Standard Tile definitions for demo/test apps */
 #define COM_TILE 0
+#define APP_TILE 1
 #define APP_TILE_1 1
 #define APP_TILE_2 2
 #define IFM_TILE 3

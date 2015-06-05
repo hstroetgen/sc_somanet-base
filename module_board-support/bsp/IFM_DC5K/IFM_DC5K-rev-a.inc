@@ -17,9 +17,9 @@ on tile[MOTOR_TILE]: out port p4_adc_mux = XS1_PORT_4C; // 4-bit port used to co
 on tile[MOTOR_TILE]: clock adc_xclk = XS1_CLKBLK_3; // Intern al XMOS clock
 
 /* BLDC Motor, default port mode */
-on tile[MOTOR_TILE]:          in  port p_ifm_hall = XS1_PORT_4E; /* [p3 p2 p1 p0] -> [AUX_IO  HALL.1  HALL.2  HALL.3] */
-on tile[MOTOR_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; /* [p3 p2 p1 p0] -> [QEI.Q  QEI.I  QEI.B  QEI.A] */
-on tile[MOTOR_TILE]:          in  port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
+on tile[MOTOR_TILE]: in  port p_ifm_hall = XS1_PORT_4E; /* [p3 p2 p1 p0] -> [AUX_IO  HALL.1  HALL.2  HALL.3] */
+on tile[MOTOR_TILE]: in  port p_ifm_encoder = XS1_PORT_4A; /* [p3 p2 p1 p0] -> [QEI.Q  QEI.I  QEI.B  QEI.A] */
+on tile[MOTOR_TILE]: in  port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
 on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { 
 								XS1_PORT_1K,   /* Hi A */
 								XS1_PORT_1O,   /* Hi B */

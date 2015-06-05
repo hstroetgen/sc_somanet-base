@@ -21,11 +21,11 @@ on tile[MOTOR_TILE]:          in  port p_ifm_hall = XS1_PORT_4E; // [p3 p2 p1 p0
 on tile[MOTOR_TILE]:          in  port p_ifm_encoder = XS1_PORT_4A; // [p3 p2 p1 p0] -> [QEI.Q  QEI.I  QEI.B  QEI.A]
 on tile[MOTOR_TILE]:          in  port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
 on tile[MOTOR_TILE]:  buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
-							         XS1_PORT_1O,   /* Hi B */
-							         XS1_PORT_1M }; /* Hi C */
-on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
-							        XS1_PORT_1P,   /* Lo B */
-							        XS1_PORT_1N }; /* Lo C */
+							         							 XS1_PORT_1O,   /* Hi B */
+							         							 XS1_PORT_1M }; /* Hi C */
+on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor_lo[3]  = { XS1_PORT_1L,   /* Lo A */
+							        							 XS1_PORT_1P,   /* Lo B */
+							        							 XS1_PORT_1N }; /* Lo C */
 
 /* LEDs, Watchdog */
 on tile[MOTOR_TILE]: out port p_ifm_led_moton_wdtick_wden = XS1_PORT_4B; // [p3 p2 p1 p0] -> [LED Motor_ON WD_TICK WD_EN]

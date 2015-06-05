@@ -25,7 +25,7 @@ on tile[MOTOR_TILE]:  buffered out port:32 p_ifm_motor_hi[4] = { XS1_PORT_1K,   
 																 XS1_PORT_1O,   /* Hi B */
 															     XS1_PORT_1M,    /* Hi C */
 																 XS1_PORT_1A }; /* Hi D */
-on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor_lo[3]  = { XS1_PORT_1L,   /* Lo A */
+on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor_lo[4]  = { XS1_PORT_1L,   /* Lo A */
 							  									 XS1_PORT_1P,   /* Lo B */
 							  									 XS1_PORT_1N,   /* Lo C */
 							  									 XS1_PORT_1B }; /* Lo D */

@@ -8,6 +8,9 @@
  **********************/
 
 #define IFM_TILE 1
+#define SET_ALL_AS_HALL 0b0000
+#define DC1K
+#define AD7265
 
 /* ADC */
 //FixMe decide whether remove this definition or not 

@@ -39,9 +39,9 @@ on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRe
 on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Ports */
-on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,
-									  XS1_PORT_1E,
-									  XS1_PORT_1J,
-									  XS1_PORT_1B };
+on tile[IFM_TILE]: port p_ifm_ext_d0 = XS1_PORT_1A;
+on tile[IFM_TILE]: port p_ifm_ext_d1 = XS1_PORT_1E;
+on tile[IFM_TILE]: port p_ifm_ext_d2 = XS1_PORT_1J;
+on tile[IFM_TILE]: port p_ifm_ext_d3 = XS1_PORT_1B;
 
 

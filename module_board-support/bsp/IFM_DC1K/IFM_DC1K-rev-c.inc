@@ -42,10 +42,10 @@ on tile[IFM_TILE]: out port  p_ifm_led_moton_wdtick_wden = XS1_PORT_4B;  /* [p3 
 
 
 /* Expansion Port */
-#define GPIO_D0 on tile[IFM_TILE]: XS1_PORT_1I; //EXT_D.0
-#define GPIO_D1 on tile[IFM_TILE]: XS1_PORT_1J; //EXT_D.1
-#define GPIO_D2 on tile[IFM_TILE]: XS1_PORT_1F; //EXT_D.2
-#define GPIO_D3 on tile[IFM_TILE]: XS1_PORT_1E; //EXT_D.3
+#define GPIO_D0 on tile[IFM_TILE]: XS1_PORT_1I //EXT_D.0
+#define GPIO_D1 on tile[IFM_TILE]: XS1_PORT_1J //EXT_D.1
+#define GPIO_D2 on tile[IFM_TILE]: XS1_PORT_1F //EXT_D.2
+#define GPIO_D3 on tile[IFM_TILE]: XS1_PORT_1E //EXT_D.3
 
 // DX -> XS1_PORT_4D
 

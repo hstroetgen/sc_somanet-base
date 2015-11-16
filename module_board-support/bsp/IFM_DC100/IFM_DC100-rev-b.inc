@@ -20,18 +20,29 @@ on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
 on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
-on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
 
 /* BLDC Motor */
+/* PWM PORTS*/
+#define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62 
+#define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
+#define PWM_PORT_A_LOW_SIDE IFM_PORT_1BIT_56
+#define PWM_PORT_B_LOW_SIDE IFM_PORT_1BIT_52
+#define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
+
+#define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
+#define PWM_DUMMY_PORT_TRIGGER IFM_UNUSED_PORT_0
+
+#define PWM_PORTS { 														\
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
+    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
+    null,																	\
+    null,																	\
+	PWM_CLOCK_SRC,       													\
+	PWM_DUMMY_PORT_TRIGGER													\
+}
+
 on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E;
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
-							XS1_PORT_1O,   /* Hi B */
-							XS1_PORT_1M }; /* Hi C */
-
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
-							  XS1_PORT_1P,   /* Lo B */
-							  XS1_PORT_1N }; /* Lo C */
-
 on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
 
 /* LEDs, Watchdog */

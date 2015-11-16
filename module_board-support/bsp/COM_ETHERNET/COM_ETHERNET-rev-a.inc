@@ -11,28 +11,30 @@
 /****************************************************************************/
 
 #define ETHERNET_DEFAULT_TILE_P1 tile[0]
-#define PORT_ETH_RST_N0 on tile[0]: XS1_PORT_1P;
-#define PORT_ETH_RXCLK0 on tile[0]: XS1_PORT_1G
-#define PORT_ETH_RXD0 on tile[0]: XS1_PORT_4E
-#define PORT_ETH_TXD0 on tile[0]: XS1_PORT_4F
-#define PORT_ETH_RXDV0 on tile[0]: XS1_PORT_1O
-#define PORT_ETH_TXEN0 on tile[0]: XS1_PORT_1N
-#define PORT_ETH_TXCLK0 on tile[0]: XS1_PORT_1I
-#define PORT_ETH_MDIOC0 on tile[0]: XS1_PORT_4D
-#define PORT_ETH_MDIOFAKE0 on tile[0]: XS1_PORT_8B
-#define PORT_ETH_ERR0 on tile[0]: XS1_PORT_1M
+
+#define PORT_ETH_RST_N0 COM_PORT_1BIT_66
+#define PORT_ETH_RXCLK0 COM_PORT_1BIT_14
+#define PORT_ETH_RXD0 COM_PORT_4BIT_76_78_8_72
+#define PORT_ETH_TXD0 COM_PORT_4BIT_4_2_6_74
+#define PORT_ETH_RXDV0 COM_PORT_1BIT_68
+#define PORT_ETH_TXEN0 COM_PORT_1BIT_12
+#define PORT_ETH_TXCLK0 COM_PORT_1BIT_10
+#define PORT_ETH_MDIOC0 COM_PORT_4BIT_60_20_56_24
+#define PORT_ETH_MDIOFAKE0 COM_PORT_8BIT_NOT_CONNECTED //GET RID OF THIS!?
+#define PORT_ETH_ERR0 COM_PORT_1BIT_70
 
 #define ETHERNET_DEFAULT_TILE_P2 tile[0]
-#define PORT_ETH_RST_N1 on tile[0]: XS1_PORT_1F;
-#define PORT_ETH_RXCLK1 on tile[0]: XS1_PORT_1J
-#define PORT_ETH_RXD1 on tile[0]: XS1_PORT_4B
-#define PORT_ETH_TXD1 on tile[0]: XS1_PORT_4A
-#define PORT_ETH_RXDV1 on tile[0]: XS1_PORT_1L
-#define PORT_ETH_TXEN1 on tile[0]: XS1_PORT_1K
-#define PORT_ETH_TXCLK1 on tile[0]: XS1_PORT_1H
-#define PORT_ETH_MDIOC1 on tile[0]: XS1_PORT_4C
-#define PORT_ETH_MDIOFAKE1 on tile[0]: XS1_PORT_8A
-#define PORT_ETH_ERR1 on tile[0]: XS1_PORT_1E
+
+#define PORT_ETH_RST_N1 COM_PORT_1BIT_18
+#define PORT_ETH_RXCLK1 COM_PORT_1BIT_34
+#define PORT_ETH_RXD1 COM_PORT_4BIT_46_42_38_36
+#define PORT_ETH_TXD1 COM_PORT_4BIT_48_52_28_32
+#define PORT_ETH_RXDV1 COM_PORT_1BIT_40
+#define PORT_ETH_TXEN1 COM_PORT_1BIT_50
+#define PORT_ETH_TXCLK1 COM_PORT_1BIT_58
+#define PORT_ETH_MDIOC1 COM_PORT_4BIT_22_26_54_30
+#define PORT_ETH_MDIOFAKE1 COM_PORT_8BIT_NOT_CONNECTED //GET RID OF THIS!?
+#define PORT_ETH_ERR1 COM_PORT_1BIT_NOT_CONNECTED
 
 /****************************************************************************/
 

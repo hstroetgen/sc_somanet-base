@@ -42,6 +42,13 @@
 #define IFM_PORT_4BIT_66_76_80 on tile[IFM_TILE]: XS1_PORT_4E
 #define IFM_PORT_4BIT_68_70_72_74 on tile[IFM_TILE]: XS1_PORT_4F
 
+ /* SPI port definitions */ 
+on tile[APP_TILE]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,
+ 								PORT_SPI_SS,
+ 								PORT_SPI_CLK,
+ 								PORT_SPI_MOSI,
+ 								XS1_CLKBLK_2 };
+
 #if defined(COM_PORT_1B_18) || defined(COM_PORT_1B_10) || defined(COM_PORT_1B_34) || defined(COM_PORT_1B_50) || defined(COM_PORT_1B_40) || defined(COM_PORT_1B_70) || defined(COM_PORT_16B_48_52_46_42_38_36_28_60_20_56_24_54_30) || defined(COM_PORT_16B_76_78_4_2_6_74_8_72_70_12_68_66_16_64_62_44)
 	#error "CORE C21 does not support a COM modules"
 #endif

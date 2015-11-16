@@ -75,5 +75,12 @@
 
 /* INTERNAL PORTS */
 #define INTERNAL_PORT_1BIT_NOT_CONNECTED on tile[0]: XS1_PORT_1E
-#define INTERNAL_PORT_8BIT_NOT_CONNECTED on tile[0]: XS1_PORT_8A
-#define INTERNAL_PORT_8BIT_NOT_CONNECTED on tile[0]: XS1_PORT_8B
+#define INTERNAL_PORT_8BIT_NOT_CONNECTED_1 on tile[0]: XS1_PORT_8A
+#define INTERNAL_PORT_8BIT_NOT_CONNECTED_2 on tile[0]: XS1_PORT_8B
+
+ /* SPI port definitions */ 
+on tile[0]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,
+ 								PORT_SPI_SS,
+ 								PORT_SPI_CLK,
+ 								PORT_SPI_MOSI,
+ 								XS1_CLKBLK_2 };

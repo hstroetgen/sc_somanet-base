@@ -46,8 +46,17 @@ on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E;
 on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
 
 /* LEDs, Watchdog */
-on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
-on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
+
+/************ WATCHDOG PORT DEFINITIONS *********************/
+#define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
+#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
+
+#define WATCHDOG_PORTS {  		\
+    WATCHDOG_EN_PORT,         	\
+    WATCHDOG_TICK_PORT          \
+}
+//on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
+//on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
 
 /* Expansion Ports */
 on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,

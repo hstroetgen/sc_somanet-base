@@ -10,16 +10,24 @@
 
 #define IFM_RESOLUTION 740
 
-/* A4935 control ports */
-//on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
-//on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;
-//on tile[IFM_TILE]: port p_ifm_ff1 = XS1_PORT_1H;
-//on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
-
 /* ADC */
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
-on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
+
+#define ADC_DATA_OUT IFM_PORT_4BIT_20_58_10_8 
+#define ADC_DATA_IN_A IFM_PORT_1BIT_42 
+#define ADC_DATA_IN_B IFM_PORT_1BIT_40 
+
+#define ADC_PORTS {  						\
+    {										\
+	    ADC_DATA_OUT,         				\
+	    ADC_DATA_IN_A,         				\
+	    ADC_DATA_IN_B,          			\
+	    									\
+	    ADC_CLK_SRC							\
+    },        								\
+    { {null,null}, null, null, null,null}	\
+}
+
 
 /* BLDC Motor */
 /* PWM PORTS*/

@@ -38,7 +38,11 @@
 }
 
 /* HALL SENSOR PORT*/
-#define HALL_PORT IFM_PORT_1BIT_2
+#define HALL_PORT IFM_PORT_4BIT_66_76_80
+
+#define HALL_PORTS {\
+	HALL_PORT		\
+}
 
 /* ENCODER PORT */
 #define ENCODER_PORT IFM_PORT_4BIT_38_44_30_34; /* Encoder */

@@ -1,11 +1,13 @@
+/**********************
+ * Ifm Drive BLDC 1K
+ **********************/
+
 #pragma once
 
 #include <xs1.h>
 #include <platform.h>
 
-/**********************
- * Ifm Drive BLDC 1K
- **********************/
+#define IFM_DC1K
 
 #define SET_ALL_AS_HALL 0b0000
 #define SET_ALL_AS_QEI 0b0011
@@ -14,40 +16,74 @@
 #define DC1K
 #define AD7265
 
-#define ADC_DATA_A on tile[IFM_TILE]: XS1_PORT_1D
-#define ADC_DATA_B on tile[IFM_TILE]: XS1_PORT_1C
-#define ADC_SCLK on tile[IFM_TILE]: XS1_PORT_1H // 1-bit port connecting to external ADC serial clock
-#define ADC_READY on tile[IFM_TILE]: XS1_PORT_1G // 1-bit port used to as ready signal for pb32_adc_data ports and ADC chip
-#define ADC_MUX on tile[IFM_TILE]: XS1_PORT_4C // 4-bit port used to control multiplexor on ADC chip and ADC single-diff mode "P4C3 -> SGL_DIFF set"
-#define ADC_INT_CLK on tile[IFM_TILE]: XS1_CLKBLK_3 // Intern al XMOS clock
+#define PWM_CLOCK_SRC CLOCK_MOTOR_TILE_0
 
-/* BLDC Motor, default port mode */
-on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E; /* [p3 p2 p1 p0] -> [QEI_HALL_OUT2.Q/AUX_I  QEI_HALL_OUT2.I/H1  QEI_HALL_OUT2.B/H2  QEI_HALL_OUT2.A/H3] */
-on tile[IFM_TILE]: in  port p_ifm_encoder = XS1_PORT_4A; /* [p3 p2 p1 p0] -> [QEI_HALL_OUT1.Q  QEI_HALL_OUT1.I/H1  QEI_HALL_OUT1.B/H2  QEI_HALL_OUT1.A/H3] */
-on tile[IFM_TILE]:     port p_ifm_encoder_hall_select_ext_d4to5 = XS1_PORT_4F; /* [p3 p2 p1 p0] -> [EXT_D.5  EXT_D.4  HALL_ENC_SELEC.2  HALL_ENC_SELEC.1] */
-on tile[IFM_TILE]: in  port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[4] = { 
-								XS1_PORT_1K,    /* Hi A */ 
-								XS1_PORT_1O,    /* Hi B */
-								XS1_PORT_1M,    /* Hi C */
-								XS1_PORT_1A };  /* Hi D */
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[4]  = { 
-								XS1_PORT_1L,    /* Lo A */
-								XS1_PORT_1P,    /* Lo B */
-								XS1_PORT_1N,    /* Lo C */
-								XS1_PORT_1B };  /* Lo D */
+#define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62 
+#define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
+#define PWM_PORT_D_HIGH_SIDE IFM_PORT_1BIT_28
+								
+#define PWM_PORT_A_LOW_SIDE IFM_PORT_1BIT_56
+#define PWM_PORT_B_LOW_SIDE IFM_PORT_1BIT_52
+#define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
+#define PWM_PORT_D_LOW_SIDE IFM_PORT_1BIT_32
 
-/* LEDs, Watchdog */
-on tile[IFM_TILE]: out port  p_ifm_led_moton_wdtick_wden = XS1_PORT_4B;  /* [p3 p2 p1 p0] -> [LED Motor_ON WD_TICK WD_EN] */
+#define PWM_PORTS {																					\
+	PWM_CLOCK_SRC,																					\
+																									\
+	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},								\
+	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},								\
+	PWM_PORT_D_HIGH_SIDE,																			\
+	PWM_PORT_D_LOW_SIDE																				\
+}
 
+// ADC PORT DEFINITIONS
+#define ADC_DATA_A IFM_PORT_1BIT_42 
+#define ADC_DATA_B IFM_PORT_1BIT_40 
+#define ADC_SCLK IFM_PORT_1BIT_16 
+#define ADC_READY IFM_PORT_1BIT_4 
+#define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC. ADC single-diff mode p20
+#define ADC_INT_CLK CLOCK_MOTOR_TILE_2
 
-/* Expansion Port */
-on tile[IFM_TILE]: port p_ifm_ext_d0 = XS1_PORT_1I; //EXT_D.0
-on tile[IFM_TILE]: port p_ifm_ext_d1 = XS1_PORT_1J; //EXT_D.1
-on tile[IFM_TILE]: port p_ifm_ext_d2 = XS1_PORT_1F; //EXT_D.2
-on tile[IFM_TILE]: port p_ifm_ext_d3 = XS1_PORT_1E; //EXT_D.3
+#define AD7265_PORTS {	\
+	ADC_INT_CLK,		\
+						\
+	ADC_DATA_A,			\
+	ADC_DATA_B,			\
+	ADC_SCLK,			\
+	ADC_READY,			\
+	ADC_MUX				\
+}
 
-// DX -> XS1_PORT_4D
+#define SELECTION_HALL_ENCODER_PORT IFM_PORT_4BIT_68_70_72_74
+
+/************** HALL PORT DEFINITIONS ***********************/
+#define HALL_PORT IFM_PORT_4BIT_38_44_30_34
+
+/************** QEI PORT DEFINITIONS ***********************/
+#define QEI_PORT IFM_PORT_4BIT_36_46_48_50
+
+/************ WATCHDOG PORT DEFINITIONS *********************/
+#define WATCHDOG_TICK_PORT null
+#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
+
+#define WATCHDOG_PORTS {		\
+	WATCHDOG_TICK_PORT,			\
+ 	WATCHDOG_EN_PORT			\
+}
+
+/************** GPIO PORT DEFINITIONS ***********************/
+#define GPIO_D0 IFM_PORT_1BIT_6
+#define GPIO_D1 IFM_PORT_1BIT_78
+#define GPIO_D2 IFM_PORT_1BIT_2
+#define GPIO_D3 IFM_PORT_1BIT_22
+
+#define FET_DRIVER_PORTS {	\
+	null,					\
+	null,					\
+	null,					\
+	null					\
+}
 
 
 

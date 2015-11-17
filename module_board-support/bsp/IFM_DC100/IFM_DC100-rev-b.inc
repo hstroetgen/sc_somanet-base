@@ -11,10 +11,10 @@
 #define IFM_RESOLUTION 740
 
 /* A4935 control ports */
-on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
-on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;
-on tile[IFM_TILE]: port p_ifm_ff1 = XS1_PORT_1H;
-on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
+//on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
+//on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;
+//on tile[IFM_TILE]: port p_ifm_ff1 = XS1_PORT_1H;
+//on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
 
 /* ADC */
 on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
@@ -55,8 +55,19 @@ on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
     WATCHDOG_EN_PORT,         	\
     WATCHDOG_TICK_PORT          \
 }
-//on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
-//on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
+
+/************** FET DRIVER PORT DEFINITIONS ***********************/
+#define FET_DRIVER_COAST_PORT IFM_PORT_1BIT_4 
+#define FET_DRIVER_ESF_RST_PWML_PWMH_PORT IFM_PORT_4BIT_68_70_72_74 
+#define FET_DRIVER_FF1 IFM_PORT_1BIT_16
+#define FET_DRIVER_FF2 IFM_PORT_1BIT_78
+
+#define FET_DRIVER_PORTS {    			\
+	FET_DRIVER_COAST_PORT,        		\
+    FET_DRIVER_ESF_RST_PWML_PWMH_PORT, 	\
+    FET_DRIVER_FF1,					  	\
+    FET_DRIVER_FF2   					\
+}
 
 /* Expansion Ports */
 on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,

@@ -8,8 +8,6 @@
 #include <xs1.h>
 #include <platform.h>
 
-#define IFM_RESOLUTION 740
-
 /* ADC */
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
@@ -28,8 +26,33 @@
     { {null,null}, null, null, null,null}	\
 }
 
+/* FET DRIVER A4935 control ports */
+#define FETDRV_PORT_COASTN IFM_PORT_1BIT_4
+#define FETDRV_PORT_ESF_RSTN_PWML_PWMH IFM_PORT_4BIT_68_70_72_74
+#define FETDRV_PORT_FF1 IFM_PORT_1BIT_16
+#define FETDRV_PORT_FF2 IFM_PORT_1BIT_78
 
-/* BLDC Motor */
+#define FET_DRIVER_PORTS {			\
+	FETDRV_PORT_COASTN,				\
+	FETDRV_PORT_ESF_RSTN_PWML_PWMH, \
+	FETDRV_PORT_FF1,				\
+	FETDRV_PORT_FF2					\
+}
+
+/* HALL SENSOR PORTS */
+#define HALL_PORT IFM_PORT_4BIT_66_76_80
+
+#define HALL_PORTS {\
+	HALL_PORT		\
+}
+
+/* ENCODER PORT */
+#define ENCODER_PORT IFM_PORT_4BIT_38_44_30_34
+
+#define ENCODER_PORTS {	\
+	ENCODER_PORT		\
+}
+
 /* PWM PORTS*/
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62 
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
@@ -42,43 +65,26 @@
 #define PWM_DUMMY_PORT_TRIGGER IFM_UNUSED_PORT_0
 
 #define PWM_PORTS { 														\
-    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
-    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
-    null,																	\
-    null,																	\
+	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
+	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
+	null,																	\
+	null,																	\
 	PWM_CLOCK_SRC,       													\
 	PWM_DUMMY_PORT_TRIGGER													\
 }
 
-on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E;
-on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
-
 /* LEDs, Watchdog */
-
-/************ WATCHDOG PORT DEFINITIONS *********************/
 #define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 
-#define WATCHDOG_PORTS {  		\
-    WATCHDOG_EN_PORT,         	\
-    WATCHDOG_TICK_PORT          \
+#define WATCHDOG_PORTS {		\
+	WATCHDOG_EN_PORT,			\
+	WATCHDOG_TICK_PORT			\
 }
 
-/************** FET DRIVER PORT DEFINITIONS ***********************/
-#define FET_DRIVER_COAST_PORT IFM_PORT_1BIT_4 
-#define FET_DRIVER_ESF_RST_PWML_PWMH_PORT IFM_PORT_4BIT_68_70_72_74 
-#define FET_DRIVER_FF1 IFM_PORT_1BIT_16
-#define FET_DRIVER_FF2 IFM_PORT_1BIT_78
+/* GPIO_PORTS */
+#define GPIO_D0 IFM_PORT_1B_28
+#define GPIO_D1 IFM_PORT_1B_2
+#define GPIO_D2 IFM_PORT_1B_22
+#define GPIO_D3 IFM_PORT_1B_32
 
-#define FET_DRIVER_PORTS {    			\
-	FET_DRIVER_COAST_PORT,        		\
-    FET_DRIVER_ESF_RST_PWML_PWMH_PORT, 	\
-    FET_DRIVER_FF1,					  	\
-    FET_DRIVER_FF2   					\
-}
-
-/* Expansion Ports */
-on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,
-									  XS1_PORT_1E,
-									  XS1_PORT_1J,
-									  XS1_PORT_1B };

@@ -57,8 +57,19 @@
 
 #define SELECTION_HALL_ENCODER_PORT IFM_PORT_4BIT_68_70_72_74
 
-/************** HALL PORT DEFINITIONS ***********************/
+/* HALL SENSOR PORTS */
 #define HALL_PORT IFM_PORT_4BIT_38_44_30_34
+
+#define HALL_PORTS {\
+	HALL_PORT		\
+}
+
+/* ENCODER PORT */
+#define ENCODER_PORT IFM_PORT_4BIT_XXX
+
+#define ENCODER_PORTS {	\
+	ENCODER_PORT		\
+}
 
 /************** QEI PORT DEFINITIONS ***********************/
 #define QEI_PORT IFM_PORT_4BIT_36_46_48_50

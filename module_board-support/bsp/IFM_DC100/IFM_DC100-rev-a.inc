@@ -8,13 +8,11 @@
 #include <xs1.h>
 #include <platform.h>
 
-#define ADC_RESOLUTION 740
-
 /* FET DRIVER A4935 control ports */
 #define FETDRV_PORT_COASTN IFM_PORT_1BIT_4
 #define FETDRV_PORT_ESF_RSTN_PWML_PWMH IFM_PORT_4BIT_68_70_72_74
 #define FETDRV_PORT_FF1 IFM_PORT_1BIT_16
-#define FETDRV_PORT_FF2 IFM_PORT_1BIT_10
+#define FETDRV_PORT_FF2 IFM_PORT_1BIT_78
 
 #define FET_DRIVER_PORTS {			\
 	FETDRV_PORT_COASTN, 			\
@@ -39,10 +37,20 @@
 	ADC_CLOCK							\
 }
 
-/* HALL SENSOR PORT*/
-#define HALL_PORT IFM_PORT_1BIT_2
+/* HALL SENSOR PORTS */
+#define HALL_PORT IFM_PORT_4BIT_66_76_80
 
-/* PWM PORTS*/
+#define HALL_PORTS {\
+	HALL_PORT		\
+}
+
+/* ENCODER PORT */
+#define ENCODER_PORT IFM_PORT_4BIT_38_44_30_34
+
+#define ENCODER_PORTS {	\
+	ENCODER_PORT		\
+}
+
 /* PWM PORTS*/
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62 
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
@@ -63,12 +71,14 @@
 	PWM_DUMMY_PORT_TRIGGER													\
 }
 
-/* ENCODER PORT */
-#define ENCODER_PORT IFM_PORT_4BIT_XXX; /* Encoder */
-
 /* LEDs, Watchdog */
-on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
-on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
+#define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
+#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
+
+#define WATCHDOG_PORTS {  		\
+    WATCHDOG_EN_PORT,         	\
+    WATCHDOG_TICK_PORT          \
+}
 
 /* GPIO_PORTS */
 #define GPIO_D0 IFM_PORT_1B_28

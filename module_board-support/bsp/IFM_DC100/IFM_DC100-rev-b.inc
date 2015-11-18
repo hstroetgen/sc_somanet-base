@@ -50,6 +50,7 @@
 #define ENCODER_PORT IFM_PORT_4BIT_38_44_30_34
 
 #define ENCODER_PORTS {	\
+	null,				\
 	ENCODER_PORT		\
 }
 

@@ -8,6 +8,8 @@
 #include <xs1.h>
 #include <platform.h>
 #include <flash.h>
+#include <print.h>
+#include <xscope.h>
 
 /* Standard Tile definitions for demo/test apps */
 #define COM_TILE 0

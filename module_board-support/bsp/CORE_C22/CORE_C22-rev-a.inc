@@ -89,4 +89,3 @@ on tile[0]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,
  								PORT_SPI_CLK,
  								PORT_SPI_MOSI,
  								XS1_CLKBLK_2 };
-

@@ -9,6 +9,7 @@
 #include <platform.h>
 #include <flash.h>
 #include <print.h>
+#include <stdio.h>
 #include <xscope.h>
 
 /* Standard Tile definitions for demo/test apps */

@@ -8,40 +8,84 @@
 #include <xs1.h>
 #include <platform.h>
 
-#define IFM_RESOLUTION 400
-
-/* A4935 control ports */
-on tile[IFM_TILE]: port p_ifm_coastn = XS1_PORT_1G;
-on tile[IFM_TILE]: out port p_ifm_esf_rstn_pwml_pwmh = XS1_PORT_4F;
-on tile[IFM_TILE]: port p_ifm_ff1 = XS1_PORT_1H;
-on tile[IFM_TILE]: port p_ifm_ff2 = XS1_PORT_1I;
-
 /* ADC */
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misoa = XS1_PORT_1D;
-on tile[IFM_TILE]: in buffered  port:32 p_ifm_adc_misob = XS1_PORT_1C;
-on tile[IFM_TILE]: buffered out port:32 p_ifm_adc_sclk_conv_mosib_mosia = XS1_PORT_4C;
-on tile[IFM_TILE]: in           port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
-/* BLDC Motor */
-on tile[IFM_TILE]: in  port p_ifm_hall = XS1_PORT_4E;
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_hi[3] = { XS1_PORT_1K,   /* Hi A */
-							XS1_PORT_1O,   /* Hi B */
-							XS1_PORT_1M }; /* Hi C */
+#define ADC_DATA_OUT IFM_PORT_4BIT_20_58_10_8 
+#define ADC_DATA_IN_A IFM_PORT_1BIT_42 
+#define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 
-on tile[IFM_TILE]: buffered out port:32 p_ifm_motor_lo[3] = { XS1_PORT_1L,   /* Lo A */
-							  XS1_PORT_1P,   /* Lo B */
-							  XS1_PORT_1N }; /* Lo C */
+#define SOMANET_IFM_ADC_PORTS {  						\
+    {										\
+	    ADC_DATA_OUT,         				\
+	    ADC_DATA_IN_A,         				\
+	    ADC_DATA_IN_B,          			\
+	    									\
+	    ADC_CLK_SRC							\
+    },        								\
+    { {null,null}, null, null, null,null}	\
+}
 
-on tile[IFM_TILE]: in port p_ifm_encoder = XS1_PORT_4A; /* Encoder */
+/* FET DRIVER A4935 control ports */
+#define FETDRV_PORT_COASTN IFM_PORT_1BIT_4
+#define FETDRV_PORT_ESF_RSTN_PWML_PWMH IFM_PORT_4BIT_68_70_72_74
+#define FETDRV_PORT_FF1 IFM_PORT_1BIT_16
+#define FETDRV_PORT_FF2 IFM_PORT_1BIT_78
+
+#define SOMANET_IFM_FET_DRIVER_PORTS {			\
+	FETDRV_PORT_COASTN,				\
+	FETDRV_PORT_ESF_RSTN_PWML_PWMH, \
+	FETDRV_PORT_FF1,				\
+	FETDRV_PORT_FF2					\
+}
+
+/* HALL SENSOR PORTS */
+#define HALL_PORT IFM_PORT_4BIT_64_66_76_80
+
+#define SOMANET_IFM_HALL_PORTS {\
+	HALL_PORT		\
+}
+
+/* ENCODER PORT */
+#define QEI_PORT IFM_PORT_4BIT_38_44_30_34
+
+#define SOMANET_IFM_QEI_PORTS {	\
+	null,				\
+	QEI_PORT		\
+}
+
+/* PWM PORTS*/
+#define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62 
+#define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
+#define PWM_PORT_A_LOW_SIDE IFM_PORT_1BIT_56
+#define PWM_PORT_B_LOW_SIDE IFM_PORT_1BIT_52
+#define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
+
+#define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
+#define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
+
+#define SOMANET_IFM_PWM_PORTS { 														\
+	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
+	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
+	null,																	\
+	null,																	\
+	PWM_CLOCK_SRC,       													\
+	PWM_DUMMY_PORT_TRIGGER													\
+}
 
 /* LEDs, Watchdog */
-on tile[IFM_TILE]: out port p_ifm_shared_leds_wden = XS1_PORT_4B; /* BlueGreenRed_WDEN */
-on tile[IFM_TILE]: out port p_ifm_wd_tick = XS1_PORT_1F; /* WatchdogTick */
+#define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
+#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 
-/* Expansion Ports */
-on tile[IFM_TILE]: port p_ifm_ext_d[4] ={ XS1_PORT_1A,
-									  XS1_PORT_1E,
-									  XS1_PORT_1J,
-									  XS1_PORT_1B };
+#define SOMANET_IFM_WATCHDOG_PORTS {		\
+	WATCHDOG_EN_PORT,			\
+	WATCHDOG_TICK_PORT			\
+}
 
+/* GPIO_PORTS */
+#define SOMANET_IFM_GPIO_D0 IFM_PORT_1BIT_28
+#define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_2
+#define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_22
+#define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_32
 

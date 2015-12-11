@@ -7,18 +7,29 @@
 
 #include <xs1.h>
 #include <platform.h>
+#include <print.h>
+#include <stdio.h>
 #include <flash.h>
+#include <xscope.h>
 
 /* For single-node setups */
-#define APP_TILE 0
-#define IFM_TILE 1
+#define APP_TILE 	0
+#define APP_TILE_1 	0
+#define APP_TILE_2 	0
+#define IFM_TILE 	1
 
 /* LED PORTS */
 #define CORE_LED_PORT_RED on tile[APP_TILE]: XS1_PORT_1M
 #define CORE_LED_PORT_GREEN on tile[APP_TILE]: XS1_PORT_1L
 #define CORE_LED_PORT_BLUE on tile[APP_TILE]: XS1_PORT_1K
 
- /* IFM PORTS */
+/************ CLOCK DEFINITIONS ************/
+#define IFM_TILE_CLOCK_0 on tile[IFM_TILE]: XS1_CLKBLK_REF
+#define IFM_TILE_CLOCK_1 on tile[IFM_TILE]: XS1_CLKBLK_2 
+#define IFM_TILE_CLOCK_2 on tile[IFM_TILE]: XS1_CLKBLK_3
+#define IFM_TILE_CLOCK_3 on tile[IFM_TILE]: XS1_CLKBLK_4
+
+/************* IFM PORTS ******************/
 #define IFM_PORT_1BIT_2 on tile[IFM_TILE]: XS1_PORT_1E
 #define IFM_PORT_1BIT_4 on tile[IFM_TILE]: XS1_PORT_1G
 #define IFM_PORT_1BIT_6 on tile[IFM_TILE]: XS1_PORT_1F
@@ -41,6 +52,9 @@
 #define IFM_PORT_4BIT_20_58_10_8 on tile[IFM_TILE]: XS1_PORT_4C
 #define IFM_PORT_4BIT_66_76_80 on tile[IFM_TILE]: XS1_PORT_4E
 #define IFM_PORT_4BIT_68_70_72_74 on tile[IFM_TILE]: XS1_PORT_4F
+
+/* INTERNAL PORTS */
+#define INTERNAL_PORT_16BIT_NOT_CONNECTED_0 on tile[IFM_TILE]: XS1_PORT_16A
 
  /* SPI port definitions */ 
 on tile[APP_TILE]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,

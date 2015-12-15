@@ -16,7 +16,7 @@
 #define ADC_SCLK IFM_PORT_1BIT_16 
 #define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
-#define ADC_INT_CLK CLOCK_MOTOR_TILE_2
+#define ADC_INT_CLK IFM_TILE_CLOCK_2
 
 #define SOMANET_IFM_ADC_PORTS {  	\
     { null, null, null, null },     \
@@ -78,9 +78,9 @@
 #define WATCHDOG_TICK_PORT null
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 
-#define SOMANET_IFM_WATCHDOG_PORTS {		\
-	WATCHDOG_EN_PORT,			\
-	WATCHDOG_TICK_PORT			\
+#define SOMANET_IFM_WATCHDOG_PORTS {	\
+	WATCHDOG_EN_PORT,					\
+	WATCHDOG_TICK_PORT 					\
 }
 
 /* GPIO_PORTS */

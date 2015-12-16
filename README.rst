@@ -12,6 +12,7 @@ Key Features
    * SOMANET board support files
    * SOMANET platform files
    * xSCOPE wrapper
+   * Flash memory access and firmware update 
 
 Firmware Overview
 =================
@@ -31,5 +32,5 @@ Issues may be submitted via the Issues tab in this GitHub repository. Response t
 Required software (dependencies)
 ================================
 
-  * None
+  * sc_flash/module_flash
 

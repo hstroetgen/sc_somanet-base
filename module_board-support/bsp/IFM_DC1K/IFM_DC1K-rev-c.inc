@@ -1,6 +1,6 @@
 /***************************
- * IFM Drive DC-100
- * Rev. B
+ * IFM Drive DC-1K
+ * Rev. C
  ***************************/
 
 #pragma once

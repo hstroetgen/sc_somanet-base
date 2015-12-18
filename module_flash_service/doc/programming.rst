@@ -128,27 +128,29 @@ Upgrading Firmware
 -----------------
 To upgrade your firmware, call the firmware update filter in the ethernet fetcher.
 
-void ethernet_fetcher(chanend dataFromP1, chanend dataFromP2, chanend c_flash_data, client interface if_tx tx)
-{
-    int nbytes;
-    unsigned rxbuffer[BUFFER_SIZE];
+::
 
-    while(1)
-    {
-       select
-       {
-           case fetchFrameFromHub(dataFromP1, rxbuffer, nbytes):
-                           break;
-
-           case fetchFrameFromHub(dataFromP2, rxbuffer, nbytes):
-                           break;
-       }
-
-       if( isSNCN((rxbuffer,char[])) && ( isForMe((rxbuffer,char[]), MAC_ADDRESS_P1 ) || isForMe((rxbuffer,char[]), MAC_ADDRESS_P2 )) )
-       {
-           fwUpdt_filter(rxbuffer, c_flash_data, nbytes, tx);
-       }
-    }
-}
+	void ethernet_fetcher(chanend dataFromP1, chanend dataFromP2, chanend c_flash_data, client interface if_tx tx)
+	{
+	    int nbytes;
+	    unsigned rxbuffer[BUFFER_SIZE];
+	
+	    while(1)
+	    {
+	       select
+	       {
+	           case fetchFrameFromHub(dataFromP1, rxbuffer, nbytes):
+	                           break;
+	
+	           case fetchFrameFromHub(dataFromP2, rxbuffer, nbytes):
+	                           break;
+	       }
+	
+	       if( isSNCN((rxbuffer,char[])) && ( isForMe((rxbuffer,char[]), MAC_ADDRESS_P1 ) || isForMe((rxbuffer,char[]), MAC_ADDRESS_P2 )) )
+	       {
+	           fwUpdt_filter(rxbuffer, c_flash_data, nbytes, tx);
+	       }
+	    }
+	}
 
 

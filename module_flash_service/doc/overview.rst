@@ -20,4 +20,4 @@ By default the flash memory consist of just a boot partition. To store common da
 For further information take a look in the PDF `Design and manufacture systems with flash memory`_ by XMOS.
 
 	
-.. _Design and manufacture systems with flash memory: https://download.xmos.com/XM-000949-PC-9.pdf?auth=WzAsIjkxLjE4Ljg1LjExIiwxNDUwMzQxMzA5LCJYTS0wMDA5NDktUEMtOS5wZGYiXQ==
+.. _Design and manufacture systems with flash memory: https://www.xmos.com/download/private/Design-and-manufacture-systems-with-flash-memory(9).pdf

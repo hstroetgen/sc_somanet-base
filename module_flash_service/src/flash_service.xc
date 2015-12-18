@@ -9,13 +9,16 @@
 #include <flash_boot.h>
 #include <flash_data.h>
 
-void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data, server interface if_flash_boot if_boot)
+// TODO Nullable interfaces!
+void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data, server interface if_flash_boot ?if_boot)
 {
     int command;
     int data_length; /* data length exceeds page length error */
     int page;        /* page exceeds error, no data partition found error */
     unsigned char data[PAGE_SIZE];
     int status;      /* erase all pages atleast once if status is always 0 even if data partition is found */
+
+    fl_BootImageInfo bii;
 
     flash_init(SPI);
 
@@ -24,7 +27,7 @@ void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data
     {
         select
         {
-                /* Data Field update */
+            /* Data Field update */
             case if_data.read(char data[], unsigned nbytes, unsigned address):
             {       // read
 
@@ -40,10 +43,36 @@ void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data
             }
             break;
             // XXX we don't need addresses here, because the position in the boot partition will be calculated automatically.
-            // bii provides the address.
-            case if_boot.read(char data[], unsigned nbytes, fl_BootImageInfo &bii):
+            case if_boot.read(char data[], unsigned nbytes, unsigned char image_num) -> unsigned error:
             {
-                //fl_startImageRead(b)
+                // Calculating addresses of the factory image.
+                if (fl_getFactoryImage(bii))
+                {
+                    error = NO_FACTORY_IMAGE;
+                    break;
+                }
+
+                // In dependence of the factory image, we calculate the address of the next upgrade images (if available)
+                for (int i = 0; i < image_num; i++)
+                {
+                    if (fl_getNextBootImage(bii))
+                    {
+                        error = NO_UPGRADE_IMAGE;
+                        break;
+                    }
+                }
+
+                fl_imageReadState.currentAddress = bootImageInfo->startAddress;
+                unsigned limitAddress = fl_imageReadState.currentAddress + bootImageInfo->size;
+                unsigned pageSize = fl_getPageSize();
+                limitAddress = ((limitAddress + pageSize - 1) / pageSize) * pageSize;
+                fl_imageReadState.limitAddress = limitAddress;
+
+                // If image_num is zero, we will read the factory image. For image number greater then zero,
+                // we will read the n-1th upgrade image.
+
+                // When we are using fl_readImagePage(), we have to call first fl_startImageRead(), which calculateds the start and end addres of the image.
+                // fl_startImageRead(b)
                 read_boot_flash();
             }
             break;

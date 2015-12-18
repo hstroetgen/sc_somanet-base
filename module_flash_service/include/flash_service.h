@@ -16,10 +16,12 @@ interface if_flash_data
 
 interface if_flash_boot
 {
-    void read(char data[], unsigned nbytes, fl_BootImageInfo &bii);
-    void write(char data[], unsigned nbytes);
+    unsigned read(char data[], unsigned nbytes,  unsigned char image_num);
+    unsigned write(char data[], unsigned nbytes);
 };
 
-void flash_service_loop(fl_SPIPorts &SPI, interface if_flash_data, interface if_flash_boot);
+typedef enum flash_error {NO_FACTORY_IMAGE=1, NO_UPGRADE_IMAGE};
+
+void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data, server interface if_flash_boot ?if_boot);
 
 #endif /* FLASH_SERVICE_H_ */

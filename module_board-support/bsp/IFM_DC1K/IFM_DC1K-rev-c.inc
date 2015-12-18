@@ -22,7 +22,8 @@
      ADC_CLK_SRC, 					\
      ADC_SCLK,						\
      ADC_READY,						\
-     ADC_MUX}						\
+     ADC_MUX},						\
+     {1, -1, 50}					\
 }
 
 /* FET DRIVER A4935 control ports */

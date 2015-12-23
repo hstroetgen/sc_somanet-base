@@ -22,6 +22,6 @@ interface if_flash_boot
 
 typedef enum flash_error {NO_FACTORY_IMAGE=1, NO_UPGRADE_IMAGE};
 
-void flash_service_loop(fl_SPIPorts &SPI, server interface if_flash_data if_data, server interface if_flash_boot ?if_boot);
+void flash_service(fl_SPIPorts &SPI, server interface if_flash_data if_data, server interface if_flash_boot ?if_boot);
 
 #endif /* FLASH_SERVICE_H_ */

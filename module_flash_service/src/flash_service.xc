@@ -15,7 +15,6 @@ void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?i_bo
     int command;
     int data_length; /* data length exceeds page length error */
     int page;        /* page exceeds error, no data partition found error */
-    unsigned char data[PAGE_SIZE];
     int status;      /* erase all pages atleast once if status is always 0 even if data partition is found */
 
     fl_BootImageInfo bii;
@@ -28,16 +27,16 @@ void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?i_bo
         select
         {
             /* Data Field update */
-            {       // read
             case i_data.read(char data[], unsigned nbytes, unsigned address):
+            {
 
                 // TODO Do flash management
                 status = __read_data_flash(page, data);
 
             }
             break;
-            { // write
             case i_data.write(char data[], unsigned nbytes) -> int address:
+            {
 
                 status = __write_data_flash(data, data_length, page);
             }

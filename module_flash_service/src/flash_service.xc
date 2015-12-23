@@ -10,7 +10,7 @@
 #include <flash_data.h>
 
 // TODO Nullable interfaces!
-void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?if_boot, interface flash_data_interface server if_data)
+void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?i_boot, interface flash_data_interface server i_data)
 {
     int command;
     int data_length; /* data length exceeds page length error */
@@ -28,22 +28,22 @@ void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?if_b
         select
         {
             /* Data Field update */
-            case if_data.read(char data[], unsigned nbytes, unsigned address):
             {       // read
+            case i_data.read(char data[], unsigned nbytes, unsigned address):
 
                 // TODO Do flash management
                 status = __read_data_flash(page, data);
 
             }
             break;
-            case if_data.write(char data[], unsigned nbytes) -> int address:
             { // write
+            case i_data.write(char data[], unsigned nbytes) -> int address:
 
                 status = __write_data_flash(data, data_length, page);
             }
             break;
             // XXX we don't need addresses here, because the position in the boot partition will be calculated automatically.
-            case if_boot.read(char data[], unsigned nbytes, unsigned char image_num) -> unsigned error:
+            case i_boot.read(char data[], unsigned nbytes, unsigned char image_num) -> unsigned error:
             {
                 // Calculating addresses of the factory image.
                 if (fl_getFactoryImage(bii))
@@ -76,7 +76,7 @@ void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?if_b
                 read_boot_flash();
             }
             break;
-            case if_boot.write(char data[], unsigned nbytes):
+            case i_boot.write(char data[], unsigned nbytes):
             {
                 write_boot_flash();
             }

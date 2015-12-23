@@ -10,7 +10,7 @@
 #include <flash_data.h>
 
 // TODO Nullable interfaces!
-void flash_service(fl_SPIPorts &SPI, interface if_flash_boot server ?if_boot, interface if_flash_data server if_data)
+void flash_service(fl_SPIPorts &SPI, interface flash_boot_interface server ?if_boot, interface flash_data_interface server if_data)
 {
     int command;
     int data_length; /* data length exceeds page length error */

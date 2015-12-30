@@ -1,21 +1,24 @@
 /**
- * @file flash_write.c
+ * @file flash_common.c
  * @brief Flash device access
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <stdlib.h>
-#include <stdint.h>
+#include <flash_common.h>
+#include <flash_somanet.h>
+
 #include <flashlib.h>
 #include <platform.h>
 #include <flash.h>
-#include <flash_somanet.h>
-#include <string.h>
 #include <print.h>
+
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
 //#define DEBUG // No space for prints!
 
-fl_SPIPorts SPI_port;
+fl_SPIPorts *SPI_port;
 
 void flash_init(fl_SPIPorts *SPI) {
     SPI_port = SPI;
@@ -106,7 +109,6 @@ int __write_data_flash(unsigned char data[PAGE_SIZE], int data_length, int page)
 //int __read_data_flash(fl_SPIPorts *SPI, int page, unsigned char data[256])
 int __read_data_flash(int page, unsigned char data[PAGE_SIZE]) {
     /* Variables for buffering, counting iterations, etc */
-    unsigned int temp;
     int status = 1;
 
     /* Initialise the data_page array */

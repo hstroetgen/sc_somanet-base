@@ -7,8 +7,10 @@
 
 int flash_write_boot(char data[], unsigned size) {
     //TODO
+    return 0;
 }
 
 int flash_read_boot(char data[], unsigned size) {
     //TODO
+    return 0;
 }

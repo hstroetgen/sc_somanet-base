@@ -5,19 +5,21 @@
 
 #pragma once
 
+#include <flash.h>
+
 interface FlashDataInterface {
-    void read(char data[], unsigned nbytes, unsigned address);
-    unsigned write(char data[], unsigned nbytes);
+    int read(char data[], unsigned nbytes, unsigned address);
+    int write(char data[], unsigned nbytes);
 };
 
 interface FlashBootInterface {
-    unsigned read(char data[], unsigned nbytes,  unsigned char image_num);
-    unsigned write(char data[], unsigned nbytes);
+    int read(char data[], unsigned nbytes,  unsigned char image_num);
+    int write(char data[], unsigned nbytes);
 };
 
-typedef enum flash_error {
+enum {
     NO_FACTORY_IMAGE=1, NO_UPGRADE_IMAGE
-};
+} flash_error;
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,

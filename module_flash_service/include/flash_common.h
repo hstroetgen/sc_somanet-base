@@ -1,5 +1,5 @@
 /**
- * @file flash_write.c
+ * @file flash_common.h
  * @brief Flash device access
  * @author Synapticon GmbH <support@synapticon.com>
  */
@@ -7,6 +7,7 @@
 #pragma once
 
 #include <xccompat.h>
+#include <flash.h>
 
 /**
  * Buffer size for the firmware image. TODO: Where comes this value

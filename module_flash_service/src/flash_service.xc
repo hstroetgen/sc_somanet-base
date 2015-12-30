@@ -9,8 +9,8 @@
 
 // TODO Nullable interfaces!
 void flash_service(fl_SPIPorts &SPI,
-                   interface flash_boot_interface server ?i_boot,
-                   interface flash_data_interface server i_data[n],
+                   interface FlashBootInterface server ?i_boot,
+                   interface FlashDataInterface server i_data[n],
                    unsigned n) {
     int command;
     int data_length; /* data length exceeds page length error */

@@ -5,12 +5,12 @@
 
 #pragma once
 
-interface flash_data_interface {
+interface FlashDataInterface {
     void read(char data[], unsigned nbytes, unsigned address);
     unsigned write(char data[], unsigned nbytes);
 };
 
-interface flash_boot_interface {
+interface FlashBootInterface {
     unsigned read(char data[], unsigned nbytes,  unsigned char image_num);
     unsigned write(char data[], unsigned nbytes);
 };
@@ -20,6 +20,6 @@ typedef enum flash_error {
 };
 
 void flash_service(fl_SPIPorts &SPI,
-                   interface flash_boot_interface server ?i_boot,
-                   interface flash_data_interface server i_data[n],
+                   interface FlashBootInterface server ?i_boot,
+                   interface FlashDataInterface server i_data[n],
                    unsigned n);

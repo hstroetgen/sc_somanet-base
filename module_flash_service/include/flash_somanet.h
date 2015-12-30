@@ -9,8 +9,6 @@
 #include <flashlib.h>
 #include <xccompat.h>
 
-
-
 /**
  * @brief Firmware update handler
  *
@@ -27,8 +25,6 @@
  * @param c_nodes[]     channel to subsequent nodes
  * @param reset         signal from firmware updater a reset occured.
  */
-
-
 
 void reset_cores1(void);
 /* software auto reset functions */

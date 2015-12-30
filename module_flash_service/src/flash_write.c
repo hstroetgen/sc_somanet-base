@@ -17,26 +17,21 @@
 
 fl_SPIPorts SPI_port;
 
-
-
-void flash_init(fl_SPIPorts *SPI)
-{
+void flash_init(fl_SPIPorts *SPI) {
     SPI_port = SPI;
 }
 
-void connect_to_flash(void)
-{
+void connect_to_flash(void) {
     if (fl_connect(SPI_port) != 0) {
         #ifdef DEBUG
-        printstrln("could not connect flash");
+        printstrln("Could not connect to flash memory");
         #endif
         exit(1);
     }
 }
 
 // Address must be a multiple of page_size
-void flash_buffer(unsigned char content[BUFFER_SIZE], int image_size, unsigned address)
-{
+void flash_buffer(unsigned char content[BUFFER_SIZE], int image_size, unsigned address) {
     unsigned current_page = 0;
 
     for (int i=0; i<(image_size/PAGE_SIZE); i++) {
@@ -46,9 +41,7 @@ void flash_buffer(unsigned char content[BUFFER_SIZE], int image_size, unsigned a
     }
 }
 
-
-int __write_data_flash(unsigned char data[PAGE_SIZE], int data_length, int page)
-{
+int __write_data_flash(unsigned char data[PAGE_SIZE], int data_length, int page) {
     /* Array to store the data to be written to the flash */
     unsigned char data_page[PAGE_SIZE];
 
@@ -111,8 +104,7 @@ int __write_data_flash(unsigned char data[PAGE_SIZE], int data_length, int page)
 }
 
 //int __read_data_flash(fl_SPIPorts *SPI, int page, unsigned char data[256])
-int __read_data_flash(int page, unsigned char data[PAGE_SIZE])
-{
+int __read_data_flash(int page, unsigned char data[PAGE_SIZE]) {
     /* Variables for buffering, counting iterations, etc */
     unsigned int temp;
     int status = 1;

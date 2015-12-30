@@ -22,19 +22,22 @@
 }
 
 /* ADC */
-#define ADC_PORT_MISO_A IFM_PORT_1BIT_42
-#define ADC_PORT_MISO_B IFM_PORT_1BIT_40
-#define ADC_PORT_SCLK_CONV_MOSI_B_MOSI_A IFM_PORT_4BIT_20_58_10_8
-#define ADC_PORT_DUMMY XS1_PORT_16A	
-#define ADC_CLOCK IFM_TILE_CLOCK_1
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
-#define ADC_PORTS {						\
-	ADC_PORT_MISO_A,					\
-	ADC_PORT_MISO_B,					\
-	ADC_PORT_SCLK_CONV_MOSI_B_MOSI_A,	\
-	ADC_PORT_DUMMY,						\
-										\
-	ADC_CLOCK							\
+#define ADC_DATA_OUT IFM_PORT_4BIT_20_58_10_8 
+#define ADC_DATA_IN_A IFM_PORT_1BIT_42 
+#define ADC_DATA_IN_B IFM_PORT_1BIT_40 
+
+#define SOMANET_IFM_ADC_PORTS {  			\
+    {										\
+	    ADC_DATA_OUT,         				\
+	    ADC_DATA_IN_A,         				\
+	    ADC_DATA_IN_B,          			\
+	    									\
+	    ADC_CLK_SRC							\
+    },        								\
+    { {null,null}, null, null, null,null},	\
+    {1, 1, 5}								\
 }
 
 /* HALL SENSOR PORTS */

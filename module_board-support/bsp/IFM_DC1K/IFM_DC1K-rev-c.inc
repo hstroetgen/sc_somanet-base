@@ -1,6 +1,6 @@
 /***************************
- * IFM Drive DC-100
- * Rev. B
+ * IFM Drive DC-1K
+ * Rev. C
  ***************************/
 
 #pragma once
@@ -9,26 +9,24 @@
 #include <platform.h>
 
 /* ADC */
-#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
-
 #define ADC_DATA_A IFM_PORT_1BIT_42 
 #define ADC_DATA_B IFM_PORT_1BIT_40 
 #define ADC_SCLK IFM_PORT_1BIT_16 
 #define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
-#define ADC_INT_CLK IFM_TILE_CLOCK_2
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
 #define SOMANET_IFM_ADC_PORTS {  	\
     { null, null, null, null },     \
     { {ADC_DATA_A , ADC_DATA_B},	\
-     ADC_INT_CLK, 					\
+     ADC_CLK_SRC, 					\
      ADC_SCLK,						\
      ADC_READY,						\
-     ADC_MUX}						\
+     ADC_MUX},						\
+     {1, -1, 50}					\
 }
 
 /* FET DRIVER A4935 control ports */
-
 #define SOMANET_IFM_FET_DRIVER_PORTS {			\
 	null,										\
 	null, 										\
@@ -65,13 +63,13 @@
 #define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
 #define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
 
-#define SOMANET_IFM_PWM_PORTS { 											\
-	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
-	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
-	PWM_PORT_D_HIGH_SIDE,													\
-	PWM_PORT_D_LOW_SIDE,													\
-	PWM_CLOCK_SRC,       													\
-	PWM_DUMMY_PORT_TRIGGER													\
+#define SOMANET_IFM_PWM_PORTS {											\
+	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},	\
+	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},	\
+	PWM_PORT_D_HIGH_SIDE,												\
+	PWM_PORT_D_LOW_SIDE,												\
+	PWM_CLOCK_SRC,														\
+	PWM_DUMMY_PORT_TRIGGER												\
 }
 
 /* LEDs, Watchdog */

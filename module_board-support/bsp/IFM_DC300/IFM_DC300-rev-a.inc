@@ -23,7 +23,8 @@
 	    									\
 	    ADC_CLK_SRC							\
     },        								\
-    { {null,null}, null, null, null,null}	\
+    { {null,null}, null, null, null,null},	\
+    {1, 1, 20}								\
 }
 
 /* FET DRIVER A4935 control ports */

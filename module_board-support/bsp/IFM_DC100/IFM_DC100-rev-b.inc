@@ -15,7 +15,7 @@
 #define ADC_DATA_IN_A IFM_PORT_1BIT_42 
 #define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 
-#define SOMANET_IFM_ADC_PORTS {  						\
+#define SOMANET_IFM_ADC_PORTS {  			\
     {										\
 	    ADC_DATA_OUT,         				\
 	    ADC_DATA_IN_A,         				\
@@ -23,7 +23,8 @@
 	    									\
 	    ADC_CLK_SRC							\
     },        								\
-    { {null,null}, null, null, null,null}	\
+    { {null,null}, null, null, null,null},	\
+    {1, 1, 5}								\
 }
 
 /* FET DRIVER A4935 control ports */

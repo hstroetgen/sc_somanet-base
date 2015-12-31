@@ -17,9 +17,9 @@ interface FlashBootInterface {
     int write(char data[], unsigned nbytes);
 };
 
-enum {
+enum flash_error {
     NO_FACTORY_IMAGE=1, NO_UPGRADE_IMAGE
-} flash_error;
+};
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,

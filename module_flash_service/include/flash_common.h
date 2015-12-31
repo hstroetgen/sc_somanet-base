@@ -25,6 +25,6 @@ int __read_data_flash(REFERENCE_PARAM(fl_SPIPorts, SPI), int page, unsigned char
 */
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));
 void flash_buffer(unsigned char content[], int imageSize, unsigned address);
-void connect_to_flash(void);
+int connect_to_flash(void);
 int __write_data_flash(unsigned char data[256], int data_length, int page);
 int __read_data_flash(int page, unsigned char data[256]);

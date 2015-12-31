@@ -24,13 +24,12 @@ void flash_init(fl_SPIPorts *SPI) {
     SPI_port = SPI;
 }
 
-void connect_to_flash(void) {
-    if (fl_connect(SPI_port) != 0) {
-        #ifdef DEBUG
+int connect_to_flash(void) {
+    int result = fl_connect(SPI_port);
+    if (result != 0) {
         printstrln("Could not connect to flash memory");
-        #endif
-        exit(1);
     }
+    return result;
 }
 
 // Address must be a multiple of page_size

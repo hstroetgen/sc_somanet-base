@@ -1,4 +1,4 @@
 COM Recognition Demo
 ====================
 
-Lorem Ipsum...
+This app is not yet intended for public use.

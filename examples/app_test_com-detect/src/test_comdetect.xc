@@ -3,35 +3,27 @@
 #include <stdio.h>
 #include "platform.h"
 
-
-
 //#define COM_DETECT_TEST_MODULE
-
-
 
 #ifdef COM_DETECT_TEST_MODULE
 
 #define array_len 7
-on stdcore[0]: port p_array[] = { XS1_PORT_1N,   /* unused */
-                                  XS1_PORT_1M,   /* 100p */
-                                  XS1_PORT_1L,   /* 220p */
-                                  XS1_PORT_1K,   /* 470p */
-                                  XS1_PORT_1I,   /*   1n */
-                                  XS1_PORT_1G,   /*  2n2 */
-                                  XS1_PORT_1H }; /* 100n */
+on tile[0]: port p_array[] = {  XS1_PORT_1N,   // unused
+                                XS1_PORT_1M,   // 100p
+                                XS1_PORT_1L,   // 220p
+                                XS1_PORT_1K,   // 470p
+                                XS1_PORT_1I,   // 1n
+                                XS1_PORT_1G,   // 2n2
+                                XS1_PORT_1H }; // 100n
 
 #else
-
-on stdcore[0]: port p_com_detect = XS1_PORT_1M;
-
+on tile[0]: port p_com_detect = XS1_PORT_1M;
 #endif
-
-
 
 int main(void)
 {
     par {
-        on stdcore[0]: {
+        on tile[0]: {
             com_module_type_t type;
             const char com_module_names[][15] = {
                 "No COM module",
@@ -51,7 +43,6 @@ int main(void)
 #ifdef COM_DETECT_TEST_MODULE
             for (int i=0; i<array_len; i++) {
                 type = com_detect(p_array[i]);
-
                 printf("%d - %s\n\n", type , com_module_names[type]);
             }
 #else

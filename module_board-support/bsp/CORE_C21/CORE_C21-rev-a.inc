@@ -13,10 +13,10 @@
 #include <xscope.h>
 
 /* For single-node setups */
-#define APP_TILE 	0
-#define APP_TILE_1 	0
-#define APP_TILE_2 	0
-#define IFM_TILE 	1
+#define APP_TILE    0
+#define APP_TILE_1  0
+#define APP_TILE_2  0
+#define IFM_TILE    1
 
 /* LED PORTS */
 #define CORE_LED_PORT_RED on tile[APP_TILE]: XS1_PORT_1M
@@ -57,12 +57,12 @@
 #define INTERNAL_PORT_16BIT_NOT_CONNECTED_0 on tile[IFM_TILE]: XS1_PORT_16A
 
  /* SPI port definitions */ 
-on tile[APP_TILE]: fl_SPIPorts p_spi_flash = { PORT_SPI_MISO,
- 								PORT_SPI_SS,
- 								PORT_SPI_CLK,
- 								PORT_SPI_MOSI,
- 								XS1_CLKBLK_2 };
+on tile[APP_TILE]: fl_SPIPorts p_spi_flash = {  PORT_SPI_MISO,
+                                                PORT_SPI_SS,
+                                                PORT_SPI_CLK,
+                                                PORT_SPI_MOSI,
+                                                XS1_CLKBLK_2 };
 
 #if defined(COM_TILE) || defined(COM_PORT_1BIT_18) || defined(COM_PORT_1BIT_10) || defined(COM_PORT_1BIT_34) || defined(COM_PORT_1BIT_50) || defined(COM_PORT_1BIT_40) || defined(COM_PORT_1BIT_70) || defined(COM_PORT_16BIT_48_52_46_42_38_36_28_60_20_56_24_54_30) || defined(COM_PORT_16BIT_76_78_4_2_6_74_8_72_70_12_68_66_16_64_62_44) 
-	#error "CORE C21 does not support a COM modules"
+    #error "CORE C21 does not support a COM modules"
 #endif

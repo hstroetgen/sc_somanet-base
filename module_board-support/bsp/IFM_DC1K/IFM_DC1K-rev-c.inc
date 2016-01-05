@@ -16,38 +16,38 @@
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
-#define SOMANET_IFM_ADC_PORTS {  	\
+#define SOMANET_IFM_ADC_PORTS {     \
     { null, null, null, null },     \
-    { {ADC_DATA_A , ADC_DATA_B},	\
-     ADC_CLK_SRC, 					\
-     ADC_SCLK,						\
-     ADC_READY,						\
-     ADC_MUX},						\
-     {1, -1, 50}					\
+    { {ADC_DATA_A , ADC_DATA_B},    \
+     ADC_CLK_SRC,                   \
+     ADC_SCLK,                      \
+     ADC_READY,                     \
+     ADC_MUX},                      \
+     {1, -1, 50}                    \
 }
 
 /* FET DRIVER A4935 control ports */
-#define SOMANET_IFM_FET_DRIVER_PORTS {			\
-	null,										\
-	null, 										\
-	null,										\
-	null										\
+#define SOMANET_IFM_FET_DRIVER_PORTS {  \
+    null,                               \
+    null,                               \
+    null,                               \
+    null                                \
 }
 
 /* HALL SENSOR PORTS */
 #define HALL_PORT IFM_PORT_4BIT_38_44_30_34
 
-#define SOMANET_IFM_HALL_PORTS {	\
-	HALL_PORT						\
+#define SOMANET_IFM_HALL_PORTS {    \
+    HALL_PORT                       \
 }
 
 /* ENCODER PORT */
 #define QEI_PORT IFM_PORT_4BIT_64_66_76_80
 #define QEI_PORT_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
 
-#define SOMANET_IFM_QEI_PORTS {					\
-	QEI_PORT_INPUT_MODE_SELECTION,				\
-	QEI_PORT									\
+#define SOMANET_IFM_QEI_PORTS {                 \
+    QEI_PORT_INPUT_MODE_SELECTION,              \
+    QEI_PORT                                    \
 }
 
 /* PWM PORTS*/
@@ -63,22 +63,22 @@
 #define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
 #define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
 
-#define SOMANET_IFM_PWM_PORTS {											\
-	{PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},	\
-	{PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},	\
-	PWM_PORT_D_HIGH_SIDE,												\
-	PWM_PORT_D_LOW_SIDE,												\
-	PWM_CLOCK_SRC,														\
-	PWM_DUMMY_PORT_TRIGGER												\
+#define SOMANET_IFM_PWM_PORTS {                                         \
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE}, \
+    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},    \
+    PWM_PORT_D_HIGH_SIDE,                                               \
+    PWM_PORT_D_LOW_SIDE,                                                \
+    PWM_CLOCK_SRC,                                                      \
+    PWM_DUMMY_PORT_TRIGGER                                              \
 }
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT null
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 
-#define SOMANET_IFM_WATCHDOG_PORTS {	\
-	WATCHDOG_EN_PORT,					\
-	WATCHDOG_TICK_PORT 					\
+#define SOMANET_IFM_WATCHDOG_PORTS {    \
+    WATCHDOG_EN_PORT,                   \
+    WATCHDOG_TICK_PORT                  \
 }
 
 /* GPIO_PORTS */

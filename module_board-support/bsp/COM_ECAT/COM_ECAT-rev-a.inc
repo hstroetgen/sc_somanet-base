@@ -8,25 +8,25 @@
 #include <xs1.h>
 #include <platform.h>
 
-#define PORT_ECAT_RST		COM_PORT_1BIT_18
-#define PORT_ECAT_IRQ		COM_PORT_1BIT_10
-#define PORT_ECAT_BUSY		COM_PORT_1BIT_34
-#define PORT_ECAT_WR		COM_PORT_1BIT_50
-#define PORT_ECAT_RD		COM_PORT_1BIT_40
-#define PORT_ECAT_CS		COM_PORT_1BIT_70
-#define PORT_ECAT_DATA		COM_PORT_16BIT_48_52_46_42_38_36_28_60_20_56_24_54_30
-#define PORT_ECAT_ADDRESS	COM_PORT_16BIT_76_78_4_2_6_74_8_72_70_12_68_66_16_64_62_44
+#define PORT_ECAT_RST       COM_PORT_1BIT_18
+#define PORT_ECAT_IRQ       COM_PORT_1BIT_10
+#define PORT_ECAT_BUSY      COM_PORT_1BIT_34
+#define PORT_ECAT_WR        COM_PORT_1BIT_50
+#define PORT_ECAT_RD        COM_PORT_1BIT_40
+#define PORT_ECAT_CS        COM_PORT_1BIT_70
+#define PORT_ECAT_DATA      COM_PORT_16BIT_48_52_46_42_38_36_28_60_20_56_24_54_30
+#define PORT_ECAT_ADDRESS   COM_PORT_16BIT_76_78_4_2_6_74_8_72_70_12_68_66_16_64_62_44
 
 //C21 -> NOT SUPPORTED ERROR!
 //CA11 -> NOT SUPPORTED ERROR!
 
 #define SOMANET_COM_ETHERCAT_PORTS {\
-    PORT_ECAT_RST,		\
-    PORT_ECAT_IRQ,		\
-    PORT_ECAT_BUSY,		\
-    PORT_ECAT_WR,		\
-    PORT_ECAT_RD,		\
-    PORT_ECAT_CS,		\
-    PORT_ECAT_DATA,		\
-    PORT_ECAT_ADDRESS	\
+    PORT_ECAT_RST,                  \
+    PORT_ECAT_IRQ,                  \
+    PORT_ECAT_BUSY,                 \
+    PORT_ECAT_WR,                   \
+    PORT_ECAT_RD,                   \
+    PORT_ECAT_CS,                   \
+    PORT_ECAT_DATA,                 \
+    PORT_ECAT_ADDRESS               \
 }

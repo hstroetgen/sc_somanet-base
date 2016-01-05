@@ -2,18 +2,11 @@
 SOMANET COM Detect Module
 ==========================
 
+.. note:: This module is still not completed. For the moment being it is not required by any SOMANET Library and its use is not recommended. 
+
 .. contents:: In this document
     :backlinks: none
     :depth: 3
 
-Lorem ipsum...
+This module offers the functionality to detect which **SOMANET COM Board** is attached to our CORE Board.
 
-How to use
-==========
-
-Lorem ipsum...
-
-API
-===
-
-Lorem ipsum...

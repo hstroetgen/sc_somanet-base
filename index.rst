@@ -9,7 +9,7 @@ SOMANET Base - Utility Library
 	COM Recognition Module <module_com-detect/doc/index>
 	Locks Module <module_locks/doc/index>
 
-.. important:: You will always need to include SOMANET Base library in your project in order to run other **SOMANET Libraries**. 
+.. important:: You will always need to include SOMANET Base library in your project in order to run any other **SOMANET Library**. 
 
 The SOMANET Base Package is a collection useful utilities and basic firmware for SOMANET programming. SOMANET libraries It currently consist of following modules:
 

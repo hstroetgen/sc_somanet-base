@@ -2,10 +2,6 @@
 SOMANET COM Detect Module
 ==========================
 
-.. contents:: In this document
-    :backlinks: none
-    :depth: 3
-
 This module offers the functionality to detect which **SOMANET COM Board** is mounted in our SOMANET node.
   
   

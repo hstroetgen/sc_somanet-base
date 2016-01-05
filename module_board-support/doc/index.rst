@@ -43,14 +43,32 @@ Here the list of available targets supported by the module:
 **module_board_support/targets/**
 
 * SOMANET-C22.xn
+Select this target by setting in your app Makefile
+
+::
+
+ TARGET = SOMANET-C22
+
 
 * SOMANET-C21-DX.xn
+
+Select this target by setting in your app Makefile
+
+::
+
+ TARGET = SOMANET-C21-DX
 
 Here the list of supported SOMANET boards:
 **module_board_support/bsp/**
 
 * COM_ECAT
+        COM_ECAT-rev-a.inc
+::
+
+ #include <COM_ECAT-rev-a.inc>
+        
 * COM_ETHERNET
+
 * CORE_C21
 * CORE_C22
 * IFM_DC100

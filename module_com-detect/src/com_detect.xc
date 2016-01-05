@@ -23,23 +23,17 @@
 #include <stdio.h>
 #endif
 
-
-
 /* XS1 clock settings (defined as constants for now - FIXME: read cpu regs instead */
 #define REFCLK_MHZ 100
 
 /* maximum RC time constant in ns (R = 10k, C_max = 1u) */
 #define MAX_RC_DELAY_NS ( 10000 * (1000000000 / 1000000) )
 
-
-
 /* Derived constants
    Timers are clocked from the reference clock. So we need convert nanoseconds
    to "ticks" using the reference clock speed */
 #define T_REFCLK_NS    ( 1000 / REFCLK_MHZ )
 #define CHARGING_DELAY ( 5 * (MAX_RC_DELAY_NS / T_REFCLK_NS) )
-
-
 
 /* divide all delay times so that even the longest delay value fits in an uint16 */
 #define DETECTION_TIMEOUT 4400000  /* equals the delay time for a 220n cap */
@@ -82,8 +76,6 @@ static const rc_delay_t com_detect_rc_delays[] = {
 //    { PACK_NS( DETECTION_TIMEOUT ), COM_DETECT_IS_NONE }  /* upper limit (timeout) */
 };
 
-
-
 /* Calculate deviations of the measured value from the next smaller and bigger values.
    -> How much bigger would the smaller nominal value have to be to match the measurement?
    -> And how much smaller would the bigger nominal value have to be? */
@@ -119,7 +111,6 @@ static const rc_delay_t com_detect_rc_delays[] = {
 
     return { delta_lower, delta_upper };
 }
-
 
 com_module_type_t com_detect(port p)
 {
@@ -191,6 +182,4 @@ com_module_type_t com_detect(port p)
 
     return COM_DETECT_IS_UNKNOWN;
 }
-
-
 

@@ -69,31 +69,31 @@
 #endif
 
 #define ETHERNET_DEFAULT_MII_INIT_P1_lite { \
-  ETHERNET_DEFAULT_CLKBLK_0, \
-  ETHERNET_DEFAULT_CLKBLK_1, \
-\
-    PORT_ETH_RXCLK0,                             \
-    PORT_ETH_ERR0,                               \
-    PORT_ETH_RXD0,                               \
-    PORT_ETH_RXDV0,                              \
-    PORT_ETH_TXCLK0,                             \
-    PORT_ETH_TXEN0,                              \
-    PORT_ETH_TXD0,                               \
-    PORT_ETH_FAKE0 \
+  ETHERNET_DEFAULT_CLKBLK_0,                \
+  ETHERNET_DEFAULT_CLKBLK_1,                \
+                                            \
+    PORT_ETH_RXCLK0,                        \
+    PORT_ETH_ERR0,                          \
+    PORT_ETH_RXD0,                          \
+    PORT_ETH_RXDV0,                         \
+    PORT_ETH_TXCLK0,                        \
+    PORT_ETH_TXEN0,                         \
+    PORT_ETH_TXD0,                          \
+    PORT_ETH_FAKE0                          \
 }
 
 #define ETHERNET_DEFAULT_MII_INIT_P2_lite { \
-  ETHERNET_DEFAULT_CLKBLK_2, \
-  ETHERNET_DEFAULT_CLKBLK_3, \
-\
-    PORT_ETH_RXCLK1,                             \
-    PORT_ETH_ERR1,                               \
-    PORT_ETH_RXD1,                               \
-    PORT_ETH_RXDV1,                              \
-    PORT_ETH_TXCLK1,                             \
-    PORT_ETH_TXEN1,                              \
-    PORT_ETH_TXD1,                               \
-    PORT_ETH_FAKE1 \
+  ETHERNET_DEFAULT_CLKBLK_2,                \
+  ETHERNET_DEFAULT_CLKBLK_3,                \
+                                            \
+    PORT_ETH_RXCLK1,                        \
+    PORT_ETH_ERR1,                          \
+    PORT_ETH_RXD1,                          \
+    PORT_ETH_RXDV1,                         \
+    PORT_ETH_TXCLK1,                        \
+    PORT_ETH_TXEN1,                         \
+    PORT_ETH_TXD1,                          \
+    PORT_ETH_FAKE1                          \
 }
 
 #define ETHERNET_DEFAULT_MII_INIT_P1 ETHERNET_DEFAULT_MII_INIT_P1_lite

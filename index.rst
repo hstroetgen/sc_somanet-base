@@ -34,6 +34,6 @@ Examples
 
  	COM Recognition Demo <examples/app_test_com-detect/doc/index>
 
-Additionally, this repository includes the following example: 
+Additionally, this repository includes the following example app: 
 
-* `COM Recognition Demo <examples/app_test_com-detect/doc/index>`_
+* `COM Recognition Demo <examples/app_test_com-detect/doc/index>`_: Simple example on how to use the **COM Recognition Module**.

@@ -29,13 +29,12 @@ on tile[MOTOR_TILE]: out port p_ifm_led_moton_wdtick_wden = XS1_PORT_4B;    // [
 
 
 /* Expansion Port in DC5K */
-on tile[MOTOR_TILE]: port p_ifm_ext_d1 = XS1_PORT_1B;
-on tile[MOTOR_TILE]: port p_ifm_ext_d2 = XS1_PORT_1I;
-on tile[MOTOR_TILE]: port p_ifm_ext_d3 = XS1_PORT_1C;
-on tile[MOTOR_TILE]: port p_ifm_ext_d4 = XS1_PORT_1D;
-on tile[MOTOR_TILE]: port p_ifm_ext_d5 = XS1_PORT_1J;
+#define GPIO_D0 on tile[IFM_TILE]: XS1_PORT_1B;
+#define GPIO_D1 on tile[IFM_TILE]: XS1_PORT_1I;
+#define GPIO_D2 on tile[IFM_TILE]: XS1_PORT_1C;
+#define GPIO_D3 on tile[IFM_TILE]: XS1_PORT_1D;
+#define GPIO_D4 on tile[IFM_TILE]: XS1_PORT_1J;
 
 
 on tile[MOTOR_TILE]: port p_ifm_ext_d6to8_AUX12vEN = XS1_PORT_4F;   // [p3 p2 p1 p0] -> [EXT_D.7  EXT_D.6  EXT_D.8  AUX12vEN]
-
 

@@ -104,5 +104,3 @@
 
 #define ETHERNET_DEFAULT_SMI_INIT_P2 {ETHERNET_DEFAULT_PHY_ADDRESS, \
                                    PORT_ETH_MDIOC1}
-
-

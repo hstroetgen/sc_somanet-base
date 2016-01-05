@@ -7,13 +7,15 @@ SOMANET Base - Utility Library
 
 	Board Support Module <module_board-support/doc/index>
 	COM Recognition Module <module_com-detect/doc/index>
+	Locks Module <module_locks/doc/index>
 
 .. important:: You will always need to include SOMANET Base library in your project in order to run other **SOMANET Libraries**. 
 
 The SOMANET Base Package is a collection useful utilities and basic firmware for SOMANET programming. SOMANET libraries It currently consist of following modules:
 
-* `Board Support Module <module_board-support/doc/index>`_: Contains port mappings and platform description files (*.xn) for all available SOMANET modules
+* `Board Support Module <module_board-support/doc/index>`_: Contains port mappings and platform description files (*.xn) for all available SOMANET modules.
 * `SOMANET COM Recognition Module <module_com-detect/doc/index>`_:  Enables automatic recognition of SOMANET COM modules. **For internal use only!**
+* `Locks Module <module_locks/doc/index>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
 
 .. cssclass:: downloadable-button 
 

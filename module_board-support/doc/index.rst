@@ -78,18 +78,14 @@ Add board support files (*.bsp) in your app by just including them. e.g.
 ::
 
  #include <COM_ECAT-rev-a.bsp>
-        
-or 
+ #include <CORE_C22-rev-a.bsp>
+ #include <IFM_DC100-rev-b.bsp>
 
 ::
 
  #include <CORE_C21-rev-a.bsp>
-
-or
-
-::
-
  #include <IFM_DC1K-rev-c2.bsp>
+
 
 .. note:: Have a look at our demo apps to see how to use the definitions within these files. 
 

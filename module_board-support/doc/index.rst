@@ -21,11 +21,10 @@ How to use
  USED_MODULES = module_board-support etc etc
 
 
-* Include in your main the SOMANET port definitions files you need according to your hardware configuration:
+* Include in your main the SOMANET port definitions files you need according to your hardware configuration. Eg:
 
 ::
 
- //Eg.
  #include <CORE_C22-rev-a.inc>
  #include <IFM_DC100-rev-b.inc>
 
@@ -41,24 +40,26 @@ API
 
 Here the list of available targets supported by the module: 
 
-* targets/SOMANET-C22.xn
+* targets/**SOMANET-C22.xn**
 
-If you are using a SOMANET CORE C22, select this target in your app Makefile
+If you are using a **SOMANET CORE C22**, select this target in your app Makefile
 
 ::
 
  TARGET = SOMANET-C22
 
 
-* targets/SOMANET-C21-DX.xn
+* targets/**SOMANET-C21-DX.xn**
 
-If you are using a SOMANET CORE C21-DX, select this target in your app Makefile
+If you are using a **SOMANET CORE C21-DX**, select this target in your app Makefile
 
 ::
 
  TARGET = SOMANET-C21-DX
 
 Here the list of supported SOMANET boards and how to include their ports mapping in your app:
+
+.. important:: Have a look at our demo apps to see how to use the ports definition within these files. 
 
 * bsp/COM_ECAT/COM_ECAT-rev-a.inc
 ::

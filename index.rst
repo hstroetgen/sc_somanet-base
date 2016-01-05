@@ -8,6 +8,8 @@ SOMANET Base - Utility Library
 	Board Support Module <module_board-support/doc/index>
 	COM Recognition Module <module_com-detect/doc/index>
 
+.. important:: You will always need to include SOMANET Base library in your project in order to run other **SOMANET Libraries**. 
+
 The SOMANET Base Package is a collection useful utilities and basic firmware for SOMANET programming. SOMANET libraries It currently consist of following modules:
 
 * `Board Support Module <module_board-support/doc/index>`_: Contains port mappings and platform description files (*.xn) for all available SOMANET modules
@@ -15,11 +17,11 @@ The SOMANET Base Package is a collection useful utilities and basic firmware for
 
 .. cssclass:: downloadable-button 
 
-  `Download Library <https://github.com/synapticon/sc_somanet-base/archive/master.zip>`_
+  `Download Library <https://github.com/synapticon/sc_somanet-base/archive/new_board_support_system.zip>`_
 
 .. cssclass:: github
 
-  `Visit Public Repository <https://github.com/synapticon/sc_somanet-base>`_
+  `Visit Public Repository <https://github.com/synapticon/sc_somanet-base/tree/new_board_support_system>`_
 
 Examples
 --------

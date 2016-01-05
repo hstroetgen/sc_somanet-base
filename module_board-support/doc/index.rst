@@ -40,38 +40,58 @@ API
 ===
 
 Here the list of available targets supported by the module: 
-**module_board_support/targets/**
 
-* SOMANET-C22.xn
-Select this target by setting in your app Makefile
+* targets/SOMANET-C22.xn
+
+If you are using a SOMANET CORE C22, select this target in your app Makefile
 
 ::
 
  TARGET = SOMANET-C22
 
 
-* SOMANET-C21-DX.xn
+* targets/SOMANET-C21-DX.xn
 
-Select this target by setting in your app Makefile
+If you are using a SOMANET CORE C21-DX, select this target in your app Makefile
 
 ::
 
  TARGET = SOMANET-C21-DX
 
-Here the list of supported SOMANET boards:
-**module_board_support/bsp/**
+Here the list of supported SOMANET boards and how to include their ports mapping in your app:
 
-* COM_ECAT
-        COM_ECAT-rev-a.inc
+* bsp/COM_ECAT/COM_ECAT-rev-a.inc
 ::
 
  #include <COM_ECAT-rev-a.inc>
         
-* COM_ETHERNET
+* bsp/COM_ETHERNET/COM_ETHERNET-rev-a.inc
+::
 
-* CORE_C21
-* CORE_C22
-* IFM_DC100
-* IFM_DC300
-* IFM_DC1K
+ #include <COM_ETHERNET-rev-a.inc>
+
+* bsp/CORE_C21/CORE_C21-rev-a.inc
+::
+
+ #include <CORE_C21-rev-a.inc>
+
+* bsp/CORE_C22/CORE_C22-rev-a.inc
+::
+
+ #include <CORE_C22-rev-a.inc>
+
+* bsp/IFM_DC100/IFM_DC100-rev-b.inc
+::
+
+ #include <IFM_DC100-rev-b.inc>
+
+* bsp/IFM_DC300/IFM_DC300-rev-a.inc
+::
+
+ #include <IFM_DC300-rev-a.inc>
+
+* bsp/IFM_DC1K/IFM_DC1K-rev-c2.inc
+::
+
+ #include <IFM_DC1K-rev-c2.inc>
 

@@ -8,19 +8,6 @@
 #include <xs1.h>
 #include <platform.h>
 
-/* FET DRIVER A4935 control ports */
-#define FETDRV_PORT_COASTN IFM_PORT_1BIT_4
-#define FETDRV_PORT_ESF_RSTN_PWML_PWMH IFM_PORT_4BIT_68_70_72_74
-#define FETDRV_PORT_FF1 IFM_PORT_1BIT_16
-#define FETDRV_PORT_FF2 IFM_PORT_1BIT_78
-
-#define FET_DRIVER_PORTS {			\
-	FETDRV_PORT_COASTN, 			\
-	FETDRV_PORT_ESF_RSTN_PWML_PWMH,	\
-	FETDRV_PORT_FF1,				\
-	FETDRV_PORT_FF2					\
-}
-
 /* ADC */
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 
@@ -28,30 +15,44 @@
 #define ADC_DATA_IN_A IFM_PORT_1BIT_42 
 #define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 
-#define SOMANET_IFM_ADC_PORTS {  			\
-    {										\
-	    ADC_DATA_OUT,         				\
-	    ADC_DATA_IN_A,         				\
-	    ADC_DATA_IN_B,          			\
-	    									\
-	    ADC_CLK_SRC							\
-    },        								\
-    { {null,null}, null, null, null,null},	\
-    {1, 1, 5}								\
+#define SOMANET_IFM_ADC_PORTS {             \
+    {                                       \
+        ADC_DATA_OUT,                       \
+        ADC_DATA_IN_A,                      \
+        ADC_DATA_IN_B,                      \
+                                            \
+        ADC_CLK_SRC                         \
+    },                                      \
+    { {null,null}, null, null, null,null},  \
+    {1, 1, 5}                               \
+}
+
+/* FET DRIVER A4935 control ports */
+#define FETDRV_PORT_COASTN IFM_PORT_1BIT_4
+#define FETDRV_PORT_ESF_RSTN_PWML_PWMH IFM_PORT_4BIT_68_70_72_74
+#define FETDRV_PORT_FF1 IFM_PORT_1BIT_16
+#define FETDRV_PORT_FF2 IFM_PORT_1BIT_78
+
+#define SOMANET_IFM_FET_DRIVER_PORTS {  \
+    FETDRV_PORT_COASTN,                 \
+    FETDRV_PORT_ESF_RSTN_PWML_PWMH,     \
+    FETDRV_PORT_FF1,                    \
+    FETDRV_PORT_FF2                     \
 }
 
 /* HALL SENSOR PORTS */
-#define HALL_PORT IFM_PORT_4BIT_66_76_80
+#define HALL_PORT IFM_PORT_4BIT_64_66_76_80
 
-#define HALL_PORTS {\
-	HALL_PORT		\
+#define SOMANET_IFM_HALL_PORTS {    \
+    HALL_PORT                       \
 }
 
 /* ENCODER PORT */
-#define ENCODER_PORT IFM_PORT_4BIT_38_44_30_34
+#define QEI_PORT IFM_PORT_4BIT_38_44_30_34
 
-#define ENCODER_PORTS {	\
-	ENCODER_PORT		\
+#define SOMANET_IFM_QEI_PORTS { \
+    null,                       \
+    QEI_PORT                    \
 }
 
 /* PWM PORTS*/
@@ -63,29 +64,29 @@
 #define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
 
 #define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
-#define PWM_DUMMY_PORT_TRIGGER IFM_UNUSED_PORT_0
+#define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
 
-#define PWM_PORTS { 														\
-    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},		\
-    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},		\
-    null,																	\
-    null,																	\
-	PWM_CLOCK_SRC,       													\
-	PWM_DUMMY_PORT_TRIGGER													\
+#define SOMANET_IFM_PWM_PORTS {                                             \
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},     \
+    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},        \
+    null,                                                                   \
+    null,                                                                   \
+    PWM_CLOCK_SRC,                                                          \
+    PWM_DUMMY_PORT_TRIGGER                                                  \
 }
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 
-#define WATCHDOG_PORTS {  		\
-    WATCHDOG_EN_PORT,         	\
-    WATCHDOG_TICK_PORT          \
+#define SOMANET_IFM_WATCHDOG_PORTS {    \
+    WATCHDOG_EN_PORT,                   \
+    WATCHDOG_TICK_PORT                  \
 }
 
 /* GPIO_PORTS */
-#define GPIO_D0 IFM_PORT_1B_28
-#define GPIO_D1 IFM_PORT_1B_2
-#define GPIO_D2 IFM_PORT_1B_22
-#define GPIO_D3 IFM_PORT_1B_32
+#define SOMANET_IFM_GPIO_D0 IFM_PORT_1BIT_28
+#define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_2
+#define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_22
+#define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_32
 

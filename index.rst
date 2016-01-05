@@ -32,8 +32,10 @@ Examples
  	:maxdepth: 1
  	:hidden:
 
- 	COM Recognition Demo <examples/app_test_com-detect/doc/index>
+ 	XScope Test <examples/app_test_xscope/doc/index>
+        COM Recognition Demo <examples/app_test_com-detect/doc/index>
 
-Additionally, this repository includes the following example app: 
+Additionally, this repository includes the following example apps: 
 
+* `XScope Test <examples/app_test_xscope/doc/index>`_: Simple XScope test.
 * `COM Recognition Demo <examples/app_test_com-detect/doc/index>`_: Simple example on how to use the **COM Recognition Module**.

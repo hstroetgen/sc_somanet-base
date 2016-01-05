@@ -15,9 +15,10 @@ Two types of locks are provided. Hardware locks are fast and power
 efficient but there are a limited number per tile. Software locks are
 slower but you can use an unlimited number of them.
 
-This module was originally obtained from XMOS public repositories_. 
+This module was originally obtained from `XMOS public repositories`_. 
 
-.. note:: This module is internally used by certain SOMANET Libraries. Just advanced users are recommended to use it. 
+.. note:: This module is internally used by certain SOMANET Libraries. Its use is only recommended to advanced users. 
+                You will find a demo app for this module at `XMOS public repositories`_.
 
 Hardware lock API
 -----------------
@@ -42,4 +43,4 @@ Software lock API
 .. doxygenfunction:: swlock_release
 
 
-.. _XMOS public repositories: https://github.com/xcore/sc_util/tree/c06706f4b71dfa966f4a5a4d0d76d7188214db3f/module_locks
+.. _`XMOS public repositories`: https://github.com/xcore/sc_util/tree/c06706f4b71dfa966f4a5a4d0d76d7188214db3f

@@ -21,14 +21,14 @@ How to use
  USED_MODULES = module_board-support etc etc
 
 
-* Include in your main the SOMANET port definitions files you need according to your hardware configuration. e.g.:
+* Include in your main the SOMANET port definitions files you need according to your hardware configuration. e.g.
 
 ::
 
  #include <CORE_C22-rev-a.inc>
  #include <IFM_DC100-rev-b.inc>
 
-* Select your right target in your app Makefile. e.g.:
+* Select your right target in your app Makefile. e.g.
 
 ::
 

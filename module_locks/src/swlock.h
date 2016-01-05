@@ -12,11 +12,11 @@ typedef unsigned swlock_t;
 
 /** This define should be used to initialize a software lock e.g.
 
-    \code
-       swlock_t my_lock = SWLOCK_INITIAL_VALUE;
-    \endcode
+\code
+   swlock_t my_lock = SWLOCK_INITIAL_VALUE;
+\endcode
 
-    If you intialize this way there is no need to call swlock_init().
+If you intialize this way there is no need to call swlock_init().
 */
 #define SWLOCK_INITIAL_VALUE 0
 

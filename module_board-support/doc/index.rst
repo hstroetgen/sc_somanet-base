@@ -2,14 +2,14 @@
 SOMANET Board Support Module
 =============================
 
+.. note:: You will need this module in all your **SOMANET applications** for an easy use of your SOMANET hardware. 
+
 .. contents:: In this document
     :backlinks: none
     :depth: 3
 
 By including this module in your project you will provide access to the complete ports definition for SOMANET devices.
 Furthermore, it contains the targets definition files (*.xn) for the different SOMANET CORE boards so you can choose such targets in your app Makefile.
-
-.. note:: You will need this module in all your **SOMANET applications** for an easy use of your SOMANET hardware. 
  
 How to use
 ==========
@@ -95,7 +95,7 @@ Here the list of supported SOMANET boards and how to include their port mapping 
 
  #include <IFM_DC300-rev-a.inc>
 
-* bsp/IFM_DC1K/**IFM_DC1K-rev-c2.inc**
+* bsp/IFM_DC1K/**SIFM_DC1K-rev-c2.inc**
 ::
 
  #include <IFM_DC1K-rev-c2.inc>

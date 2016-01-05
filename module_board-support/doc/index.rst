@@ -43,15 +43,13 @@ Target Files
 Here the list of available targets supported by the module: 
 
 * targets/**SOMANET-C22.xn**
+* targets/**SOMANET-C21-DX.xn**
 
 If you are using a **SOMANET Core C22**, select this target in your app Makefile
 
 ::
 
  TARGET = SOMANET-C22
-
-
-* targets/**SOMANET-C21-DX.xn**
 
 If you are using a **SOMANET Core C21-DX**, select this target in your app Makefile
 
@@ -60,42 +58,37 @@ If you are using a **SOMANET Core C21-DX**, select this target in your app Makef
  TARGET = SOMANET-C21-DX
 
 Board Support Files
-------
+-------------------
 Here the list of supported SOMANET boards and how to include their support files in your app:
 
 .. note:: Have a look at our demo apps to see how to use the definitions within these files. 
 
+* bsp/CORE_C21/**CORE_C21-rev-a.bsp**
+* bsp/CORE_C22/**CORE_C22-rev-a.bsp**
+
+  
+* bsp/IFM_DC100/**IFM_DC100-rev-b.bsp**
+* bsp/IFM_DC300/**IFM_DC300-rev-a.bsp**
+* bsp/IFM_DC1K/**IFM_DC1K-rev-c2.bsp**
+
+
 * bsp/COM_ECAT/**COM_ECAT-rev-a.bsp**
+* bsp/COM_ETHERNET/**COM_ETHERNET-rev-a.bsp**
+
+Add board support files (*.bsp) in your app by just including them. e.g.
+
 ::
 
  #include <COM_ECAT-rev-a.bsp>
         
-* bsp/COM_ETHERNET/**COM_ETHERNET-rev-a.bsp**
-::
+or 
 
- #include <COM_ETHERNET-rev-a.bsp>
-
-* bsp/CORE_C21/**CORE_C21-rev-a.bsp**
 ::
 
  #include <CORE_C21-rev-a.bsp>
 
-* bsp/CORE_C22/**CORE_C22-rev-a.bsp**
-::
+or
 
- #include <CORE_C22-rev-a.bsp>
-
-* bsp/IFM_DC100/**IFM_DC100-rev-b.bsp**
-::
-
- #include <IFM_DC100-rev-b.bsp>
-
-* bsp/IFM_DC300/**IFM_DC300-rev-a.bsp**
-::
-
- #include <IFM_DC300-rev-a.bsp>
-
-* bsp/IFM_DC1K/**SIFM_DC1K-rev-c2.bsp**
 ::
 
  #include <IFM_DC1K-rev-c2.bsp>

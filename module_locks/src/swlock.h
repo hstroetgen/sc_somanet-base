@@ -18,7 +18,7 @@ typedef unsigned swlock_t;
  *  \endcode
  *
  *   If you intialize this way there is no need to call swlock_init().
-*/
+ */
 #define SWLOCK_INITIAL_VALUE 0
 
 enum {

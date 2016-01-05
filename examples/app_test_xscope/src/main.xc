@@ -1,6 +1,6 @@
 // Copyright (c) 2015, XMOS Ltd, All rights reserved
 /* PLEASE REPLACE "CORE_BOARD_REQUIRED" AND "IFM_BOARD_REQUIRED" WITH AN APPROPRIATE BOARD SUPPORT FILE FROM module_board-support */
-#include <CORE_BOARD_REQUIRED>
+#include <CORE_C22-rev-a.inc>
 
 #include <xscope.h>
 
@@ -16,6 +16,7 @@ unsigned int sine[NUM_SAMPLES] = {
 int main() {
 
     par{
+
         on tile[APP_TILE]:
         {
             while (1) {
@@ -23,7 +24,8 @@ int main() {
                     xscope_int(VALUE, sine[i]);
                 }
             }
+        }
     }
-    }
+
     return 0;
 }

@@ -13,25 +13,26 @@ This app was originall provided by XMOS as an `Application Note`_.
 
 Hardware setup
 ===============
+
 You need a SOMANET node consisting, at least, on a SOMANET Core board.
 
 Quick how-to
 ============
 
-* Configure your Makefile with your SOMANET Core Board. e.g.
+1. Configure your Makefile with your SOMANET Core Board. e.g.
 
-::
+	::
 
- TARGET = SOMANET-C22
+		TARGET = SOMANET-C22
 
-* In the main.xc, include the board support package for your Core Board. e.g.
+2. In the main.xc, include the board support package for your Core Board. e.g.
 
-::
+	::
 
-#include <CORE_C22-rev-a.bsp>
+		#include <CORE_C22-rev-a.bsp>
 
-* Enable your Real-Time Mode XScope in your Run Configuration.
+3. Enable your Real-Time Mode XScope in your Run Configuration.
 
-* Run!
+4. Run!
 
 .. _`Application Note`: https://www.xmos.com/download/private/AN00196%3A-Getting-Started-with-Real-Time-xSCOPE-in-xTIMEcomposer-Studio%281.0.0rc1%29.pdf

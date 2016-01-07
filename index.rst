@@ -7,11 +7,11 @@ The SOMANET Base Package is a collection useful utilities and basic firmware for
 
 .. cssclass:: downloadable-button 
 
-  `Download Library <https://github.com/synapticon/sc_somanet-base/archive/new_board_support_system.zip>`_
+  `Download Library <https://github.com/synapticon/sc_somanet-base/archive/master.zip>`_
 
 .. cssclass:: github
 
-  `Visit Public Repository <https://github.com/synapticon/sc_somanet-base/tree/new_board_support_system>`_
+  `Visit Public Repository <https://github.com/synapticon/sc_somanet-base/>`_
 
 Modules
 --------

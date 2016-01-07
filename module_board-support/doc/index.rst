@@ -2,7 +2,7 @@
 SOMANET Board Support Module
 =============================
 
-.. note:: You will need this module in all your **SOMANET applications** for an easy use of your SOMANET hardware. 
+.. note:: You will need this module in all your **SOMANET applications** for an easy access to the hardware on your SOMANET device. 
 
 .. contents:: In this document
     :backlinks: none
@@ -81,6 +81,8 @@ Add board support files (\*.bsp) in your app by just including them. e.g.
 	#include <COM_ECAT-rev-a.bsp>
 	#include <CORE_C22-rev-a.bsp>
 	#include <IFM_DC100-rev-b.bsp>
+
+or
 
 ::
 

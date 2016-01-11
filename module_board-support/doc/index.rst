@@ -1,3 +1,5 @@
+.. _somanet_board_support_module:
+
 =============================
 SOMANET Board Support Module
 =============================

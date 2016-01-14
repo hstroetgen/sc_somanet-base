@@ -1,4 +1,4 @@
-.. _board_support:
+.. _somanet_board_support_module:
 
 =============================
 SOMANET Board Support Module

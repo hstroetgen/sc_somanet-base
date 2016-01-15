@@ -24,8 +24,9 @@ How to use
 
 	::
 
-		USED_MODULES = module_board-support etc etc
+		USED_MODULES = module_board-support module_locks module_com-detect
 
+    .. note:: Just module_board-support will be required. However, for simplicity, when using a library it is recommended to include always all the contained modules. 
 
 2. Include in your **main.xc** the board support packages that you might need in your hardware configuration. e.g.
 
@@ -52,7 +53,7 @@ Here the list of available targets supported by the module:
 * targets/**SOMANET-C22.xn**
 * targets/**SOMANET-C21-DX.xn**
 
-Select your target in your app Makefile accordingly:
+Select your target in your app **Makefile** accordingly:
 
 ::
 

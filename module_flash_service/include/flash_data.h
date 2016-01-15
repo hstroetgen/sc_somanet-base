@@ -15,3 +15,6 @@ int flash_data_init(unsigned partition_size);
 
 int flash_write_data(char data[], unsigned size);
 int flash_read_data(char data[], unsigned size);
+
+int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
+int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);

@@ -7,7 +7,11 @@
 
 #include <flash.h>
 
+#define DATA_PAGES_PER_TYPE 4
+
 interface FlashDataInterface {
+    int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
+    int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
     int read(char data[], unsigned nbytes, unsigned address);
     int write(char data[], unsigned nbytes);
 };
@@ -19,6 +23,10 @@ interface FlashBootInterface {
 
 enum flash_error {
     NO_FACTORY_IMAGE=1, NO_UPGRADE_IMAGE
+};
+
+enum configuration_type {
+    MOTCTRL_BLDC_CONFIG
 };
 
 void flash_service(fl_SPIPorts &SPI,

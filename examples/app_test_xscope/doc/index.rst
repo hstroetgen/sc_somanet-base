@@ -11,6 +11,10 @@ While running, it should display a sinusoidal wave over XScope.
 
 This app was originall provided by XMOS as an `Application Note`_.
 
+.. cssclass:: github
+
+  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/examples/app_test_xscope>`_
+
 Hardware setup
 ===============
 

@@ -13,6 +13,10 @@ SOMANET Board Support Module
 By including this module in your project you will provide access to the complete port mapping and other low-level configurations for SOMANET devices.
 Furthermore, it contains the targets definition files (\*.xn) for the different SOMANET CORE boards so you can choose such targets in your app Makefile.
  
+.. cssclass:: github
+
+  `See Module on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/module_board-support>`_
+  
 How to use
 ==========
 

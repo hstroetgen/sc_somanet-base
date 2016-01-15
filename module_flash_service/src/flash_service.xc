@@ -196,17 +196,6 @@ void flash_service(fl_SPIPorts &SPI,
 
                 break;
             }
-            /* Data Field update */
-            case i_data[int i].read(char data[], unsigned nbytes, unsigned address) -> int result: {
-                // TODO
-//                status = __read_data_flash(page, data);
-            }
-            break;
-            case i_data[int i].write(char data[], unsigned nbytes) -> int address: {
-                // TODO
-//                status = __write_data_flash(data, data_length, page);
-            }
-            break;
             // XXX we don't need addresses here, because the position in the boot partition will be
             // calculated automatically.
             case i_boot.read(char data[], unsigned nbytes, unsigned char image_num) -> int result: {

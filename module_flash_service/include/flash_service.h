@@ -12,8 +12,6 @@
 interface FlashDataInterface {
     int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
     int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
-    int read(char data[], unsigned nbytes, unsigned address);
-    int write(char data[], unsigned nbytes);
 };
 
 interface FlashBootInterface {

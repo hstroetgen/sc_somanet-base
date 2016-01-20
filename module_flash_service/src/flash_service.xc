@@ -15,8 +15,7 @@
 // TODO Nullable interfaces!
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server i_data[n],
-                   unsigned n) {
+                   interface FlashDataInterface server i_data[4]) {
     fl_BootImageInfo bootImageInfo;
 
     flash_init(SPI);

@@ -24,7 +24,7 @@ enum flash_error {
 };
 
 enum configuration_type {
-    MOTCTRL_BLDC_CONFIG
+    MOTCTRL_CONFIG
 };
 
 void flash_service(fl_SPIPorts &SPI,

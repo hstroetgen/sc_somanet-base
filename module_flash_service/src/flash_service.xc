@@ -20,7 +20,6 @@ void flash_service(fl_SPIPorts &SPI,
 
     flash_init(SPI);
 
-    // XXX code in the cases is just scrap and random or symbolic
     while (1) {
         select {
             case i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {
@@ -37,6 +36,7 @@ void flash_service(fl_SPIPorts &SPI,
                 result = set_configurations(type, intermediate_buffer, n_bytes);
                 break;
             }
+            // XXX code in below cases is just scrap and random or symbolic
             // XXX we don't need addresses here, because the position in the boot partition will be
             // calculated automatically.
             case i_boot.read(char data[], unsigned nbytes, unsigned char image_num) -> int result: {

@@ -1,13 +1,13 @@
 ====================
-XScope Simple Test
+xSCOPE Simple Test
 ====================
 
 .. contents:: In this document
     :backlinks: none
     :depth: 3
 
-This test shows a simple example on the use of XScope.
-While running, it should display a sinusoidal wave over XScope.
+This test shows a simple example on the use of xSCOPE.
+While running, it should display a sinusoidal wave over xSCOPE.
 
 This app was originall provided by XMOS as an `Application Note`_.
 
@@ -18,7 +18,7 @@ This app was originall provided by XMOS as an `Application Note`_.
 Hardware setup
 ===============
 
-You need a SOMANET node consisting, at least, on a SOMANET Core board.
+You need a SOMANET node consisting of at least a SOMANET Core board.
 
 Quick how-to
 ============
@@ -35,7 +35,7 @@ Quick how-to
 
 		#include <CORE_C22-rev-a.bsp>
 
-3. Enable your Real-Time Mode XScope in your Run Configuration.
+3. Enable your Real-Time xSCOPE in your xTIMEcomposer Run Configuration.
 
 4. Run!
 

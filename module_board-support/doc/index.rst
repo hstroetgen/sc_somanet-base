@@ -69,17 +69,17 @@ Board Support Files
 -------------------
 Here the list of supported SOMANET boards and how to include their support files in your app:
 
-* bsp/CORE_C21/**CORE_C21-rev-a.bsp**
-* bsp/CORE_C22/**CORE_C22-rev-a.bsp**
+* CORE_C21/**CORE_C21-rev-a.bsp**
+* CORE_C22/**CORE_C22-rev-a.bsp**
 
 
-* bsp/IFM_DC100/**IFM_DC100-rev-b.bsp**
-* bsp/IFM_DC300/**IFM_DC300-rev-a.bsp**
-* bsp/IFM_DC1K/**IFM_DC1K-rev-c2.bsp**
+* IFM_DC100/**IFM_DC100-rev-b.bsp**
+* IFM_DC300/**IFM_DC300-rev-a.bsp**
+* IFM_DC1K/**IFM_DC1K-rev-c2.bsp**
 
 
-* bsp/COM_ECAT/**COM_ECAT-rev-a.bsp**
-* bsp/COM_ETHERNET/**COM_ETHERNET-rev-a.bsp**
+* COM_ECAT/**COM_ECAT-rev-a.bsp**
+* COM_ETHERNET/**COM_ETHERNET-rev-a.bsp**
 
 Add board support files (\*.bsp) in your app by just including them. e.g.
 

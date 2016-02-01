@@ -1,7 +1,7 @@
 .. _somanet_base:
 
-SOMANET Base - Utility Library
-===============================
+SOMANET Base Utility Library
+=============================
 
 .. important:: You will always need to include **SOMANET Base** in your project in order to run any other **SOMANET Library**. 
 

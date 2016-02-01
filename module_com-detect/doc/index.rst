@@ -1,5 +1,5 @@
 ==========================
-SOMANET COM Detect Module
+COM Detect Module
 ==========================
 
 This module offers the functionality to detect which **SOMANET COM Board** is mounted in our SOMANET node.

@@ -1,8 +1,8 @@
 .. _somanet_board_support_module:
 
-=============================
-SOMANET Board Support Module
-=============================
+========================
+Board Support Module
+========================
 
 .. note:: You will need this module in all your **SOMANET applications** for an easy access to the hardware on your SOMANET device. 
 

@@ -6,5 +6,8 @@
 
 #pragma once
 
-int flash_write_boot(char data[], unsigned size);
-int flash_read_boot(char data[], unsigned size);
+
+int flash_write_boot(unsigned char page[], unsigned size);
+int flash_read_boot(unsigned char page[], unsigned size);
+int flash_prepare_boot_partition(unsigned image_size);
+int flash_find_images(void);

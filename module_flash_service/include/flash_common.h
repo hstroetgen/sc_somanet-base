@@ -9,22 +9,17 @@
 #include <xccompat.h>
 #include <flash.h>
 
-/**
- * Buffer size for the firmware image. TODO: Where comes this value
- */
-#define BUFFER_SIZE     2400
 #define PAGE_SIZE       256
 
-/*
-void flash_buffer(unsigned char content[], int imageSize, unsigned address);
-void flash_setup(int factory, REFERENCE_PARAM(fl_SPIPorts, SPI));
-void connect_to_flash(REFERENCE_PARAM(fl_SPIPorts, SPI));
-int __write_data_flash(REFERENCE_PARAM(fl_SPIPorts, SPI), unsigned char data[256],
-                       int data_length, int page);
-int __read_data_flash(REFERENCE_PARAM(fl_SPIPorts, SPI), int page, unsigned char data[256]);
-*/
+#define NO_ERROR                0
+#define ERR_NO_FACTORY_IMAGE    10
+#define ERR_NO_UPGRADE_IMAGE    11
+#define ERR_UPGRADE_FAILED      12
+#define ERR_CONNECT_FAILED      13
+#define ERR_DISCONNECT_FAILED   14
+#define ERR_WRITE_FAILED        15
+#define ERR_CRC                 20
+
+
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));
-void flash_buffer(unsigned char content[], int imageSize, unsigned address);
 int connect_to_flash(void);
-int __write_data_flash(unsigned char data[256], int data_length, int page);
-int __read_data_flash(int page, unsigned char data[256]);

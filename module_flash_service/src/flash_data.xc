@@ -10,6 +10,9 @@
 #include <print.h>
 #include <string.h>
 
+#define SPECIAL_PAGE_SIZE PAGE_SIZE-4
+
+
 int flash_data_init(unsigned partition_size) {
     // TODO
     return 0;
@@ -74,7 +77,7 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
     }
 
     // Read the first data page
-    char data_page[256];
+    char data_page[PAGE_SIZE];
     memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
 
     // Read from the data partition
@@ -89,10 +92,10 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
     memcpy(&encoded_data_size, data_page, sizeof(int));
 
     n_bytes = decode_data_size(encoded_data_size);
-
-    if (n_bytes > 252) {    // 252 = 256 - 4 (space left in the first page)
-        memcpy(buffer, data_page + sizeof(int), 252);
-        int read_bytes = 252;
+    // FIXME Why this 4 bytes?
+    if (n_bytes > SPECIAL_PAGE_SIZE) {    // 252 = 256 - 4 (space left in the first page)
+        memcpy(buffer, data_page + sizeof(int), SPECIAL_PAGE_SIZE);
+        int read_bytes = SPECIAL_PAGE_SIZE;
         n_bytes -= read_bytes;
         for (int i = 1; n_bytes > 0; i++) {
             result = fl_readDataPage(current_type_first_page + i, data_page);
@@ -100,12 +103,12 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
                 printstrln( "Could not read the data partition" );
                 return result;
             }
-            if (n_bytes <= 256) {
+            if (n_bytes <= PAGE_SIZE) {
                 memcpy(buffer + read_bytes, data_page, n_bytes);
                 n_bytes = 0;
             } else {
-                memcpy(buffer + read_bytes, data_page, 256);
-                read_bytes += 256;
+                memcpy(buffer + read_bytes, data_page, PAGE_SIZE);
+                read_bytes += PAGE_SIZE;
                 n_bytes -= read_bytes;
             }
         }
@@ -145,23 +148,23 @@ int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_byt
         return result;
     }
 
-    char data_page[256];
+    char data_page[PAGE_SIZE];
     memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
 
     // Copy the number of bytes that will be occupied in total
     int data_to_store = encode_data_size(n_bytes);
     memcpy(data_page, &data_to_store, sizeof(int));
-
-    if (n_bytes > 252) {    // 252 = 256 - 4 (space left in the first page)
-        memcpy(data_page + sizeof(int), data, 252);
+    // FIXME Why this 4 bytes?
+    if (n_bytes > SPECIAL_PAGE_SIZE) {    // 252 = 256 - 4 (space left in the first page)
+        memcpy(data_page + sizeof(int), data, SPECIAL_PAGE_SIZE);
         result = fl_writeDataPage(current_type_first_page, data_page);
         if (result != 0){
             printstrln( "Could not write a data page" );
             return result;
         }
-        int written_bytes = 252;
+        int written_bytes = SPECIAL_PAGE_SIZE;
         for (int i = 1; written_bytes < n_bytes; i++) {
-            if (n_bytes - written_bytes <= 256) {
+            if (n_bytes - written_bytes <= PAGE_SIZE) {
                 memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
                 memcpy(data_page, data + written_bytes, n_bytes - written_bytes);
                 result = fl_writeDataPage(current_type_first_page + i, data_page);
@@ -171,13 +174,13 @@ int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_byt
                 }
                 written_bytes = n_bytes;
             } else {
-                memcpy(data_page, data + written_bytes, 256);
+                memcpy(data_page, data + written_bytes, PAGE_SIZE);
                 result = fl_writeDataPage(current_type_first_page + i, data_page);
                 if (result != 0){
                     printstrln( "Could not write a data page" );
                     return result;
                 }
-                written_bytes += 256;
+                written_bytes += PAGE_SIZE;
             }
         }
     } else {

@@ -17,6 +17,8 @@ interface FlashDataInterface {
 interface FlashBootInterface {
     int read(char data[], unsigned nbytes,  unsigned char image_num);
     int write(char data[], unsigned nbytes);
+    int prepare_boot_partition(unsigned image_size);
+    int validate_flashing(void);
 };
 
 enum flash_error {
@@ -29,4 +31,4 @@ enum configuration_type {
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server i_data[2]);
+                   interface FlashDataInterface server (i_data)[2]);

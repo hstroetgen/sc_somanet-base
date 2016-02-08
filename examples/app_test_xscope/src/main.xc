@@ -1,6 +1,6 @@
 // Copyright (c) 2015, XMOS Ltd, All rights reserved
 /* PLEASE REPLACE "CORE_BOARD_REQUIRED" AND "IFM_BOARD_REQUIRED" WITH AN APPROPRIATE BOARD SUPPORT FILE FROM module_board-support */
-#include <CORE_C22-rev-a.bsp>
+#include <CORE_BOARD_REQUIRED>
 
 #include <xscope.h>
 

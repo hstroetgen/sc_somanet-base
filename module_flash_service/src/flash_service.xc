@@ -24,6 +24,8 @@ void flash_service(fl_SPIPorts &SPI,
         return;
     }
 
+    printstr(">>   SOMANET FLASH SERVICE STARTING...\n");
+
     flash_init(SPI);
 
     while (1) {

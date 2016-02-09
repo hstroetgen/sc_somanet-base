@@ -9,7 +9,7 @@
 #include <xccompat.h>
 #include <flash.h>
 
-#define PAGE_SIZE       256
+#define PAGE_SIZE               256
 
 #define NO_ERROR                0
 #define ERR_NO_FACTORY_IMAGE    10
@@ -18,7 +18,6 @@
 #define ERR_CONNECT_FAILED      13
 #define ERR_DISCONNECT_FAILED   14
 #define ERR_WRITE_FAILED        15
-#define ERR_CRC                 20
 
 
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));

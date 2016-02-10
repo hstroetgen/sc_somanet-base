@@ -1,6 +1,13 @@
 sc_somanet-base Change Log
 ==========================
 
+3.0.0
+-----
+
+  * New board support files (not compatible with older versions of SOMANET libs)
+  * Added module locks
+  * Remove xSCOPE wrapper
+
 2.0.2
 -----
 

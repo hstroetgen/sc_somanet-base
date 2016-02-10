@@ -1,6 +1,5 @@
-// Copyright (c) 2015, XMOS Ltd, All rights reserved
-#include <CORE_BOARD_REQUIRED>
 /* PLEASE REPLACE "CORE_BOARD_REQUIRED" WITH AN APPROPRIATE BOARD SUPPORT FILE FROM module_board-support */
+#include <CORE_BOARD_REQUIRED>
 
 #include <xscope.h>
 

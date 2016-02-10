@@ -1,5 +1,5 @@
 ====================
-xSCOPE Simple Test
+Simple xSCOPE  Demo
 ====================
 
 .. contents:: In this document

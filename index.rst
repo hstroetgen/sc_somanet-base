@@ -28,9 +28,9 @@ Modules
 
 SOMANET Base currently consists of the following modules:
 
-* `Board Support Module <module_board-support/doc/index>`_: Contains port mappings, low-level configurations and platform description files (\*.xn) for all available SOMANET hardware modules.
-* `SOMANET COM Recognition Module <module_com-detect/doc/index>`_:  Enables automatic recognition of SOMANET COM modules. **For internal use only!**
-* `Locks Module <module_locks/doc/index>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
+* `Board Support Module <module_board-support/doc/index.html>`_: Contains port mappings, low-level configurations and platform description files (\*.xn) for all available SOMANET hardware modules.
+* `SOMANET COM Recognition Module <module_com-detect/doc/index.html>`_:  Enables automatic recognition of SOMANET COM modules. **For internal use only!**
+* `Locks Module <module_locks/doc/index.html>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
 
 Examples
 --------
@@ -43,4 +43,4 @@ Examples
 
 Additionally, this repository includes the following example app: 
 
-* `XScope Test <examples/app_test_xscope/doc/index>`_: Simple xSCOPE test.
+* `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE test.

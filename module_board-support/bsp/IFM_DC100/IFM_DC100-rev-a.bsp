@@ -58,10 +58,10 @@
 /* BiSS PORTS */
 #define BISS_CLK_SRC IFM_TILE_CLOCK_2
 
-#define SOMANET_IFM_BISS_PORTS {	\
-	QEI_PORT, 						\
-	SOMANET_IFM_GPIO_D0,  			\
-	BISS_CLK_SRC					\
+#define SOMANET_IFM_BISS_PORTS {    \
+	QEI_PORT,                       \
+	SOMANET_IFM_GPIO_D0,            \
+	BISS_CLK_SRC                    \
 }
 
 /* PWM PORTS*/

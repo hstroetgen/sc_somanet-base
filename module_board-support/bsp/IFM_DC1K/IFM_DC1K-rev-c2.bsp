@@ -20,10 +20,10 @@
 #define SOMANET_IFM_ADC_PORTS {     \
     { null, null, null, null },     \
     { {ADC_DATA_A , ADC_DATA_B},    \
-     ADC_CLK_SRC,                   \
      ADC_SCLK,                      \
      ADC_READY,                     \
-     ADC_MUX},                      \
+     ADC_MUX,                       \
+     ADC_CLK_SRC},                  \
      {1, -1, 50}                    \
 }
 

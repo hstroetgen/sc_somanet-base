@@ -1,36 +1,4 @@
-SOMANET BASE Software Component 
-...............................
+SOMANET Base Utility Library
+=============================
 
-:Latest release: 2.0.2
-:Maintainer: Synapticon
-:Description: The SOMANET BASE software component is a collection of essential modules required for the majority of SOMANET-based applications.
-
-
-Key Features
-============
-
-   * SOMANET board support files
-   * SOMANET platform files
-   * xSCOPE wrapper
-   * Flash memory access and firmware update 
-
-Firmware Overview
-=================
-
-The SOMANET BASE software component is a collection of essential modules required for the majority of SOMANET-based applications. 
-
-Known Issues
-============
-
-none
-
-Support
-=======
-
-Issues may be submitted via the Issues tab in this GitHub repository. Response to any issues submitted as at the discretion of the maintainer for this line.
-
-Required software (dependencies)
-================================
-
-  * sc_flash/module_flash
-
+`Please visit SOMANET Documentation for further information <https://doc.synapticon.com/software/sc_somanet-base/index.html>`_

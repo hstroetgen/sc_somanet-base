@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
 
     <Type>Board</Type>
-    <Name>SOMANET C21</Name>
+    <Name>SOMANET-C21</Name>
 
     <Declarations>
         <Declaration>tileref tile[2]</Declaration>

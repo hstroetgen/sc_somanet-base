@@ -1,19 +1,14 @@
-=============================
-Lock handling module
-=============================
+======================
+Lock handling Module
+======================
 
 .. contents:: In this document
     :backlinks: none
     :depth: 3
 
-This module provides access to hardware and software locks for use in
-concurrent C programs. In general it is not safe to use these to
-marshall within XC due to the assumptions XC
-makes about safe concurrent data access.
+This module provides access to hardware and software locks for use in concurrent C programs. In general it is not safe to use these to marshal within XC due to the assumptions XC makes about safe concurrent data access.
 
-Two types of locks are provided. Hardware locks are fast and power
-efficient but there are a limited number per tile. Software locks are
-slower but you can use an unlimited number of them.
+Two types of locks are provided. Hardware locks are fast and power efficient but there are a limited number per tile. Software locks are slower but you can use an unlimited number of them.
 
 This module was originally obtained from `XMOS public repositories`_ and still
 today it is maintained by XMOS. 

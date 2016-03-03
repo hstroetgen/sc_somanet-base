@@ -1,15 +1,15 @@
 ====================
-xSCOPE Simple Test
+Simple xSCOPE  Demo
 ====================
 
 .. contents:: In this document
     :backlinks: none
     :depth: 3
 
-This test shows a simple example on the use of xSCOPE.
-While running, it should display a sinusoidal wave over xSCOPE.
+This is a simple example on how to use xSCOPE.
+While running, it should display a sinusoidal wave in xTIMEcomposer's xSCOPE tab.
 
-This app was originall provided by XMOS as an `Application Note`_.
+This app was originally provided by XMOS as an `Application Note`_.
 
 .. cssclass:: github
 
@@ -18,7 +18,9 @@ This app was originall provided by XMOS as an `Application Note`_.
 Hardware setup
 ===============
 
-You need a SOMANET node consisting of at least a SOMANET Core board.
+You need a SOMANET node consisting of at least a SOMANET CORE board connected to you PC via the XMOS XTAG adapter.
+
+.. note::  In case you are using a :ref:`SOMANET CORE C22 <core_c22>` module, xSCOPE has to be activated by a :ref:`hardware switch <core_debug_xscope>` 
 
 Quick how-to
 ============

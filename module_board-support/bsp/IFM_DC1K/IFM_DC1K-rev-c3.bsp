@@ -9,9 +9,9 @@
 #include <platform.h>
 
 /* ADC */
-#define ADC_DATA_A IFM_PORT_1BIT_42 
+#define ADC_DATA_A  IFM_PORT_1BIT_16
 #define ADC_DATA_B IFM_PORT_1BIT_40 
-#define ADC_SCLK IFM_PORT_1BIT_16 
+#define ADC_SCLK  IFM_PORT_1BIT_42
 #define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
@@ -22,7 +22,7 @@
     { {ADC_DATA_A , ADC_DATA_B},    \
      ADC_SCLK,                      \
      ADC_READY,                     \
-     ADC_MUX,                       \
+     ADC_MUX,						\
      ADC_CLK_SRC},                  \
      {1, -1, 50}                    \
 }

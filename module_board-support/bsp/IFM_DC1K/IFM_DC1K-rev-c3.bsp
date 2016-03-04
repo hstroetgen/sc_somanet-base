@@ -20,10 +20,10 @@
 #define SOMANET_IFM_ADC_PORTS {     \
     { null, null, null, null },     \
     { {ADC_DATA_A , ADC_DATA_B},    \
+     ADC_CLK_SRC,                   \
      ADC_SCLK,                      \
      ADC_READY,                     \
-     ADC_MUX,						\
-     ADC_CLK_SRC},                  \
+     ADC_MUX},                      \
      {1, -1, 50}                    \
 }
 
@@ -96,20 +96,3 @@
 #define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_78
 #define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_2
 #define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_22
-
-/* AMS Absolute Position Sensor Ports */
-/*  MOSI = D3
-    SCLK = D1
-    MISO = D2
-    Slave Select = D0 */
-#define SOMANET_IFM_AMS_PORTS {     \
-    {                               \
-        IFM_TILE_CLOCK_2,           \
-        IFM_TILE_CLOCK_3,           \
-        SOMANET_IFM_GPIO_D3,        \
-        SOMANET_IFM_GPIO_D1,        \
-        SOMANET_IFM_GPIO_D2         \
-    },                              \
-    SOMANET_IFM_GPIO_D0             \
-}
-

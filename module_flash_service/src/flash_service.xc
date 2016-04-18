@@ -45,6 +45,12 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
+            case i_data[int i].read_page(int page, unsigned char buffer[]): {
+                unsigned char intermediate_buffer[256];
+                result = flash_read_data(page, intermediate_buffer);
+                memcpy(buffer, intermediate_buffer, 256);
+            }
+
             case i_boot.prepare_boot_partition(unsigned image_size) -> int error: {
                 error = flash_prepare_boot_partition(image_size);
             }

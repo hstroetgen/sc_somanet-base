@@ -16,7 +16,7 @@
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (i_data)[2]) {
+                   interface FlashDataInterface server ?(i_data)[1]) {
 
     if (isnull(i_boot) && isnull(i_data))
     {
@@ -45,12 +45,6 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case i_data[int i].read_page(int page, unsigned char buffer[]): {
-                unsigned char intermediate_buffer[256];
-                result = flash_read_data(page, intermediate_buffer);
-                memcpy(buffer, intermediate_buffer, 256);
-            }
-
             case i_boot.prepare_boot_partition(unsigned image_size) -> int error: {
                 error = flash_prepare_boot_partition(image_size);
             }
@@ -71,6 +65,11 @@ void flash_service(fl_SPIPorts &SPI,
                 char data[PAGE_SIZE];
                 memcpy(data, page, PAGE_SIZE);
                 error = flash_write_boot(data, nbytes);
+                break;
+            }
+
+            case i_boot.erase_upgrade_image(void) -> int error: {
+                error = flash_erase_image();
             }
             break;
         }

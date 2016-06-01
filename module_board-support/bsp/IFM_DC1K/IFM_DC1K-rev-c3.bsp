@@ -112,3 +112,16 @@
     },                              \
     SOMANET_IFM_GPIO_D0             \
 }
+
+#define SOMANET_IFM_POSITION_FEEDBACK_PORTS {   \
+    QEI_PORT,                       \
+    QEI_PORT_INPUT_MODE_SELECTION,  \
+    SOMANET_IFM_GPIO_D0,            \
+    {                               \
+        IFM_TILE_CLOCK_2,           \
+        IFM_TILE_CLOCK_3,           \
+        SOMANET_IFM_GPIO_D3,        \
+        SOMANET_IFM_GPIO_D1,        \
+        SOMANET_IFM_GPIO_D2         \
+    }                               \
+}

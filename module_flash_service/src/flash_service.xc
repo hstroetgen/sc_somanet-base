@@ -66,7 +66,7 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case i_boot.erase_upgrade_image(void) -> int error: {
+            case !isnull(i_boot) => i_boot.erase_upgrade_image(void) -> int error: {
                 error = flash_erase_image();
             }
             break;

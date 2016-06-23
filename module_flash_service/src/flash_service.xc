@@ -16,7 +16,7 @@
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (i_data)[2]) {
+                   interface FlashDataInterface server (&?i_data)[2]) {
 
     if (isnull(i_boot) && isnull(i_data))
     {
@@ -30,7 +30,7 @@ void flash_service(fl_SPIPorts &SPI,
 
     while (1) {
         select {
-            case i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {
+            case !isnull(i_data) => i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {
                 unsigned char intermediate_buffer[1024];
                 unsigned intermediate_n_bytes;
                 result = get_configurations(type, intermediate_buffer, intermediate_n_bytes);
@@ -38,7 +38,7 @@ void flash_service(fl_SPIPorts &SPI,
                 n_bytes = intermediate_n_bytes;
                 break;
             }
-            case i_data[int i].set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes) -> int result: {
+            case !isnull(i_data) => i_data[int i].set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes) -> int result: {
                 unsigned char intermediate_buffer[1024];
                 memcpy(intermediate_buffer, data, n_bytes);
                 result = set_configurations(type, intermediate_buffer, n_bytes);

@@ -23,9 +23,11 @@ int flash_write_data(char data[], unsigned size) {
     return 0;
 }
 
-int flash_read_data(char data[], unsigned size) {
-    // TODO
-    return 0;
+int flash_read_data(char data[], unsigned page) {
+    // Read from the data partition
+
+    int result = fl_readDataPage(page, data);
+    return result;
 }
 
 /**

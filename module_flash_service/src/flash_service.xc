@@ -63,6 +63,11 @@ void flash_service(fl_SPIPorts &SPI,
                 char data[PAGE_SIZE];
                 memcpy(data, page, PAGE_SIZE);
                 error = flash_write_boot(data, nbytes);
+                break;
+            }
+
+            case i_boot.erase_upgrade_image(void) -> int error: {
+                error = flash_erase_image();
             }
             break;
         }

@@ -8,7 +8,7 @@
 #include <flashlib.h>
 #include <flash_common.h>
 
-#define DEBUG
+//#define DEBUG
 
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
@@ -56,18 +56,76 @@ int flash_write_boot(unsigned char page[], unsigned size) {
         // Disconnect from the flash
         error = fl_disconnect();
         if (error){
+            #ifdef DEBUG
             printstr( "Could not disconnect from FLASH\n" );
+            #endif
             return ERR_DISCONNECT_FAILED;
         }
         image_size_rest -= size;
     }
-
+    #ifdef DEBUG
+    printstrln("");
+    #endif
     return NO_ERROR;
 }
 
+/**
+ * @brief Read on boot page
+ * @param[out] data Page buffer.
+ * @param[in] size  Size of page buffer.
+ * @return 0, if no error occured
+ */
 int flash_read_boot(unsigned char data[], unsigned size) {
     //TODO
     return 0;
+}
+
+/**
+ * @brief Erase upgrade image if there is one.
+ * @return 0, if no error occured.
+ */
+int flash_erase_image(void) {
+    int found_image, error;
+
+    error = connect_to_flash();
+    if (error) {
+        #ifdef DEBUG
+        printstr("Error: Connect to flash during preparation\n");
+        #endif
+        return ERR_CONNECT_FAILED;
+    }
+
+    // error should be 0 or 11. 11 equals No upgrade image found.
+    error = flash_find_images();
+
+    // Convert error in found_image flag. An error of 0 equals upgrade image were found -> 1.
+    // An error of 11 equals no upgrade image was found -> 0.
+    found_image = !error;
+
+    // If image was found, delete it (deleting means: erase the first image page)
+    if (found_image)
+    {
+        // Reset bootimageInfo and get factory image info.
+        // fl_eraseNextBootImage will call fl_getNextBootImage to get upgrade image info.
+        if (fl_getFactoryImage(&bootImageInfo)) {
+            #ifdef DEBUG
+            printstr("ERR_NO_FACTORY_IMAGE\n");
+            #endif
+            return ERR_NO_FACTORY_IMAGE;
+        }
+        error = fl_eraseNextBootImage(&bootImageInfo);
+
+        if (error) {
+            #ifdef DEBUG
+            printstr("Error: Erasing upgrade image failed\n");
+            #endif
+            return ERR_ERASE_FAILED;
+        }
+    }
+    else
+        return ERR_NO_UPGRADE_IMAGE;
+
+    return NO_ERROR;
 }
 
 /**
@@ -131,9 +189,13 @@ int flash_prepare_boot_partition(unsigned image_size) {
     // Disconnect from the flash
     error = fl_disconnect();
     if (error){
+        #ifdef DEBUG
         printstr("Could not disconnect from FLASH\n");
+        #endif
         return ERR_DISCONNECT_FAILED;
     }
-
+    #ifdef DEBUG
+    //printstrln("");
+    #endif
     return NO_ERROR;
 }

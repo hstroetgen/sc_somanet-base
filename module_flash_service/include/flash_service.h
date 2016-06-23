@@ -18,6 +18,7 @@ interface FlashBootInterface {
     int read(char data[], unsigned nbytes,  unsigned char image_num);
     int write(char data[], unsigned nbytes);
     int prepare_boot_partition(unsigned image_size);
+    int erase_upgrade_image(void);
     int validate_flashing(void);
 };
 

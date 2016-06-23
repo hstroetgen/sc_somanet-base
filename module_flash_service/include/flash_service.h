@@ -31,4 +31,4 @@ enum configuration_type {
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[2]);
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data);

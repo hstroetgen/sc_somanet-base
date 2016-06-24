@@ -10,6 +10,7 @@
 #include <flash.h>
 
 #define PAGE_SIZE               256
+#define DATA_PAGES_PER_TYPE     4
 
 #define NO_ERROR                0
 #define ERR_NO_FACTORY_IMAGE    10
@@ -19,7 +20,7 @@
 #define ERR_DISCONNECT_FAILED   14
 #define ERR_WRITE_FAILED        15
 #define ERR_ERASE_FAILED        16
-
+#define ERR_NO_DATA_PARTITION   17
 
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));
 int connect_to_flash(void);

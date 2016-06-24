@@ -78,6 +78,13 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
         return result;
     }
 
+    // Check the data partition size
+    if (fl_getDataPartitionSize() == 0) {
+        result = ERR_NO_DATA_PARTITION;
+        printstrln( "No data partition available." );
+        return result;
+    }
+
     // Read the first data page
     char data_page[PAGE_SIZE];
     memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
@@ -94,7 +101,7 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
     memcpy(&encoded_data_size, data_page, sizeof(int));
 
     n_bytes = decode_data_size(encoded_data_size);
-    // FIXME Why this 4 bytes?
+    // The first 4 bytes contain an encoded size of total data written in the data partition
     if (n_bytes > SPECIAL_PAGE_SIZE) {    // 252 = 256 - 4 (space left in the first page)
         memcpy(buffer, data_page + sizeof(int), SPECIAL_PAGE_SIZE);
         int read_bytes = SPECIAL_PAGE_SIZE;
@@ -138,7 +145,7 @@ int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_byt
 
     // Check the data partition size
     if (fl_getDataPartitionSize() == 0) {
-        result = 1;
+        result = ERR_NO_DATA_PARTITION;
         printstrln( "No data partition available." );
         return result;
     }

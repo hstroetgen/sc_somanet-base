@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "flash_common.h"
 #include <flash.h>
 
 interface FlashDataInterface {

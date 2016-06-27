@@ -32,8 +32,10 @@ void flash_service(fl_SPIPorts &SPI,
                 unsigned char intermediate_buffer[1024];
                 unsigned intermediate_n_bytes;
                 result = get_configurations(type, intermediate_buffer, intermediate_n_bytes);
-                memcpy(buffer, intermediate_buffer, intermediate_n_bytes);
-                n_bytes = intermediate_n_bytes;
+                if (result == NO_ERROR) {
+                    memcpy(buffer, intermediate_buffer, intermediate_n_bytes);
+                    n_bytes = intermediate_n_bytes;
+                }
                 break;
             }
             case !isnull(i_data) => i_data[int i].set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes) -> int result: {

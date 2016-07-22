@@ -120,6 +120,7 @@
 #define SOMANET_IFM_POSITION_FEEDBACK_PORTS {   \
     QEI_PORT,                       \
     null,                           \
+    HALL_PORT,                      \
     SOMANET_IFM_GPIO_D0,            \
     {                               \
         IFM_TILE_CLOCK_2,           \

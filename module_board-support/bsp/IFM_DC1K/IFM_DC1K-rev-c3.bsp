@@ -16,7 +16,7 @@
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
 #define SOMANET_IFM_ADC	AD7265
-#define CURRENT_RATIO           20 /*ratio between current recieved in control core, and real phase current */
+#define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 
 #define SOMANET_IFM_ADC_PORTS {     \
     { null, null, null, null },     \

@@ -1,6 +1,13 @@
 sc_somanet-base Change Log
 ==========================
 
+3.0.1
+-----
+
+   * Add board support for DC1K-rev-c3 and DC5K-rev-a3
+   * Remove invalid board support file for DC5k
+   * Add BISS encoder and AMS encoder (SPI) ports to board support file of all IFM_DC boards
+
 3.0.0
 -----
 

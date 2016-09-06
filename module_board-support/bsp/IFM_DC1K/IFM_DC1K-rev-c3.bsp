@@ -9,9 +9,9 @@
 #include <platform.h>
 
 /* ADC */
-#define ADC_DATA_A IFM_PORT_1BIT_42 
+#define ADC_DATA_A  IFM_PORT_1BIT_16
 #define ADC_DATA_B IFM_PORT_1BIT_40 
-#define ADC_SCLK IFM_PORT_1BIT_16 
+#define ADC_SCLK  IFM_PORT_1BIT_42
 #define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
@@ -55,9 +55,9 @@
 #define BISS_CLK_SRC IFM_TILE_CLOCK_2
 
 #define SOMANET_IFM_BISS_PORTS {    \
-	QEI_PORT,                       \
-	QEI_PORT_INPUT_MODE_SELECTION,  \
-	BISS_CLK_SRC                    \
+    QEI_PORT,                       \
+    QEI_PORT_INPUT_MODE_SELECTION,  \
+    BISS_CLK_SRC                    \
 }
 
 /* PWM PORTS*/
@@ -111,4 +111,17 @@
         SOMANET_IFM_GPIO_D2         \
     },                              \
     SOMANET_IFM_GPIO_D0             \
+}
+
+#define SOMANET_IFM_POSITION_FEEDBACK_PORTS {   \
+    QEI_PORT,                       \
+    QEI_PORT_INPUT_MODE_SELECTION,  \
+    SOMANET_IFM_GPIO_D0,            \
+    {                               \
+        IFM_TILE_CLOCK_2,           \
+        IFM_TILE_CLOCK_3,           \
+        SOMANET_IFM_GPIO_D3,        \
+        SOMANET_IFM_GPIO_D1,        \
+        SOMANET_IFM_GPIO_D2         \
+    }                               \
 }

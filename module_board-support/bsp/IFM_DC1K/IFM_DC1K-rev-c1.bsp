@@ -52,15 +52,6 @@
     QEI_PORT                                    \
 }
 
-/* BiSS PORTS */
-#define BISS_CLK_SRC IFM_TILE_CLOCK_2
-
-#define SOMANET_IFM_BISS_PORTS {    \
-	QEI_PORT,                       \
-	QEI_PORT_INPUT_MODE_SELECTION,  \
-	BISS_CLK_SRC                    \
-}
-
 /* PWM PORTS*/
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
@@ -112,18 +103,4 @@
         SOMANET_IFM_GPIO_D2         \
     },                              \
     SOMANET_IFM_GPIO_D0             \
-}
-
-#define SOMANET_IFM_POSITION_FEEDBACK_PORTS {   \
-    QEI_PORT,                       \
-    QEI_PORT_INPUT_MODE_SELECTION,  \
-    HALL_PORT,                      \
-    SOMANET_IFM_GPIO_D0,            \
-    {                               \
-        IFM_TILE_CLOCK_2,           \
-        IFM_TILE_CLOCK_3,           \
-        SOMANET_IFM_GPIO_D3,        \
-        SOMANET_IFM_GPIO_D1,        \
-        SOMANET_IFM_GPIO_D2         \
-    }                               \
 }

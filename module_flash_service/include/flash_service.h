@@ -12,6 +12,7 @@ interface FlashDataInterface {
     int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
     int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
 };
+typedef interface FlashDataInterface FlashDataInterface;
 
 interface FlashBootInterface {
     int read(char data[], unsigned nbytes,  unsigned char image_num);
@@ -20,6 +21,8 @@ interface FlashBootInterface {
     int erase_upgrade_image(void);
     int validate_flashing(void);
 };
+
+typedef interface FlashBootInterface FlashBootInterface;
 
 enum configuration_type {
     MOTCTRL_CONFIG

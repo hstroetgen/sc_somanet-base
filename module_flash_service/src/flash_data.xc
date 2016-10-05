@@ -10,7 +10,7 @@
 #include <print.h>
 #include <string.h>
 
-#define SPECIAL_PAGE_SIZE PAGE_SIZE-4
+
 
 
 int flash_data_init(unsigned partition_size) {
@@ -69,8 +69,10 @@ unsigned int decode_data_size(unsigned int encoded_n_bytes) {
     }
 }
 
-int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
+int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes, const static int flash_page_size_bytes)
+{
     int current_type_first_page = DATA_PAGES_PER_TYPE * type;
+    const int special_page_size = flash_page_size_bytes - 4;
 
     // Conect to flash
     int result = connect_to_flash();
@@ -86,8 +88,8 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
     }
 
     // Read the first data page
-    char data_page[PAGE_SIZE];
-    memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
+    char data_page[flash_page_size_bytes];
+    memset(data_page, 0, flash_page_size_bytes);    // Fill the data page with zeros
 
     // Read from the data partition
     result = fl_readDataPage(current_type_first_page, data_page);
@@ -102,9 +104,9 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
 
     n_bytes = decode_data_size(encoded_data_size);
     // The first 4 bytes contain an encoded size of total data written in the data partition
-    if (n_bytes > SPECIAL_PAGE_SIZE) {    // 252 = 256 - 4 (space left in the first page)
-        memcpy(buffer, data_page + sizeof(int), SPECIAL_PAGE_SIZE);
-        int read_bytes = SPECIAL_PAGE_SIZE;
+    if (n_bytes > special_page_size) {    // 252 = 256 - 4 (space left in the first page)
+        memcpy(buffer, data_page + sizeof(int), special_page_size);
+        int read_bytes = special_page_size;
         n_bytes -= read_bytes;
         for (int i = 1; n_bytes > 0; i++) {
             result = fl_readDataPage(current_type_first_page + i, data_page);
@@ -112,12 +114,12 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
                 printstrln( "Could not read the data partition" );
                 return result;
             }
-            if (n_bytes <= PAGE_SIZE) {
+            if (n_bytes <= flash_page_size_bytes) {
                 memcpy(buffer + read_bytes, data_page, n_bytes);
                 n_bytes = 0;
             } else {
-                memcpy(buffer + read_bytes, data_page, PAGE_SIZE);
-                read_bytes += PAGE_SIZE;
+                memcpy(buffer + read_bytes, data_page, flash_page_size_bytes);
+                read_bytes += flash_page_size_bytes;
                 n_bytes -= read_bytes;
             }
         }
@@ -134,8 +136,9 @@ int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) {
     return result;
 }
 
-int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_bytes) {
+int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_bytes, const static int flash_page_size_bytes) {
     int current_type_first_page = DATA_PAGES_PER_TYPE * type;
+    const int special_page_size = flash_page_size_bytes - 4;
 
     // Conect to flash
     int result = connect_to_flash();
@@ -157,24 +160,24 @@ int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_byt
         return result;
     }
 
-    char data_page[PAGE_SIZE];
-    memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
+    char data_page[flash_page_size_bytes];
+    memset(data_page, 0, flash_page_size_bytes);    // Fill the data page with zeros
 
     // Copy the number of bytes that will be occupied in total
     int data_to_store = encode_data_size(n_bytes);
     memcpy(data_page, &data_to_store, sizeof(int));
     // FIXME Why this 4 bytes?
-    if (n_bytes > SPECIAL_PAGE_SIZE) {    // 252 = 256 - 4 (space left in the first page)
-        memcpy(data_page + sizeof(int), data, SPECIAL_PAGE_SIZE);
+    if (n_bytes > special_page_size) {    // 252 = 256 - 4 (space left in the first page)
+        memcpy(data_page + sizeof(int), data, special_page_size);
         result = fl_writeDataPage(current_type_first_page, data_page);
         if (result != 0){
             printstrln( "Could not write a data page" );
             return result;
         }
-        int written_bytes = SPECIAL_PAGE_SIZE;
+        int written_bytes = special_page_size;
         for (int i = 1; written_bytes < n_bytes; i++) {
-            if (n_bytes - written_bytes <= PAGE_SIZE) {
-                memset(data_page, 0, sizeof(data_page));    // Fill the data page with zeros
+            if (n_bytes - written_bytes <= flash_page_size_bytes) {
+                memset(data_page, 0, flash_page_size_bytes);    // Fill the data page with zeros
                 memcpy(data_page, data + written_bytes, n_bytes - written_bytes);
                 result = fl_writeDataPage(current_type_first_page + i, data_page);
                 if (result != 0){
@@ -183,13 +186,13 @@ int set_configurations(int type, unsigned char data[n_bytes], unsigned int n_byt
                 }
                 written_bytes = n_bytes;
             } else {
-                memcpy(data_page, data + written_bytes, PAGE_SIZE);
+                memcpy(data_page, data + written_bytes, flash_page_size_bytes);
                 result = fl_writeDataPage(current_type_first_page + i, data_page);
                 if (result != 0){
                     printstrln( "Could not write a data page" );
                     return result;
                 }
-                written_bytes += PAGE_SIZE;
+                written_bytes += flash_page_size_bytes;
             }
         }
     } else {

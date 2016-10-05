@@ -36,7 +36,8 @@ int flash_find_images(void) {
  * @param size      Size of the page.
  * @return 0 if writing is succesful.
  */
-int flash_write_boot(unsigned char page[], unsigned size) {
+int flash_write_boot_page(unsigned char page[], unsigned size)
+{
 
     if (image_size_rest > 0) {
         int error = connect_to_flash();

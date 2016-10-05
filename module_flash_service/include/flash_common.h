@@ -9,7 +9,6 @@
 #include <xccompat.h>
 #include <flash.h>
 
-#define PAGE_SIZE               256
 #define DATA_PAGES_PER_TYPE     4
 
 #define NO_ERROR                0

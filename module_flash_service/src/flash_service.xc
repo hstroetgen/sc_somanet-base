@@ -45,8 +45,8 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case !isnull(i_boot) => i_boot.prepare_boot_partition(unsigned image_size) -> int error: {
-                error = flash_prepare_boot_partition(image_size);
+            case !isnull(i_boot) => i_boot.prepare_boot_partition() -> int error: {
+                error = flash_prepare_boot_partition();
             }
             break;
 
@@ -72,6 +72,7 @@ void flash_service(fl_SPIPorts &SPI,
                 error = flash_erase_image();
             }
             break;
+
         }
     }
 }

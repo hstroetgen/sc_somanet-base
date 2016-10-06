@@ -13,6 +13,6 @@ int flash_read_boot(unsigned char page[], unsigned size);
 
 int flash_erase_image(void);
 
-int flash_prepare_boot_partition(unsigned image_size);
+int flash_prepare_boot_partition();
 
 int flash_find_images(void);

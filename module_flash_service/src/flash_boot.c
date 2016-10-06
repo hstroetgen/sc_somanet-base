@@ -39,7 +39,8 @@ int flash_find_images(void) {
 int flash_write_boot_page(unsigned char page[], unsigned size)
 {
 
-    if (image_size_rest > 0) {
+    if (image_size_rest > 0)
+    {
         int error = connect_to_flash();
         if (error) {
             return ERR_CONNECT_FAILED;
@@ -132,10 +133,9 @@ int flash_erase_image(void) {
 /**
  * @brief Prepares the boot partition. This means, the function is searching other images
  *        and calculates in dependencies of found images the addresses for the upgrade image.
- * @param   image_size  Size of the upgrade image in bytes.
  * @return 0, if no error occured.
  */
-int flash_prepare_boot_partition(unsigned image_size) {
+int flash_prepare_boot_partition() {
     // Calculating addresses of the factory image.
     int found_image;
     int complete = 0;
@@ -154,6 +154,11 @@ int flash_prepare_boot_partition(unsigned image_size) {
         return ERR_CONNECT_FAILED;
     }
 
+    /* Calculate maximum image size */
+    fl_BootImageInfo bootImageInfoFactoryImage;
+    fl_getFactoryImage(&bootImageInfoFactoryImage);
+    unsigned max_image_size = fl_getFlashSize() - fl_getDataPartitionSize() - (bootImageInfoFactoryImage.size + bootImageInfoFactoryImage.startAddress);
+
     // error should be 0 or 11. 11 equals No upgrade image found.
     error = flash_find_images();
 
@@ -168,7 +173,7 @@ int flash_prepare_boot_partition(unsigned image_size) {
     // An error of 11 equals no upgrade image was found -> 0.
     found_image = !error;
 
-    image_size_rest = image_size;
+    image_size_rest = max_image_size;
 
     // While loop is necessary, cause both of the functions need sometimes more then one call.
     while (!complete) {
@@ -177,13 +182,13 @@ int flash_prepare_boot_partition(unsigned image_size) {
             #ifdef DEBUG
             printstr("Replace Image\n");
             #endif
-            complete = fl_startImageReplace(&bootImageInfo, image_size);
+            complete = fl_startImageReplace(&bootImageInfo, max_image_size);
         } else {
             // Add Image
             #ifdef DEBUG
             printstr("Add Image\n");
             #endif
-            complete = fl_startImageAdd(&bootImageInfo, image_size, 0);
+            complete = fl_startImageAdd(&bootImageInfo, max_image_size, 0);
         }
     }
 

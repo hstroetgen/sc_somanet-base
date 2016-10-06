@@ -17,7 +17,7 @@ typedef interface FlashDataInterface FlashDataInterface;
 interface FlashBootInterface {
     int read(char data[], unsigned nbytes,  unsigned char image_num);
     int write(char data[], unsigned nbytes);
-    int prepare_boot_partition(unsigned image_size);
+    int prepare_boot_partition();
     int erase_upgrade_image(void);
     int validate_flashing(void);
 };

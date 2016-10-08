@@ -270,7 +270,7 @@ int flash_prepare_boot_partition() {
     if (dataPartSize > 0)
         eraseEndSector = getSectorContaining(fl_getFlashSize() - fl_getDataPartitionSize()) - 1;
     else
-        eraseEndSector = fl_getNumSectors();
+        eraseEndSector = fl_getNumSectors() - 1;
 
     #ifdef DEBUG
         printstrln("Deleting image area...");
@@ -282,8 +282,16 @@ int flash_prepare_boot_partition() {
     for (int i = eraseStartSector; i <= eraseEndSector; i ++)
         fl_eraseSector(i);
 
+    #ifdef DEBUG
+        printstrln("Deleted!");
+    #endif
+
     /* Prepare area for writing */
     while (!fl_startImageAdd(&bootImageInfo, max_image_size, 0));
+
+    #ifdef DEBUG
+        printstrln("Area prepared!");
+    #endif
 
     // Disconnect from the flash
     error = fl_disconnect();

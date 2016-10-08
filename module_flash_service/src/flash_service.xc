@@ -12,6 +12,12 @@
 #include <print.h>
 #include <string.h>
 
+/* Defines the maximum size of a packet coming over the interface to be written into flash
+ * (in bytes)
+ */
+#define MAX_PACKET_SIZE 1024
+
+
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
                    interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size) {
@@ -62,8 +68,8 @@ void flash_service(fl_SPIPorts &SPI,
             break;
 
             case !isnull(i_boot) => i_boot.write(char page[], unsigned nbytes) -> int error: {
-                char data[flash_page_size];
-                memcpy(data, page, flash_page_size);
+                char data[MAX_PACKET_SIZE];
+                memcpy(data, page, nbytes);
                 error = flash_write_boot_page(data, nbytes);
                 break;
             }

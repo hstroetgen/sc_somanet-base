@@ -70,7 +70,7 @@ void flash_service(fl_SPIPorts &SPI,
             case !isnull(i_boot) => i_boot.write(char page[], unsigned nbytes) -> int error: {
                 char data[MAX_PACKET_SIZE];
                 memcpy(data, page, nbytes);
-                error = flash_write_boot_page(data, nbytes);
+                error = flash_write_boot_page(data, nbytes, flash_page_size);
                 break;
             }
 

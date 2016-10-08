@@ -8,7 +8,7 @@
 #include <flashlib.h>
 #include <flash_common.h>
 
-//#define DEBUG
+#define DEBUG
 
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
@@ -21,6 +21,10 @@ int flash_find_images(void) {
     if (fl_getFactoryImage(&bootImageInfo)) {
         return ERR_NO_FACTORY_IMAGE;
     }
+
+    printstr("Start address"); printintln(bootImageInfo.startAddress);
+    printstr("Size"); printintln(bootImageInfo.size);
+    printstr("factory"); printintln(bootImageInfo.factory);
 
     // 0 if image found; 1, when not
     if (fl_getNextBootImage(&bootImageInfo)) {
@@ -36,38 +40,70 @@ int flash_find_images(void) {
  * @param size      Size of the page.
  * @return 0 if writing is succesful.
  */
-int flash_write_boot_page(unsigned char page[], unsigned size)
+int flash_write_boot_page(unsigned char page[], unsigned size, int flash_page_size)
 {
-
-    if (image_size_rest > 0)
+    if (size < flash_page_size)
     {
-        int error = connect_to_flash();
-        if (error) {
-            return ERR_CONNECT_FAILED;
-        }
-
-        error = fl_writeImagePage(page);
-
-        if (error) {
-            #ifdef DEBUG
-            printstr("Writing failed!\n");
-            #endif
-            return ERR_WRITE_FAILED;
-        }
-
-        // Disconnect from the flash
-        error = fl_disconnect();
-        if (error){
-            #ifdef DEBUG
-            printstr( "Could not disconnect from FLASH\n" );
-            #endif
-            return ERR_DISCONNECT_FAILED;
-        }
-        image_size_rest -= size;
+        #ifdef DEBUG
+            printstrln("ERROR: Data package smaller than page size");
+        #endif
+        return ERR_DATA_PACKAGE_TOO_SMALL;
     }
-    #ifdef DEBUG
-    printstrln("");
-    #endif
+
+    unsigned char * data_ptr = &page[0];
+
+    /* Make sure we write everything page-by-page */
+    while (1)
+    {
+        if (image_size_rest > 0)
+        {
+            int error = connect_to_flash();
+            if (error) {
+                return ERR_CONNECT_FAILED;
+            }
+
+            /* If write error happened, try 5 times, then give up */
+            for (int i = 0; i < 5; i ++)
+            {
+                error = fl_writeImagePage(data_ptr);
+
+                #ifdef DEBUG
+                    if (error != 0)
+                    {
+                        printstr("Write attempt "); printint(i); printstrln(" failed");
+                    }
+                #endif
+
+                if (error == 0)
+                    break;
+            }
+
+            if (error) {
+                #ifdef DEBUG
+                printstr("Writing failed!\n");
+                #endif
+                return ERR_WRITE_FAILED;
+            }
+
+            // Disconnect from the flash
+            error = fl_disconnect();
+            if (error){
+                #ifdef DEBUG
+                printstr( "Could not disconnect from FLASH\n" );
+                #endif
+                return ERR_DISCONNECT_FAILED;
+            }
+            image_size_rest -= size;
+        }
+
+        /* Increment page array pointer */
+        data_ptr += flash_page_size;
+
+        /* Break condition - make sure we never run out of boundaries */
+        if (data_ptr >= &page[size - 1])
+            break;
+    }
+
     return NO_ERROR;
 }
 

@@ -20,6 +20,7 @@ interface FlashBootInterface {
     int prepare_boot_partition();
     int erase_upgrade_image(void);
     int validate_flashing(void);
+    int upgrade_image_installed(void);
 };
 
 typedef interface FlashBootInterface FlashBootInterface;

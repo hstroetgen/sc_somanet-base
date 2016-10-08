@@ -16,3 +16,5 @@ int flash_erase_image(void);
 int flash_prepare_boot_partition();
 
 int flash_find_images(void);
+
+int upgrade_image_installed(void);

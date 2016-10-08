@@ -77,6 +77,33 @@ int flash_find_images(void) {
 }
 
 /**
+ * @brief Checks if a bootable image is installed
+ * @return 0 if factory and upgrade image were found.
+ */
+int upgrade_image_installed(void)
+{
+    int error = connect_to_flash();
+
+    if (error)
+    {
+        return ERR_CONNECT_FAILED;
+    }
+
+    error = flash_find_images();
+
+    // Disconnect from the flash
+    error = fl_disconnect();
+    if (error){
+        #ifdef DEBUG
+        printstr( "Could not disconnect from FLASH\n" );
+        #endif
+        return ERR_DISCONNECT_FAILED;
+    }
+
+    return error;
+}
+
+/**
  * @brief Writes a page into the boot partition. Addresses are automatically calculated in fl_writeImagePage.
  *        Image_size_rest is set in flash_prepare_boot_partition and equals the total size of the upgrade image.
  * @param page      Contains one page of the image.

@@ -92,8 +92,8 @@ int upgrade_image_installed(void)
     error = flash_find_images();
 
     // Disconnect from the flash
-    error = fl_disconnect();
-    if (error){
+
+    if (fl_disconnect()){
         #ifdef DEBUG
         printstr( "Could not disconnect from FLASH\n" );
         #endif

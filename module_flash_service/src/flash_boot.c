@@ -13,6 +13,49 @@
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
 
+/***************** HELPER FUNCTIONS ***********************************/
+/**
+ * Return the address one past the end of the sector.
+ */
+static int fl_getSectorEndAddress(int sectorNum)
+{
+  return fl_getSectorAddress(sectorNum) + fl_getSectorSize(sectorNum);
+}
+
+/**
+ * Returns the number of the first sector containing the specified
+ * address.
+ * \return The number of sector or -1 if there is no such sector.
+ */
+static int getSectorContaining(unsigned address)
+{
+  unsigned numSectors = fl_getNumSectors();
+  unsigned sector;
+  for (sector = 0; sector < numSectors; sector++) {
+    if (fl_getSectorEndAddress(sector) > address)
+      return sector;
+  }
+  return -1;
+}
+
+/**
+ * Returns the number of the first sector starting at or after the specified
+ * address.
+ * \return The number of sector or -1 if there is no such sector.
+ */
+static int getSectorAtOrAfter(unsigned address)
+{
+  unsigned numSectors = fl_getNumSectors();
+  unsigned sector;
+  for (sector = 0; sector < numSectors; sector++) {
+    if (fl_getSectorAddress(sector) >= address)
+      return sector;
+  }
+  return -1;
+}
+
+
+/***************************** MAIN FUNCTIONS *************************************************/
 /**
  * @brief Trys to find an upgrade image. First error (no factory image) should never occur.
  * @return 0 if factory and upgrade image were found.
@@ -167,14 +210,10 @@ int flash_erase_image(void) {
 }
 
 /**
- * @brief Prepares the boot partition. This means, the function is searching other images
- *        and calculates in dependencies of found images the addresses for the upgrade image.
+ * @brief Prepares the boot partition to accept a new image
  * @return 0, if no error occured.
  */
 int flash_prepare_boot_partition() {
-    // Calculating addresses of the factory image.
-    int found_image;
-    int complete = 0;
     int error = 0;
 
     #ifdef DEBUG
@@ -190,43 +229,34 @@ int flash_prepare_boot_partition() {
         return ERR_CONNECT_FAILED;
     }
 
+    /* Get information about the factory image */
+    fl_getFactoryImage(&bootImageInfo);
+
     /* Calculate maximum image size */
-    fl_BootImageInfo bootImageInfoFactoryImage;
-    fl_getFactoryImage(&bootImageInfoFactoryImage);
-    unsigned max_image_size = fl_getFlashSize() - fl_getDataPartitionSize() - (bootImageInfoFactoryImage.size + bootImageInfoFactoryImage.startAddress);
-
-    // error should be 0 or 11. 11 equals No upgrade image found.
-    error = flash_find_images();
-
-    if (error == ERR_NO_FACTORY_IMAGE)
-    {
-        #ifdef DEBUG
-        printstr("ERR_NO_FACTORY_IMAGE\n");
-        #endif
-        return ERR_NO_FACTORY_IMAGE;
-    }
-    // Convert error in found_image flag. An error of 0 equals upgrade image were found -> 1.
-    // An error of 11 equals no upgrade image was found -> 0.
-    found_image = !error;
-
+    unsigned max_image_size = fl_getFlashSize() - fl_getDataPartitionSize() - (bootImageInfo.size + bootImageInfo.startAddress);
     image_size_rest = max_image_size;
 
-    // While loop is necessary, cause both of the functions need sometimes more then one call.
-    while (!complete) {
-        if (found_image) {
-            // Replace Image
-            #ifdef DEBUG
-            printstr("Replace Image\n");
-            #endif
-            complete = fl_startImageReplace(&bootImageInfo, max_image_size);
-        } else {
-            // Add Image
-            #ifdef DEBUG
-            printstr("Add Image\n");
-            #endif
-            complete = fl_startImageAdd(&bootImageInfo, max_image_size, 0);
-        }
-    }
+    /* Erase everything between end of factory image and data partition */
+    int eraseStartSector    = getSectorAtOrAfter(bootImageInfo.startAddress + bootImageInfo.size);
+    int dataPartSize        = fl_getDataPartitionSize();
+    int eraseEndSector      = 0;
+    if (dataPartSize > 0)
+        eraseEndSector = getSectorContaining(fl_getFlashSize() - fl_getDataPartitionSize()) - 1;
+    else
+        eraseEndSector = fl_getNumSectors();
+
+    #ifdef DEBUG
+        printstrln("Deleting image area...");
+        printstr("Start address to delete: "); printintln(fl_getSectorAddress(eraseStartSector));
+        printstr("End address to delete: "); printintln(fl_getSectorEndAddress(eraseEndSector));
+    #endif
+
+    // Do actual erase
+    for (int i = eraseStartSector; i <= eraseEndSector; i ++)
+        fl_eraseSector(i);
+
+    /* Prepare area for writing */
+    while (!fl_startImageAdd(&bootImageInfo, max_image_size, 0));
 
     // Disconnect from the flash
     error = fl_disconnect();
@@ -236,8 +266,6 @@ int flash_prepare_boot_partition() {
         #endif
         return ERR_DISCONNECT_FAILED;
     }
-    #ifdef DEBUG
-    //printstrln("");
-    #endif
+
     return NO_ERROR;
 }

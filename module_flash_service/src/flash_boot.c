@@ -8,7 +8,7 @@
 #include <flashlib.h>
 #include <flash_common.h>
 
-#define DEBUG
+//#define DEBUG
 
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
@@ -65,10 +65,11 @@ int flash_find_images(void) {
         return ERR_NO_FACTORY_IMAGE;
     }
 
+#ifdef DEBUG
     printstr("Start address"); printintln(bootImageInfo.startAddress);
     printstr("Size"); printintln(bootImageInfo.size);
     printstr("factory"); printintln(bootImageInfo.factory);
-
+#endif
     // 0 if image found; 1, when not
     if (fl_getNextBootImage(&bootImageInfo)) {
         return ERR_NO_UPGRADE_IMAGE;

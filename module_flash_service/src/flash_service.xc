@@ -20,7 +20,12 @@
 
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size) {
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size)
+{
+
+    /* Init local variables */
+    unsigned int erase_flash = 0;
+    int erase_error = 0;
 
     if (isnull(i_boot) && isnull(i_data))
     {
@@ -51,8 +56,8 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case !isnull(i_boot) => i_boot.prepare_boot_partition() -> int error: {
-                error = flash_prepare_boot_partition();
+            case !isnull(i_boot) => i_boot.prepare_boot_partition(): {
+                erase_flash = 1;
             }
             break;
 
@@ -74,8 +79,8 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case !isnull(i_boot) => i_boot.erase_upgrade_image(void) -> int error: {
-                error = flash_erase_image();
+            case !isnull(i_boot) => i_boot.erase_upgrade_image(void): {
+                erase_flash = 1;
                 break;
             }
 
@@ -84,6 +89,21 @@ void flash_service(fl_SPIPorts &SPI,
                 error = upgrade_image_installed();
                 break;
             }
+
+            case !isnull(i_boot) => i_boot.get_notification() -> int error:
+                    error = erase_error;
+                break;
+
+            /* Do time consuming operations and notify client when done - to make sure we don't block */
+            default:
+                if (!isnull(i_boot) && erase_flash)
+                {
+                    erase_error = flash_prepare_boot_partition();
+                    erase_flash = 0;
+
+                    i_boot.notification();
+                }
+                break;
 
         }
     }

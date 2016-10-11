@@ -8,7 +8,12 @@
 #include <flash_data.h>
 #include <flash_common.h>
 
+#ifdef XCORE200
+#include <quadflashlib.h>
+#else
 #include <flashlib.h>
+#endif
+
 #include <print.h>
 #include <string.h>
 
@@ -17,10 +22,15 @@
  */
 #define MAX_PACKET_SIZE 1024
 
-
+#ifdef XCORE200
+void flash_service(fl_QSPIPorts &SPI,
+                   interface FlashBootInterface server ?i_boot,
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size)
+#else
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
                    interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size)
+#endif
 {
 
     /* Init local variables */

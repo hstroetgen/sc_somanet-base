@@ -6,7 +6,12 @@
 #include <flash_service.h>
 #include <flash_common.h>
 
+#ifdef XCORE200
+#include <quadflashlib.h>
+#else
 #include <flashlib.h>
+#endif
+
 #include <print.h>
 #include <string.h>
 

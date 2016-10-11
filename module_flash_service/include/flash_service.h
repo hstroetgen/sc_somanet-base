@@ -6,7 +6,12 @@
 #pragma once
 
 #include "flash_common.h"
+
+#ifdef XCORE200
+#include <quadflash.h>
+#else
 #include <flash.h>
+#endif
 
 interface FlashDataInterface {
     int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
@@ -35,6 +40,12 @@ enum configuration_type {
     MOTCTRL_CONFIG
 };
 
+#ifdef XCORE200
+void flash_service(fl_QSPIPorts &SPI,
+                   interface FlashBootInterface server ?i_boot,
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size);
+#else
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
                    interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size);
+#endif

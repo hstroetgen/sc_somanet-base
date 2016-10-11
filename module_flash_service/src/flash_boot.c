@@ -5,7 +5,13 @@
 
 #include <flash_boot.h>
 #include <print.h>
+
+#ifdef XCORE200
+#include <quadflashlib.h>
+#else
 #include <flashlib.h>
+#endif
+
 #include <flash_common.h>
 
 //#define DEBUG

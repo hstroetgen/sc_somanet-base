@@ -7,7 +7,12 @@
 #pragma once
 
 #include <xccompat.h>
+
+#ifdef XCORE200
+#include <quadflash.h>
+#else
 #include <flash.h>
+#endif
 
 #define DATA_PAGES_PER_TYPE         4
 
@@ -22,5 +27,9 @@
 #define ERR_NO_DATA_PARTITION       17
 #define ERR_DATA_PACKAGE_TOO_SMALL  18
 
+#ifdef XCORE200
+void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI));
+#else
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));
+#endif
 int connect_to_flash(void);

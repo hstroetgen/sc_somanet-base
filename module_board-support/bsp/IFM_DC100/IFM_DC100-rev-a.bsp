@@ -15,6 +15,7 @@
 #define ADC_DATA_IN_A IFM_PORT_1BIT_42 
 #define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 #define SOMANET_IFM_ADC	AD7949
+#define CURRENT_RATIO           600 /*ratio between current recieved in control core, and real phase current */
 
 #define SOMANET_IFM_ADC_PORTS {             \
     {                                       \
@@ -25,7 +26,7 @@
         ADC_CLK_SRC                         \
     },                                      \
     { {null,null}, null, null, null,null},  \
-    {1, 1, 5}                               \
+    {-1, -1, 5}                             \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -54,15 +55,6 @@
 #define SOMANET_IFM_QEI_PORTS { \
     null,                       \
     QEI_PORT                    \
-}
-
-/* BiSS PORTS */
-#define BISS_CLK_SRC IFM_TILE_CLOCK_2
-
-#define SOMANET_IFM_BISS_PORTS {    \
-	QEI_PORT,                       \
-	SOMANET_IFM_GPIO_D0,            \
-	BISS_CLK_SRC                    \
 }
 
 /* PWM PORTS*/

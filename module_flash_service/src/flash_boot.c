@@ -330,73 +330,68 @@ int flash_prepare_boot_partition() {
     return NO_ERROR;
 }
 
-//
-//
-///**
-// * @brief Prepares the boot partition to accept a new image
-// * @return 0, if no error occured.
-// */
-//int flash_prepare_boot_partition() {
-//    int error = 0;
-//
-//    #ifdef DEBUG
-//    printstr("Prepare boot partition\n");
-//    #endif
-//
-//    // Connect to flash
-//    error = connect_to_flash();
-//    if (error) {
-//        #ifdef DEBUG
-//        printstr("Error: Connect to flash during preparation\n");
-//        #endif
-//        return ERR_CONNECT_FAILED;
-//    }
-//
-//    /* Get information about the factory image */
-//    fl_getFactoryImage(&bootImageInfo);
-//
-//    /* Calculate maximum image size */
-//    unsigned max_image_size = fl_getFlashSize() - fl_getDataPartitionSize() - (bootImageInfo.size + bootImageInfo.startAddress);
-//    image_size_rest = max_image_size;
-//
-//    /* Erase everything between end of factory image and data partition */
-//    int eraseStartSector    = getSectorAtOrAfter(bootImageInfo.startAddress + bootImageInfo.size);
-//    int dataPartSize        = fl_getDataPartitionSize();
-//    int eraseEndSector      = 0;
-//    if (dataPartSize > 0)
-//        eraseEndSector = getSectorContaining(fl_getFlashSize() - fl_getDataPartitionSize()) - 1;
-//    else
-//        eraseEndSector = fl_getNumSectors() - 1;
-//
-//    #ifdef DEBUG
-//        printstrln("Deleting image area...");
-//        printstr("Start address to delete: "); printintln(fl_getSectorAddress(eraseStartSector));
-//        printstr("End address to delete: "); printintln(fl_getSectorEndAddress(eraseEndSector));
-//    #endif
-//
-//    // Do actual erase
-//    for (int i = eraseStartSector; i <= eraseEndSector; i ++)
-//        fl_eraseSector(i);
-//
-//    #ifdef DEBUG
-//        printstrln("Deleted!");
-//    #endif
-//
-//    /* Prepare area for writing */
-//    while (!fl_startImageAdd(&bootImageInfo, max_image_size, 0));
-//
-//    #ifdef DEBUG
-//        printstrln("Area prepared!");
-//    #endif
-//
-//    // Disconnect from the flash
-//    error = fl_disconnect();
-//    if (error){
-//        #ifdef DEBUG
-//        printstr("Could not disconnect from FLASH\n");
-//        #endif
-//        return ERR_DISCONNECT_FAILED;
-//    }
-//
-//    return NO_ERROR;
-//}
+
+
+/**
+ * @brief Erases the whole boot-partition only keeping the bootloader image
+ * @return 0, if no error occured.
+ */
+int flash_erase_boot_partition()
+{
+    int error = 0;
+
+    #ifdef DEBUG
+    printstr("Erase boot partition\n");
+    #endif
+
+    // Connect to flash
+    error = connect_to_flash();
+    if (error) {
+        #ifdef DEBUG
+        printstr("Error: Connect to flash during preparation\n");
+        #endif
+        return ERR_CONNECT_FAILED;
+    }
+
+    /* Get information about the factory image */
+    fl_getFactoryImage(&bootImageInfo);
+
+    /* Calculate maximum image size */
+    unsigned max_image_size = fl_getFlashSize() - fl_getDataPartitionSize() - (bootImageInfo.size + bootImageInfo.startAddress);
+    image_size_rest = max_image_size;
+
+    /* Erase everything between end of factory image and data partition */
+    int eraseStartSector    = getSectorAtOrAfter(bootImageInfo.startAddress + bootImageInfo.size);
+    int dataPartSize        = fl_getDataPartitionSize();
+    int eraseEndSector      = 0;
+    if (dataPartSize > 0)
+        eraseEndSector = getSectorContaining(fl_getFlashSize() - fl_getDataPartitionSize()) - 1;
+    else
+        eraseEndSector = fl_getNumSectors() - 1;
+
+    #ifdef DEBUG
+        printstrln("Deleting image area...");
+        printstr("Start address to delete: "); printintln(fl_getSectorAddress(eraseStartSector));
+        printstr("End address to delete: "); printintln(fl_getSectorEndAddress(eraseEndSector));
+    #endif
+
+    // Do actual erase
+    for (int i = eraseStartSector; i <= eraseEndSector; i ++)
+        fl_eraseSector(i);
+
+    #ifdef DEBUG
+        printstrln("Deleted!");
+    #endif
+
+
+    // Disconnect from the flash
+    error = fl_disconnect();
+    if (error){
+        #ifdef DEBUG
+        printstr("Could not disconnect from FLASH\n");
+        #endif
+        return ERR_DISCONNECT_FAILED;
+    }
+
+    return NO_ERROR;
+}

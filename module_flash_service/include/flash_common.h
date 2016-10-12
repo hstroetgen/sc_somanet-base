@@ -15,6 +15,7 @@
 #endif
 
 #define DATA_PAGES_PER_TYPE         4
+#define FLASH_PAGE_SIZE             256
 
 #define NO_ERROR                    0
 #define ERR_NO_FACTORY_IMAGE        10

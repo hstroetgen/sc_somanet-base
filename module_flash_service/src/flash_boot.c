@@ -120,7 +120,7 @@ int upgrade_image_installed(void)
  * @param size      Size of the page.
  * @return 0 if writing is succesful.
  */
-int flash_write_boot_page(unsigned char page[], unsigned size, int flash_page_size)
+int flash_write_boot_page(unsigned char page[], unsigned size)
 {
     unsigned char readBuf[FLASH_PAGE_SIZE];
     int error = 0;

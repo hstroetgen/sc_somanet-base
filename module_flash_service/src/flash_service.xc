@@ -25,11 +25,11 @@
 #ifdef XCORE200
 void flash_service(fl_QSPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size)
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data)
 #else
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size)
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data)
 #endif
 {
 
@@ -52,7 +52,7 @@ void flash_service(fl_SPIPorts &SPI,
             case !isnull(i_data) => i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {
                 unsigned char intermediate_buffer[1024];
                 unsigned intermediate_n_bytes;
-                result = get_configurations(type, intermediate_buffer, intermediate_n_bytes, flash_page_size);
+                result = get_configurations(type, intermediate_buffer, intermediate_n_bytes, FLASH_PAGE_SIZE);
                 if (result == NO_ERROR) {
                     memcpy(buffer, intermediate_buffer, intermediate_n_bytes);
                     n_bytes = intermediate_n_bytes;
@@ -62,7 +62,7 @@ void flash_service(fl_SPIPorts &SPI,
             case !isnull(i_data) => i_data[int i].set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes) -> int result: {
                 unsigned char intermediate_buffer[1024];
                 memcpy(intermediate_buffer, data, n_bytes);
-                result = set_configurations(type, intermediate_buffer, n_bytes, flash_page_size);
+                result = set_configurations(type, intermediate_buffer, n_bytes, FLASH_PAGE_SIZE);
                 break;
             }
 
@@ -85,7 +85,7 @@ void flash_service(fl_SPIPorts &SPI,
             case !isnull(i_boot) => i_boot.write(char page[], unsigned nbytes) -> int error: {
                 char data[MAX_PACKET_SIZE];
                 memcpy(data, page, nbytes);
-                error = flash_write_boot_page(data, nbytes, flash_page_size);
+                error = flash_write_boot_page(data, nbytes);
                 break;
             }
 

@@ -43,9 +43,9 @@ enum configuration_type {
 #ifdef XCORE200
 void flash_service(fl_QSPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size);
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data);
 #else
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
-                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data, const static int flash_page_size);
+                   interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data);
 #endif

@@ -7,7 +7,7 @@
 #pragma once
 
 
-int flash_write_boot_page(unsigned char page[], unsigned size, int flash_page_size);
+int flash_write_boot_page(unsigned char page[], unsigned size);
 
 int flash_read_boot(unsigned char page[], unsigned size);
 

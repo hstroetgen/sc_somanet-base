@@ -66,8 +66,8 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case !isnull(i_boot) => i_boot.prepare_boot_partition(): {
-                erase_flash = 1;
+            case !isnull(i_boot) => i_boot.prepare_boot_partition() -> int error: {
+                error = flash_prepare_boot_partition();
             }
             break;
 
@@ -89,7 +89,7 @@ void flash_service(fl_SPIPorts &SPI,
                 break;
             }
 
-            case !isnull(i_boot) => i_boot.erase_upgrade_image(void): {
+            case !isnull(i_boot) => i_boot.erase_boot_partition(void): {
                 erase_flash = 1;
                 break;
             }
@@ -108,7 +108,7 @@ void flash_service(fl_SPIPorts &SPI,
             default:
                 if (!isnull(i_boot) && erase_flash)
                 {
-                    erase_error = flash_prepare_boot_partition();
+                    erase_error = flash_erase_boot_partition();
                     erase_flash = 0;
 
                     i_boot.notification();

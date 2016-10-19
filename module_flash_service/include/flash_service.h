@@ -14,18 +14,18 @@
 #endif
 
 interface FlashDataInterface {
-    int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
-    int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
+    [[guarded]] int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
+    [[guarded]] int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
 };
 typedef interface FlashDataInterface FlashDataInterface;
 
 interface FlashBootInterface {
-    int read(char data[], unsigned nbytes,  unsigned char image_num);
-    int write(char data[], unsigned nbytes);
-    int prepare_boot_partition();
-    void erase_boot_partition(void);
-    int validate_flashing(void);
-    int upgrade_image_installed(void);
+    [[guarded]] int read(char data[], unsigned nbytes,  unsigned char image_num);
+    [[guarded]] int write(char data[], unsigned nbytes);
+    [[guarded]] int prepare_boot_partition();
+    [[guarded]] void erase_boot_partition(void);
+    [[guarded]] int validate_flashing(void);
+    [[guarded]] int upgrade_image_installed(void);
 
     [[notification]]
     slave void notification();

@@ -7,43 +7,103 @@
  * Ifm Drive BLDC 30
  **********************/
 
-#define MOTOR_TILE 1
-
 /* ADC */
-//on tile[MOTOR_TILE]: buffered in port:32 pb32_adc_data[2] = { XS1_PORT_1D ,XS1_PORT_1C };
-//on tile[MOTOR_TILE]: out port p1_adc_sclk = XS1_PORT_1H; // 1-bit port connecting to external ADC serial clock
-//on tile[MOTOR_TILE]: port p1_ready = XS1_PORT_1G; // 1-bit port used to as ready signal for pb32_adc_data ports and ADC chip
-//on tile[MOTOR_TILE]: out port p4_adc_mux = XS1_PORT_4C; // 4-bit port used to control multiplexor on ADC chip and ADC single-diff mode "P4C3 -> AI SGL_DIFF set"
-//on tile[MOTOR_TILE]: clock adc_xclk = XS1_CLKBLK_3; // Intern al XMOS clock
+#define ADC_DATA_A  IFM_PORT_1BIT_42
+#define ADC_DATA_B IFM_PORT_1BIT_40 
+#define ADC_SCLK  IFM_PORT_1BIT_16
+#define ADC_READY IFM_PORT_1BIT_4 
+#define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
+#define SOMANET_IFM_ADC	AD7265
+#define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 
-/* BLDC Motor, default port mode */
-//on tile[MOTOR_TILE]: in  port p_ifm_hall = XS1_PORT_4E; /* [p3 p2 p1 p0] -> [AUX_IO  HALL.1  HALL.2  HALL.3] */
-//on tile[MOTOR_TILE]: in  port p_ifm_encoder = XS1_PORT_4A; /* [p3 p2 p1 p0] -> [QEI.Q  QEI.I  QEI.B  QEI.A] */
-on tile[MOTOR_TILE]: in  port p_ifm_dummy_port = XS1_PORT_16A; /* any unused port */
-on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor1_hi[3] = { 
-                                XS1_PORT_1K,   /* Hi A */
-                                XS1_PORT_1L,   /* Hi B */
-                                XS1_PORT_1M }; /* Hi C */
+#define SOMANET_IFM_ADC_PORTS {     \
+    { null, null, null, null },     \
+    { {ADC_DATA_A , ADC_DATA_B},    \
+     ADC_CLK_SRC,                   \
+     ADC_SCLK,                      \
+     ADC_READY,                     \
+     ADC_MUX},                      \
+     {-1, -1, 3}                    \
+}
 
-on tile[MOTOR_TILE]: buffered out port:32 p_ifm_motor2_hi[3]  = { 
-                                XS1_PORT_1N,   /* Hi A */
-                                XS1_PORT_1O,   /* Hi B */
-                                XS1_PORT_1P }; /* Hi C */
+/* FET DRIVER A4935 control ports */
+#define SOMANET_IFM_FET_DRIVER_PORTS {  \
+    null,                               \
+    null,                               \
+    null,                               \
+    null                                \
+}
+
+/* HALL SENSOR PORTS */
+#define HALL_PORT IFM_PORT_4BIT_36_46_48_50
+#define HALL_PORT_2 IFM_PORT_4BIT_64_66_76_80
+
+//FixMe: add second hall port
+#define SOMANET_IFM_HALL_PORTS {    \
+    HALL_PORT                       \
+}
+
+/* ENCODER PORT */
+#define QEI_PORT IFM_PORT_4BIT_38_44_30_34
+#define QEI_PORT_2 IFM_PORT_4BIT_68_70_72_74
+
+//FixMe: add second qei port
+#define SOMANET_IFM_QEI_PORTS { \
+    null,                       \
+    QEI_PORT                    \
+}
+
+/* PWM PORTS*/
+#define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62
+#define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_56
+#define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
+#define PWM_PORT_A_HIGH_SIDE_2 IFM_PORT_1BIT_24
+#define PWM_PORT_B_HIGH_SIDE_2 IFM_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE_2 IFM_PORT_1BIT_52
+
+#define PWM_CLOCK_SRC IFM_TILE_CLOCK_0
+#define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
+
+//FixMe: add second motor
+#define SOMANET_IFM_PWM_PORTS {                                             \
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},     \
+    {null, null, null},        \
+    null,                                                                   \
+    null,                                                                   \
+    PWM_CLOCK_SRC,                                                          \
+    PWM_DUMMY_PORT_TRIGGER                                                  \
+}
 
 /* LEDs, Watchdog */
-//on tile[MOTOR_TILE]: out port p_ifm_led_moton_wdtick_wden = XS1_PORT_4B; /* [p3 p2 p1 p0] -> [LED Motor_ON WD_TICK WD_EN] */
-on tile[MOTOR_TILE]: out port p_ifm_wd_tick = XS1_PORT_1E; /* WatchdogTick */
+#define WATCHDOG_TICK_PORT IFM_PORT_1BIT_2
+//Warning! Enable port is single-bit
+#define WATCHDOG_EN_PORT IFM_PORT_1BIT_6
 
-/* Expansion Port */
-//on tile[MOTOR_TILE]: port p_ifm_ext_d0 = XS1_PORT_1A;
-//on tile[MOTOR_TILE]: port p_ifm_ext_d1 = XS1_PORT_1B;
-//on tile[MOTOR_TILE]: port p_ifm_ext_d2 = XS1_PORT_1F;
-//on tile[MOTOR_TILE]: port p_ifm_ext_d3 = XS1_PORT_1E;
-//on tile[MOTOR_TILE]: port p_ifm_ext_d4 = XS1_PORT_1I;
-//on tile[MOTOR_TILE]: port p_ifm_ext_d5 = XS1_PORT_1J;
+#define SOMANET_IFM_WATCHDOG_PORTS {    \
+    WATCHDOG_EN_PORT,                   \
+    WATCHDOG_TICK_PORT                  \
+}
 
-//on tile[MOTOR_TILE]: port p_ifm_ext_d6to8_AUX12vEN = XS1_PORT_4F; /* [p3 p2 p1 p0] -> [EXT_D.7  EXT_D.6  EXT_D.8  AUX12vEN] */
+/* GPIO_PORTS */
+#define SOMANET_IFM_GPIO_D0 IFM_PORT_1BIT_28
+#define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_32
+#define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_78
+#define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_22
 
-// DX -> XS1_PORT_4D
-
-
+/* SPI Absolute Position Sensor Ports */
+/*  MOSI = D3
+    SCLK = D1
+    MISO = D2
+    Slave Select = D0 */
+#define SOMANET_IFM_SPI_PORTS {     \
+    {                               \
+        IFM_TILE_CLOCK_2,           \
+        IFM_TILE_CLOCK_3,           \
+        SOMANET_IFM_GPIO_D3,        \
+        SOMANET_IFM_GPIO_D1,        \
+        SOMANET_IFM_GPIO_D2         \
+    },                              \
+    SOMANET_IFM_GPIO_D0             \
+}
+ 

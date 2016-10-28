@@ -16,7 +16,7 @@
 
 #include <flash_common.h>
 
-#define DEBUG
+//#define DEBUG
 
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
@@ -92,8 +92,6 @@ unsigned calc_crc_block(unsigned * data, unsigned *crc, unsigned num_words)
   {
     asm volatile("crc32 %0, %2, %3" : "=r" (*crc) : "0" (*crc), "r" (data[i]), "r" (polynom));
   }
-
-  //asm volatile("crc32 %0, %2, %3" : "=r" (crc) : "0" (crc), "r" (expected_crc), "r" (polynom));
 
   return *crc;
 }

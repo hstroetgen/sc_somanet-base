@@ -144,7 +144,7 @@ bool crc_check_image(unsigned image_start_address)
           crc_read_buf[i] = BitRev(crc_read_buf[i]);
 
         /* Last page */
-        if (0 && (read_addr + FLASH_PAGE_SIZE) > (image_start_address + image_size))
+        if ((read_addr + FLASH_PAGE_SIZE) > (image_start_address + image_size))
             words = (image_start_address + image_size - read_addr) / 4;
         else /* Regular page */
            words = FLASH_PAGE_SIZE / 4;
@@ -203,9 +203,7 @@ int upgrade_image_installed(void)
     int error = connect_to_flash();
 
     if (error)
-    {
         return ERR_CONNECT_FAILED;
-    }
 
     error = flash_find_images();
 
@@ -231,7 +229,6 @@ int upgrade_image_installed(void)
     printstrln("Upgrade Image CRC OK");
 #endif
 
-    while (1);
     // Disconnect from the flash
     if (fl_disconnect()){
         #ifdef DEBUG
@@ -240,7 +237,8 @@ int upgrade_image_installed(void)
         return ERR_DISCONNECT_FAILED;
     }
 
-    return error;
+    /* Signal success */
+    return 0;
 }
 
 /**

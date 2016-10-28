@@ -6,6 +6,7 @@
 #include <flash_boot.h>
 #include <print.h>
 #include <string.h>
+#include <stdbool.h>
 
 #ifdef XCORE200
 #include <quadflashlib.h>
@@ -15,7 +16,7 @@
 
 #include <flash_common.h>
 
-//#define DEBUG
+#define DEBUG
 
 fl_BootImageInfo bootImageInfo;
 unsigned image_size_rest;
@@ -63,6 +64,113 @@ static int getSectorAtOrAfter(unsigned address)
   return -1;
 }
 
+/**
+ * @brief: Reverses all bits in a byte and returns the result
+ */
+unsigned char BitRev(unsigned char c)
+{
+  unsigned char res = 0;
+  for( int b=0; b<8; b++ )
+  {
+    res <<= 1;
+    res |= c&1;
+    c >>= 1;
+  }
+
+  return( res );
+}
+
+/**
+ * @brief: Calculates the CRC of a data block and compares it to an expected CRC
+ * @return: Returns the CRC calculated
+ */
+unsigned calc_crc_block(unsigned * data, unsigned *crc, unsigned num_words)
+{
+  unsigned polynom = 0xedb88320;
+
+  for(unsigned i = 0; i < num_words; i++)
+  {
+    asm volatile("crc32 %0, %2, %3" : "=r" (*crc) : "0" (*crc), "r" (data[i]), "r" (polynom));
+  }
+
+  //asm volatile("crc32 %0, %2, %3" : "=r" (crc) : "0" (crc), "r" (expected_crc), "r" (polynom));
+
+  return *crc;
+}
+
+/**
+ * @brief: Checks the CRC of an image
+ * @return: True if CRC is correct, false if not
+ */
+bool crc_check_image(unsigned image_start_address)
+{
+    /* Check CRC */
+#ifdef DEBUG
+    printstrln("Start CRC-Check:");
+    printstr("CRC-Image Start Address: 0x");
+    printhexln(image_start_address);
+#endif
+
+    unsigned char crc_read_buf[FLASH_PAGE_SIZE];
+    unsigned expected_image_crc = 0;
+    unsigned crc = 0xFFFFFFFF;
+    unsigned image_size = 0;
+
+    /* Get expected page CRC as well as image size */
+    //Read the page where the image starts...
+    fl_readPage(image_start_address, crc_read_buf);
+
+    //Sort the bits read from SPI
+    for(unsigned i = 0; i < FLASH_PAGE_SIZE; i++)
+      crc_read_buf[i] = BitRev(crc_read_buf[i]);
+
+    expected_image_crc = *(unsigned *)&crc_read_buf[8];
+    image_size = *(unsigned *)&crc_read_buf[24];
+
+    /* CRC header page */
+    calc_crc_block((unsigned *)&crc_read_buf[12], &crc, (FLASH_PAGE_SIZE / 4) - 3);
+
+    /* Run through remaining pages and CRC them */
+    for (unsigned read_addr = image_start_address + FLASH_PAGE_SIZE;
+            read_addr < image_start_address + image_size; read_addr += FLASH_PAGE_SIZE)
+    {
+        unsigned words = 0;
+
+        /* Read page */
+        fl_readPage(read_addr, crc_read_buf);
+
+        /* Sort the bits read from SPI */
+        for(unsigned i = 0; i < FLASH_PAGE_SIZE; i++)
+          crc_read_buf[i] = BitRev(crc_read_buf[i]);
+
+        /* Last page */
+        if (0 && (read_addr + FLASH_PAGE_SIZE) > (image_start_address + image_size))
+            words = (image_start_address + image_size - read_addr) / 4;
+        else /* Regular page */
+           words = FLASH_PAGE_SIZE / 4;
+
+        calc_crc_block((unsigned *)&crc_read_buf, &crc, words);
+    }
+
+    /* CRC the CRC */
+    asm volatile("crc32 %0, %2, %3" : "=r" (crc) : "0" (crc), "r" (expected_image_crc), "r" (0xedb88320));
+
+    if (crc == 0xFFFFFFFF)
+    {
+#ifdef DEBUG
+        printstrln("CRC OK");
+#endif
+        return true;
+    }
+    else
+    {
+#ifdef DEBUG
+        printstrln("CRC CHECK FAILED!");
+#endif
+        return false;
+    }
+
+}
 
 /***************************** MAIN FUNCTIONS *************************************************/
 /**
@@ -75,9 +183,9 @@ int flash_find_images(void) {
     }
 
 #ifdef DEBUG
-    printstr("Start address"); printintln(bootImageInfo.startAddress);
-    printstr("Size"); printintln(bootImageInfo.size);
-    printstr("factory"); printintln(bootImageInfo.factory);
+    printstr("Start address Factory Image: 0x"); printhexln(bootImageInfo.startAddress);
+    printstr("Size: "); printintln(bootImageInfo.size);
+    printstr("factory: "); printintln(bootImageInfo.factory);
 #endif
     // 0 if image found; 1, when not
     if (fl_getNextBootImage(&bootImageInfo)) {
@@ -101,8 +209,30 @@ int upgrade_image_installed(void)
 
     error = flash_find_images();
 
-    // Disconnect from the flash
+    if (error)
+    {
+        fl_disconnect();
+        return error;
+    }
 
+
+    /* CRC Check of the upgrade image */
+    if (!crc_check_image(bootImageInfo.startAddress))
+    {
+#ifdef DEBUG
+        printstrln("Upgrade Image CRC CHECK FAILED!");
+#endif
+        fl_disconnect();
+
+        return ERR_CRC_CHECK_FAILED;
+    }
+
+#ifdef DEBUG
+    printstrln("Upgrade Image CRC OK");
+#endif
+
+    while (1);
+    // Disconnect from the flash
     if (fl_disconnect()){
         #ifdef DEBUG
         printstr( "Could not disconnect from FLASH\n" );

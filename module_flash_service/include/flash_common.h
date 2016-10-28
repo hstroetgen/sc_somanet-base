@@ -28,6 +28,7 @@
 #define ERR_NO_DATA_PARTITION       17
 #define ERR_DATA_PACKAGE_TOO_SMALL  18
 #define ERR_OUT_OF_LIMITS           19
+#define ERR_CRC_CHECK_FAILED        20
 
 #ifdef XCORE200
 void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI));

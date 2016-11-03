@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <ethercat_service.h>
+
 #if 0 /* -> interface definition in ethercat_service.h */
 interface EtherCATRebootInterface {
     void device_reboot(void);

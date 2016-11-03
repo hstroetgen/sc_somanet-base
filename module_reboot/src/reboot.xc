@@ -5,7 +5,7 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <ethercat_service.h>
+//#include <ethercat_service.h>
 #include <reboot.h>
 #include <xs1.h>
 #include <platform.h>
@@ -38,7 +38,29 @@ static unsigned GetDFUFlag(void);
 
 
 /**************************************** Service Implementation ***********************************/
-void reboot_service(server interface EtherCATRebootInterface i_reboot)
+#ifdef COM_ETHERCAT
+[[distributable]]
+void _reboot_service_ethercat(server interface EtherCATRebootInterface i_reboot_ecat, client interface RebootInterface i_reboot)
+{
+    while (1)
+    {
+        select
+        {
+            case i_reboot_ecat.device_reboot():
+                i_reboot.device_reboot();
+                break;
+            case i_reboot_ecat.get_boot_flag() -> unsigned flag:
+                flag = i_reboot.get_boot_flag();
+                break;
+            case i_reboot_ecat.set_boot_flag(unsigned flag):
+                i_reboot.set_boot_flag(flag);
+                break;
+        }
+    }
+}
+#endif
+
+void reboot_service(server interface RebootInterface i_reboot)
 {
     while (1)
     {
@@ -56,6 +78,8 @@ void reboot_service(server interface EtherCATRebootInterface i_reboot)
         }
     }
 }
+
+
 /************************************* Reboot implementation ****************************************/
 void reboot_device(void)
 {
@@ -63,13 +87,10 @@ void reboot_device(void)
     unsigned int localTileId = get_local_tile_id();
     unsigned int tileId;
     unsigned int tileArrayLength;
+
     #ifdef DEBUG
     printstrln("Reboot...");
     #endif
-
-
-    // Write Flag to signal bootloader that device has been rebooted
-    SetDFUFlag(2);
 
     asm volatile ("ldc %0, tile.globound":"=r"(tileArrayLength));
 

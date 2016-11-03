@@ -39,5 +39,5 @@ void _reboot_service_ethercat(server interface EtherCATRebootInterface i_reboot_
         reboot_service(i_reboot);\
         [[distribute]] _reboot_service_ethercat(i_reboot_ecat, i_reboot);\
     }\
-}
+} while(0)
 #endif /* COM_ETHERCAT */

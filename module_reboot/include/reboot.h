@@ -18,5 +18,3 @@ interface EtherCATRebootInterface {
 
 void reboot_service(server interface EtherCATRebootInterface i_reboot);
 void reboot_device(void);
-
-unsigned GetDFUFlag(void); /* obsolete?! */

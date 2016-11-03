@@ -34,6 +34,7 @@
 
 /************************************** Local function prototypes **************************************/
 static void SetDFUFlag(unsigned x);
+static unsigned GetDFUFlag(void);
 
 
 /**************************************** Service Implementation ***********************************/
@@ -45,6 +46,12 @@ void reboot_service(server interface EtherCATRebootInterface i_reboot)
         {
             case i_reboot.device_reboot():
                 reboot_device();
+                break;
+            case i_reboot.get_boot_flag() -> unsigned flag:
+                flag = GetDFUFlag();
+                break;
+            case i_reboot.set_boot_flag(unsigned flag):
+                SetDFUFlag(flag);
                 break;
         }
     }
@@ -101,7 +108,7 @@ static void SetDFUFlag(unsigned x)
 }
 
 /* Load flag from fixed address */
-unsigned GetDFUFlag()
+static unsigned GetDFUFlag()
 {
     unsigned x;
     asm volatile("ldw %0, %1[0]" : "=r"(x) : "r"(FLAG_ADDRESS));

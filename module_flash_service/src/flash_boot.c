@@ -65,6 +65,18 @@ static int getSectorAtOrAfter(unsigned address)
 }
 
 /**
+ * @brief: Reverses all Nibbles
+ */
+unsigned char NibbleRev(unsigned char c)
+{
+  unsigned char res = 0;
+
+  res = ((c & 0x0F) << 4) | ((c & 0xF0) >> 4);
+
+  return( res );
+}
+
+/**
  * @brief: Reverses all bits in a byte and returns the result
  */
 unsigned char BitRev(unsigned char c)
@@ -79,6 +91,12 @@ unsigned char BitRev(unsigned char c)
 
   return( res );
 }
+
+#ifdef XCORE200
+#define PREP_BYTE(c) NibbleRev(c);
+#else
+#define PREP_BYTE(c) BitRev(c);
+#endif
 
 /**
  * @brief: Calculates the CRC of a data block and compares it to an expected CRC
@@ -120,7 +138,7 @@ bool crc_check_image(unsigned image_start_address)
 
     //Sort the bits read from SPI
     for(unsigned i = 0; i < FLASH_PAGE_SIZE; i++)
-      crc_read_buf[i] = BitRev(crc_read_buf[i]);
+      crc_read_buf[i] = PREP_BYTE(crc_read_buf[i]);
 
     expected_image_crc = *(unsigned *)&crc_read_buf[8];
     image_size = *(unsigned *)&crc_read_buf[24];
@@ -139,7 +157,7 @@ bool crc_check_image(unsigned image_start_address)
 
         /* Sort the bits read from SPI */
         for(unsigned i = 0; i < FLASH_PAGE_SIZE; i++)
-          crc_read_buf[i] = BitRev(crc_read_buf[i]);
+          crc_read_buf[i] = PREP_BYTE(crc_read_buf[i]);
 
         /* Last page */
         if ((read_addr + FLASH_PAGE_SIZE) > (image_start_address + image_size))

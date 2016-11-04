@@ -46,14 +46,8 @@ void _reboot_service_ethercat(server interface EtherCATRebootInterface i_reboot_
     {
         select
         {
-            case i_reboot_ecat.device_reboot():
-                i_reboot.device_reboot();
-                break;
-            case i_reboot_ecat.get_boot_flag() -> unsigned flag:
-                flag = i_reboot.get_boot_flag();
-                break;
-            case i_reboot_ecat.set_boot_flag(unsigned flag):
-                i_reboot.set_boot_flag(flag);
+            case i_reboot_ecat.boot_to_bootloader():
+                i_reboot.boot_to_bootloader();
                 break;
         }
     }
@@ -74,6 +68,23 @@ void reboot_service(server interface RebootInterface i_reboot)
                 break;
             case i_reboot.set_boot_flag(unsigned flag):
                 SetDFUFlag(flag);
+                break;
+            case i_reboot.boot_to_bootloader(void):
+                SetDFUFlag(2);
+                reboot_device();
+                break;
+            case i_reboot.boot_to_application(void):
+                SetDFUFlag(1);
+                reboot_device();
+                break;
+            case i_reboot.has_rebooted_from_application(void) -> int ret:
+
+                unsigned flag = GetDFUFlag();
+                if (flag == 2)
+                    ret = 1;
+                else
+                    ret = 0;
+
                 break;
         }
     }

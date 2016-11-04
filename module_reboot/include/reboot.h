@@ -22,6 +22,9 @@ typedef interface RebootInterface {
     void device_reboot(void);
     unsigned get_boot_flag(void);
     void set_boot_flag(unsigned);
+    void boot_to_bootloader(void);
+    void boot_to_application(void);
+    int has_rebooted_from_application(void);
 } RebootInterface;
 
 

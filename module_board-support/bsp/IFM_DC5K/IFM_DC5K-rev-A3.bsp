@@ -109,7 +109,7 @@
 #define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_40  // equivalent to port 1C in C22, which is EXT_D.3 in DC5K
 
 
-/* AMS Absolute Position Sensor Ports */
+/* SPI Ports */
 /*  MOSI = D3
     SCLK = D1
     MISO = D2
@@ -135,11 +135,11 @@
 		    in buffered port:8 miso;  = SOMANET_IFM_GPIO_D2 = IFM_PORT_1BIT_78 = XS1_PORT_1I = EXT D.2 = pin 5
 		}
 		out port slave_select;        = SOMANET_IFM_GPIO_D0 = IFM_PORT_1BIT_28 = XS1_PORT_1A = EXT D.0 = pin 2
-	} AMSPorts;
+	} SPIPorts;
     */
 
 //FixMe: D2 and D1 are flipped because the clock trace is too short, will be fixed in hardware
-#define SOMANET_IFM_AMS_PORTS {     \
+#define SOMANET_IFM_SPI_PORTS {     \
     {                               \
         IFM_TILE_CLOCK_2,           \
         IFM_TILE_CLOCK_3,           \

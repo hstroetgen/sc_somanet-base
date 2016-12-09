@@ -14,6 +14,9 @@
 #endif
 
 interface FlashDataInterface {
+    [[guarded]] int read(unsigned addr, unsigned size, unsigned char data[]);
+    [[guarded]] int write(unsigned addr, unsigned size, unsigned char data[]);
+    [[guarded]] int erase(unsigned addr, unsigned size);
     [[guarded]] int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
     [[guarded]] int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
 };

@@ -13,8 +13,9 @@
  */
 int flash_data_init(unsigned partition_size);
 
-int flash_write_data(char data[], unsigned size);
-int flash_read_data(char data[], unsigned size);
+int flash_write_data(unsigned addr, unsigned size, unsigned char data[]);
+int flash_read_data(unsigned addr, unsigned size, unsigned char data[]);
+int flash_erase_data(unsigned addr, unsigned size);
 
 int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes, const static int flash_page_size_bytes);
 int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes, const static int flash_page_size_bytes);

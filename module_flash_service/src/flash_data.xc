@@ -3,6 +3,8 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
+#include <xs1.h>
+#include <platform.h>
 #include <flash_service.h>
 #include <flash_common.h>
 
@@ -17,21 +19,101 @@
 
 
 
-
 int flash_data_init(unsigned partition_size) {
-    // TODO
+
     return 0;
 }
 
-int flash_write_data(char data[], unsigned size) {
-    // TODO
-    return 0;
+int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
+
+    int page_offset, page_len, page_num;
+    int data_offset = 0;
+    unsigned char page_buffer[256];
+
+        // Conect to flash
+        int result = connect_to_flash();
+        if (result != 0) {
+              printstrln( "Could not connect to FLASH" );
+              return result;
+        }
+        do {
+             //calculate position and lenght for current page
+             page_offset = (addr % 256);
+             page_len = (size <= (256 - page_offset)) ? size : (256 - page_offset);
+             page_num = addr / 256;
+
+             //save previous data from page
+             fl_readDataPage(page_num, page_buffer);
+             if (result !=0 )
+             {
+                  printstrln( "Could not read from FLASH" );
+                  return result;
+              }
+
+             //copy new data to page buffer
+             memcpy(page_buffer + page_offset, data + data_offset, page_len);
+             result = fl_writeDataPage(page_num, page_buffer);
+
+             if (result !=0 )
+             {
+                 printstrln( "Could not write to FLASH" );
+                 return result;
+             }
+
+             data_offset += page_len;
+             addr += page_len;
+             size -= page_len;
+
+        }  while (size > 0);
+
+        // Disconnect from the flash
+        result = fl_disconnect();
+        if (result != 0){
+             printstrln( "Could not disconnect from FLASH" );
+        }
+        return result;
 }
 
-int flash_read_data(char data[], unsigned page) {
+int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
+
+    // Conect to flash
+    int result = connect_to_flash();
+    if (result != 0) {
+        printstrln( "Could not connect to FLASH" );
+        return result;
+    }
+
     // Read from the data partition
+    result = fl_readData(addr, size, data);
 
-    int result = fl_readDataPage(page, data);
+    // Disconnect from the flash
+    result = fl_disconnect();
+    if (result != 0){
+            printstrln( "Could not disconnect from FLASH" );
+    }
+
+    return result;
+}
+
+
+int flash_erase_data(unsigned addr, unsigned size)
+{
+    // Conect to flash
+    int result = connect_to_flash();
+    if (result != 0) {
+          printstrln( "Could not connect to FLASH" );
+          return result;
+    }
+
+
+    //Coming soon....
+
+    // Disconnect from the flash
+    result = fl_disconnect();
+    if (result != 0){
+            printstrln( "Could not disconnect from FLASH" );
+    }
+
     return result;
 }
 
@@ -54,6 +136,7 @@ unsigned int encode_data_size(unsigned int n_bytes) {
 
 /**
  * @brief Decode the total size of stored configurations in the flash memory
+ *
  *
  * Used for decoding (and confirming the validity) of the number stored
  * inside the flash memory that contains the information about the total

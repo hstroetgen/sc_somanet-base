@@ -17,6 +17,7 @@
 #include <print.h>
 #include <string.h>
 
+
 /* Defines the maximum size of a packet coming over the interface to be written into flash
  * (in bytes)
  */
@@ -65,6 +66,26 @@ void flash_service(fl_SPIPorts &SPI,
                 result = set_configurations(type, intermediate_buffer, n_bytes, FLASH_PAGE_SIZE);
                 break;
             }
+
+            case !isnull(i_data) => i_data[int i].read(unsigned addr, unsigned size, unsigned char buffer[]) -> int error: {
+                unsigned char intermediate_buffer[MAX_PACKET_SIZE];
+                error = flash_read_data(addr,size,intermediate_buffer);
+                memcpy(buffer, intermediate_buffer, size);
+            }
+            break;
+
+            case !isnull(i_data) => i_data[int i].write(unsigned addr, unsigned size, unsigned char buffer[]) -> int error: {
+                unsigned char intermediate_buffer[MAX_PACKET_SIZE];
+                memcpy(intermediate_buffer, buffer, size);
+                error = flash_write_data(addr,size,intermediate_buffer);
+            }
+            break;
+
+            case !isnull(i_data) => i_data[int i].erase(unsigned addr, unsigned size) -> int error: {
+
+                 error = flash_erase_data(addr,size);
+            }
+            break;
 
             case !isnull(i_boot) => i_boot.prepare_boot_partition() -> int error: {
                 error = flash_prepare_boot_partition();

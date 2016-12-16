@@ -17,6 +17,8 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <xccompat.h>
+#include <flash_service.h>
 // ----------- >8 ------------
 
 /* Typedefs */

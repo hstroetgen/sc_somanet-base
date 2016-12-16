@@ -7,8 +7,10 @@
 
 
 #include <stdio.h>
-
+#include <xccompat.h>
 #include <spiffs.h>
+#include <spiffs_service.h>
+
 
 #define LOG_PAGE_SIZE       256
 
@@ -18,42 +20,33 @@ static u8_t spiffs_cache_buf[(LOG_PAGE_SIZE+32)*4];
 
 static spiffs fs;
 
-void my_spi_read(int addr, int size, char *buf)
+
+
+//----------------------------------
+
+
+
+static s32_t my_spiffs_read(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t addr, u32_t size, u8_t *dst)
 {
-
-}
-
-void my_spi_write(int addr, int size, char *buf)
-{
-
-}
-
-void my_spi_erase(int addr, int size)
-{
-
-}
-
-
-static s32_t my_spiffs_read(u32_t addr, u32_t size, u8_t *dst)
-{
-    my_spi_read(addr, size, dst);
-    return SPIFFS_OK;
-}
-
-static s32_t my_spiffs_write(u32_t addr, u32_t size, u8_t *src)
-{
-    my_spi_write(addr, size, src);
-    return SPIFFS_OK;
-}
-
-static s32_t my_spiffs_erase(u32_t addr, u32_t size)
-{
-    my_spi_erase(addr, size);
+    if_read_flash(i_data, addr, size, dst);
     return SPIFFS_OK;
 }
 
 
-void my_spiffs_mount()
+static s32_t my_spiffs_write(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t addr, u32_t size, u8_t *src)
+{
+    if_write_flash(i_data, addr, size, src);
+    return SPIFFS_OK;
+}
+
+static s32_t my_spiffs_erase(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t addr, u32_t size)
+{
+    if_erase_flash(i_data, addr, size);
+    return SPIFFS_OK;
+}
+
+
+void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
 {
     spiffs_config cfg;
     cfg.phys_size = 2*1024*1024; // use all spi flash
@@ -62,9 +55,10 @@ void my_spiffs_mount()
     cfg.log_block_size = 65536; // let us not complicate things
     cfg.log_page_size = LOG_PAGE_SIZE; // as we said
 
+    cfg.if_spi_flash = i_data;
     cfg.hal_read_f = my_spiffs_read;
-      cfg.hal_write_f = my_spiffs_write;
-      cfg.hal_erase_f = my_spiffs_erase;
+    cfg.hal_write_f = my_spiffs_write;
+    cfg.hal_erase_f = my_spiffs_erase;
 
     int res = SPIFFS_mount(&fs,
             &cfg,
@@ -77,10 +71,11 @@ void my_spiffs_mount()
     printf("mount res: %i\n", res);
 }
 
-void spiffs_init()
+void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data))
 {
-    my_spiffs_mount();
+    my_spiffs_mount(i_data);
 }
+
 
 void test_wrapper_function()
 {
@@ -97,4 +92,5 @@ void test_wrapper_function()
        SPIFFS_close(&fs, fd);
 
        printf("--> %s <--\n", buf);
+
 }

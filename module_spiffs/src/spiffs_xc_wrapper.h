@@ -9,7 +9,10 @@
 #ifndef SPIFFS_XC_WRAPPER_H_
 #define SPIFFS_XC_WRAPPER_H_
 
-void spiffs_init();
+
+
+
+void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data));
 void test_wrapper_function();
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

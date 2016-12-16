@@ -7,11 +7,13 @@
 
 #ifndef SPIFFS_H_
 #define SPIFFS_H_
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
 #include "spiffs_config.h"
+
 
 #define SPIFFS_OK                       0
 #define SPIFFS_ERR_NOT_MOUNTED          -10000
@@ -76,6 +78,7 @@ typedef u8_t spiffs_obj_type;
 
 struct spiffs_t;
 
+
 #if SPIFFS_HAL_CALLBACK_EXTRA
 
 /* spi read call function type */
@@ -88,11 +91,11 @@ typedef s32_t (*spiffs_erase)(struct spiffs_t *fs, u32_t addr, u32_t size);
 #else // SPIFFS_HAL_CALLBACK_EXTRA
 
 /* spi read call function type */
-typedef s32_t (*spiffs_read)(u32_t addr, u32_t size, u8_t *dst);
+typedef s32_t (*spiffs_read)(CLIENT_INTERFACE(FlashDataInterface, if_spi_flash), u32_t addr, u32_t size, u8_t *dst);
 /* spi write call function type */
-typedef s32_t (*spiffs_write)(u32_t addr, u32_t size, u8_t *src);
+typedef s32_t (*spiffs_write)(CLIENT_INTERFACE(FlashDataInterface, if_spi_flash), u32_t addr, u32_t size, u8_t *src);
 /* spi erase call function type */
-typedef s32_t (*spiffs_erase)(u32_t addr, u32_t size);
+typedef s32_t (*spiffs_erase)(CLIENT_INTERFACE(FlashDataInterface, if_spi_flash), u32_t addr, u32_t size);
 #endif // SPIFFS_HAL_CALLBACK_EXTRA
 
 /* file system check callback report operation */
@@ -195,6 +198,7 @@ typedef void (*spiffs_file_callback)(struct spiffs_t *fs, spiffs_fileop_type op,
 
 // spiffs spi configuration struct
 typedef struct {
+   CLIENT_INTERFACE(FlashDataInterface, if_spi_flash);
   // physical read function
   spiffs_read hal_read_f;
   // physical write function

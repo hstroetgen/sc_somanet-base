@@ -43,4 +43,4 @@ Examples
 
 Additionally, this repository includes the following example app: 
 
-* `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE test.
+* `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE test

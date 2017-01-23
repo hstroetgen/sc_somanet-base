@@ -33,7 +33,7 @@ typedef unsigned char u8_t;
 
 // Set generic spiffs debug output call.
 #ifndef SPIFFS_DBG
-#define SPIFFS_DBG(...) //printf(__VA_ARGS__)
+#define SPIFFS_DBG(...) printf(__VA_ARGS__)
 #endif
 // Set spiffs debug output call for garbage collecting.
 #ifndef SPIFFS_GC_DBG
@@ -298,7 +298,7 @@ typedef unsigned char u8_t;
 
 // Block index type. Make sure the size of this type can hold
 // the highest number of all blocks - i.e. spiffs_file_system_size / log_block_size
-typedef u16_t spiffs_block_ix;
+typedef u8_t spiffs_block_ix;
 // Page index type. Make sure the size of this type can hold
 // the highest page number of all pages - i.e. spiffs_file_system_size / log_page_size
 typedef u16_t spiffs_page_ix;

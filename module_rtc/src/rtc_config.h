@@ -29,12 +29,19 @@
  */
 
 interface rtc_communication {
+
+    /**
+     * @brief Initialization of M41T62LC6F rtc device.
+     *
+     * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
+     */
+
     void    init(i2c_regop_res_t result);
 
     /**
      * @brief Setter for Hours.
      *
-     * @param data Hours data.
+     * @param data Hours data (00-23).
      */
 
     void    set_Hours(uint8_t data);
@@ -42,7 +49,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Minutes.
      *
-     * @param data Minutes data.
+     * @param data Minutes data (00-59).
      */
 
     void    set_Minutes(uint8_t data);
@@ -50,7 +57,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Seconds.
      *
-     * @param data Seconds data.
+     * @param data Seconds data (00-59).
      */
 
     void    set_Seconds(uint8_t data);
@@ -58,7 +65,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Milli Seconds.
      *
-     * @param data Milli Seconds data.
+     * @param data Milli Seconds data (00-99).
      */
 
     void    set_Milli_Seconds(uint8_t data);
@@ -66,7 +73,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Day of the week.
      *
-     * @param data Day of the week data.
+     * @param data Day of the week data (01-7).
      */
 
     void    set_Day_of_week(uint8_t data);
@@ -74,7 +81,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Date.
      *
-     * @param data Date data.
+     * @param data Date data (01-31).
      */
 
     void    set_Date(uint8_t data);
@@ -82,7 +89,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Year.
      *
-     * @param data Year data.
+     * @param data Year data (00-99).
      */
 
     void    set_Year(uint8_t data);
@@ -90,7 +97,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Month.
      *
-     * @param data Month data.
+     * @param data Month data (01-12).
      */
 
     void    set_Month(uint8_t data);
@@ -98,7 +105,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Century.
      *
-     * @param data Century data.
+     * @param data Century data (21-23).
      */
 
     void    set_Century(uint8_t data);

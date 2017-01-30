@@ -21,16 +21,15 @@ void RTC_run_test(client interface rtc_communication rtc)
     uint8_t data = 0;
 
     /* Set date */
-    rtc. set_Milli_Seconds(0);
-    rtc. set_Seconds(30);
-    rtc. set_Minutes(44);
-    rtc. set_Hours(11);
-    rtc. set_Day_of_week(2);
-    rtc. set_Date(30);
-    //rtc. set_Century_Month(0x41);
-    rtc.set_Month(1);
-    rtc.set_Century(21);
-    rtc. set_Year(17);
+    rtc. set_Milli_Seconds(0);        /* (00-99) */
+    rtc. set_Seconds(30);             /* (00-59) */
+    rtc. set_Minutes(44);             /* (00-59) */
+    rtc. set_Hours(11);               /* (00-23) */
+    rtc. set_Day_of_week(2);          /* (01-7) */
+    rtc. set_Date(30);                /* (01-31) */
+    rtc.set_Month(1);                 /* (01-12) */
+    rtc.set_Century(21);              /* (21-23) */
+    rtc. set_Year(17);                /* (00-99) */
 
     while (1)
     {
@@ -80,7 +79,7 @@ int main(void)
     interface rtc_communication rtc;
 
     par {
-        on tile[0] : {
+        on tile[COM_TILE] : {
                    par {
                        rtc_service(rtc, i2c[0]);
                        i2c_master(i2c, 1, p_scl, p_sda, 10);

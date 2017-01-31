@@ -30,6 +30,8 @@ How to use
 
         USED_MODULES = module_rtc module_board-support lib_i2c
 
+  `Refer to i2c library and documentation <https://www.xmos.com/support/libraries/lib_i2c>`_
+
 2. Include the RTC Service header **rtc_config.h** in your app.
 
 3. Define the i2c communication ports that the Service will be using in order to set and get time/date from rtc device.
@@ -41,7 +43,7 @@ How to use
 
     .. code-block:: c
 
-        #include <CORE_C21-rev-b.bsp>   //Board Support file for SOMANET Core C21 device
+        #include <CORE_C21-rev-b.bsp>   // 1  Board Support file for SOMANET Core C21 device
                                         //(select your board support files according to your device)
 
         #include "rtc_config.h" // 2
@@ -59,9 +61,9 @@ How to use
                 on tile[COM_TILE]:     // 5
                 {
                  par {
-                       rtc_service(rtc, i2c[0]);
+                       rtc_service(rtc, i2c[0]); // 6
                        i2c_master(i2c, 1, p_scl, p_sda, 10);
-                       RTC_run_test(rtc);  // 6
+                       RTC_run_test(rtc);  
                        }
                 }
             }

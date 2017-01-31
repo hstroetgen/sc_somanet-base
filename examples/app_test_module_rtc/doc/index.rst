@@ -57,6 +57,6 @@ in the main function:
                        return 0;
                    }
 
-7. :ref:`Run the application setting XScope(via xconnect/uart) <running_an_application>`.
+7. :ref:`Run the application using printing forwarding functions via XScope <http://www.xmos.com/support/examples/AN10090>`.
 
 .. seealso:: Did everything go well? If you need further support please check out our `forum <http://forum.synapticon.com/>`_.

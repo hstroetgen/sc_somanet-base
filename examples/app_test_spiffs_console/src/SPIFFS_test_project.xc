@@ -11,8 +11,6 @@
 #include <spiffs_service.h>
 #include <command_processor.h>
 
-#define XCORE200
-
 #ifdef XCORE200
 #include <quadflash.h>
 #else

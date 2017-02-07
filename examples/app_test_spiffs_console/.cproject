@@ -850,5 +850,9 @@
 			</target>
 		</buildTargets>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Default">
+			<resource resourceType="PROJECT" workspacePath="/app_test_spiffs_console"/>
+		</configuration>
+	</storageModule>
 </cproject>

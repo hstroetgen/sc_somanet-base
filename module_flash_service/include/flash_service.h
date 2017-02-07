@@ -13,6 +13,8 @@
 #include <flash.h>
 #endif
 
+
+#ifdef __XC__
 interface FlashDataInterface {
     [[guarded]] int read(unsigned addr, unsigned size, unsigned char data[]);
     [[guarded]] int write(unsigned addr, unsigned size, unsigned char data[]);
@@ -20,6 +22,7 @@ interface FlashDataInterface {
     [[guarded]] int get_configurations(int type, unsigned char buffer[], unsigned &n_bytes);
     [[guarded]] int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
 };
+
 typedef interface FlashDataInterface FlashDataInterface;
 
 interface FlashBootInterface {
@@ -51,4 +54,6 @@ void flash_service(fl_QSPIPorts &SPI,
 void flash_service(fl_SPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
                    interface FlashDataInterface server (&?i_data)[n_data], unsigned n_data);
+#endif
+
 #endif

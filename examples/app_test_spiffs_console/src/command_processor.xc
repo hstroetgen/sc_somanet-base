@@ -13,6 +13,7 @@ void test_script(client SPIFFSInterface i_spiffs)
     char buf[200], par1[20], par2[100], par3[10];
     int par_num, res;
     unsigned short fd = 0;
+    unsigned short flags;
 
     printstrln(">>   COMMAND SERVICE STARTING...\n");
 
@@ -27,22 +28,23 @@ void test_script(client SPIFFSInterface i_spiffs)
                 if (par_num > 2)
                 {
                     if (strcmp(par3, "rw") == 0)
-                    {
-                        fd  = i_spiffs.open_file(par2, strlen(par2), SPIFFS_RDWR);
-                        if (fd > 0) printf("File opened with file descriptor %i\n", fd);
-                        else
-                            printf("Error opening file \n");
-                    }
+                        flags = SPIFFS_RDWR;
+                    else
+                    if (strcmp(par3, "ro") == 0)
+                        flags = SPIFFS_RDONLY;
+                    else
+                    if (strcmp(par3, "wo") == 0)
+                        flags = SPIFFS_WRONLY;
                     else
                     if (strcmp(par3, "c") == 0)
-                    {
-                        fd  = i_spiffs.open_file(par2, strlen(par2), SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR);
-                        if (fd > 0) printf("File created with file descriptor %i\n", fd);
-                        else
-                           printf("Error creating file \n");
-                     }
+                        flags = (SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR);
                     else
                         printf("Unknown parameter \n");
+
+                    fd  = i_spiffs.open_file(par2, strlen(par2), flags);
+                    if (fd > 0) printf("File created with file descriptor %i\n", fd);
+                    else
+                        printf("Error creating file \n");
                 }
                 else
                     printf("Missing parameter \n");

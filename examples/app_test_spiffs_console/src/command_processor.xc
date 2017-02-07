@@ -103,7 +103,10 @@ void test_script(client SPIFFSInterface i_spiffs)
               {
                   if (par_num > 2)
                   {
+                       res  = i_spiffs.rename_file(par2, strlen(par2), par3, strlen(par3));
+                       if (res < 0) printf("errno %i\n", res);
                        else
+                           printf("Success... \n");
 
                    }
                    else

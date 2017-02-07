@@ -89,6 +89,18 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                            res = iSPIFFS_status(obj_id, size, type, pix, buffer);
                            memcpy(name, buffer, 32);
                    break;
+
+                   case !isnull(i_spiffs) => i_spiffs.format() -> int res:
+                        res = iSPIFFS_format();
+                   break;
+
+                   case !isnull(i_spiffs) => i_spiffs.rename_file(char old_path[], unsigned old_path_length, char new_path[], unsigned new_path_length) -> int res:
+                       char old_buffer[32];
+                       char new_buffer[32];
+                       memcpy(old_buffer,old_path,old_path_length+1);
+                       memcpy(new_buffer,new_path,new_path_length+1);
+                       res = iSPIFFS_rename(old_buffer, new_buffer);
+                   break;
                }
     }
 }

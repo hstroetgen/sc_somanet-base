@@ -25,6 +25,8 @@ interface SPIFFSInterface {
     [[guarded]] int vis(void);
     [[guarded]] int check(void);
     [[guarded]] int status(unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]);
+    [[guarded]] int rename_file(char path[], unsigned path_length, char new_path[], unsigned new_path_length);
+    [[guarded]] int format(void);
 };
 
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs, char ready);

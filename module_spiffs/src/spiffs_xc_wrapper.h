@@ -24,5 +24,7 @@ int iSPIFFS_remove(void);
 int iSPIFFS_vis(void);
 int iSPIFFS_check(void);
 int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[]);
+int iSPIFFS_rename(char old[], char newPath[]);
+int iSPIFFS_format(void);
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

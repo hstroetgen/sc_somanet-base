@@ -124,6 +124,20 @@ int iSPIFFS_remove(void)
     return res;
 }
 
+int iSPIFFS_format(void)
+{
+    int res;
+    res = SPIFFS_format(&fs);
+    return res;
+}
+
+int iSPIFFS_rename(char old[], char newPath[])
+{
+    int res;
+    res = SPIFFS_rename(&fs, old, newPath);
+    return res;
+}
+
 int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
 {
     int res;

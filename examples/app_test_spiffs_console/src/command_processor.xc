@@ -99,6 +99,24 @@ void test_script(client SPIFFSInterface i_spiffs)
                   //printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
 
               }
+              if (strcmp(par1, "rename") == 0)
+              {
+                  if (par_num > 2)
+                  {
+                       else
+
+                   }
+                   else
+                       printf("Missing parameter \n");
+              }
+              else
+              if (strcmp(par1, "format") == 0)
+              {
+                  res = i_spiffs.format();
+                  if (res < 0) printf("errno %i\n", res);
+                  else
+                      printf("Success... \n");
+              }
               else
                   printf("Unknown command \n");
         }

@@ -9,14 +9,24 @@
 #ifndef SPIFFS_SERVICE_H_
 #define SPIFFS_SERVICE_H_
 
+
 /**
  * @brief SPIFFS Service, handling all file system operations
  */
 
-void if_read_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf);
-void if_write_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf);
-void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size);
+typedef interface SPIFFSInterface SPIFFSInterface;
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data));
+interface SPIFFSInterface {
+    [[guarded]] unsigned short open_file(char path[], unsigned path_length, unsigned short flags);
+    [[guarded]] int close_file(void);
+    [[guarded]] int read(unsigned char data[], unsigned int len);
+    [[guarded]] int write(unsigned char data[], unsigned int len);
+    [[guarded]] int remove_file(void);
+    [[guarded]] int vis(void);
+    [[guarded]] int check(void);
+    [[guarded]] int status(unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]);
+};
+
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs, char ready);
 
 #endif /* SPIFFS_SERVICE_H_ */

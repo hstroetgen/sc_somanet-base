@@ -9,8 +9,7 @@
 #include <stdio.h>
 #include <xccompat.h>
 #include <spiffs.h>
-#include <spiffs_service.h>
-
+#include <spiffs_xc_wrapper.h>
 
 #define LOG_PAGE_SIZE       256
 
@@ -19,12 +18,10 @@ static u8_t spiffs_fds[32*4];
 static u8_t spiffs_cache_buf[(LOG_PAGE_SIZE+32)*4];
 
 static spiffs fs;
-
+static spiffs_file fd;
 
 
 //----------------------------------
-
-
 
 static s32_t my_spiffs_read(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t addr, u32_t size, u8_t *dst)
 {
@@ -69,6 +66,8 @@ void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
             sizeof(spiffs_cache_buf),
             0);
     printf("mount res: %i\n", res);
+
+
 }
 
 void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data))
@@ -77,20 +76,64 @@ void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data))
 }
 
 
-void test_wrapper_function()
+unsigned short iSPIFFS_open(char path[], unsigned short flags)
 {
-    char buf[12];
+    fd = SPIFFS_open(&fs, path,  flags, 0);
+    return fd;
+}
 
-       // Surely, I've mounted spiffs before entering here
+int iSPIFFS_close()
+{
+    int res;
+    res = SPIFFS_close(&fs, fd);
+    return res;
+}
 
-       spiffs_file fd = SPIFFS_open(&fs, "my_file", SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR, 0);
-       if (SPIFFS_write(&fs, fd, (u8_t *)"Hello world", 12) < 0) printf("errno %i\n", SPIFFS_errno(&fs));
-       SPIFFS_close(&fs, fd);
+int iSPIFFS_write(unsigned char data[], unsigned int len)
+{
+    int res;
+    res = SPIFFS_write(&fs, fd, data, len);
+    return res;
+}
 
-       fd = SPIFFS_open(&fs, "my_file", SPIFFS_RDWR, 0);
-       if (SPIFFS_read(&fs, fd, (u8_t *)buf, 12) < 0) printf("errno %i\n", SPIFFS_errno(&fs));
-       SPIFFS_close(&fs, fd);
+int iSPIFFS_read(unsigned char data[], unsigned int len)
+{
+    int res;
+    res = SPIFFS_read(&fs, fd, data, len);
+    return res;
+}
 
-       printf("--> %s <--\n", buf);
+int iSPIFFS_vis(void)
+{
+    int res;
+    res = SPIFFS_vis(&fs);
+    return res;
+}
 
+int iSPIFFS_check(void)
+{
+    int res;
+    res = SPIFFS_check(&fs);
+    return res;
+}
+
+int iSPIFFS_remove(void)
+{
+    int res;
+    res = SPIFFS_fremove(&fs, fd);
+    return res;
+}
+
+int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
+{
+    int res;
+    spiffs_stat s;
+    res = SPIFFS_fstat(&fs, fd, &s);
+    obj_id = s.obj_id;
+    size = s.size;
+    type = s.type;
+    pix = s.pix;
+    name = &s.name;
+    printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (unsigned char*)name);
+    return res;
 }

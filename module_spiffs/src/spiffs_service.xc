@@ -90,6 +90,10 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                         res = iSPIFFS_format();
                    break;
 
+                   case !isnull(i_spiffs) => i_spiffs.seek(int offs, int whence) -> int res:
+                       res = iSPIFFS_seek(offs, whence);
+                   break;
+
                    case !isnull(i_spiffs) => i_spiffs.rename_file(char old_path[], unsigned old_path_length, char new_path[], unsigned new_path_length) -> int res:
                        char old_buffer[MAX_FILENAME_SIZE];
                        char new_buffer[MAX_FILENAME_SIZE];

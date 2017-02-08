@@ -138,6 +138,13 @@ int iSPIFFS_rename(char old[], char newPath[])
     return res;
 }
 
+int iSPIFFS_seek(int offs, int whence)
+{
+    int res;
+    res = SPIFFS_lseek(&fs, fd, offs, whence);
+    return res;
+}
+
 int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
 {
     int res;

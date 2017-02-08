@@ -52,9 +52,8 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        memcpy(buffer,path,path_length+1);
                        fd = iSPIFFS_open(buffer, flags);
                    break;
-
                    case !isnull(i_spiffs) => i_spiffs.close_file() -> int res:
-                       iSPIFFS_close();
+                       res = iSPIFFS_close();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.read(unsigned char data[], unsigned int len) -> int res:

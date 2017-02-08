@@ -67,7 +67,7 @@ void test_script(client SPIFFSInterface i_spiffs)
             {
                 if (par_num > 1)
                 {
-                    res = i_spiffs.write((unsigned char *)par2, strlen(par2));
+                    res = i_spiffs.write((unsigned char *)par2, strlen(par2) + 1);
                     if (res < 0) printf("errno %i\n", res);
                     else
                         printf("Success... \n");

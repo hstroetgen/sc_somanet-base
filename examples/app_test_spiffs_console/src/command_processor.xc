@@ -13,7 +13,7 @@ void test_script(client SPIFFSInterface i_spiffs)
     char buf[200], par1[20], par2[100], par3[10];
     int par_num, res;
     unsigned short fd = 0;
-    unsigned short flags;
+    unsigned short flags = 0;
 
     printstrln(">>   COMMAND SERVICE STARTING...\n");
 
@@ -39,9 +39,14 @@ void test_script(client SPIFFSInterface i_spiffs)
                     if (strcmp(par3, "c") == 0)
                         flags = (SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR);
                     else
+                    {
+                        flags = 0;
                         printf("Unknown parameter \n");
+                    }
 
-                    fd  = i_spiffs.open_file(par2, strlen(par2), flags);
+                    if (flags)
+                        fd  = i_spiffs.open_file(par2, strlen(par2), flags);
+
                     if (fd > 0) printf("File created with file descriptor %i\n", fd);
                     else
                         printf("Error creating file \n");

@@ -26,7 +26,6 @@ PORT_SQI_SCLK,
 PORT_SQI_SIO,
 on tile[0]: XS1_CLKBLK_1
 };
-char spiffs_ready = 0;
 
 
 int main(void)
@@ -44,7 +43,7 @@ int main(void)
 
     on tile[1]:
     {
-        spiffs_service(i_data[0], i_spiffs, spiffs_ready);
+        spiffs_service(i_data[0], i_spiffs);
     }
     on tile[1]:
     {

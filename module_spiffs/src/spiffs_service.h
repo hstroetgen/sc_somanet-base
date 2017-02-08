@@ -29,6 +29,6 @@ interface SPIFFSInterface {
     [[guarded]] int format(void);
 };
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs, char ready);
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

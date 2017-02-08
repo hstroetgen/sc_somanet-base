@@ -38,15 +38,13 @@ void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int a
 
 
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs, char ready)
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs)
 {
     /* Init SPIFFS */
 
     printstrln(">>   SPIFFS SERVICE STARTING...\n");
 
     spiffs_init(i_data);
-
-    ready = 1;
 
     while (1) {
         select {

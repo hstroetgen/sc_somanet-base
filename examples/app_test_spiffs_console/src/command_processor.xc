@@ -150,7 +150,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                       if (flags < 3)
                       {
                           res = i_spiffs.seek(atoi(par2), flags);
-                          if (res < 0) printf("Error\n");
+                          if (res < 0) printf("errno %i\n", res);
                           else
                               printf("Success... \n");
                       }

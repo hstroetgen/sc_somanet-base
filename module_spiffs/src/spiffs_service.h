@@ -14,6 +14,8 @@
  * @brief SPIFFS Service, handling all file system operations
  */
 
+#define MAX_FILENAME_SIZE 32
+
 typedef interface SPIFFSInterface SPIFFSInterface;
 
 interface SPIFFSInterface {

@@ -10,7 +10,7 @@
 
 void test_script(client SPIFFSInterface i_spiffs)
 {
-    char buf[200], par1[20], par2[100], par3[10];
+    char buf[256], par1[MAX_FILENAME_SIZE], par2[100], par3[MAX_FILENAME_SIZE];
     int par_num, res;
     unsigned short fd = 0;
     unsigned short flags = 0;
@@ -99,13 +99,14 @@ void test_script(client SPIFFSInterface i_spiffs)
                 unsigned int size;
                 unsigned char type;
                 unsigned short pix;
-                unsigned char name[32];
+                unsigned char name[MAX_FILENAME_SIZE];
                 res = i_spiffs.status(obj_id, size, type, pix, name);
                 if (res < 0) printf("errno %i\n", res);
                 //else
                   //printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
 
               }
+              else
               if (strcmp(par1, "rename") == 0)
               {
                   if (par_num > 2)

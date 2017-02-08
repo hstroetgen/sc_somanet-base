@@ -14,7 +14,6 @@
 #include <spiffs_xc_wrapper.h>
 
 
-
 /**
  * @brief SPIFFS Service, handling all file system operations
  */
@@ -49,7 +48,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
     while (1) {
         select {
                    case !isnull(i_spiffs) => i_spiffs.open_file(char path[], unsigned path_length, unsigned short flags) -> unsigned short fd:
-                       char buffer[32];
+                       char buffer[MAX_FILENAME_SIZE];
                        memcpy(buffer,path,path_length+1);
                        fd = iSPIFFS_open(buffer, flags);
                    break;
@@ -83,9 +82,9 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.status(unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]) -> int res:
-                           unsigned char buffer[32];
+                           unsigned char buffer[MAX_FILENAME_SIZE];
                            res = iSPIFFS_status(obj_id, size, type, pix, buffer);
-                           memcpy(name, buffer, 32);
+                           memcpy(name, buffer, MAX_FILENAME_SIZE);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.format() -> int res:
@@ -93,8 +92,8 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.rename_file(char old_path[], unsigned old_path_length, char new_path[], unsigned new_path_length) -> int res:
-                       char old_buffer[32];
-                       char new_buffer[32];
+                       char old_buffer[MAX_FILENAME_SIZE];
+                       char new_buffer[MAX_FILENAME_SIZE];
                        memcpy(old_buffer,old_path,old_path_length+1);
                        memcpy(new_buffer,new_path,new_path_length+1);
                        res = iSPIFFS_rename(old_buffer, new_buffer);

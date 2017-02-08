@@ -45,11 +45,12 @@ void test_script(client SPIFFSInterface i_spiffs)
                     }
 
                     if (flags)
+                    {
                         fd  = i_spiffs.open_file(par2, strlen(par2), flags);
-
-                    if (fd > 0) printf("File created with file descriptor %i\n", fd);
-                    else
-                        printf("Error creating file \n");
+                        if (fd > 0) printf("File created with file descriptor %i\n", fd);
+                        else
+                            printf("Error creating file \n");
+                    }
                 }
                 else
                     printf("Missing parameter \n");
@@ -129,6 +130,41 @@ void test_script(client SPIFFSInterface i_spiffs)
                       printf("Success... \n");
               }
               else
+              if (strcmp(par1, "seek") == 0)
+              {
+                  if (par_num > 2)
+                  {
+                      if (strcmp(par3, "set") == 0)
+                          flags = SPIFFS_SEEK_SET;
+                      else
+                      if (strcmp(par3, "cur") == 0)
+                          flags = SPIFFS_SEEK_CUR;
+                      else
+                      if (strcmp(par3, "end") == 0)
+                          flags = SPIFFS_SEEK_END;
+                      else
+                      {
+                          flags = 3;
+                          printf("Missing parameter \n");
+                      }
+                      if (flags < 3)
+                      {
+                          res = i_spiffs.seek(atoi(par2), flags);
+                          if (res < 0) printf("Error\n");
+                          else
+                              printf("Success... \n");
+                      }
+                   }
+               }
+               else
+               if (strcmp(par1, "tell") == 0)
+               {
+                   res = i_spiffs.tell();
+                   if (res < 0) printf("errno %i\n", res);
+                   else
+                       printf("-> %i\n", res);
+               }
+               else
                   printf("Unknown command \n");
         }
     }

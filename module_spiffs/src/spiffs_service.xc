@@ -36,7 +36,6 @@ void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int a
 }
 
 
-
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs)
 {
     /* Init SPIFFS */
@@ -57,13 +56,13 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.read(unsigned char data[], unsigned int len) -> int res:
-                       unsigned char buffer[1024];
+                       unsigned char buffer[MAX_DATA_BUFFER_SIZE];
                        res = iSPIFFS_read(buffer, len);
                        memcpy(data, buffer, len);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.write(unsigned char data[], unsigned int len) -> int res:
-                       unsigned char buffer[1024];
+                       unsigned char buffer[MAX_DATA_BUFFER_SIZE];
                        memcpy(buffer, data, len);
                        res = iSPIFFS_write(buffer, len);
                    break;
@@ -88,6 +87,10 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
 
                    case !isnull(i_spiffs) => i_spiffs.format() -> int res:
                         res = iSPIFFS_format();
+                   break;
+
+                   case !isnull(i_spiffs) => i_spiffs.tell() -> int res:
+                       res = iSPIFFS_tell();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.seek(int offs, int whence) -> int res:

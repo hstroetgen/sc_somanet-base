@@ -27,6 +27,7 @@ int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type,
 int iSPIFFS_rename(char old[], char newPath[]);
 int iSPIFFS_format(void);
 int iSPIFFS_seek(int offs, int whence);
+int iSPIFFS_tell(void);
 
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

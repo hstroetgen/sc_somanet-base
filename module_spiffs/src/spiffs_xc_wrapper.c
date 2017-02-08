@@ -145,6 +145,13 @@ int iSPIFFS_seek(int offs, int whence)
     return res;
 }
 
+int iSPIFFS_tell(void)
+{
+    int res;
+    res = SPIFFS_tell(&fs, fd);
+    return res;
+}
+
 int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
 {
     int res;

@@ -18,6 +18,10 @@
 #define SPIFFS_RDWR                     (SPIFFS_RDONLY | SPIFFS_WRONLY)
 #define SPIFFS_O_RDWR                   SPIFFS_RDWR
 
+#define SPIFFS_SEEK_SET                 (0)
+#define SPIFFS_SEEK_CUR                 (1)
+#define SPIFFS_SEEK_END                 (2)
+
 
 void test_script(client SPIFFSInterface i_spiffs);
 

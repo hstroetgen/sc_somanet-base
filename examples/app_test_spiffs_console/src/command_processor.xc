@@ -58,7 +58,7 @@ void test_script(client SPIFFSInterface i_spiffs)
             else
             if (strcmp(par1, "close") == 0)
             {
-                 res = i_spiffs.close_file();
+                 res = i_spiffs.close_file(fd);
                  if (res < 0) printf("errno %i\n", res);
                  else
                      printf("Success... \n");
@@ -68,7 +68,7 @@ void test_script(client SPIFFSInterface i_spiffs)
             {
                 if (par_num > 1)
                 {
-                    res = i_spiffs.write((unsigned char *)par2, strlen(par2) + 1);
+                    res = i_spiffs.write(fd, (unsigned char *)par2, strlen(par2) + 1);
                     if (res < 0) printf("errno %i\n", res);
                     else
                         printf("Success... \n");
@@ -79,7 +79,7 @@ void test_script(client SPIFFSInterface i_spiffs)
             {
                 if (par_num > 1)
                 {
-                     res = i_spiffs.read((unsigned char *)buf, atoi(par2));
+                     res = i_spiffs.read(fd, (unsigned char *)buf, atoi(par2));
                      if (res < 0) printf("Error\n");
                      else
                          printf("--> %s <--\n", buf);
@@ -88,7 +88,7 @@ void test_script(client SPIFFSInterface i_spiffs)
             else
             if (strcmp(par1, "remove") == 0)
             {
-                  res = i_spiffs.remove_file();
+                  res = i_spiffs.remove_file(fd);
                   if (res < 0) printf("errno %i\n", res);
                   else
                       printf("Success... \n");
@@ -101,7 +101,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                 unsigned char type;
                 unsigned short pix;
                 unsigned char name[MAX_FILENAME_SIZE];
-                res = i_spiffs.status(obj_id, size, type, pix, name);
+                res = i_spiffs.status(fd, obj_id, size, type, pix, name);
                 if (res < 0) printf("errno %i\n", res);
                 //else
                   //printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
@@ -149,7 +149,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                       }
                       if (flags < 3)
                       {
-                          res = i_spiffs.seek(atoi(par2), flags);
+                          res = i_spiffs.seek(fd, atoi(par2), flags);
                           if (res < 0) printf("errno %i\n", res);
                           else
                               printf("Success... \n");
@@ -159,10 +159,22 @@ void test_script(client SPIFFSInterface i_spiffs)
                else
                if (strcmp(par1, "tell") == 0)
                {
-                   res = i_spiffs.tell();
+                   res = i_spiffs.tell(fd);
                    if (res < 0) printf("errno %i\n", res);
                    else
                        printf("-> %i\n", res);
+               }
+               else
+               if (strcmp(par1, "set") == 0)
+               {
+                   if (par_num > 1)
+                   {
+                       fd = atoi(par2);
+                       printf("File descriptor: %i\n", fd);
+                   }
+                   else
+                       printf("Missing parameter \n");
+
                }
                else
                   printf("Unknown command \n");

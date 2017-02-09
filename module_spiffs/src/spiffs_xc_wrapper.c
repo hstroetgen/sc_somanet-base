@@ -161,6 +161,6 @@ int iSPIFFS_status(unsigned short fd, unsigned short obj_id, unsigned int size, 
     type = s.type;
     pix = s.pix;
     name = &s.name;
-    printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (unsigned char*)name);
+    printf("File descriptor: %i\nObject ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n",fd, obj_id, size, type, pix, (unsigned char*)name);
     return res;
 }

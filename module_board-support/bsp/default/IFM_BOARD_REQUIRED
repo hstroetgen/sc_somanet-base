@@ -11,6 +11,7 @@
  *    IFM_DC300-rev-a.bsp
  *    IFM_DC1K-rev-c2.bsp
  *    IFM_DC1K-rev-c3.bsp
+ *    IFM_DC1K-rev-c4.bsp
  *    IFM_DC5K-rev-a.bsp
  *  
  */
@@ -24,5 +25,6 @@ IFM_DC100-rev-b.bsp \
 IFM_DC300-rev-a.bsp \
 IFM_DC1K-rev-c2.bsp \
 IFM_DC1K-rev-c3.bsp \
+IFM_DC1K-rev-c4.bsp \
 IFM_DC5K-rev-a.bsp  \
 "

@@ -12,14 +12,13 @@
 #include <spiffs_xc_wrapper.h>
 
 #define LOG_PAGE_SIZE       256
+#define MAX_OPEN_FILES       16
 
 static u8_t spiffs_work_buf[LOG_PAGE_SIZE*2];
 static u8_t spiffs_fds[32*4];
 static u8_t spiffs_cache_buf[(LOG_PAGE_SIZE+32)*4];
 
 static spiffs fs;
-static spiffs_file fd;
-
 
 //----------------------------------
 
@@ -78,25 +77,25 @@ void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data))
 
 unsigned short iSPIFFS_open(char path[], unsigned short flags)
 {
-    fd = SPIFFS_open(&fs, path,  flags, 0);
+    unsigned short fd = SPIFFS_open(&fs, path,  flags, 0);
     return fd;
 }
 
-int iSPIFFS_close()
+int iSPIFFS_close(unsigned short fd)
 {
     int res;
     res = SPIFFS_close(&fs, fd);
     return res;
 }
 
-int iSPIFFS_write(unsigned char data[], unsigned int len)
+int iSPIFFS_write(unsigned short fd, unsigned char data[], unsigned int len)
 {
     int res;
     res = SPIFFS_write(&fs, fd, data, len);
     return res;
 }
 
-int iSPIFFS_read(unsigned char data[], unsigned int len)
+int iSPIFFS_read(unsigned short fd, unsigned char data[], unsigned int len)
 {
     int res;
     res = SPIFFS_read(&fs, fd, data, len);
@@ -117,7 +116,7 @@ int iSPIFFS_check(void)
     return res;
 }
 
-int iSPIFFS_remove(void)
+int iSPIFFS_remove(unsigned short fd)
 {
     int res;
     res = SPIFFS_fremove(&fs, fd);
@@ -138,21 +137,21 @@ int iSPIFFS_rename(char old[], char newPath[])
     return res;
 }
 
-int iSPIFFS_seek(int offs, int whence)
+int iSPIFFS_seek(unsigned short fd, int offs, int whence)
 {
     int res;
     res = SPIFFS_lseek(&fs, fd, offs, whence);
     return res;
 }
 
-int iSPIFFS_tell(void)
+int iSPIFFS_tell(unsigned short fd)
 {
     int res;
     res = SPIFFS_tell(&fs, fd);
     return res;
 }
 
-int iSPIFFS_status(unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
+int iSPIFFS_status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
 {
     int res;
     spiffs_stat s;

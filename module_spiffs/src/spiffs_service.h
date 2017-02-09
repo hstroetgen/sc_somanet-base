@@ -21,17 +21,17 @@ typedef interface SPIFFSInterface SPIFFSInterface;
 
 interface SPIFFSInterface {
     [[guarded]] unsigned short open_file(char path[], unsigned path_length, unsigned short flags);
-    [[guarded]] int close_file(void);
-    [[guarded]] int read(unsigned char data[], unsigned int len);
-    [[guarded]] int write(unsigned char data[], unsigned int len);
-    [[guarded]] int remove_file(void);
+    [[guarded]] int close_file(unsigned short fd);
+    [[guarded]] int read(unsigned short fd, unsigned char data[], unsigned int len);
+    [[guarded]] int write(unsigned short fd, unsigned char data[], unsigned int len);
+    [[guarded]] int remove_file(unsigned short fd);
     [[guarded]] int vis(void);
     [[guarded]] int check(void);
-    [[guarded]] int status(unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]);
+    [[guarded]] int status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]);
     [[guarded]] int rename_file(char path[], unsigned path_length, char new_path[], unsigned new_path_length);
     [[guarded]] int format(void);
-    [[guarded]] int seek(int offs, int whence);
-    [[guarded]] int tell(void);
+    [[guarded]] int seek(unsigned short fd, int offs, int whence);
+    [[guarded]] int tell(unsigned short fd);
 };
 
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs);

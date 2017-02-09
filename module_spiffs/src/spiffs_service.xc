@@ -51,24 +51,24 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        memcpy(buffer,path,path_length+1);
                        fd = iSPIFFS_open(buffer, flags);
                    break;
-                   case !isnull(i_spiffs) => i_spiffs.close_file() -> int res:
-                       res = iSPIFFS_close();
+                   case !isnull(i_spiffs) => i_spiffs.close_file(unsigned short fd) -> int res:
+                       res = iSPIFFS_close(fd);
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.read(unsigned char data[], unsigned int len) -> int res:
+                   case !isnull(i_spiffs) => i_spiffs.read(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
                        unsigned char buffer[MAX_DATA_BUFFER_SIZE];
-                       res = iSPIFFS_read(buffer, len);
+                       res = iSPIFFS_read(fd, buffer, len);
                        memcpy(data, buffer, len);
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.write(unsigned char data[], unsigned int len) -> int res:
+                   case !isnull(i_spiffs) => i_spiffs.write(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
                        unsigned char buffer[MAX_DATA_BUFFER_SIZE];
                        memcpy(buffer, data, len);
-                       res = iSPIFFS_write(buffer, len);
+                       res = iSPIFFS_write(fd, buffer, len);
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.remove_file() -> int res:
-                        res = iSPIFFS_remove();
+                   case !isnull(i_spiffs) => i_spiffs.remove_file(unsigned short fd) -> int res:
+                        res = iSPIFFS_remove(fd);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.vis() -> int res:
@@ -79,9 +79,9 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        res = iSPIFFS_check();
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.status(unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]) -> int res:
+                   case !isnull(i_spiffs) => i_spiffs.status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]) -> int res:
                            unsigned char buffer[MAX_FILENAME_SIZE];
-                           res = iSPIFFS_status(obj_id, size, type, pix, buffer);
+                           res = iSPIFFS_status(fd, obj_id, size, type, pix, buffer);
                            memcpy(name, buffer, MAX_FILENAME_SIZE);
                    break;
 
@@ -89,12 +89,12 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                         res = iSPIFFS_format();
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.tell() -> int res:
-                       res = iSPIFFS_tell();
+                   case !isnull(i_spiffs) => i_spiffs.tell(unsigned short fd) -> int res:
+                       res = iSPIFFS_tell(fd);
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs.seek(int offs, int whence) -> int res:
-                       res = iSPIFFS_seek(offs, whence);
+                   case !isnull(i_spiffs) => i_spiffs.seek(unsigned short fd, int offs, int whence) -> int res:
+                       res = iSPIFFS_seek(fd, offs, whence);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs.rename_file(char old_path[], unsigned old_path_length, char new_path[], unsigned new_path_length) -> int res:

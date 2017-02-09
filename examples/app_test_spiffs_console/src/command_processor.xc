@@ -124,10 +124,26 @@ void test_script(client SPIFFSInterface i_spiffs)
               else
               if (strcmp(par1, "format") == 0)
               {
+                  printf("Formating... \n");
                   res = i_spiffs.format();
                   if (res < 0) printf("errno %i\n", res);
                   else
                       printf("Success... \n");
+              }
+              else
+              if (strcmp(par1, "check") == 0)
+              {
+                  printf("Checking... \n");
+                  res = i_spiffs.check();
+                  if (res < 0) printf("errno %i\n", res);
+                  else
+                       printf("Success... \n");
+              }
+              else
+              if (strcmp(par1, "unmount") == 0)
+              {
+                  i_spiffs.unmount();
+                  printf("Unmounted... \n");
               }
               else
               if (strcmp(par1, "seek") == 0)

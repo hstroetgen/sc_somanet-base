@@ -85,6 +85,10 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                            memcpy(name, buffer, MAX_FILENAME_SIZE);
                    break;
 
+                   case !isnull(i_spiffs) => i_spiffs.unmount():
+                       iSPIFFS_unmount();
+                   break;
+
                    case !isnull(i_spiffs) => i_spiffs.format() -> int res:
                         res = iSPIFFS_format();
                    break;

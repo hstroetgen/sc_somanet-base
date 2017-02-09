@@ -28,6 +28,7 @@ int iSPIFFS_rename(char old[], char newPath[]);
 int iSPIFFS_format(void);
 int iSPIFFS_seek(unsigned short fd, int offs, int whence);
 int iSPIFFS_tell(unsigned short fd);
+void iSPIFFS_unmount(void);
 
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

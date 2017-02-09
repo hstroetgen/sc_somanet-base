@@ -151,6 +151,13 @@ int iSPIFFS_tell(unsigned short fd)
     return res;
 }
 
+void iSPIFFS_unmount(void)
+{
+    SPIFFS_unmount(&fs);
+}
+
+
+
 int iSPIFFS_status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
 {
     int res;

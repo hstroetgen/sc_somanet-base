@@ -21,12 +21,12 @@
 
 void if_read_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf)
 {
-    i_data.read(addr, size, buf);
+     i_data.read(addr, size, buf);
 }
 
 void if_write_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf)
 {
-   i_data.write(addr, size, buf);
+    i_data.write(addr, size, buf);
 }
 
 
@@ -50,7 +50,9 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
 
     spiffs_init(i_data);
 
-    i_spiffs[0].service_ready();
+    //Send data ready notification to all clients
+    for (int i = 0; i < n_spiffs; i++)
+       i_spiffs[0].service_ready();
 
     while (1) {
         select {

@@ -5,6 +5,7 @@
 
 #include <xs1.h>
 #include <platform.h>
+#include <stdio.h>
 #include <flash_service.h>
 #include <flash_common.h>
 
@@ -85,6 +86,11 @@ int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
 
     // Read from the data partition
     result = fl_readData(addr, size, data);
+    if (result !=0 )
+    {
+        printstrln( "Could not read from FLASH" );
+        return result;
+    }
 
     // Disconnect from the flash
     result = fl_disconnect();
@@ -100,13 +106,26 @@ int flash_erase_data(unsigned addr, unsigned size)
 {
     // Conect to flash
     int result = connect_to_flash();
+    unsigned sec_num, sec_size;
     if (result != 0) {
           printstrln( "Could not connect to FLASH" );
           return result;
     }
 
+    //convert address to sector number
+    sec_num = addr / 0xFFF;
+    sec_size = size / 0xFFF;
 
-    //Coming soon....
+    //erase sectors
+    for (unsigned i = sec_num; i < sec_num + sec_size; i++)
+    {
+        result = fl_eraseDataSector(i);
+        if (result !=0 )
+        {
+           printstrln( "Could not erase FLASH sector" );
+           return result;
+        }
+    }
 
     // Disconnect from the flash
     result = fl_disconnect();

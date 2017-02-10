@@ -16,7 +16,6 @@ void test_script(client SPIFFSInterface i_spiffs)
     unsigned short flags = 0;
 
     select {
-
         case i_spiffs.service_ready():
 
             printstrln(">>   COMMAND SERVICE STARTING...\n");

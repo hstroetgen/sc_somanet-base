@@ -27,7 +27,7 @@ interface SPIFFSInterface {
     [[guarded]] int remove_file(unsigned short fd);
     [[guarded]] int vis(void);
     [[guarded]] int check(void);
-    [[guarded]] int status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]);
+    [[guarded]] int status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[]);
     [[guarded]] int rename_file(char path[], unsigned path_length, char new_path[], unsigned new_path_length);
     [[guarded]] int format(void);
     [[guarded]] void unmount(void);
@@ -36,6 +36,14 @@ interface SPIFFSInterface {
 
     [[notification]] slave void service_ready ( void );
 };
+
+typedef struct {
+  unsigned short obj_id;
+  unsigned int size;
+  unsigned char type;
+  unsigned short pix;
+  unsigned char name[MAX_FILENAME_SIZE];
+} spiffs_stat;
 
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs);
 

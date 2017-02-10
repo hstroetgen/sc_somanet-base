@@ -22,6 +22,7 @@ void test_script(client SPIFFSInterface i_spiffs)
 
             while(1)
             {
+            printstr(">");
             gets(buf);
             par_num = sscanf(buf, "%s %s %s", par1, par2, par3);
             if (par_num > 0)
@@ -106,8 +107,8 @@ void test_script(client SPIFFSInterface i_spiffs)
                     unsigned char name[MAX_FILENAME_SIZE];
                     res = i_spiffs.status(fd, obj_id, size, type, pix, name);
                     if (res < 0) printf("errno %i\n", res);
-                    //else
-                      //printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
+                    else
+                      printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
 
                   }
                   else

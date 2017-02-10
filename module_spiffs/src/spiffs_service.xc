@@ -89,10 +89,16 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        res = iSPIFFS_check();
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs[int i].status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char type, unsigned short pix, unsigned char name[]) -> int res:
-                           unsigned char buffer[MAX_FILENAME_SIZE];
-                           res = iSPIFFS_status(fd, obj_id, size, type, pix, buffer);
-                           memcpy(name, buffer, MAX_FILENAME_SIZE);
+                   case !isnull(i_spiffs) => i_spiffs[int i].status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[]) -> int res:
+                           unsigned stat_buffer[sizeof(spiffs_stat)];
+                           spiffs_stat s;
+                           res = iSPIFFS_status(fd, stat_buffer);
+                           memcpy(&s, stat_buffer, sizeof(spiffs_stat));
+                           obj_id = s.obj_id;
+                           size = s.size;
+                           type = s.type;
+                           pix = s.pix;
+                           memcpy(name, s.name, MAX_FILENAME_SIZE);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].unmount():

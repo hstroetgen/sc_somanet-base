@@ -158,16 +158,9 @@ void iSPIFFS_unmount(void)
 
 
 
-int iSPIFFS_status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[])
+int iSPIFFS_status(unsigned short fd, unsigned stat[])
 {
     int res;
-    spiffs_stat s;
-    res = SPIFFS_fstat(&fs, fd, &s);
-    obj_id = s.obj_id;
-    size = s.size;
-    type = s.type;
-    pix = s.pix;
-    name = &s.name;
-    printf("File descriptor: %i\nObject ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n",fd, obj_id, size, type, pix, (unsigned char*)name);
+    res = SPIFFS_fstat(&fs, fd, (unsigned *)stat);
     return res;
 }

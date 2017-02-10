@@ -5,7 +5,6 @@
 
 #include <xs1.h>
 #include <platform.h>
-#include <stdio.h>
 #include <flash_service.h>
 #include <flash_common.h>
 

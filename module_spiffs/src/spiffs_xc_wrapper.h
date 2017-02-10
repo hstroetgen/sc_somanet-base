@@ -23,7 +23,7 @@ int iSPIFFS_write(unsigned short fd, unsigned char data[], unsigned int len);
 int iSPIFFS_remove(unsigned short fd);
 int iSPIFFS_vis(void);
 int iSPIFFS_check(void);
-int iSPIFFS_status(unsigned short fd, unsigned short obj_id, unsigned int size, unsigned char type, unsigned short pix, unsigned char name[]);
+int iSPIFFS_status(unsigned short fd, unsigned stat[]);
 int iSPIFFS_rename(char old[], char newPath[]);
 int iSPIFFS_format(void);
 int iSPIFFS_seek(unsigned short fd, int offs, int whence);

@@ -50,6 +50,8 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
 
     spiffs_init(i_data);
 
+    i_spiffs[0].service_ready();
+
     while (1) {
         select {
                    case !isnull(i_spiffs) => i_spiffs[int i].open_file(char path[], unsigned path_length, unsigned short flags) -> unsigned short fd:

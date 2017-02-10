@@ -33,6 +33,8 @@ interface SPIFFSInterface {
     [[guarded]] void unmount(void);
     [[guarded]] int seek(unsigned short fd, int offs, int whence);
     [[guarded]] int tell(unsigned short fd);
+
+    [[notification]] slave void service_ready ( void );
 };
 
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs);

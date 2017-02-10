@@ -18,6 +18,7 @@
 #endif
 
 #define MAX_SPIFFS_INTERFACES 2
+#define MAX_FLASH_DATA_INTERFACES 2
 
 //---------SPI flash definitions---------
 
@@ -32,7 +33,7 @@ on tile[0]: XS1_CLKBLK_1
 
 int main(void)
 {
-  FlashDataInterface i_data[2];
+  FlashDataInterface i_data[MAX_FLASH_DATA_INTERFACES];
   FlashBootInterface i_boot;
   SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
 
@@ -49,7 +50,6 @@ int main(void)
     }
     on tile[1]:
     {
-        delay_milliseconds(3000);
         test_script(i_spiffs[0]);
     }
   }

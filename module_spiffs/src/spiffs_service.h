@@ -35,6 +35,6 @@ interface SPIFFSInterface {
     [[guarded]] int tell(unsigned short fd);
 };
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs);
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

@@ -17,6 +17,8 @@
 #include <flash.h>
 #endif
 
+#define MAX_SPIFFS_INTERFACES 2
+
 //---------SPI flash definitions---------
 
 // Ports for QuadSPI access on explorerKIT.
@@ -32,7 +34,7 @@ int main(void)
 {
   FlashDataInterface i_data[2];
   FlashBootInterface i_boot;
-  SPIFFSInterface i_spiffs;
+  SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
 
   par
   {
@@ -43,12 +45,12 @@ int main(void)
 
     on tile[1]:
     {
-        spiffs_service(i_data[0], i_spiffs);
+        spiffs_service(i_data[0], i_spiffs, 1);
     }
     on tile[1]:
     {
         delay_milliseconds(3000);
-        test_script(i_spiffs);
+        test_script(i_spiffs[0]);
     }
   }
 

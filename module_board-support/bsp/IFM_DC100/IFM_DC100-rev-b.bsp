@@ -53,8 +53,12 @@
 #define QEI_PORT IFM_PORT_4BIT_38_44_30_34
 
 #define SOMANET_IFM_QEI_PORTS { \
-    null,                       \
     QEI_PORT                    \
+}
+
+/* INPUT MODE SELECTION PORT */
+#define SOMANET_IFM_QEI_PORT_INPUT_MODE_SELECTION { \
+    null                    \
 }
 
 /* PWM PORTS*/

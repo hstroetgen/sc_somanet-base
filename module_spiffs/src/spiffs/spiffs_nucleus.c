@@ -1305,10 +1305,10 @@ s32_t spiffs_object_append(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
       // append to existing page, fill out free data in existing page
       if (cur_objix_spix == 0) {
         // get data page from object index header page
-        data_page = ((spiffs_page_ix*)((u8_t *)objix_hdr + sizeof(spiffs_page_object_ix_header)))[data_spix];
+        data_page = ((spiffs_page_ix*)((u16_t *)objix_hdr + sizeof(spiffs_page_object_ix_header)))[data_spix];
       } else {
         // get data page from object index page
-        data_page = ((spiffs_page_ix*)((u8_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)];
+        data_page = ((spiffs_page_ix*)((u16_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)];
       }
 
       res = spiffs_page_data_check(fs, fd, data_page, data_spix);
@@ -1332,7 +1332,7 @@ s32_t spiffs_object_append(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
       objix_hdr->size = offset+written;
     } else {
       // update object index page
-      ((spiffs_page_ix*)((u8_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = data_page;
+      ((spiffs_page_ix*)((u16_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = data_page;
       SPIFFS_DBG("append: %04x wrote page %04x to objix entry %02x in mem\n", fd->obj_id
           , data_page, SPIFFS_OBJ_IX_ENTRY(fs, data_spix));
     }
@@ -1558,11 +1558,11 @@ s32_t spiffs_object_modify(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
     // update memory representation of object index page with new data page
     if (cur_objix_spix == 0) {
       // update object index header page
-      ((spiffs_page_ix*)((u8_t *)objix_hdr + sizeof(spiffs_page_object_ix_header)))[data_spix] = data_pix;
+      ((spiffs_page_ix*)((u16_t *)objix_hdr + sizeof(spiffs_page_object_ix_header)))[data_spix] = data_pix;
       SPIFFS_DBG("modify: wrote page %04x to objix_hdr entry %02x in mem\n", data_pix, data_spix);
     } else {
       // update object index page
-      ((spiffs_page_ix*)((u8_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = data_pix;
+      ((spiffs_page_ix*)((u16_t *)objix + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = data_pix;
       SPIFFS_DBG("modify: wrote page %04x to objix entry %02x in mem\n", data_pix, SPIFFS_OBJ_IX_ENTRY(fs, data_spix));
     }
 
@@ -1587,7 +1587,7 @@ s32_t spiffs_object_modify(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
     res2 = spiffs_page_index_check(fs, fd, cur_objix_pix, cur_objix_spix);
     SPIFFS_CHECK_RES(res2);
 
-    res2 = spiffs_page_move(fs, fd->file_nbr, (u8_t*)objix, fd->obj_id, 0, cur_objix_pix, &new_objix_pix);
+    res2 = spiffs_page_move(fs, fd->file_nbr, (u16_t*)objix, fd->obj_id, 0, cur_objix_pix, &new_objix_pix);
     SPIFFS_DBG("modify: store modified objix page, %04x:%04x, written %i\n", new_objix_pix, cur_objix_spix, written);
     fd->cursor_objix_pix = new_objix_pix;
     fd->cursor_objix_spix = cur_objix_spix;

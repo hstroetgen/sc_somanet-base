@@ -31,7 +31,7 @@ int iSPIFFS_tell(unsigned short fd);
 void iSPIFFS_unmount(void);
 int iSPIFFS_flush(unsigned short fd);
 int iSPIFFS_errno(void);
-int iSPIFFS_info(unsigned total[], unsigned used[]);
+int iSPIFFS_info(unsigned int total[], unsigned int used[]);
 
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

@@ -134,17 +134,11 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                   case !isnull(i_spiffs) => i_spiffs[int i].fs_info(unsigned int &total, unsigned int &used) -> int res:
-                          unsigned total_buffer[sizeof(unsigned int)];
-                          unsigned used_buffer[sizeof(unsigned int)];
-                          res = iSPIFFS_info(total_buffer, used_buffer);
-                          memcpy(&total, total_buffer, sizeof(unsigned int));
-                          memcpy(&used, used_buffer, sizeof(unsigned int));
-
-                          printstr("Total: ");
-                          printuintln(total);
-                          printstr("Used: ");
-                          printuintln(used);
-
+                          unsigned int buffer_total[1];
+                          unsigned int buffer_used[1];
+                          res = iSPIFFS_info(buffer_total, buffer_used);
+                          total = buffer_total[0];
+                          used = buffer_used[0];
                   break;
                }
     }

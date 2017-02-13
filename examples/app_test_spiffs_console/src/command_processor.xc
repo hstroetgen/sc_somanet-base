@@ -197,6 +197,23 @@ void test_script(client SPIFFSInterface i_spiffs)
 
                    }
                    else
+                   if (strcmp(par1, "info") == 0)
+                   {
+                       unsigned int total, used;
+                       res = i_spiffs.fs_info(total, used);
+                       if (res < 0) printf("errno %i\n", res);
+                       else
+                           printf("Total: %ib, Used: %ib\n", total, used);
+                   }
+                   else
+                   if (strcmp(par1, "errno") == 0)
+                   {
+                       res = i_spiffs.errno();
+                       if (res < 0) printf("errno %i\n", res);
+                       else
+                          printf("No errors\n");
+                    }
+                    else
                       printf("Unknown command \n");
             }
         }

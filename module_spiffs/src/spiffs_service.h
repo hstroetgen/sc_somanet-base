@@ -25,6 +25,7 @@ typedef struct {
   unsigned char name[MAX_FILENAME_SIZE];
 } spiffs_stat;
 
+
 typedef interface SPIFFSInterface SPIFFSInterface;
 
 interface SPIFFSInterface {

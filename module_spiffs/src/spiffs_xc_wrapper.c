@@ -160,7 +160,7 @@ void iSPIFFS_unmount(void)
 int iSPIFFS_status(unsigned short fd, unsigned stat[])
 {
     int res;
-    res = SPIFFS_fstat(&fs, fd, (unsigned *)stat);
+    res = SPIFFS_fstat(&fs, fd, (spiffs_stat *)stat);
     return res;
 }
 
@@ -173,15 +173,14 @@ int iSPIFFS_flush(unsigned short fd)
 
 int iSPIFFS_errno(void)
 {
-    unsigned int res;
+    int res;
     res = SPIFFS_errno(&fs);
     return res;
 }
 
-int iSPIFFS_info(unsigned total[], unsigned used[])
+int iSPIFFS_info(unsigned int total[], unsigned int used[])
 {
-    unsigned int res;
-    res = SPIFFS_info(&fs, (unsigned *)total, (unsigned *)used);
-    printf("Total: %i, Used: %i", total, used);
+    int res;
+    res = SPIFFS_info(&fs, total, used);
     return res;
 }

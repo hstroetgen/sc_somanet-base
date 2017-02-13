@@ -213,6 +213,14 @@ void test_script(client SPIFFSInterface i_spiffs)
                        else
                           printf("No errors\n");
                     }
+                   else
+                   if (strcmp(par1, "flush") == 0)
+                   {
+                       res = i_spiffs.flush(fd);
+                       if (res < 0) printf("errno %i\n", res);
+                       else
+                           printf("Success... \n", res);
+                    }
                     else
                       printf("Unknown command \n");
             }

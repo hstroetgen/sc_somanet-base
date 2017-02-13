@@ -29,6 +29,9 @@ int iSPIFFS_format(void);
 int iSPIFFS_seek(unsigned short fd, int offs, int whence);
 int iSPIFFS_tell(unsigned short fd);
 void iSPIFFS_unmount(void);
+int iSPIFFS_flush(unsigned short fd);
+int iSPIFFS_errno(void);
+int iSPIFFS_info(unsigned total[], unsigned used[]);
 
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

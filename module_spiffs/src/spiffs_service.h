@@ -41,6 +41,9 @@ interface SPIFFSInterface {
     [[guarded]] void unmount(void);
     [[guarded]] int seek(unsigned short fd, int offs, int whence);
     [[guarded]] int tell(unsigned short fd);
+    [[guarded]] int flush(unsigned short fd);
+    [[guarded]] int errno(void);
+    [[guarded]] int fs_info(unsigned int &itotal, unsigned int &iused);
 
     [[notification]] slave void service_ready ( void );
 };

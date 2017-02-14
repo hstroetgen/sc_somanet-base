@@ -135,6 +135,14 @@ void test_script(client SPIFFSInterface i_spiffs)
                           printf("Success... \n");
                   }
                   else
+                  if (strcmp(par1, "vis") == 0)
+                  {
+                      res = i_spiffs.vis();
+                      if (res < 0) printf("errno %i\n", res);
+                      else
+                          printf("Success... \n");
+                  }
+                  else
                   if (strcmp(par1, "check") == 0)
                   {
                       printf("Checking... \n");

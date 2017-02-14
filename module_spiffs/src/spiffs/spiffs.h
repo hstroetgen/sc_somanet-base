@@ -681,6 +681,8 @@ s32_t SPIFFS_tell(spiffs *fs, spiffs_file fh);
  */
 s32_t SPIFFS_set_file_callback_func(spiffs *fs, spiffs_file_callback cb_func);
 
+s32_t SPIFFS_ls(spiffs *fs);
+
 #if SPIFFS_IX_MAP
 
 /**

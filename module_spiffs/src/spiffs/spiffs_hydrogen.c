@@ -1238,6 +1238,70 @@ s32_t SPIFFS_ix_map_entries_to_bytes(spiffs *fs, u32_t map_page_ix_entries) {
 
 #endif // SPIFFS_IX_MAP
 
+
+
+s32_t SPIFFS_ls(spiffs *fs) {
+  s32_t res = SPIFFS_OK;
+  SPIFFS_API_CHECK_CFG(fs);
+  SPIFFS_API_CHECK_MOUNT(fs);
+  SPIFFS_LOCK(fs);
+
+  int entries_per_page = (SPIFFS_CFG_LOG_PAGE_SZ(fs) / sizeof(spiffs_obj_id));
+  spiffs_obj_id *obj_lu_buf = (spiffs_obj_id *)fs->lu_work;
+  spiffs_block_ix bix = 0;
+
+  while (bix < fs->block_count) {
+    // check each object lookup page
+    int obj_lookup_page = 0;
+    int cur_entry = 0;
+
+    while (res == SPIFFS_OK && obj_lookup_page < (int)SPIFFS_OBJ_LOOKUP_PAGES(fs)) {
+      int entry_offset = obj_lookup_page * entries_per_page;
+      res = _spiffs_rd(fs, SPIFFS_OP_T_OBJ_LU | SPIFFS_OP_C_READ,
+          0, bix * SPIFFS_CFG_LOG_BLOCK_SZ(fs) + SPIFFS_PAGE_TO_PADDR(fs, obj_lookup_page), SPIFFS_CFG_LOG_PAGE_SZ(fs), fs->lu_work);
+      // check each entry
+      while (res == SPIFFS_OK &&
+          cur_entry - entry_offset < entries_per_page && cur_entry < (int)(SPIFFS_PAGES_PER_BLOCK(fs)-SPIFFS_OBJ_LOOKUP_PAGES(fs))) {
+        spiffs_obj_id obj_id = obj_lu_buf[cur_entry-entry_offset];
+
+
+        if (obj_id & SPIFFS_OBJ_ID_IX_FLAG){
+            spiffs_page_ix pix;
+            spiffs_stat s;
+            res = spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
+            res = spiffs_stat_pix(fs, pix, 0, &s);
+
+            spiffs_printf(" \"%s\" size: %u, type: %i", s.name, s.size, s.type);
+            spiffs_printf(" obj ID: %4x, pix: %i\n", (obj_id | SPIFFS_OBJ_ID_IX_FLAG), pix);
+        }
+        else
+        if (obj_id == SPIFFS_OBJ_ID_FREE) {
+                SPIFFS_UNLOCK(fs);
+                return res;
+        }
+
+        cur_entry++;
+        if ((cur_entry & 0x3f) == 0) {
+          spiffs_printf("\n");
+        }
+      } // per entry
+      obj_lookup_page++;
+    } // per object lookup page
+
+    spiffs_obj_id erase_count;
+    res = _spiffs_rd(fs, SPIFFS_OP_C_READ | SPIFFS_OP_T_OBJ_LU2, 0,
+        SPIFFS_ERASE_COUNT_PADDR(fs, bix),
+        sizeof(spiffs_obj_id), (u8_t *)&erase_count);
+    SPIFFS_CHECK_RES(res);
+
+    bix++;
+  } // per block
+  SPIFFS_UNLOCK(fs);
+  return res;
+}
+
+
+
 #if SPIFFS_TEST_VISUALISATION
 s32_t SPIFFS_vis(spiffs *fs) {
   s32_t res = SPIFFS_OK;

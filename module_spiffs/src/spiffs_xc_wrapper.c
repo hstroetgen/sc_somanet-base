@@ -105,7 +105,8 @@ int iSPIFFS_read(unsigned short fd, unsigned char data[], unsigned int len)
 int iSPIFFS_vis(void)
 {
     int res;
-    res = SPIFFS_vis(&fs);
+    //res = SPIFFS_vis(&fs);
+    res = SPIFFS_ls(&fs);
     return res;
 }
 

@@ -1267,7 +1267,7 @@ s32_t SPIFFS_ls(spiffs *fs) {
                    spiffs_page_ix pix;
                    spiffs_stat s;
                    spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
-                   spiffs_stat_pix(fs, pix, 0, &s);
+                   res = spiffs_stat_pix(fs, pix, 0, &s);
                    spiffs_printf("%32s, size: %u, type: %i,", s.name, s.size, s.type);
                    spiffs_printf(" obj ID: %4x, pix: %i\n", (obj_id | SPIFFS_OBJ_ID_IX_FLAG), pix);
                }

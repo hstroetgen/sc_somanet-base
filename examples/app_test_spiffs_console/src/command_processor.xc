@@ -143,6 +143,15 @@ void test_script(client SPIFFSInterface i_spiffs)
                           printf("Success... \n");
                   }
                   else
+                  if (strcmp(par1, "ls") == 0)
+                  {
+                      printf("Scanning file system... \n");
+                      res = i_spiffs.ls();
+                      if (res < 0) printf("errno %i\n", res);
+                      else
+                          printf("Success... \n");
+                  }
+                  else
                   if (strcmp(par1, "check") == 0)
                   {
                       printf("Checking... \n");
@@ -211,7 +220,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                        res = i_spiffs.fs_info(total, used);
                        if (res < 0) printf("errno %i\n", res);
                        else
-                           printf("Total: %ib, Used: %ib\n", total, used);
+                           printf("Total: %i, Used: %i\n", total, used);
                    }
                    else
                    if (strcmp(par1, "errno") == 0)

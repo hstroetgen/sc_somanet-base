@@ -681,6 +681,11 @@ s32_t SPIFFS_tell(spiffs *fs, spiffs_file fh);
  */
 s32_t SPIFFS_set_file_callback_func(spiffs *fs, spiffs_file_callback cb_func);
 
+
+/**
+ * Prints out a list of files in filesystem.
+ * @param fs            the file system struct
+ */
 s32_t SPIFFS_ls(spiffs *fs);
 
 #if SPIFFS_IX_MAP

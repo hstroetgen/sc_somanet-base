@@ -35,6 +35,7 @@ interface SPIFFSInterface {
     [[guarded]] int write(unsigned short fd, unsigned char data[], unsigned int len);
     [[guarded]] int remove_file(unsigned short fd);
     [[guarded]] int vis(void);
+    [[guarded]] int ls(void);
     [[guarded]] int check(void);
     [[guarded]] int status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, unsigned char name[]);
     [[guarded]] int rename_file(char path[], unsigned path_length, char new_path[], unsigned new_path_length);

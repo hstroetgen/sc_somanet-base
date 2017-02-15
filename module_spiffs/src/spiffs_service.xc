@@ -85,6 +85,10 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        res = iSPIFFS_vis();
                    break;
 
+                   case !isnull(i_spiffs) => i_spiffs[int i].ls() -> int res:
+                       res = iSPIFFS_ls();
+                   break;
+
                    case !isnull(i_spiffs) => i_spiffs[int i].check() -> int res:
                        res = iSPIFFS_check();
                    break;

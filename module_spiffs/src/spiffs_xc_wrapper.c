@@ -106,7 +106,13 @@ int iSPIFFS_vis(void)
 {
     int res;
     res = SPIFFS_vis(&fs);
-    //res = SPIFFS_ls(&fs);
+    return res;
+}
+
+int iSPIFFS_ls(void)
+{
+    int res;
+    res = SPIFFS_ls(&fs);
     return res;
 }
 

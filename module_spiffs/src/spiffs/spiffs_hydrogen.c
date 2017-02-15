@@ -1260,35 +1260,30 @@ s32_t SPIFFS_ls(spiffs *fs) {
       res = _spiffs_rd(fs, SPIFFS_OP_T_OBJ_LU | SPIFFS_OP_C_READ,
           0, bix * SPIFFS_CFG_LOG_BLOCK_SZ(fs) + SPIFFS_PAGE_TO_PADDR(fs, obj_lookup_page), SPIFFS_CFG_LOG_PAGE_SZ(fs), fs->lu_work);
       // check each entry
-      while (res == SPIFFS_OK && cur_entry - entry_offset < entries_per_page && cur_entry < (int)(SPIFFS_PAGES_PER_BLOCK(fs)-SPIFFS_OBJ_LOOKUP_PAGES(fs))) {
+      while (res == SPIFFS_OK &&
+          cur_entry - entry_offset < entries_per_page && cur_entry < (int)(SPIFFS_PAGES_PER_BLOCK(fs)-SPIFFS_OBJ_LOOKUP_PAGES(fs))) {
         spiffs_obj_id obj_id = obj_lu_buf[cur_entry-entry_offset];
 
-        /*if (obj_id == SPIFFS_OBJ_ID_FREE) {} else if (obj_id == SPIFFS_OBJ_ID_DELETED) {} else
+
         if (obj_id & SPIFFS_OBJ_ID_IX_FLAG){
             spiffs_page_ix pix;
             spiffs_stat s;
-           //spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
-           // spiffs_stat_pix(fs, pix, 0, &s);
+            res = spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
+            res = spiffs_stat_pix(fs, pix, 0, &s);
 
-            //spiffs_printf(" \"%s\" size: %u, type: %i", s.name, s.size, s.type);
+            spiffs_printf(" \"%s\" size: %u, type: %i", s.name, s.size, s.type);
             spiffs_printf(" obj ID: %4x, pix: %i\n", (obj_id | SPIFFS_OBJ_ID_IX_FLAG), pix);
         }
-        /*else
+        else
         if (obj_id == SPIFFS_OBJ_ID_FREE) {
                 SPIFFS_UNLOCK(fs);
                 return res;
-        }*/
+        }
 
-
-               if (obj_id == SPIFFS_OBJ_ID_FREE) {}
-               else if (obj_id == SPIFFS_OBJ_ID_DELETED) {}
-               else if (obj_id & SPIFFS_OBJ_ID_IX_FLAG){
-                   spiffs_page_ix pix;
-                   spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
-                   spiffs_printf(" obj ID: %4x, pix: %i\n", (obj_id | SPIFFS_OBJ_ID_IX_FLAG), pix);
-               } else {}
-               cur_entry++;
-
+        cur_entry++;
+        if ((cur_entry & 0x3f) == 0) {
+          spiffs_printf("\n");
+        }
       } // per entry
       obj_lookup_page++;
     } // per object lookup page

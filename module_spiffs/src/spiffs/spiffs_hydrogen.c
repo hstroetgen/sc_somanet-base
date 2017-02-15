@@ -1263,9 +1263,7 @@ s32_t SPIFFS_ls(spiffs *fs) {
       while (res == SPIFFS_OK && cur_entry - entry_offset < entries_per_page && cur_entry < (int)(SPIFFS_PAGES_PER_BLOCK(fs)-SPIFFS_OBJ_LOOKUP_PAGES(fs))) {
         spiffs_obj_id obj_id = obj_lu_buf[cur_entry-entry_offset];
 
-               if (obj_id == SPIFFS_OBJ_ID_FREE) {}
-               else if (obj_id == SPIFFS_OBJ_ID_DELETED) {}
-               else if (obj_id & SPIFFS_OBJ_ID_IX_FLAG){
+               if ((obj_id & SPIFFS_OBJ_ID_IX_FLAG)&&(obj_id != SPIFFS_OBJ_ID_FREE)){
                    spiffs_page_ix pix;
                    spiffs_stat s;
                    spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);

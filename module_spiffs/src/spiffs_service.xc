@@ -67,12 +67,21 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
 
                    case !isnull(i_spiffs) => i_spiffs[int i].read(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
                        unsigned char buffer[MAX_DATA_BUFFER_SIZE];
-                       res = iSPIFFS_read(fd, buffer, len);
-                       memcpy(data, buffer, len);
+                       unsigned int read_len, read_offset = 0;
+
+                       for (int il = len; il > 0; il = il - MAX_DATA_BUFFER_SIZE)
+                       {
+                           read_len = (il > MAX_DATA_BUFFER_SIZE ? MAX_DATA_BUFFER_SIZE : il);
+                           res = iSPIFFS_read(fd, buffer, read_len);
+                           if (res < 0) break; else res = len;
+                           memcpy(data + read_offset, buffer, read_len);
+                           read_offset+=read_len;
+                       }
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].write(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
                        unsigned char buffer[MAX_DATA_BUFFER_SIZE];
+
                        memcpy(buffer, data, len);
                        res = iSPIFFS_write(fd, buffer, len);
                    break;

@@ -15,7 +15,7 @@
  */
 
 #define MAX_FILENAME_SIZE 32
-#define MAX_DATA_BUFFER_SIZE 1024
+#define MAX_DATA_BUFFER_SIZE 256
 
 typedef struct {
   unsigned short obj_id;

@@ -69,13 +69,14 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        unsigned char buffer[MAX_DATA_BUFFER_SIZE];
                        unsigned int read_len, read_offset = 0;
 
+
                        for (int il = len; il > 0; il = il - MAX_DATA_BUFFER_SIZE)
                        {
                            read_len = (il > MAX_DATA_BUFFER_SIZE ? MAX_DATA_BUFFER_SIZE : il);
                            res = iSPIFFS_read(fd, buffer, read_len);
                            if (res < 0) break; else res = len;
                            memcpy(data + read_offset, buffer, read_len);
-                           read_offset+=read_len;
+                           read_offset += read_len;
                        }
                    break;
 

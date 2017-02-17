@@ -18,7 +18,6 @@
 #include <string.h>
 
 
-
 int flash_data_init(unsigned partition_size) {
 
     return 0;
@@ -28,7 +27,7 @@ int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
 
     int page_offset, page_len, page_num;
     int data_offset = 0;
-    unsigned char page_buffer[256];
+    unsigned char page_buffer[FLASH_PAGE_SIZE];
 
         // Conect to flash
         int result = connect_to_flash();
@@ -38,9 +37,9 @@ int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
         }
         do {
              //calculate position and lenght for current page
-             page_offset = (addr % 256);
-             page_len = (size <= (256 - page_offset)) ? size : (256 - page_offset);
-             page_num = addr / 256;
+             page_offset = (addr % FLASH_PAGE_SIZE);
+             page_len = (size <= (FLASH_PAGE_SIZE - page_offset)) ? size : (FLASH_PAGE_SIZE - page_offset);
+             page_num = addr / FLASH_PAGE_SIZE;
 
              //save previous data from page
              fl_readDataPage(page_num, page_buffer);

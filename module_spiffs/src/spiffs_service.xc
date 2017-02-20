@@ -153,13 +153,22 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        res = iSPIFFS_errno();
                    break;
 
-                  case !isnull(i_spiffs) => i_spiffs[int i].fs_info(unsigned int &total, unsigned int &used) -> int res:
+                   case !isnull(i_spiffs) => i_spiffs[int i].fs_info(unsigned int &total, unsigned int &used) -> int res:
                           unsigned int buffer_total[1];
                           unsigned int buffer_used[1];
                           res = iSPIFFS_info(buffer_total, buffer_used);
                           total = buffer_total[0];
                           used = buffer_used[0];
-                  break;
+                   break;
+
+                   case !isnull(i_spiffs) => i_spiffs[int i].gc(unsigned int size) -> int res:
+                       res = iSPIFFS_gc(size);
+                   break;
+
+                   case !isnull(i_spiffs) => i_spiffs[int i].gc_quick(unsigned short max_free_pages) -> int res:
+                       res = iSPIFFS_gc_quick(max_free_pages);
+                   break;
+
                }
     }
 }

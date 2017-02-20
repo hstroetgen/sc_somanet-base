@@ -33,6 +33,8 @@ void iSPIFFS_unmount(void);
 int iSPIFFS_flush(unsigned short fd);
 int iSPIFFS_errno(void);
 int iSPIFFS_info(unsigned int total[], unsigned int used[]);
+int iSPIFFS_gc(unsigned int size);
+int iSPIFFS_gc_quick(unsigned short max_free_pages);
 
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

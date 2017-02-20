@@ -46,6 +46,9 @@ interface SPIFFSInterface {
     [[guarded]] int flush(unsigned short fd);
     [[guarded]] int errno(void);
     [[guarded]] int fs_info(unsigned int &itotal, unsigned int &iused);
+    [[guarded]] int gc(unsigned int size);
+    [[guarded]] int gc_quick(unsigned short max_free_pages);
+
 
     [[notification]] slave void service_ready ( void );
 };

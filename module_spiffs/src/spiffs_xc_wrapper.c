@@ -191,3 +191,17 @@ int iSPIFFS_info(unsigned int total[], unsigned int used[])
     res = SPIFFS_info(&fs, total, used);
     return res;
 }
+
+int iSPIFFS_gc(unsigned int size)
+{
+    int res;
+    res = SPIFFS_gc(&fs, size);
+    return res;
+}
+
+int iSPIFFS_gc_quick(unsigned short max_free_pages)
+{
+    int res;
+    res = SPIFFS_gc_quick(&fs, max_free_pages);
+    return res;
+}

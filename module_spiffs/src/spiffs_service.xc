@@ -87,7 +87,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        {
                            write_len = (il > MAX_DATA_BUFFER_SIZE ? MAX_DATA_BUFFER_SIZE : il);
                            memcpy(buffer, data + write_offset, write_len);
-                           res = iSPIFFS_read(fd, buffer, write_len);
+                           res = iSPIFFS_write(fd, buffer, write_len);
                            if (res < 0) break; else res = len;
                            write_offset += write_len;
                         }

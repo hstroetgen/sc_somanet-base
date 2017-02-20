@@ -11,7 +11,7 @@
 void test_script(client SPIFFSInterface i_spiffs)
 {
     //100kb test buffer
-    char buf[100000], par1[MAX_FILENAME_SIZE], par2[1024], par3[MAX_FILENAME_SIZE];
+    char buf[100000], par1[MAX_FILENAME_SIZE], par2[10000], par3[MAX_FILENAME_SIZE];
     int par_num, res;
     unsigned short fd = 0;
     unsigned short flags = 0;
@@ -73,6 +73,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                 {
                     if (par_num > 1)
                     {
+                        memset(buf, 0 , sizeof(buf));
                         res = i_spiffs.write(fd, (unsigned char *)par2, strlen(par2) + 1);
                         if (res < 0) printf("errno %i\n", res);
                         else

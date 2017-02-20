@@ -242,6 +242,32 @@ void test_script(client SPIFFSInterface i_spiffs)
                            printf("Success... \n", res);
                     }
                     else
+                    if (strcmp(par1, "gc") == 0)
+                    {
+                        if (par_num > 1)
+                        {
+                            res = i_spiffs.gc(atoi(par2));
+                            if (res < 0) printf("errno %i\n", res);
+                            else
+                                printf("Success... \n", res);
+                         }
+                         else
+                             printf("Missing parameter \n");
+                    }
+                    else
+                    if (strcmp(par1, "gcq") == 0)
+                    {
+                        if (par_num > 1)
+                        {
+                            res = i_spiffs.gc_quick(atoi(par2));
+                            if (res < 0) printf("errno %i\n", res);
+                            else
+                                printf("Success... \n", res);
+                         }
+                         else
+                             printf("Missing parameter \n");
+                    }
+                    else
                       printf("Unknown command \n");
             }
         }

@@ -16,6 +16,9 @@
 #define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 #define SOMANET_IFM_ADC	AD7949
 
+#define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
+#define VOLTAGE_RATIO           56 /*ratio between adc measured value and real dc-bus voltage*/
+
 #define SOMANET_IFM_ADC_PORTS {             \
     {                                       \
         ADC_DATA_OUT,                       \

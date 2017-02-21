@@ -6,12 +6,15 @@
 #include <flash_service.h>
 #include <spiffs_service.h>
 #include <command_processor.h>
+#include <syscall.h>
 
+#define BUFFER_SIZE 153000
 
 void test_script(client SPIFFSInterface i_spiffs)
 {
     //100kb test buffer
-    char buf[100000], par1[MAX_FILENAME_SIZE], par2[10000], par3[MAX_FILENAME_SIZE];
+    unsigned char buf[BUFFER_SIZE];
+    char par1[MAX_FILENAME_SIZE], par2[1024], par3[MAX_FILENAME_SIZE];
     int par_num, res;
     unsigned short fd = 0;
     unsigned short flags = 0;
@@ -77,7 +80,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                         res = i_spiffs.write(fd, (unsigned char *)par2, strlen(par2) + 1);
                         if (res < 0) printf("errno %i\n", res);
                         else
-                            printf("Success... \n");
+                            printf("Writed: %i\n", res);
                     }
                 }
                 else
@@ -90,6 +93,45 @@ void test_script(client SPIFFSInterface i_spiffs)
                          if (res < 0) printf("Error\n");
                          else
                              printf("Readed: %i b\n--> %s <--\n",res, buf);
+                    }
+                }
+                else
+                if (strcmp(par1, "fwrite") == 0)
+                {
+                    if (par_num > 1)
+                    {
+                        int cfd = _open(par2, O_RDONLY, 0);
+                        if (cfd == -1)
+                        {
+                            printstrln("Error: file open failed");
+                            break;
+                        }
+
+                        memset(buf, 0 , sizeof(buf));
+                        int fread_size = _read(cfd, (unsigned char *)buf, BUFFER_SIZE);
+
+                        if (_close(cfd) != 0)
+                        {
+                            printstrln("Error: file close failed.");
+                            break;
+                        }
+
+                        res = i_spiffs.write(fd, buf, fread_size);
+                        if (res < 0) printf("errno %i\n", res);
+                        else
+                            printf("Writed: %i\n", res);
+                    }
+                }
+                else
+                if (strcmp(par1, "fread") == 0)
+                {
+                    if (par_num > 1)
+                    {
+                        memset(buf, 0 , sizeof(buf));
+                        res = i_spiffs.read(fd, (unsigned char *)buf, atoi(par2));
+                        if (res < 0) printf("Error\n");
+                        else
+                            printf("Readed: %i b\n--> %s <--\n",res, buf);
                     }
                 }
                 else

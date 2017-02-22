@@ -104,7 +104,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                         if (cfd == -1)
                         {
                             printstrln("Error: file open failed");
-                            break;
+                            //break;
                         }
 
                         memset(buf, 0 , sizeof(buf));
@@ -113,7 +113,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                         if (_close(cfd) != 0)
                         {
                             printstrln("Error: file close failed.");
-                            break;
+                            //break;
                         }
 
                         res = i_spiffs.write(fd, buf, fread_size);
@@ -127,11 +127,42 @@ void test_script(client SPIFFSInterface i_spiffs)
                 {
                     if (par_num > 1)
                     {
+                        unsigned short obj_id;
+                        unsigned int size;
+                        unsigned char type;
+                        unsigned short pix;
+                        unsigned char name[MAX_FILENAME_SIZE];
+
                         memset(buf, 0 , sizeof(buf));
-                        res = i_spiffs.read(fd, (unsigned char *)buf, atoi(par2));
-                        if (res < 0) printf("Error\n");
+                        res = i_spiffs.status(fd, obj_id, size, type, pix, name);
+                        if (res < 0)
+                        {
+                            printf("errno %i\n", res);
+                            //break;
+                        }
+                        res = i_spiffs.read(fd, buf, size);
+                        if (res < 0)
+                        {
+                            printf("Error\n");
+                            //break;
+                        }
                         else
                             printf("Readed: %i b\n--> %s <--\n",res, buf);
+
+                        int cfd = _open(par2, O_WRONLY | O_CREAT | O_TRUNC, S_IREAD | S_IWRITE);
+                        if (cfd == -1)
+                        {
+                            printstrln("Error: file open failed");
+                            break;
+                        }
+
+                        int fwrite_size = _write(cfd, buf, size);
+
+                        if (_close(cfd) != 0)
+                        {
+                            printstrln("Error: file close failed.");
+                            break;
+                        }
                     }
                 }
                 else

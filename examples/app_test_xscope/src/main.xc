@@ -2,6 +2,7 @@
 #include <CORE_BOARD_REQUIRED>
 
 #include <xscope.h>
+#include <stdio.h>
 
 #define NUM_SAMPLES 64
 
@@ -22,6 +23,14 @@ int main() {
                 for (unsigned int i = 0; i < NUM_SAMPLES; ++i) {
                     xscope_int(VALUE, sine[i]);
                 }
+            }
+        }
+
+        on tile[APP_TILE]:
+        {
+            while (1) {
+                printf("Print is working!\n");
+                delay_seconds(1);
             }
         }
     }

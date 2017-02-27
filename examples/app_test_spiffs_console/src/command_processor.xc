@@ -140,14 +140,14 @@ void test_script(client SPIFFSInterface i_spiffs)
                             printf("errno %i\n", res);
                             //break;
                         }
-                        res = i_spiffs.read(fd, buf, size);
+                        res = i_spiffs.read(fd, buf, size - 2);
                         if (res < 0)
                         {
                             printf("Error\n");
                             //break;
                         }
                         else
-                            printf("Readed: %i b\n--> %s <--\n",res, buf);
+                            printf("Readed: %i b\n",res);
 
                         int cfd = _open(par2, O_WRONLY | O_CREAT | O_TRUNC, S_IREAD | S_IWRITE);
                         if (cfd == -1)

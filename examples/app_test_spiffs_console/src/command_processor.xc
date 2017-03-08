@@ -8,7 +8,7 @@
 #include <command_processor.h>
 #include <syscall.h>
 
-#define BUFFER_SIZE 153000
+#define BUFFER_SIZE 5000
 
 void test_script(client SPIFFSInterface i_spiffs)
 {
@@ -55,9 +55,9 @@ void test_script(client SPIFFSInterface i_spiffs)
                         if (flags)
                         {
                             fd  = i_spiffs.open_file(par2, strlen(par2), flags);
-                            if (fd > 0) printf("File created with file descriptor %i\n", fd);
+                            if (fd > 0) printf("File opened with file descriptor %i\n", fd);
                             else
-                                printf("Error creating file \n");
+                                printf("Error opening file \n");
                         }
                     }
                     else
@@ -107,19 +107,28 @@ void test_script(client SPIFFSInterface i_spiffs)
                             //break;
                         }
 
-                        memset(buf, 0 , sizeof(buf));
-                        int fread_size = _read(cfd, (unsigned char *)buf, BUFFER_SIZE);
+                        int fread_size = 1;
+                        while (fread_size > 0)
+                        {
+                            memset(buf, 0 , sizeof(buf));
+                            fread_size = _read(cfd, buf, BUFFER_SIZE);
+
+                            res = i_spiffs.write(fd, buf, fread_size);
+                            if (res < 0)
+                            {
+                                printf("errno %i\n", res);
+                                break;
+                            }
+                            else
+                                printf("Writed: %i\n", res);
+                                i_spiffs.flush(fd);
+                        }
 
                         if (_close(cfd) != 0)
                         {
                             printstrln("Error: file close failed.");
                             //break;
                         }
-
-                        res = i_spiffs.write(fd, buf, fread_size);
-                        if (res < 0) printf("errno %i\n", res);
-                        else
-                            printf("Writed: %i\n", res);
                     }
                 }
                 else
@@ -133,6 +142,13 @@ void test_script(client SPIFFSInterface i_spiffs)
                         unsigned short pix;
                         unsigned char name[MAX_FILENAME_SIZE];
 
+                        int cfd = _open(par2, O_WRONLY | O_CREAT | O_TRUNC, S_IREAD | S_IWRITE);
+                        if (cfd == -1)
+                        {
+                             printstrln("Error: file open failed");
+                             break;
+                        }
+
                         memset(buf, 0 , sizeof(buf));
                         res = i_spiffs.status(fd, obj_id, size, type, pix, name);
                         if (res < 0)
@@ -140,23 +156,21 @@ void test_script(client SPIFFSInterface i_spiffs)
                             printf("errno %i\n", res);
                             //break;
                         }
-                        res = i_spiffs.read(fd, buf, size - 2);
-                        if (res < 0)
-                        {
-                            printf("Error\n");
-                            //break;
-                        }
-                        else
-                            printf("Readed: %i b\n",res);
 
-                        int cfd = _open(par2, O_WRONLY | O_CREAT | O_TRUNC, S_IREAD | S_IWRITE);
-                        if (cfd == -1)
+                        for (int il = size; il > 0; il = il - BUFFER_SIZE)
                         {
-                            printstrln("Error: file open failed");
-                            break;
-                        }
+                            int read_len = (il > BUFFER_SIZE ? BUFFER_SIZE : il);
+                            res = i_spiffs.read(fd, buf, read_len);
+                            if (res < 0)
+                            {
+                                printf("Error\n");
+                                //break;
+                            }
+                            else
+                                printf("Readed: %i b\n",res);
 
-                        int fwrite_size = _write(cfd, buf, size);
+                            int fwrite_size = _write(cfd, buf, read_len);
+                        }
 
                         if (_close(cfd) != 0)
                         {
@@ -204,7 +218,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                   else
                   if (strcmp(par1, "format") == 0)
                   {
-                      printf("Formating... \n");
+                      printf("Formatting... \n");
                       res = i_spiffs.format();
                       if (res < 0) printf("errno %i\n", res);
                       else

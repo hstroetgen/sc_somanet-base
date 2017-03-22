@@ -33,7 +33,7 @@ typedef unsigned char u8_t;
 
 // Set generic spiffs debug output call.
 #ifndef SPIFFS_DBG
-#define SPIFFS_DBG(...) printf(__VA_ARGS__)
+#define SPIFFS_DBG(...) //printf(__VA_ARGS__)
 #endif
 // Set spiffs debug output call for garbage collecting.
 #ifndef SPIFFS_GC_DBG
@@ -184,7 +184,7 @@ typedef unsigned char u8_t;
 
 // Enable this if your target needs aligned data for index tables
 #ifndef SPIFFS_ALIGNED_OBJECT_INDEX_TABLES
-#define SPIFFS_ALIGNED_OBJECT_INDEX_TABLES       0
+#define SPIFFS_ALIGNED_OBJECT_INDEX_TABLES       1
 #endif
 
 // Enable this if you want the HAL callbacks to be called with the spiffs struct

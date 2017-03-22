@@ -12,7 +12,6 @@
 
 void test_script(client SPIFFSInterface i_spiffs)
 {
-    //100kb test buffer
     unsigned char buf[BUFFER_SIZE];
     char par1[MAX_FILENAME_SIZE], par2[1024], par3[MAX_FILENAME_SIZE];
     int par_num, res;
@@ -108,6 +107,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                         }
 
                         int fread_size = 1;
+                        int writed_counter = 0;
                         while (fread_size > 0)
                         {
                             memset(buf, 0 , sizeof(buf));
@@ -120,8 +120,11 @@ void test_script(client SPIFFSInterface i_spiffs)
                                 break;
                             }
                             else
-                                printf("Writed: %i\n", res);
+                            {
+                                writed_counter += res;
+                                printf("Writed: %i\n", writed_counter);
                                 i_spiffs.flush(fd);
+                            }
                         }
 
                         if (_close(cfd) != 0)
@@ -157,6 +160,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                             //break;
                         }
 
+                        int readed_counter = 0;
                         for (int il = size; il > 0; il = il - BUFFER_SIZE)
                         {
                             int read_len = (il > BUFFER_SIZE ? BUFFER_SIZE : il);
@@ -167,7 +171,10 @@ void test_script(client SPIFFSInterface i_spiffs)
                                 //break;
                             }
                             else
-                                printf("Readed: %i b\n",res);
+                            {
+                                readed_counter += res;
+                                printf("Readed: %i b\n",readed_counter);
+                            }
 
                             int fwrite_size = _write(cfd, buf, read_len);
                         }

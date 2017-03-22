@@ -134,9 +134,9 @@ static s32_t spiffs_rewrite_index(spiffs *fs, spiffs_obj_id obj_id, spiffs_span_
 
   // rewrite in mem
   if (objix_spix == 0) {
-    ((spiffs_page_ix*)((u16_t *)fs->lu_work + sizeof(spiffs_page_object_ix_header)))[data_spix] = new_data_pix;
+    ((spiffs_page_ix*)((u8_t *)fs->lu_work + sizeof(spiffs_page_object_ix_header)))[data_spix] = new_data_pix;
   } else {
-    ((spiffs_page_ix*)((u16_t *)fs->lu_work + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = new_data_pix;
+    ((spiffs_page_ix*)((u8_t *)fs->lu_work + sizeof(spiffs_page_object_ix)))[SPIFFS_OBJ_IX_ENTRY(fs, data_spix)] = new_data_pix;
   }
 
   res = _spiffs_wr(fs, SPIFFS_OP_T_OBJ_DA | SPIFFS_OP_C_UPDT,
@@ -572,12 +572,12 @@ static s32_t spiffs_page_consistency_check_i(spiffs *fs) {
             // object header page index
             entries = SPIFFS_OBJ_HDR_IX_LEN(fs);
             data_spix_offset = 0;
-            object_page_index = (spiffs_page_ix *)((u16_t *)fs->lu_work + sizeof(spiffs_page_object_ix_header));
+            object_page_index = (spiffs_page_ix *)((u8_t *)fs->lu_work + sizeof(spiffs_page_object_ix_header));
           } else {
             // object page index
             entries = SPIFFS_OBJ_IX_LEN(fs);
             data_spix_offset = SPIFFS_OBJ_HDR_IX_LEN(fs) + SPIFFS_OBJ_IX_LEN(fs) * (p_hdr.span_ix - 1);
-            object_page_index = (spiffs_page_ix *)((u16_t *)fs->lu_work + sizeof(spiffs_page_object_ix));
+            object_page_index = (spiffs_page_ix *)((u8_t *)fs->lu_work + sizeof(spiffs_page_object_ix));
           }
 
           // for all entries in index

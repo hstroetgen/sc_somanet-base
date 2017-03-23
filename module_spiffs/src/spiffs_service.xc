@@ -109,7 +109,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        res = iSPIFFS_check();
                    break;
 
-                   case !isnull(i_spiffs) => i_spiffs[int i].status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, unsigned char name[]) -> int res:
+                   case !isnull(i_spiffs) => i_spiffs[int i].status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, char name[]) -> int res:
                            unsigned stat_buffer[sizeof(spiffs_stat)];
                            spiffs_stat s;
                            res = iSPIFFS_status(fd, stat_buffer);

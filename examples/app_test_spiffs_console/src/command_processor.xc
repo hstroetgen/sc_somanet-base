@@ -122,7 +122,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                             else
                             {
                                 writed_counter += res;
-                                printf("Writed: %i\n", writed_counter);
+                                printf("Writed: %i b\n", writed_counter);
                                 i_spiffs.flush(fd);
                             }
                         }
@@ -201,11 +201,11 @@ void test_script(client SPIFFSInterface i_spiffs)
                     unsigned int size;
                     unsigned char type;
                     unsigned short pix;
-                    unsigned char name[MAX_FILENAME_SIZE];
+                    char name[MAX_FILENAME_SIZE];
                     res = i_spiffs.status(fd, obj_id, size, type, pix, name);
                     if (res < 0) printf("errno %i\n", res);
                     else
-                      printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, (char *)name);
+                      printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, name);
 
                   }
                   else

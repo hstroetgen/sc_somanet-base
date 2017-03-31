@@ -1,7 +1,7 @@
 /*
  * SPIFFS_test_project.xc
  *
- *  Created on: 27 нояб. 2016 г.
+ *  Created on: 27 пїЅпїЅпїЅпїЅ. 2016 пїЅ.
  *      Author: w
  */
 
@@ -48,6 +48,7 @@ int main(void)
     {
         spiffs_service(i_data[0], i_spiffs, 1);
     }
+
     on tile[1]:
     {
         test_script(i_spiffs[0]);

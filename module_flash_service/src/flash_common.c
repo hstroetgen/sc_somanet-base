@@ -6,6 +6,7 @@
 
 #include <flash_common.h>
 
+
 #ifdef XCORE200
 #include <quadflash.h>
 #else
@@ -26,12 +27,18 @@ fl_SPIPorts *SPI_port;
  */
 #ifdef XCORE200
 void flash_init(fl_QSPIPorts *SPI)
-#else
-void flash_init(fl_SPIPorts *SPI)
-#endif
 {
     SPI_port = SPI;
+    fl_connect(SPI_port);
 }
+#else
+void flash_init(fl_SPIPorts *SPI)
+
+{
+    SPI_port = SPI;
+    fl_connect(SPI_port);
+}
+#endif
 
 /**
  * @brief Connect to the flash. Should be called before any accessing the flash memory.

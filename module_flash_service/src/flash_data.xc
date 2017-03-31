@@ -25,62 +25,51 @@ int flash_data_init(unsigned partition_size) {
 
 int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
 
+    int result = 0;
     int page_offset, page_len, page_num;
     int data_offset = 0;
     unsigned char page_buffer[FLASH_PAGE_SIZE];
 
-        // Conect to flash
-        int result = connect_to_flash();
-        if (result != 0) {
-              printstrln( "Could not connect to FLASH" );
+    do {
+         //calculate position and lenght for current page
+         page_offset = (addr % FLASH_PAGE_SIZE);
+         page_len = (size <= (FLASH_PAGE_SIZE - page_offset)) ? size : (FLASH_PAGE_SIZE - page_offset);
+         page_num = addr / FLASH_PAGE_SIZE;
+
+         //save previous data from page
+         fl_readDataPage(page_num, page_buffer);
+         if (result !=0 )
+         {
+              printstrln( "Could not read from FLASH" );
               return result;
-        }
-        do {
-             //calculate position and lenght for current page
-             page_offset = (addr % FLASH_PAGE_SIZE);
-             page_len = (size <= (FLASH_PAGE_SIZE - page_offset)) ? size : (FLASH_PAGE_SIZE - page_offset);
-             page_num = addr / FLASH_PAGE_SIZE;
+         }
 
-             //save previous data from page
-             fl_readDataPage(page_num, page_buffer);
-             if (result !=0 )
-             {
-                  printstrln( "Could not read from FLASH" );
-                  return result;
-              }
+         //copy new data to page buffer
+         memcpy(page_buffer + page_offset, data + data_offset, page_len);
+         result = fl_writeDataPage(page_num, page_buffer);
 
-             //copy new data to page buffer
-             memcpy(page_buffer + page_offset, data + data_offset, page_len);
-             result = fl_writeDataPage(page_num, page_buffer);
+         if (result !=0 )
+         {
+             printstrln( "Could not write to FLASH" );
+             return result;
+         }
 
-             if (result !=0 )
-             {
-                 printstrln( "Could not write to FLASH" );
-                 return result;
-             }
+         data_offset += page_len;
+         addr += page_len;
+         size -= page_len;
 
-             data_offset += page_len;
-             addr += page_len;
-             size -= page_len;
+    }  while (size > 0);
 
-        }  while (size > 0);
+   // printstrln( "writing" );
 
-        // Disconnect from the flash
-        result = fl_disconnect();
-        if (result != 0){
-             printstrln( "Could not disconnect from FLASH" );
-        }
-        return result;
+    return result;
 }
 
 int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
 
-    // Conect to flash
-    int result = connect_to_flash();
-    if (result != 0) {
-        printstrln( "Could not connect to FLASH" );
-        return result;
-    }
+    int result = 0;
+    timer t;
+    unsigned int start_time, end_time;
 
     // Read from the data partition
     result = fl_readData(addr, size, data);
@@ -90,25 +79,16 @@ int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
         return result;
     }
 
-    // Disconnect from the flash
-    result = fl_disconnect();
-    if (result != 0){
-            printstrln( "Could not disconnect from FLASH" );
-    }
-
+   // printstrln( "reading" );
     return result;
 }
 
 
 int flash_erase_data(unsigned addr, unsigned size)
 {
-    // Conect to flash
-    int result = connect_to_flash();
+
+    int result = 0;
     unsigned sec_num, sec_size;
-    if (result != 0) {
-          printstrln( "Could not connect to FLASH" );
-          return result;
-    }
 
     //convert address to sector number
     sec_num = addr / 0xFFF;
@@ -123,12 +103,6 @@ int flash_erase_data(unsigned addr, unsigned size)
            printstrln( "Could not erase FLASH sector" );
            return result;
         }
-    }
-
-    // Disconnect from the flash
-    result = fl_disconnect();
-    if (result != 0){
-            printstrln( "Could not disconnect from FLASH" );
     }
 
     return result;

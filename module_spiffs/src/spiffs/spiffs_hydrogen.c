@@ -1249,6 +1249,7 @@ s32_t SPIFFS_ls(spiffs *fs) {
   int entries_per_page = (SPIFFS_CFG_LOG_PAGE_SZ(fs) / sizeof(spiffs_obj_id));
   spiffs_obj_id *obj_lu_buf = (spiffs_obj_id *)fs->lu_work;
   spiffs_block_ix bix = 0;
+  int prev_id = 0;
 
   while (bix < fs->block_count) {
     // check each object lookup page
@@ -1263,13 +1264,14 @@ s32_t SPIFFS_ls(spiffs *fs) {
       while (res == SPIFFS_OK && cur_entry - entry_offset < entries_per_page && cur_entry < (int)(SPIFFS_PAGES_PER_BLOCK(fs)-SPIFFS_OBJ_LOOKUP_PAGES(fs))) {
         spiffs_obj_id obj_id = obj_lu_buf[cur_entry-entry_offset];
 
-               if ((obj_id & SPIFFS_OBJ_ID_IX_FLAG)&&(obj_id != SPIFFS_OBJ_ID_FREE)){
+               if ((prev_id != obj_id)&&(obj_id & SPIFFS_OBJ_ID_IX_FLAG)&&(obj_id != SPIFFS_OBJ_ID_FREE)){
                    spiffs_page_ix pix;
                    spiffs_stat s;
                    spiffs_obj_lu_find_id_and_span(fs, (obj_id | SPIFFS_OBJ_ID_IX_FLAG), 0, 0, &pix);
                    res = spiffs_stat_pix(fs, pix, 0, &s);
-                   spiffs_printf("%32s, size: %u, type: %i,", s.name, s.size, s.type);
+                   spiffs_printf("%32s, size: %u,", s.name, s.size);
                    spiffs_printf(" obj ID: %4x, pix: %i\n", (obj_id | SPIFFS_OBJ_ID_IX_FLAG), pix);
+                   prev_id = obj_id;
                }
                cur_entry++;
 

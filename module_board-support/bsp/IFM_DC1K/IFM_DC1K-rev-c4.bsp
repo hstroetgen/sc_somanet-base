@@ -1,6 +1,6 @@
 /***************************
- * IFM Drive DC-5K
- * Rev. A3
+ * IFM Drive DC-1K
+ * Rev. C4
  ***************************/
 
 #pragma once
@@ -9,18 +9,15 @@
 #include <platform.h>
 
 /* ADC */
-#define ADC_DATA_A  IFM_PORT_1BIT_6  // port 1F on DC5K, which is IFM_PORT_1BIT_6 on C22
-#define ADC_DATA_B  IFM_PORT_1BIT_2   // port 1E on DC5K, which is IFM_PORT_1BIT_2 on C22
-#define ADC_SCLK    IFM_PORT_1BIT_16    // port 1H on DC5K, which is IFM_PORT_1BIT_16 on C22
-#define ADC_READY   IFM_PORT_1BIT_4     // port 1G on DC5K, which is IFM_PORT_1BIT_4 on C22
+#define ADC_DATA_A  IFM_PORT_1BIT_16
+#define ADC_DATA_B IFM_PORT_1BIT_40 
+#define ADC_SCLK  IFM_PORT_1BIT_42
+#define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
-                                         // port 4C on DC5K, which is  on C22
-                                         
+#define ADC_CLK_SRC IFM_TILE_CLOCK_1 
+#define SOMANET_IFM_ADC	AD7265
 #define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           56 /*ratio between adc measured value and real dc-bus voltage*/
-                                         
-#define ADC_CLK_SRC IFM_TILE_CLOCK_1   
-#define SOMANET_IFM_ADC	AD7265        
 
 #define SOMANET_IFM_ADC_PORTS {     \
     { null, null, null, null },     \
@@ -29,7 +26,7 @@
      ADC_SCLK,                      \
      ADC_READY,                     \
      ADC_MUX},                      \
-     {1, -1, 50}                    \
+     {-1, 1, 50}                    \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -65,11 +62,11 @@
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
 #define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
-
+#define PWM_PORT_D_HIGH_SIDE IFM_PORT_1BIT_28
 #define PWM_PORT_A_LOW_SIDE IFM_PORT_1BIT_56
 #define PWM_PORT_B_LOW_SIDE IFM_PORT_1BIT_52
 #define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
-
+#define PWM_PORT_D_LOW_SIDE IFM_PORT_1BIT_32
 
 #define PWM_CLOCK_SRC IFM_TILE_CLOCK_4
 #define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
@@ -77,8 +74,8 @@
 #define SOMANET_IFM_PWM_PORTS {                                         \
     {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE}, \
     {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},    \
-    null,                                               \
-    null,                                                \
+    PWM_PORT_D_HIGH_SIDE,                                               \
+    PWM_PORT_D_LOW_SIDE,                                                \
     PWM_CLOCK_SRC,                                                      \
     PWM_DUMMY_PORT_TRIGGER                                              \
 }
@@ -112,42 +109,16 @@
 }
 
 /* GPIO_PORTS */
-#define SOMANET_IFM_GPIO_D0 IFM_PORT_1BIT_28  // equivalent to port 1A in C22, which is EXT_D.0 in DC5K
-#define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_32  // equivalent to port 1B in C22, which is EXT_D.1 in DC5K
-#define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_78  // equivalent to port 1I in C22, which is EXT_D.2 in DC5K
-#define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_40  // equivalent to port 1C in C22, which is EXT_D.3 in DC5K
-
+#define SOMANET_IFM_GPIO_D0 IFM_PORT_1BIT_6
+#define SOMANET_IFM_GPIO_D1 IFM_PORT_1BIT_78
+#define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_2
+#define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_22
 
 /* SPI Ports */
 /*  MOSI = D3
     SCLK = D1
     MISO = D2
-    
-
-    out buffered port:8 mosi; equivalent to SOMANET_IFM_GPIO_D3  equivalent to EXT_D.3  equivalen to pin 6 (green)
-    out buffered port:8 sclk; equivalent to SOMANET_IFM_GPIO_D1  equivalent to EXT_D.1  equivalen to pin 3 (red)
-    in buffered port:8 miso;  equivalent to SOMANET_IFM_GPIO_D2  equivalent to EXT_D.2  equivalen to pin 5 (yellow)
-    
-    out port slave_select;    equivalent to SOMANET_IFM_GPIO_D0  equivalent to EXT_D.0  equivalen to pin 2 (brown)
-    
-    GND                                                                                 equivalen to pin 4 (orange)
-    VCC                                                                                 equivalen to pin 7 (blue)
-
-
-	typedef struct
-	{
-		{
-		    clock blk1;
-		    clock blk2;
-		    out buffered port:8 mosi; = SOMANET_IFM_GPIO_D3 = IFM_PORT_1BIT_40 = XS1_PORT_1C = EXT D.3 = pin 6
-		    out buffered port:8 sclk; = SOMANET_IFM_GPIO_D1 = IFM_PORT_1BIT_32 = XS1_PORT_1B = EXT D.1 = pin 3
-		    in buffered port:8 miso;  = SOMANET_IFM_GPIO_D2 = IFM_PORT_1BIT_78 = XS1_PORT_1I = EXT D.2 = pin 5
-		}
-		out port slave_select;        = SOMANET_IFM_GPIO_D0 = IFM_PORT_1BIT_28 = XS1_PORT_1A = EXT D.0 = pin 2
-	} SPIPorts;
-    */
-
-//FixMe: D2 and D1 are flipped because the clock trace is too short, will be fixed in hardware
+    Slave Select = D0 */
 #define SOMANET_IFM_SPI_PORTS {     \
     {                               \
         IFM_TILE_CLOCK_2,           \

@@ -21,7 +21,7 @@
 /* Defines the maximum size of a packet coming over the interface to be written into flash
  * (in bytes)
  */
-#define MAX_PACKET_SIZE 1024
+#define MAX_PACKET_SIZE 4096
 
 #ifdef XCORE200
 void flash_service(fl_QSPIPorts &SPI,

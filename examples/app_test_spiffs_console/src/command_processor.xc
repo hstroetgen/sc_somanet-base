@@ -8,7 +8,7 @@
 #include <command_processor.h>
 #include <syscall.h>
 
-#define BUFFER_SIZE 5000
+#define BUFFER_SIZE 20*1024
 
 void test_script(client SPIFFSInterface i_spiffs)
 {
@@ -108,12 +108,20 @@ void test_script(client SPIFFSInterface i_spiffs)
 
                         int fread_size = 1;
                         int writed_counter = 0;
+                        timer t;
+                        unsigned int start_time, end_time;
+
                         while (fread_size > 0)
                         {
                             memset(buf, 0 , sizeof(buf));
                             fread_size = _read(cfd, buf, BUFFER_SIZE);
 
+                            t :> start_time;
                             res = i_spiffs.write(fd, buf, fread_size);
+                            t :> end_time;
+                            printstr(" Writing time: ");
+                            printintln(((float)end_time - (float)start_time)/100000);
+
                             if (res < 0)
                             {
                                 printf("errno %i\n", res);
@@ -123,7 +131,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                             {
                                 writed_counter += res;
                                 printf("Writed: %i b\n", writed_counter);
-                                i_spiffs.flush(fd);
+                                //i_spiffs.flush(fd);
                             }
                         }
 
@@ -205,7 +213,7 @@ void test_script(client SPIFFSInterface i_spiffs)
                     res = i_spiffs.status(fd, obj_id, size, type, pix, name);
                     if (res < 0) printf("errno %i\n", res);
                     else
-                      printf("Object ID: %04x\nSize: %u\nType: %i\npix: %i\nName: %s\n", obj_id, size, type, pix, name);
+                      printf("Object ID: %04x\nSize: %u\npix: %i\nName: %s\n", obj_id, size, pix, name);
 
                   }
                   else

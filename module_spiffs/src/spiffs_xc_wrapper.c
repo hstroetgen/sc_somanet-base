@@ -11,7 +11,7 @@
 #include <spiffs.h>
 #include <spiffs_xc_wrapper.h>
 
-#define LOG_PAGE_SIZE       1024
+#define LOG_PAGE_SIZE       4096
 #define MAX_OPEN_FILES       16
 
 static u8_t spiffs_work_buf[LOG_PAGE_SIZE*2];

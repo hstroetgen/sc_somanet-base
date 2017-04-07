@@ -45,7 +45,7 @@ typedef unsigned char u8_t;
 #endif
 // Set spiffs debug output call for system consistency checks.
 #ifndef SPIFFS_CHECK_DBG
-#define SPIFFS_CHECK_DBG(...) //printf(__VA_ARGS__)
+#define SPIFFS_CHECK_DBG(...) printf(__VA_ARGS__)
 #endif
 
 // Enable/disable API functions to determine exact number of bytes
@@ -68,24 +68,24 @@ typedef unsigned char u8_t;
 
 // Enable/disable statistics on caching. Debug/test purpose only.
 #ifndef  SPIFFS_CACHE_STATS
-#define SPIFFS_CACHE_STATS              1
+#define SPIFFS_CACHE_STATS              0
 #endif
 #endif
 
 // Always check header of each accessed page to ensure consistent state.
 // If enabled it will increase number of reads, will increase flash.
 #ifndef SPIFFS_PAGE_CHECK
-#define SPIFFS_PAGE_CHECK               1
+#define SPIFFS_PAGE_CHECK               0
 #endif
 
 // Define maximum number of gc runs to perform to reach desired free pages.
 #ifndef SPIFFS_GC_MAX_RUNS
-#define SPIFFS_GC_MAX_RUNS              5
+#define SPIFFS_GC_MAX_RUNS              1
 #endif
 
 // Enable/disable statistics on gc. Debug/test purpose only.
 #ifndef SPIFFS_GC_STATS
-#define SPIFFS_GC_STATS                 1
+#define SPIFFS_GC_STATS                 0
 #endif
 
 // Garbage collecting examines all pages in a block which and sums up
@@ -114,14 +114,14 @@ typedef unsigned char u8_t;
 // zero-termination character, meaning maximum string of characters
 // can at most be SPIFFS_OBJ_NAME_LEN - 1.
 #ifndef SPIFFS_OBJ_NAME_LEN
-#define SPIFFS_OBJ_NAME_LEN             (32)
+#define SPIFFS_OBJ_NAME_LEN             (16)
 #endif
 
 // Size of buffer allocated on stack used when copying data.
 // Lower value generates more read/writes. No meaning having it bigger
 // than logical page size.
 #ifndef SPIFFS_COPY_BUFFER_STACK
-#define SPIFFS_COPY_BUFFER_STACK        (64)
+#define SPIFFS_COPY_BUFFER_STACK        (256)
 #endif
 
 // Enable this to have an identifiable spiffs filesystem. This will look for
@@ -260,7 +260,7 @@ typedef unsigned char u8_t;
 // file is modified in some way. The index buffer is tied to the file
 // descriptor.
 #ifndef SPIFFS_IX_MAP
-#define SPIFFS_IX_MAP                         1
+#define SPIFFS_IX_MAP                         0
 #endif
 
 // Set SPIFFS_TEST_VISUALISATION to non-zero to enable SPIFFS_vis function

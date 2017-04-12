@@ -25,12 +25,14 @@ Modules
 	Board Support Module <module_board-support/doc/index>
 	COM Recognition Module <module_com-detect/doc/index>
 	Locks Module <module_locks/doc/index>
+	Reboot Module <module_reboot/doc/index>
 
 SOMANET Base currently consists of the following modules:
 
 * `Board Support Module <module_board-support/doc/index.html>`_: Contains port mappings, low-level configurations and platform description files (\*.xn) for all available SOMANET hardware modules.
 * `SOMANET COM Recognition Module <module_com-detect/doc/index.html>`_:  Enables automatic recognition of SOMANET COM modules. **For internal use only!**
 * `Locks Module <module_locks/doc/index.html>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
+* `Reboot Module <module_reboot/doc/index.html>`_: Provides an API to reboot SOMANET chip. **For internal use only!**
 
 Examples
 --------

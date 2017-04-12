@@ -57,6 +57,7 @@ How to use
 The following code snippet shows the full usage:
 
  .. code-block:: c
+ 
 		#include <xs1.h>
 		#include "platform.h"
 

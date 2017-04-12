@@ -60,7 +60,7 @@ typedef interface RebootInterface
     * @brief INTERNAL USE ONLY
     * Checks if the was a cold-boot or if the application requested a reboot to the bootloader.
     *
-    * @return 1 if reboot to bootloader was requested by application
+    * @return Returns 1 if reboot to bootloader was requested by application
     */
     int has_rebooted_from_application(void);
 

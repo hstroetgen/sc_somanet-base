@@ -46,3 +46,4 @@ Examples
 Additionally, this repository includes the following example app: 
 
 * `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE test
+* `COM-detect Test <examples/app_test_com-detect/doc/index.html>`_: Internal use only test application for COM-boards identification. 

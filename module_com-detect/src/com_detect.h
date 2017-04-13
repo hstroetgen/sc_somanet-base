@@ -29,6 +29,6 @@ typedef enum {
  * @brief COM module detection method
  *
  * @param p COM-detect port
- * @return com_module_type_t detected board enumeration
+ * @return com_module_type_t - detected board enumeration
  */
 com_module_type_t com_detect(port p);

@@ -1,4 +1,4 @@
 COM Board Recognition Demo
 ==========================
 
-This app is not yet intended for public use.
+.. warning:: This application is not intended for public use. Please accept our apologies for the inconvenience.

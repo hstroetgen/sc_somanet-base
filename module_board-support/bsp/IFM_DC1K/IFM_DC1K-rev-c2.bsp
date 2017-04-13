@@ -56,7 +56,7 @@
 #define QEI_PORT_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
 
 #define SOMANET_IFM_QEI_PORT_INPUT_MODE_SELECTION { \
-   QEI_PORT_INPUT_MODE_SELECTION                     \
+    QEI_PORT_INPUT_MODE_SELECTION                   \
 }
 
 /* PWM PORTS*/
@@ -81,20 +81,20 @@
     PWM_DUMMY_PORT_TRIGGER                                              \
 }
 
-#define SOMANET_IFM_PWM_PORTS_GENERAL {                                         \
+#define SOMANET_IFM_PWM_PORTS_GENERAL { \
     PWM_PORT_A_HIGH_SIDE,		\
     PWM_PORT_A_LOW_SIDE,		\
     PWM_PORT_B_HIGH_SIDE,		\
     PWM_PORT_B_LOW_SIDE,		\
     PWM_PORT_C_HIGH_SIDE,		\
     PWM_PORT_C_LOW_SIDE,		\
-    null,						\
-    null,						\
-    null,						\
-    null,						\
-    null,						\
-    null,						\
-    PWM_CLOCK_SRC,				\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    PWM_CLOCK_SRC,			\
     PWM_DUMMY_PORT_TRIGGER		\
 }
 
@@ -106,7 +106,7 @@
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
     WATCHDOG_TICK_PORT,                 \
-    CPLD_SHARED_PORT					\
+    CPLD_SHARED_PORT			\
 }
 
 /* GPIO_PORTS */
@@ -124,9 +124,9 @@
     {                               \
         IFM_TILE_CLOCK_2,           \
         IFM_TILE_CLOCK_3,           \
-        null,        \
-        null,        \
-        null         \
+        null,                       \
+        null,                       \
+        null                        \
     },                              \
-    null             \
+    null                            \
 }

@@ -13,8 +13,11 @@
 #include <xscope.h>
 
 /* Standard Tile definitions for demo/test apps */
-#define COM_TILE 0
-#define IFM_TILE 1
+#define COM_TILE 	0
+#define APP_TILE 	0
+#define APP_TILE_1  0
+#define APP_TILE_2  0
+#define IFM_TILE 	1
 
 /* CLOCKS */
 #define IFM_TILE_CLOCK_0 on tile[IFM_TILE]: XS1_CLKBLK_REF

@@ -14,6 +14,22 @@ Spiffs is designed with following characteristics in mind:
  - Zeroes can only be pulled to ones by erase
  - Wear leveling
 
+Spiffs is allocated to a part or all of the memory of the SPI flash device. 
+This area is divided into logical blocks, which in turn are divided into 
+logical pages. The boundary of a logical block must coincide with one or more 
+physical blocks.
+
+.. figure:: images/spiffs_block_structure.png
+   :width: 60%
+
+A logical block is divided further into a number of logical pages. A page 
+defines the smallest data holding element known to spiffs.
+
+.. figure:: images/spiffs_file.png
+   :width: 60%
+
+
+
 How to use
 ==========
 

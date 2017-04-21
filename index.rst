@@ -26,6 +26,7 @@ Modules
 	COM Recognition Module <module_com-detect/doc/index>
 	Locks Module <module_locks/doc/index>
 	Reboot Module <module_reboot/doc/index>
+	Flash Service Module <module_flash_service/doc/index>
 
 SOMANET Base currently consists of the following modules:
 
@@ -33,6 +34,7 @@ SOMANET Base currently consists of the following modules:
 * `SOMANET COM Recognition Module <module_com-detect/doc/index.html>`_:  Enables automatic recognition of SOMANET COM modules. **For internal use only!**
 * `Locks Module <module_locks/doc/index.html>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
 * `Reboot Module <module_reboot/doc/index.html>`_: Provides an API to reboot SOMANET chip. **For internal use only!**
+* `Flash Service Module <module_flash_service/doc/index.html>`_: Provides an API to access the internal flash of SOMANET SoCs. **Mostly intended for internal use**
 
 Examples
 --------

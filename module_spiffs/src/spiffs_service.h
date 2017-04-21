@@ -31,7 +31,7 @@ typedef interface SPIFFSInterface SPIFFSInterface;
 interface SPIFFSInterface {
 
     /**
-     * Opens/creates a file.
+     * @brief Opens/creates a file.
      * @param path          the path of the new file
      * @param path_length   the lenght of path of the new file
      * @param flags         the flags for the open command, can be combinations of
@@ -42,13 +42,13 @@ interface SPIFFSInterface {
     [[guarded]] unsigned short open_file(char path[], unsigned path_length, unsigned short flags);
 
     /**
-     * Closes a filehandle. If there are pending write operations, these are finalized before closing.
+     * @brief Closes a filehandle. If there are pending write operations, these are finalized before closing.
      * @param fd            the filehandle of the file to close
      */
     [[guarded]] int close_file(unsigned short fd);
 
     /**
-     * Reads from given filehandle.
+     * @brief Reads from given filehandle.
      * @param fd            the filehandle
      * @param buf           where to put read data
      * @param len           how much to read
@@ -57,7 +57,7 @@ interface SPIFFSInterface {
     [[guarded]] int read(unsigned short fd, unsigned char data[], unsigned int len);
 
     /**
-     * Writes to given filehandle.
+     * @brief Writes to given filehandle.
      * @param fd            the filehandle
      * @param buf           the data to write
      * @param len           how much to write
@@ -66,23 +66,23 @@ interface SPIFFSInterface {
     [[guarded]] int write(unsigned short fd, unsigned char data[], unsigned int len);
 
     /**
-     * Removes a file by filehandle
+     * @brief Removes a file by filehandle
      * @param fd            the filehandle of the file to remove
      */
     [[guarded]] int remove_file(unsigned short fd);
 
     /**
-     * Prints out a visualization of the filesystem.
+     * @brief Prints out a visualization of the filesystem.
      */
     [[guarded]] int vis(void);
 
     /**
-     * Prints out a list of files in filesystem.
+     * @brief Prints out a list of files in filesystem.
      */
     [[guarded]] int ls(void);
 
     /**
-     * Runs a consistency check on given filesystem.
+     * @brief Runs a consistency check on given filesystem.
      */
     [[guarded]] int check(void);
 
@@ -98,7 +98,7 @@ interface SPIFFSInterface {
     [[guarded]] int status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, char name[]);
 
     /**
-     * Renames a file
+     * @brief Renames a file
      * @param path                 path of file to rename
      * @param path_length          length of path of file to rename
      * @param new_path             new path of file
@@ -107,20 +107,20 @@ interface SPIFFSInterface {
     [[guarded]] int rename_file(char path[], unsigned path_length, char new_path[], unsigned new_path_length);
 
     /**
-     * Formats the entire file system. All data will be lost.
+     * @brief Formats the entire file system. All data will be lost.
      * The filesystem must not be mounted when calling this.
      *
      */
     [[guarded]] int format(void);
 
     /**
-     * Unmounts the file system. All file handles will be flushed of any
+     * @brief Unmounts the file system. All file handles will be flushed of any
      * cached writes and closed.
      */
     [[guarded]] void unmount(void);
 
     /**
-     * Moves the read/write file offset. Resulting offset is returned or negative if error.
+     * @brief Moves the read/write file offset. Resulting offset is returned or negative if error.
      * seek(fd, 0, SPIFFS_SEEK_CUR) will thus return current offset.
      * @param fd            the filehandle
      * @param offs          how much/where to move the offset
@@ -131,24 +131,24 @@ interface SPIFFSInterface {
     [[guarded]] int seek(unsigned short fd, int offs, int whence);
 
     /**
-     * Get position in file.
+     * @brief Get position in file.
      * @param fh            the filehandle of the file to check
      */
     [[guarded]] int tell(unsigned short fd);
 
     /**
-     * Flushes all pending write operations from cache for given file
+     * @brief Flushes all pending write operations from cache for given file
      * @param fd           the filehandle of the file to flush
      */
     [[guarded]] int flush(unsigned short fd);
 
     /**
-     * Returns last error of last file operation.
+     * @brief Returns last error of last file operation.
      */
     [[guarded]] int errno(void);
 
     /**
-     * Returns number of total bytes available and number of used bytes.
+     * @brief Returns number of total bytes available and number of used bytes.
      * This is an estimation, and depends on if there a many files with little
      * data or few files with much data.
      * @param itotal         total number of bytes in filesystem
@@ -157,7 +157,7 @@ interface SPIFFSInterface {
     [[guarded]] int fs_info(unsigned int &itotal, unsigned int &iused);
 
     /**
-     * Will try to make room for given amount of bytes in the filesystem by moving
+     * @brief Will try to make room for given amount of bytes in the filesystem by moving
      * pages and erasing blocks.
      * If it is physically impossible, err_no will be set to SPIFFS_ERR_FULL. If
      * there already is this amount (or more) of free space, SPIFFS_gc will
@@ -169,7 +169,7 @@ interface SPIFFSInterface {
     [[guarded]] int gc(unsigned int size);
 
     /**
-     * Tries to find a block where most or all pages are deleted, and erase that
+     * @brief Tries to find a block where most or all pages are deleted, and erase that
      * block if found. Does not care for wear levelling. Will not move pages
      * around.
      * If parameter max_free_pages are set to 0, only blocks with only deleted
@@ -188,6 +188,14 @@ interface SPIFFSInterface {
 };
 
 
+/**
+ * @brief SPIFFS Service provides a server, which managed the SPI Flash File System.
+ *
+ * @param CLIENT_INTERFACE(FlashDataInterface, i_data)  Client interface for flash service
+ * @param i_spiffs   Server interfaces for SPIFFS service
+ * @param n_spiffs   Pattern variable for SPIFFS service
+ *
+ */
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

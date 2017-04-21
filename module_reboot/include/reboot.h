@@ -19,7 +19,7 @@
 #pragma once
 
 /**
- * @brief Interface to communicate with the position service
+ * @brief Interface to communicate with the reboot service
  */
 typedef interface RebootInterface 
 {

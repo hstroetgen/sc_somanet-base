@@ -57,50 +57,50 @@ How to use
 
     .. code-block:: c
 
-#include <flash_service.h>
+    #include <flash_service.h>
 
-#ifdef XCORE200
-    #include <quadflash.h>
-#else
-    #include <flash.h>
-#endif
+    #ifdef XCORE200
+        #include <quadflash.h>
+    #else
+        #include <flash.h>
+    #endif
 
-#include <spiffs_service.h>
+    #include <spiffs_service.h>
 
-#define MAX_FLASH_DATA_INTERFACES 2
-#define MAX_SPIFFS_INTERFACES 2
+    #define MAX_FLASH_DATA_INTERFACES 2
+    #define MAX_SPIFFS_INTERFACES 2
 
-//---------SPI flash definitions---------
+    //---------SPI flash definitions---------
 
-// Ports for QuadSPI access on explorerKIT.
-fl_QSPIPorts ports = {
-PORT_SQI_CS,
-PORT_SQI_SCLK,
-PORT_SQI_SIO,
-on tile[0]: XS1_CLKBLK_1
-};
+    // Ports for QuadSPI access on explorerKIT.
+    fl_QSPIPorts ports = {
+        PORT_SQI_CS,
+        PORT_SQI_SCLK,
+        PORT_SQI_SIO,
+        on tile[0]: XS1_CLKBLK_1
+    };
 
-int main(void)
-{
-  FlashDataInterface i_data[MAX_FLASH_DATA_INTERFACES];
-  FlashBootInterface i_boot;
-  SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
-
-  par
-  {
-    on tile[0]:
+    int main(void)
     {
-        flash_service(ports, i_boot, i_data, 1);
-    }
+        FlashDataInterface i_data[MAX_FLASH_DATA_INTERFACES];
+        FlashBootInterface i_boot;
+        SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
 
-    on tile[1]:
-    {
-        spiffs_service(i_data[0], i_spiffs, 1);
-    }
-  }
+        par
+        {
+            on tile[0]:
+            {
+                flash_service(ports, i_boot, i_data, 1);
+            }
 
-  return 0;
-}
+            on tile[1]:
+            {
+                spiffs_service(i_data[0], i_spiffs, 1);
+            }
+         }
+
+         return 0;
+     }
 
 
 API

@@ -18,7 +18,7 @@ With SDK release 3.1 end-user friendly functionality will be added.
 |
 |
 
-.. important:: The usage of this module can erase all content of flash and render your SoC unusable.
+.. important:: The usage of this module can erase all contents from flash and render your SoC unusable.
 
 
 

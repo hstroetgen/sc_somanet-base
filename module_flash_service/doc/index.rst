@@ -7,7 +7,8 @@ SOMANET Flash Service
     :backlinks: none
     :depth: 3
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante a metus facilisis dictum. Sed ac erat a quam porta posuere at eu est. Phasellus congue suscipit semper. Pellentesque mollis tristique lorem, ac hendrerit ligula egestas elementum. Donec vestibulum eros ex, quis volutpat mauris tempor a. Pellentesque quis purus non ligula gravida vulputate. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+The SOMANET Flash Service offers an abstraction layer to access internal flash of SOMANET devices. The usage of this module is currently not recommended for end-users since the module release in SOMANET SDK 3.0 only offers preliminary functionality for internal use. 
+With SDK release 3.1 end-user friendly functionality will be added.
 
 .. cssclass:: github
 
@@ -15,15 +16,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante a 
 
 |
 |
-
-.. note:: The usage of this module can erase all content of flash and render your SoC unusable. 
+|
 
 .. important:: The usage of this module can erase all content of flash and render your SoC unusable.
-
-
-
-How to use
-==========
 
 
 
@@ -40,4 +35,9 @@ Interface
 ---------
 
 .. doxygeninterface:: FlashBootInterface
+.. doxygeninterface:: FlashDataInterface
 
+
+Types
+-----
+.. doxygenenum:: configuration_type

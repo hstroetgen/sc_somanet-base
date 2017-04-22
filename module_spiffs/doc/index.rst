@@ -55,6 +55,8 @@ How to use
 
  6. At whichever other core, now you can perform calls to the SPIFFS Service through the interfaces connected to it.
 
+    .. code-block:: c
+
 #include <flash_service.h>
 
 #ifdef XCORE200

@@ -42,9 +42,13 @@ Console commands
 **~open [-rw/-ro/-c] [file name]**
 
  Opens/creates a file. (where 1st param: 
+
  - c - create new file; 
+
  - ro - readonly existing file;
+
  - rw - read/write existing file)
+
 
 As a result of the successful command execution you'll see "file descriptor" - number of the opened file.
 You can open few files in one time, and set opened file as current using "set [file descriptor]" command.
@@ -108,9 +112,13 @@ Run a consistency check on given filesystem.
 **~seek [offset] [-set/-cur/-end]**
 
  Move the read/write offset in current opened file (where 2nd param: 
+
  - set - the file offset shall be set to offset bytes;
+
  - cur - the file offset shall be set to its current location plus offset;
+
  - end - the file offset shall be set to the size of the file plus offse, which should be negative)
+
 
 **~tell**
 

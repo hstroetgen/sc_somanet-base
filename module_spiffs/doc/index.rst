@@ -1,5 +1,11 @@
+=============
 SPIFFS Service
 ==============
+
+.. contents:: In this document
+    :backlinks: none
+    :depth: 3
+
 SPIFFS Service provides a server, which managed the SPI Flash File System.
 
 **SPIFFS (SPI Flash File System)**
@@ -38,6 +44,8 @@ The service provides access to all functions of the spiffs - writing/reading/era
 How to use
 ==========
 .. important:: We assume that you are using :ref:`SOMANET Base <somanet_base>` and your app includes the required **board support** files for your SOMANET device
+
+.. seealso:: You might find useful the :ref:`SPIFFS Console <app_test_spiffs_console>` example app, which illustrates the use of this module.
 
  1. module_flash_service should be installed.
 
@@ -102,6 +110,7 @@ How to use
              return 0;
          }
 
+.. seealso::  For further  configuring, integrating, using, and optimizing spiff see the wiki by Peter Andersson.
 
 API
 ===

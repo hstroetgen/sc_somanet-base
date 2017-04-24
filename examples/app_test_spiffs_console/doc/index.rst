@@ -26,7 +26,9 @@ Quick How-to
 
 4. In case of successful start of the program on your board, you will see messages in the text console:
  >>   SOMANET FLASH SERVICE STARTING...
+
  >>   SPIFFS SERVICE STARTING...
+
  >>   COMMAND SERVICE STARTING...
 
  > 
@@ -38,7 +40,8 @@ Console commands
 ================
 
 **~open [-rw/-ro/-c] [file name]**
-Opens/creates a file. (where 1st param: 
+
+ Opens/creates a file. (where 1st param: 
  - c - create new file; 
  - ro - readonly existing file;
  - rw - read/write existing file)
@@ -104,7 +107,7 @@ Run a consistency check on given filesystem.
 
 **~seek [offset] [-set/-cur/-end]**
 
-Move the read/write offset in current opened file (where 2nd param: 
+ Move the read/write offset in current opened file (where 2nd param: 
  - set - the file offset shall be set to offset bytes;
  - cur - the file offset shall be set to its current location plus offset;
  - end - the file offset shall be set to the size of the file plus offse, which should be negative)

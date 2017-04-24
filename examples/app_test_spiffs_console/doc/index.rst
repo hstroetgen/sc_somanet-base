@@ -41,7 +41,7 @@ Console commands
 
 **~open [-rw/-ro/-c] [file name]**
 
- Opens/creates a file. (where 1st param: 
+Open/create a file. (where 1st param: 
 
   - c - create new file; 
 
@@ -111,7 +111,7 @@ Run a consistency check on given filesystem.
 
 **~seek [offset] [-set/-cur/-end]**
 
- Move the read/write offset in current opened file (where 2nd param: 
+Move the read/write offset in current opened file (where 2nd param: 
 
   - set - the file offset shall be set to offset bytes;
 
@@ -132,6 +132,11 @@ As a result of the successful command execution you'll see total number of bytes
 **~errno**
 
 Return last error of last file operation.
+
+**~vis**
+
+Prints out a visualization of the filesystem.
+
 
 
 

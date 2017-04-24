@@ -43,9 +43,12 @@ The service provides access to all functions of the spiffs - writing/reading/era
 
 How to use
 ==========
+
 .. important:: We assume that you are using :ref:`SOMANET Base <somanet_base>` and your app includes the required **board support** files for your SOMANET device
 
+
 .. seealso:: You might find useful the :ref:`SPIFFS Console <app_test_spiffs_console>` example app, which illustrates the use of this module.
+
 
  1. module_flash_service should be installed.
 

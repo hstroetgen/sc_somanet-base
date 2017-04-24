@@ -51,7 +51,7 @@ int main(void)
 
     on tile[1]:
     {
-        test_script(i_spiffs[0]);
+        spiffs_console(i_spiffs[0]);
     }
   }
 

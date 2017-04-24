@@ -23,6 +23,6 @@
 #define SPIFFS_SEEK_END                 (2)
 
 
-void test_script(client SPIFFSInterface i_spiffs);
+void spiffs_console(client SPIFFSInterface i_spiffs);
 
 #endif

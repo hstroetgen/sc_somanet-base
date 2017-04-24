@@ -10,7 +10,7 @@
 
 #define BUFFER_SIZE 20*1024
 
-void test_script(client SPIFFSInterface i_spiffs)
+void spiffs_console(client SPIFFSInterface i_spiffs)
 {
     unsigned char buf[BUFFER_SIZE];
     char par1[MAX_FILENAME_SIZE], par2[1024], par3[MAX_FILENAME_SIZE];

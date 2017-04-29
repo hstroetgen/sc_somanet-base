@@ -1,9 +1,9 @@
 .. _somanet_base:
 
-SOMANET Base Utility Library
-=============================
+SOMANET Base Utilities Component
+================================
 
-.. important:: You will always need to include **SOMANET Base** in your project in order to run any other **SOMANET Library**. 
+.. important:: You will always need to include **SOMANET Base** in your project in order to run any other **SOMANET Application**. 
 
 The SOMANET Base Package is a collection of necessary utilities and basic firmware for SOMANET programming. 
 
@@ -16,7 +16,7 @@ The SOMANET Base Package is a collection of necessary utilities and basic firmwa
   `Visit Public Repository <https://github.com/synapticon/sc_somanet-base/>`_
 
 Modules
---------
+-------
 
 .. toctree::
 	:maxdepth: 1
@@ -47,5 +47,5 @@ Examples
 
 Additionally, this repository includes the following example app: 
 
-* `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE test
+* `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE and debug prints test
 * `COM-detect Test <examples/app_test_com-detect/doc/index.html>`_: Internal use only test application for COM-boards identification. 

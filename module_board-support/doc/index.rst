@@ -75,7 +75,7 @@ Here the list of supported SOMANET boards and how to include their support files
 
 * IFM_DC100/**IFM_DC100-rev-b.bsp**
 * IFM_DC300/**IFM_DC300-rev-a.bsp**
-* IFM_DC1K/**IFM_DC1K-rev-c2.bsp**
+* IFM_DC1K/**IFM_DC1K-rev-c4.bsp**
 
 
 * COM_ECAT/**COM_ECAT-rev-a.bsp**
@@ -94,7 +94,7 @@ or
 ::
 
 	#include <CORE_C21-rev-a.bsp>
-	#include <IFM_DC1K-rev-c2.bsp>
+	#include <IFM_DC1K-rev-c4.bsp>
 
 
 .. note:: Have a look at our demo apps to see how to use the definitions within these files. 

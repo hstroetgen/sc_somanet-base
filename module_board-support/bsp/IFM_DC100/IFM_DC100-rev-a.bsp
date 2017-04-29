@@ -15,6 +15,9 @@
 #define ADC_DATA_IN_A IFM_PORT_1BIT_42 
 #define ADC_DATA_IN_B IFM_PORT_1BIT_40 
 #define SOMANET_IFM_ADC	AD7949
+#define CURRENT_RATIO           600  /*ratio between current recieved in control core, and real phase current */
+#define VOLTAGE_RATIO           56   /*ratio between adc measured value and real dc-bus voltage*/
+#define TEMPERATURE_RATIO       20   /*ratio between adc measured value and temperature of temperature sensor on IFM board*/
 
 #define SOMANET_IFM_ADC_PORTS {             \
     {                                       \
@@ -25,7 +28,7 @@
         ADC_CLK_SRC                         \
     },                                      \
     { {null,null}, null, null, null,null},  \
-    {1, 1, 5}                               \
+    {-1, -1, 5}                             \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -52,17 +55,12 @@
 #define QEI_PORT IFM_PORT_4BIT_38_44_30_34
 
 #define SOMANET_IFM_QEI_PORTS { \
-    null,                       \
     QEI_PORT                    \
 }
 
-/* BiSS PORTS */
-#define BISS_CLK_SRC IFM_TILE_CLOCK_2
-
-#define SOMANET_IFM_BISS_PORTS {    \
-	QEI_PORT,                       \
-	SOMANET_IFM_GPIO_D0,            \
-	BISS_CLK_SRC                    \
+/* INPUT MODE SELECTION PORT */
+#define SOMANET_IFM_QEI_PORT_INPUT_MODE_SELECTION { \
+    null                                            \
 }
 
 /* PWM PORTS*/
@@ -85,13 +83,32 @@
     PWM_DUMMY_PORT_TRIGGER                                                  \
 }
 
+#define SOMANET_IFM_PWM_PORTS_GENERAL { \
+    PWM_PORT_A_HIGH_SIDE,		\
+    PWM_PORT_A_LOW_SIDE,		\
+    PWM_PORT_B_HIGH_SIDE,		\
+    PWM_PORT_B_LOW_SIDE,		\
+    PWM_PORT_C_HIGH_SIDE,		\
+    PWM_PORT_C_LOW_SIDE,		\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    null,				\
+    PWM_CLOCK_SRC,			\
+    PWM_DUMMY_PORT_TRIGGER		\
+}
+
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT IFM_PORT_1BIT_6
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
+#define CPLD_SHARED_PORT null
 
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
-    WATCHDOG_TICK_PORT                  \
+    WATCHDOG_TICK_PORT,                 \
+    CPLD_SHARED_PORT			\
 }
 
 /* GPIO_PORTS */
@@ -100,18 +117,18 @@
 #define SOMANET_IFM_GPIO_D2 IFM_PORT_1BIT_22
 #define SOMANET_IFM_GPIO_D3 IFM_PORT_1BIT_32
 
-/* AMS Absolute Position Sensor Ports */ 
+/* SPI Ports */ 
 /*  MOSI = D3  
     SCLK = D1  
     MISO = D2 
     Slave Select = D0 */
-#define SOMANET_IFM_AMS_PORTS {     \
+#define SOMANET_IFM_SPI_PORTS {     \
     {                               \
         IFM_TILE_CLOCK_2,           \
         IFM_TILE_CLOCK_3,           \
-        SOMANET_IFM_GPIO_D3,        \
-        SOMANET_IFM_GPIO_D1,        \
-        SOMANET_IFM_GPIO_D2         \
+        null,                       \
+        null,                       \
+        null                        \
     },                              \
-    SOMANET_IFM_GPIO_D0             \
+    null                            \
 }

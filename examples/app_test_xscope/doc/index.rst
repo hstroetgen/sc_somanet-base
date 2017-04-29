@@ -6,7 +6,7 @@ Simple xSCOPE  Demo
     :backlinks: none
     :depth: 3
 
-This is a simple example on how to use xSCOPE.
+This is a simple example on how to use xSCOPE and debug prints forwarding via xSCOPE.
 While running, it should display a sinusoidal wave in xTIMEcomposer's xSCOPE tab.
 
 This app was originally provided by XMOS as an `Application Note`_.

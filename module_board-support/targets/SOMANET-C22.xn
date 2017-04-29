@@ -107,7 +107,7 @@
         
         <!-- xSCOPE using XLink A of L2-1, which is otherwise used as 
             a second link between L2-1 and L2-2 (see disabled link above) -->
-        <Link Encoding="2wire" Delays="4,5" Flags="SOD">
+        <Link Encoding="2wire" Delays="10clk" Flags="SOD">
             <LinkEndpoint NodeId="1" Link="X0LA" />
             <LinkEndpoint RoutingID="0x8000" Chanend="1" />
         </Link>

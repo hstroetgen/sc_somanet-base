@@ -5,11 +5,11 @@ SOMANET Base Utilities Component
 
 .. important:: You will always need to include **SOMANET Base** in your project in order to run any other **SOMANET Application**. 
 
-The SOMANET Base Package is a collection of necessary utilities and basic firmware for SOMANET programming. 
+The SOMANET Base Software Component is a collection of necessary utilities and basic firmware for SOMANET programming. 
 
 .. cssclass:: downloadable-button 
 
-  `Download Library <https://github.com/synapticon/sc_somanet-base/archive/master.zip>`_
+  `Download Component <https://github.com/synapticon/sc_somanet-base/archive/master.zip>`_
 
 .. cssclass:: github
 
@@ -45,7 +45,7 @@ Examples
 
  	XScope Test <examples/app_test_xscope/doc/index>
 
-Additionally, this repository includes the following example app: 
+Additionally, this component includes the following example applications: 
 
 * `XScope Test <examples/app_test_xscope/doc/index.html>`_: Simple xSCOPE and debug prints test
 * `COM-detect Test <examples/app_test_com-detect/doc/index.html>`_: Internal use only test application for COM-boards identification. 

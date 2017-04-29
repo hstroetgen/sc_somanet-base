@@ -4,8 +4,16 @@ sc_somanet-base Change Log
 3.0.0
 -----
 
+  * Add board support for DC1K-rev-c3, DC1K-rev-c4 and DC5K-rev-a3
+  * Add board support for CORE_C21-rev-b and CORE_C21-DX_G2
+  * Add initial support for IFM_DC30-rev-a
+  * Add initial support for GPIO-A_rev-a2 module
+  * Add BISS encoder and AMS encoder (SPI) ports to board support file of all IFM_DC boards
   * New board support files (not compatible with older versions of SOMANET libs)
   * Added module locks
+  * Added communication interface detection module
+  * Added reboot module
+  * Added flash handling service
   * Remove xSCOPE wrapper
 
 2.0.2

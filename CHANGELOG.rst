@@ -6,6 +6,9 @@ sc_somanet-base Change Log
 
   * New board support files (not compatible with older versions of SOMANET libs)
   * Added module locks
+  * Added communication interface detection module
+  * Added reboot module
+  * Added flash handling service
   * Remove xSCOPE wrapper
 
 2.0.2

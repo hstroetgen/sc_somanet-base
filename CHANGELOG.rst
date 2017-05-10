@@ -1,6 +1,10 @@
 sc_somanet-base Change Log
 ==========================
 
+3.0.1
+-----
+  * Fix issue with a not working Debug/Release build configuration for demo apps
+
 3.0.0
 -----
 

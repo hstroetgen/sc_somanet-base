@@ -1,21 +1,46 @@
 /*
  * spiffs_service.h
  *
+ *  SPIFFS Service, handling all file system operations
  *  Created on: Nov 15, 2016
- *      Author: simon
+ *      Author: Synapticon GmbH <support@synapticon.com>
  */
-
 
 #ifndef SPIFFS_SERVICE_H_
 #define SPIFFS_SERVICE_H_
 
 
 /**
- * @brief SPIFFS Service, handling all file system operations
+ * @brief Maximum size of file name in bytes
  */
-
 #define MAX_FILENAME_SIZE 16
+
+/**
+ * @brief Maximum data buffer size
+ */
 #define MAX_DATA_BUFFER_SIZE 4096
+
+/* If the opened file exists, it will be truncated to zero length before opened */
+#define SPIFFS_TRUNC                    (1<<1)
+#define SPIFFS_O_TRUNC                  SPIFFS_TRUNC
+/* If the opened file does not exist, it will be created before opened */
+#define SPIFFS_CREAT                    (1<<2)
+#define SPIFFS_O_CREAT                  SPIFFS_CREAT
+ /* The opened file may only be read */
+#define SPIFFS_RDONLY                   (1<<3)
+#define SPIFFS_O_RDONLY                 SPIFFS_RDONLY
+/* The opened file may only be written */
+#define SPIFFS_WRONLY                   (1<<4)
+#define SPIFFS_O_WRONLY                 SPIFFS_WRONLY
+/* The opened file may be both read and written */
+#define SPIFFS_RDWR                     (SPIFFS_RDONLY | SPIFFS_WRONLY)
+#define SPIFFS_O_RDWR                   SPIFFS_RDWR
+
+#define SPIFFS_EOF                      -10003
+
+#define SPIFFS_SEEK_SET                 (0)
+#define SPIFFS_SEEK_CUR                 (1)
+#define SPIFFS_SEEK_END                 (2)
 
 typedef struct {
   unsigned short obj_id;

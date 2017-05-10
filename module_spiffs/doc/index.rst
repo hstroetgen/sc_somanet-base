@@ -1,3 +1,5 @@
+.. _somanet_spiffs_module:
+
 ==============
 SPIFFS Service
 ==============
@@ -6,22 +8,22 @@ SPIFFS Service
     :backlinks: none
     :depth: 3
 
-SPIFFS Service provides a server, which managed the SPI Flash File System.
+SPIFFS Service provides a server which manages the SPI Flash File System.
 
 **SPIFFS (SPI Flash File System)**
 
-Spiffs is a file system intended for SPI NOR flash devices on embedded targets.
-Spiffs is designed with following characteristics in mind:
+SPIFFS is a file system intended for SPI NOR flash devices on embedded targets.
+SPIFFS is designed with the following characteristics in mind:
 
  - Small (embedded) targets, sparse RAM without heap
  - Only big areas of data (blocks) can be erased
  - An erase will reset all bits in block to ones
- - Writing pulls one to zeroes
- - Zeroes can only be pulled to ones by erase
+ - Writing pulls ones to zeros
+ - Zeros can only be pulled to ones by erase
  - Wear leveling
 
-Spiffs is allocated to a part or all of the memory of the SPI flash device. 
-This area is divided into logical blocks, which in turn are divided into 
+SPIFFS is allocated to a part or all of SOMANET SoCs data-partition.
+The allocated area is divided into logical blocks, which in turn are divided into 
 logical pages. The boundary of a logical block must coincide with one or more 
 physical blocks.
 
@@ -29,16 +31,18 @@ physical blocks.
    :width: 60%
 
 A logical block is divided further into a number of logical pages. A page 
-defines the smallest data holding element known to spiffs.
+defines the smallest data holding element known to SPIFFS.
 
 .. figure:: images/spiffs_file.png
    :width: 60%
 
-The service provides access to all functions of the spiffs - writing/reading/erasing of files and much more. For low-level access to flash memory, the module_flash_service is required.
+The service provides access to all functions of the SPIFFS - writing/reading/erasing of files and much more. For low-level access to flash memory, the module_flash_service is required as a dependency.
 
 .. figure:: images/spiffs_service_structure.png
    :width: 60%
 
+
+.. note:: The SOMANET SPIFFS Service is based on Peter Andersson's SPIFFS implementation, which you can find `here <https://github.com/pellepl/spiffs>`_.
 
 
 How to use
@@ -46,72 +50,73 @@ How to use
 
 .. important:: We assume that you are using :ref:`SOMANET Base <somanet_base>` and your app includes the required **board support** files for your SOMANET device.
 
-.. seealso:: You might find useful the :ref:`SPIFFS Console <app_test_spiffs_console>` example app, which illustrates the use of this module.
+.. seealso:: You might find useful the :ref:`SPIFFS Console <spiffs_console_demo>` example app, which illustrates the use of this module.
 
- 1. module_flash_service should be installed.
 
- 2. Add the SPIFFS Service module to your app Makefile.
+1. module_flash_service should be part of your workspace. 
 
- ::
+2. Add the SPIFFS Service module to your app Makefile.
 
-    USED_MODULES = module_flash_service module_spiffs
+    ::
 
- 3. Include the SPIFFS Service header spiffs_service.h in your app.
+        USED_MODULES = module_flash_service module_spiffs
 
- 4. Inside your main function, instantiate the interfaces array for the Service-Clients communication.
+3. Include the SPIFFS Service header spiffs_service.h in your app.
 
- 5. Optionally, instantiate the shared memory interface.
+4. Inside your main function, instantiate the interfaces array for the Service-Clients communication.
 
- 6. At whichever other core, now you can perform calls to the SPIFFS Service through the interfaces connected to it.
+5. Optionally, instantiate the shared memory interface.
 
-    .. code-block:: c
+6. On whichever other core you can now perform calls to the SPIFFS Service through the interfaces connected to it.
 
-        #include <flash_service.h>
+.. code-block:: c
 
-        #ifdef XCORE200
-            #include <quadflash.h>
-        #else
-            #include <flash.h>
-        #endif
+    #include <flash_service.h>
 
-        #include <spiffs_service.h>
+    #ifdef XCORE200
+        #include <quadflash.h>
+    #else
+        #include <flash.h>
+    #endif
 
-        #define MAX_FLASH_DATA_INTERFACES 2
-        #define MAX_SPIFFS_INTERFACES 2
+    #include <spiffs_service.h>
 
-        //---------SPI flash definitions---------
+    #define MAX_FLASH_DATA_INTERFACES 2
+    #define MAX_SPIFFS_INTERFACES 2
 
-        // Ports for QuadSPI access on explorerKIT.
-        fl_QSPIPorts ports = {
-            PORT_SQI_CS,
-            PORT_SQI_SCLK,
-            PORT_SQI_SIO,
-            on tile[0]: XS1_CLKBLK_1
-        };
+    //---------SPI flash definitions---------
 
-        int main(void)
+    // Ports for QuadSPI access on explorerKIT.
+    fl_QSPIPorts ports = {
+        PORT_SQI_CS,
+        PORT_SQI_SCLK,
+        PORT_SQI_SIO,
+        on tile[0]: XS1_CLKBLK_1
+    };
+
+    int main(void)
+    {
+        FlashDataInterface i_data[MAX_FLASH_DATA_INTERFACES];
+        FlashBootInterface i_boot;
+        SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
+
+        par
         {
-            FlashDataInterface i_data[MAX_FLASH_DATA_INTERFACES];
-            FlashBootInterface i_boot;
-            SPIFFSInterface i_spiffs[MAX_SPIFFS_INTERFACES];
-
-            par
+        on tile[0]:
             {
-            on tile[0]:
-                {
-                    flash_service(ports, i_boot, i_data, 1);
-                }
+                flash_service(ports, i_boot, i_data, 1);
+            }
 
-                on tile[1]:
-                {
-                    spiffs_service(i_data[0], i_spiffs, 1);
-                }
-             }
-
-             return 0;
+            on tile[1]:
+            {
+                spiffs_service(i_data[0], i_spiffs, 1);
+            }
          }
 
-.. seealso::  For further  configuring, integrating, using, and optimizing spiff see the wiki by Peter Andersson.
+         return 0;
+     }
+
+.. seealso::  For further information about SPIFFS see the `GitHub Wiki-Pages provided by Peter Andersson <https://github.com/pellepl/spiffs>`_
 
 API
 ===

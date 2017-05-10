@@ -1,20 +1,23 @@
 /*
  * spiffs_service.h
  *
+ *  SPIFFS Service, handling all file system operations
  *  Created on: Nov 15, 2016
- *      Author: simon
+ *      Author: Synapticon GmbH <support@synapticon.com>
  */
-
 
 #ifndef SPIFFS_SERVICE_H_
 #define SPIFFS_SERVICE_H_
 
 
 /**
- * @brief SPIFFS Service, handling all file system operations
+ * @brief Maximum size of file name in bytes
  */
-
 #define MAX_FILENAME_SIZE 16
+
+/**
+ * @brief Maximum data buffer size
+ */
 #define MAX_DATA_BUFFER_SIZE 4096
 
 /* If the opened file exists, it will be truncated to zero length before opened */

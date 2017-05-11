@@ -71,7 +71,7 @@ static long parse_token(char *token_str)
   return value;
 }
 
-static void parse_token_for_node(struct _token_t *tokens, SdoParam_t *param,
+static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
                                  size_t node)
 {
   param->index    = (uint16_t) parse_token(tokens->token[0]);

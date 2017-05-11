@@ -186,6 +186,11 @@
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/xc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/clang&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/src}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.xc.compiler.input.309554482" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
@@ -499,6 +504,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_flash_service/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/clang&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/src}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.c.compiler.input.c.732199936" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -818,6 +828,11 @@
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/clang&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${XMOS_TOOL_PATH}/target/include/c++/v1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc/images}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_spiffs/doc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_config_parser/src}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.379261960" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>

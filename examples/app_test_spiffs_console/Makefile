@@ -12,7 +12,7 @@ TARGET = XCORE-200-EXPLORER
 APP_NAME = app_test_spiffs_console
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_flash_service module_spiffs
+USED_MODULES = module_config_parser module_flash_service module_spiffs
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

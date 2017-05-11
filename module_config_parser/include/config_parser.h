@@ -1,15 +1,14 @@
 /*
- * readsdoconfig.h
+ * config.h
  *
  * Read device configuration for the SDO transfers from CSV file.
  *
- * Frank Jeschke <fjeschke@synapticon.com>
+ * Dmytro Dotsenko <ddotsenko@synapticon.com>
  *
  * 2017 Synapticon GmbH
  */
 
-#ifndef READSDOCONFIG_H
-#define READSDOCONFIG_H
+#pragma once
 
 #include <stdint.h>
 
@@ -25,13 +24,13 @@ typedef struct {
   uint16_t index;      ///< Index of the associated object in the object dictionary
   uint8_t  subindex;   ///< Subindex of this object
   uint32_t value;      ///< Value of the container
-} SdoParam_t;
+} Param_t;
 
 typedef struct {
   size_t node_count;       ///< Number of nodes in the config parameters file, this value needs to be checked against the real number of nodes on the bus
   size_t param_count;      ///< Number of configuration parameters, aka non commented lines in the config file
-  SdoParam_t parameter[MAX_PARAMS_COUNT][MAX_NODES_COUNT];  ///< array of node_count x param_count of configuration parameters, for every node is a list of SdoParam_t objects.
-} SdoConfigParameter_t;
+  Param_t parameter[MAX_PARAMS_COUNT][MAX_NODES_COUNT];  ///< array of node_count x param_count of configuration parameters, for every node is a list of SdoParam_t objects.
+} ConfigParameter_t;
 
 /**
  * \brief Function to read configuration file and parse the content
@@ -41,7 +40,6 @@ typedef struct {
  * \param params   Pointer to a \c SdoConfigParameter_t object
  * \return         0 if no error
  */
-int read_config(char path[], SdoConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
-int write_config(char path[], SdoConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
+int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
+int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
 
-#endif /* READSDOCONFIG_H */

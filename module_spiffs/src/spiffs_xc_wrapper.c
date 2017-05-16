@@ -44,7 +44,7 @@ static s32_t my_spiffs_erase(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t
 void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
 {
     spiffs_config cfg;
-    cfg.phys_size = 256*2048; // use only data part (start from phys. addr 0x80000)
+    cfg.phys_size = 524288; // use only data part
     cfg.phys_addr = 0; // start spiffs at start of spi flash
     cfg.phys_erase_block = 4096; // according to datasheet
     cfg.log_block_size = 65536; // let us not complicate things

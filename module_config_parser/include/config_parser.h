@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#define MAX_INPUT_LINE    1024
+#define MAX_INPUT_LINE    512
 #define MAX_TOKEN_SIZE    15
 #define MAX_NODES_COUNT 10
 #define MAX_PARAMS_COUNT 100

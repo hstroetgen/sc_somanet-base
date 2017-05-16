@@ -92,7 +92,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     return -1;
   }
 
-  struct _token_t t[120];
+  struct _token_t t[70];
   size_t param_count = 0;
 
   char inbuf[MAX_INPUT_LINE];

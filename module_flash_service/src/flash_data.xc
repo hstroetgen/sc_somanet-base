@@ -3,8 +3,6 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <xs1.h>
-#include <platform.h>
 #include <flash_service.h>
 #include <flash_common.h>
 
@@ -37,7 +35,13 @@ int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
          page_num = addr / FLASH_PAGE_SIZE;
 
          //save previous data from page
-         fl_readDataPage(page_num, page_buffer);
+         if (result !=0 )
+         {
+                       printstrln( "Could not connect to FLASH" );
+                       return result;
+          }
+
+         result = fl_readDataPage(page_num, page_buffer);
          if (result !=0 )
          {
               printstrln( "Could not read from FLASH" );
@@ -60,16 +64,12 @@ int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
 
     }  while (size > 0);
 
-   // printstrln( "writing" );
-
     return result;
 }
 
 int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
 
     int result = 0;
-    timer t;
-    unsigned int start_time, end_time;
 
     // Read from the data partition
     result = fl_readData(addr, size, data);
@@ -79,7 +79,6 @@ int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
         return result;
     }
 
-   // printstrln( "reading" );
     return result;
 }
 

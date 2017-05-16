@@ -17,12 +17,12 @@
 /*  @brief Defines the maximum size of a packet coming over the interface to be written into flash
  * (in bytes)
  */
-#define MAX_PACKET_SIZE 4096
+#define MAX_PACKET_SIZE 256
 
 /*  @brief Defines the maximum size of a packet coming over the interface to be written into flash
  * (in bytes)
  */
-#define INTERMEDIATE_BUFFER_SIZE 1024
+#define INTERMEDIATE_BUFFER_SIZE 256
 
 
 #ifdef __XC__

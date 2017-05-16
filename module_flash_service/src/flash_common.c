@@ -36,7 +36,7 @@ void flash_init(fl_SPIPorts *SPI)
 
 {
     SPI_port = SPI;
-    fl_connect(SPI_port);
+    connect_to_flash();
 }
 #endif
 
@@ -45,10 +45,12 @@ void flash_init(fl_SPIPorts *SPI)
  * @return  0 if connecting was successful.
  */
 int connect_to_flash(void) {
+
     int result = fl_connect(SPI_port);
     if (result != 0) {
-        printstrln("Could not connect to flash memory");
+        printstrln("Could not connect to flash memory \n");
     }
+
     return result;
 }
 

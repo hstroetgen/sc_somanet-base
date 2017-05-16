@@ -5,13 +5,12 @@
  *      Author: simon
  */
 
-
 #include <stdio.h>
 #include <xccompat.h>
 #include <spiffs.h>
 #include <spiffs_xc_wrapper.h>
 
-#define LOG_PAGE_SIZE       4096
+#define LOG_PAGE_SIZE       256
 #define MAX_OPEN_FILES       16
 
 static u8_t spiffs_work_buf[LOG_PAGE_SIZE*2];
@@ -45,9 +44,9 @@ static s32_t my_spiffs_erase(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t
 void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
 {
     spiffs_config cfg;
-    cfg.phys_size = 2*1024*1024 - 524288; // use only data part (start from phys. addr 0x80000)
+    cfg.phys_size = 256*2048; // use only data part (start from phys. addr 0x80000)
     cfg.phys_addr = 0; // start spiffs at start of spi flash
-    cfg.phys_erase_block = 65536; // according to datasheet
+    cfg.phys_erase_block = 4096; // according to datasheet
     cfg.log_block_size = 65536; // let us not complicate things
     cfg.log_page_size = LOG_PAGE_SIZE; // as we said
 

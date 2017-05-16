@@ -8,7 +8,6 @@
 #include <string.h>
 #include <xccompat.h>
 #include <print.h>
-#include <stdio.h>
 #include <flash_service.h>
 #include <spiffs_service.h>
 #include <spiffs_xc_wrapper.h>

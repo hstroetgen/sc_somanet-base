@@ -18,7 +18,7 @@
 /**
  * @brief Maximum data buffer size
  */
-#define MAX_DATA_BUFFER_SIZE 4096
+#define MAX_DATA_BUFFER_SIZE 256
 
 /* If the opened file exists, it will be truncated to zero length before opened */
 #define SPIFFS_TRUNC                    (1<<1)

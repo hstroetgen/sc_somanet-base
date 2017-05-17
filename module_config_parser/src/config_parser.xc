@@ -17,6 +17,7 @@
 #include <flash_service.h>
 #include <spiffs_service.h>
 #include <config_parser.h>
+#include <print.h>
 
 
 
@@ -92,8 +93,8 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     return -1;
   }
 
-  struct _token_t t[70];
-  size_t param_count = 0;
+  struct _token_t t[MAX_PARAMS_COUNT];
+  int param_count = 0;
 
   char inbuf[MAX_INPUT_LINE];
   size_t inbuf_length = 0;
@@ -174,20 +175,12 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
   }
 
 
-  /*sprintf(line_buf, "#index, subindex,   ");
-  for (size_t node = 0; node < parameter->node_count; node++) {
-           sprintf(line_buf + strlen(line_buf), "axis %d,       ", node);
-   }
-   line_buf[strlen(line_buf)]='\n';
-
-   retval = i_spiffs.write(cfd, line_buf, strlen(line_buf));*/
-
    for (size_t param = 0; param < parameter->param_count; param++) {
           uint16_t index = parameter->parameter[param][0].index;
           uint8_t subindex = parameter->parameter[param][0].subindex;
           uint32_t value = parameter->parameter[param][0].value;
 
-          //memset(line_buf, NULL, sizeof(line_buf));
+          safememset(line_buf, 0, sizeof(line_buf));
           sprintf(line_buf, "0x%x,  %3d", index, subindex, value);
 
           for (size_t node = 0; node < parameter->node_count; node++) {
@@ -201,7 +194,6 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
               return retval;
 
   }
-
 
   retval = i_spiffs.close_file(cfd);
   if ( retval < 0) {

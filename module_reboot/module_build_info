@@ -1,5 +1,5 @@
 # The placeholder.
 
-DEPENDENT_MODULES = module_ethercat
+DEPENDENT_MODULES = lib_ethercat
 
 MODULE_XCC_XC_FLAGS = $(XCC_XC_FLAGS)

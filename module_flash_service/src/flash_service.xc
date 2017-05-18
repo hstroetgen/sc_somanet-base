@@ -48,6 +48,10 @@ void flash_service(fl_SPIPorts &SPI,
 
     flash_init(SPI);
 
+    //Send data ready notification to all clients
+     for (int i = 0; i < n_data; i++)
+         i_data[i].service_ready();
+
     while (1) {
         select {
             case !isnull(i_data) => i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {

@@ -37,6 +37,12 @@ void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int a
 
 void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs)
 {
+
+    select {
+        case i_data.service_ready():
+    break;
+    }
+
     /* Init SPIFFS */
 
     printstrln(">>   SPIFFS SERVICE STARTING...\n");

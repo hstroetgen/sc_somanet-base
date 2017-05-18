@@ -14,7 +14,7 @@
 
 #define MAX_INPUT_LINE    255
 #define MAX_TOKEN_SIZE    15
-#define MAX_NODES_COUNT 10
+#define MAX_NODES_COUNT 3
 #define MAX_PARAMS_COUNT 160
 
 /**

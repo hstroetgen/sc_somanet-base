@@ -91,7 +91,7 @@
 #define INTERNAL_COM_PORT_4BIT_NOT_CONNECTED on tile[COM_TILE]: XS1_PORT_4B
 #define INTERNAL_PORT_16BIT_NOT_CONNECTED_0 on tile[IFM_TILE]: XS1_PORT_16A
 
-fl_QSPIPorts ports = {
+fl_QSPIPorts p_qspi_flash = {
   PORT_SQI_CS,
   PORT_SQI_SCLK,
   PORT_SQI_SIO,

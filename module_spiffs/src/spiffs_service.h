@@ -9,6 +9,8 @@
 #ifndef SPIFFS_SERVICE_H_
 #define SPIFFS_SERVICE_H_
 
+#include <flash_service.h>
+#include <xccompat.h>
 
 /**
  * @brief Maximum size of file name in bytes
@@ -221,6 +223,6 @@ interface SPIFFSInterface {
  * @param n_spiffs   Pattern variable for SPIFFS service
  *
  */
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs);
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server (&?i_spiffs)[n_spiffs], unsigned n_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

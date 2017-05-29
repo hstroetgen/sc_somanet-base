@@ -18,11 +18,6 @@
 #include <string.h>
 
 
-/* Defines the maximum size of a packet coming over the interface to be written into flash
- * (in bytes)
- */
-#define MAX_PACKET_SIZE 4096
-
 #ifdef XCORE200
 void flash_service(fl_QSPIPorts &SPI,
                    interface FlashBootInterface server ?i_boot,
@@ -47,6 +42,10 @@ void flash_service(fl_SPIPorts &SPI,
     printstr(">>   SOMANET FLASH SERVICE STARTING...\n");
 
     flash_init(SPI);
+
+    //Send data ready notification to all clients
+     for (int i = 0; i < n_data; i++)
+         i_data[i].service_ready();
 
     while (1) {
         select {

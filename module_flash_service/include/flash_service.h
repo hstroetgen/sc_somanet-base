@@ -74,6 +74,9 @@ interface FlashDataInterface {
      * @return 0 - if writing of data was successful
      */
     [[guarded]] int set_configurations(int type, unsigned char data[n_bytes], unsigned n_bytes);
+
+
+    [[notification]] slave void service_ready ( void );
 };
 
 typedef interface FlashDataInterface FlashDataInterface;
@@ -130,6 +133,7 @@ interface FlashBootInterface
 
     [[clears_notification]]
     int get_notification();
+
 };
 
 typedef interface FlashBootInterface FlashBootInterface;

@@ -93,7 +93,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     return -1;
   }
 
-  struct _token_t t[MAX_PARAMS_COUNT];
+  struct _token_t t;
   int param_count = 0;
 
   char inbuf[MAX_INPUT_LINE];
@@ -114,7 +114,12 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     if (c[0] == '\n') {
       if (inbuf_length > 1) {
         inbuf[inbuf_length++] = '\0';
-        tokenize_inbuf(inbuf, inbuf_length, &t[param_count]);
+        tokenize_inbuf(inbuf, inbuf_length, &t);
+
+        for (size_t node = 0; node < t.count - 2; node++) {
+            parse_token_for_node(&t, &parameter->parameter[param_count][node], node);
+        }
+
         param_count++;
       }
 
@@ -139,20 +144,13 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     return retval;
   }
 
-
   parameter->param_count = param_count;
-  parameter->node_count  = t->count - 2;
+  parameter->node_count  = t.count - 2;
   if (parameter->node_count == 0 || parameter->param_count == 0) {
-    return -1;
+    retval = 0;
   }
 
 
-  for (size_t node = 0; node < parameter->node_count; node++) {
-    for (size_t param = 0; param < parameter->param_count; param++) {
-      parse_token_for_node(&t[param], &parameter->parameter[param][node], node);
-
-    }
-  }
 
   return retval;
 }

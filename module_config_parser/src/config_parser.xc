@@ -89,7 +89,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
   }
 
   int cfd = i_spiffs.open_file(path, strlen(path), SPIFFS_RDONLY);
-  if ((cfd < 0)||(cfd > 255)) {
+  if ((cfd < 0)||(cfd > SPIFFS_MAX_FILE_DESCRIPTOR)) {
     return -1;
   }
 
@@ -168,7 +168,7 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
 
   char line_buf[255];
   int cfd = i_spiffs.open_file(path, strlen(path), (SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR));
-  if ((cfd < 0)||(cfd > 255)) {
+  if ((cfd < 0)||(cfd > SPIFFS_MAX_FILE_DESCRIPTOR)) {
     return -1;
   }
 

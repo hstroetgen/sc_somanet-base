@@ -62,7 +62,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
     while (1) {
         select {
                    case !isnull(i_spiffs) => i_spiffs[int i].open_file(char path[], unsigned path_length, unsigned short flags) -> unsigned short fd:
-                       char buffer[MAX_FILENAME_SIZE];
+                       char buffer[SPIFFS_MAX_FILENAME_SIZE];
                        memcpy(buffer,path,path_length+1);
                        fd = iSPIFFS_open(buffer, flags);
                    break;
@@ -71,12 +71,12 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].read(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
-                       unsigned char buffer[MAX_DATA_BUFFER_SIZE];
+                       unsigned char buffer[SPIFFS_MAX_DATA_BUFFER_SIZE];
                        unsigned int read_len, read_offset = 0;
 
-                       for (int il = len; il > 0; il = il - MAX_DATA_BUFFER_SIZE)
+                       for (int il = len; il > 0; il = il - SPIFFS_MAX_DATA_BUFFER_SIZE)
                        {
-                           read_len = (il > MAX_DATA_BUFFER_SIZE ? MAX_DATA_BUFFER_SIZE : il);
+                           read_len = (il > SPIFFS_MAX_DATA_BUFFER_SIZE ? SPIFFS_MAX_DATA_BUFFER_SIZE : il);
                            res = iSPIFFS_read(fd, buffer, read_len);
                            if (res < 0) break; else res = len;
                            memcpy(data + read_offset, buffer, read_len);
@@ -85,12 +85,12 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].write(unsigned short fd, unsigned char data[], unsigned int len) -> int res:
-                       unsigned char buffer[MAX_DATA_BUFFER_SIZE];
+                       unsigned char buffer[SPIFFS_MAX_DATA_BUFFER_SIZE];
                        unsigned int write_len, write_offset = 0;
 
-                       for (int il = len; il > 0; il = il - MAX_DATA_BUFFER_SIZE)
+                       for (int il = len; il > 0; il = il - SPIFFS_MAX_DATA_BUFFER_SIZE)
                        {
-                           write_len = (il > MAX_DATA_BUFFER_SIZE ? MAX_DATA_BUFFER_SIZE : il);
+                           write_len = (il > SPIFFS_MAX_DATA_BUFFER_SIZE ? SPIFFS_MAX_DATA_BUFFER_SIZE : il);
                            memcpy(buffer, data + write_offset, write_len);
                            res = iSPIFFS_write(fd, buffer, write_len);
                            if (res < 0) break; else res = len;
@@ -123,7 +123,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                            size = s.size;
                            type = s.type;
                            pix = s.pix;
-                           memcpy(name, s.name, MAX_FILENAME_SIZE);
+                           memcpy(name, s.name, SPIFFS_MAX_FILENAME_SIZE);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].unmount():
@@ -143,8 +143,8 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].rename_file(char old_path[], unsigned old_path_length, char new_path[], unsigned new_path_length) -> int res:
-                       char old_buffer[MAX_FILENAME_SIZE];
-                       char new_buffer[MAX_FILENAME_SIZE];
+                       char old_buffer[SPIFFS_MAX_FILENAME_SIZE];
+                       char new_buffer[SPIFFS_MAX_FILENAME_SIZE];
                        memcpy(old_buffer,old_path,old_path_length+1);
                        memcpy(new_buffer,new_path,new_path_length+1);
                        res = iSPIFFS_rename(old_buffer, new_buffer);

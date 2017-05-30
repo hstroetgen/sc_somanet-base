@@ -15,12 +15,12 @@
 /**
  * @brief Maximum size of file name in bytes
  */
-#define MAX_FILENAME_SIZE 16
+#define SPIFFS_MAX_FILENAME_SIZE 16
 
 /**
  * @brief Maximum data buffer size
  */
-#define MAX_DATA_BUFFER_SIZE 1024
+#define SPIFFS_MAX_DATA_BUFFER_SIZE 1024
 
 /* If the opened file exists, it will be truncated to zero length before opened */
 #define SPIFFS_TRUNC                    (1<<1)
@@ -49,7 +49,7 @@ typedef struct {
   unsigned int size;
   unsigned char type;
   unsigned short pix;
-  unsigned char name[MAX_FILENAME_SIZE];
+  unsigned char name[SPIFFS_MAX_FILENAME_SIZE];
 } spiffs_stat;
 
 

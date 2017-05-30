@@ -18,6 +18,11 @@
 #define SPIFFS_MAX_FILENAME_SIZE 16
 
 /**
+ * @brief Maximum value of file descriptor
+ */
+#define SPIFFS_MAX_FILE_DESCRIPTOR 256
+
+/**
  * @brief Maximum data buffer size
  */
 #define SPIFFS_MAX_DATA_BUFFER_SIZE 1024

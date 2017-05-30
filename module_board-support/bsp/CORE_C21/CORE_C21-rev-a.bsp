@@ -13,11 +13,11 @@
 #include <xscope.h>
 
 /* For single-node setups */
-#define APP_TILE    	0
+#define APP_TILE    0
 #define APP_TILE 	0
-#define APP_TILE_1  	0
-#define APP_TILE_2 	1
-#define IFM_TILE   	1
+#define APP_TILE_1  0
+#define APP_TILE_2  0
+#define IFM_TILE    1
 
 /* LED PORTS */
 #define CORE_LED_PORT_RED on tile[APP_TILE]: XS1_PORT_1M

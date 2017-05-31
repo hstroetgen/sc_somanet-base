@@ -44,6 +44,7 @@
 #define SPIFFS_O_RDWR                   SPIFFS_RDWR
 
 #define SPIFFS_EOF                      -10003
+#define SPIFFS_ERR_FULL                 -10001
 
 #define SPIFFS_SEEK_SET                 (0)
 #define SPIFFS_SEEK_CUR                 (1)

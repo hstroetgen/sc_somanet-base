@@ -1,7 +1,7 @@
-/**************
- * Core-C21-DX
- * Rev. B
- **************/
+/*****************
+ * Core-C21-DX-G2
+ * Rev. A
+ *****************/
 
 #pragma once
 
@@ -12,11 +12,13 @@
 #include <stdio.h>
 #include <xscope.h>
 
+#define CORE_C21_DX_G2
+
 /* Standard Tile definitions for demo/test apps */
-#define COM_TILE 	0
+#define COM_TILE	0
 #define APP_TILE 	0
-#define APP_TILE_1  0
-#define APP_TILE_2  0
+#define APP_TILE_1 	0
+#define APP_TILE_2 	1
 #define IFM_TILE 	1
 
 /* CLOCKS */
@@ -87,8 +89,9 @@
 /* INTERNAL PORTS */
 #define INTERNAL_PORT_FOR_SW_CLK_25MHZ_BY_DEFAULT_NOT_CONNECTED on tile[COM_TILE]: XS1_PORT_1E
 #define INTERNAL_COM_PORT_4BIT_NOT_CONNECTED on tile[COM_TILE]: XS1_PORT_4B
+#define INTERNAL_PORT_16BIT_NOT_CONNECTED_0 on tile[IFM_TILE]: XS1_PORT_16A
 
-fl_QSPIPorts ports = {
+fl_QSPIPorts p_qspi_flash = {
   PORT_SQI_CS,
   PORT_SQI_SCLK,
   PORT_SQI_SIO,

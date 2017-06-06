@@ -29,7 +29,7 @@ fl_SPIPorts *SPI_port;
 void flash_init(fl_QSPIPorts *SPI)
 {
     SPI_port = SPI;
-    fl_connect(SPI_port);
+    connect_to_flash();
 }
 #else
 void flash_init(fl_SPIPorts *SPI)

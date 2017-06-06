@@ -41,12 +41,12 @@ int main(void)
 
     on tile[APP_TILE]:
     {
-        spiffs_service(i_data[0], i_spiffs, 1);
+        spiffs_console(i_spiffs[0]);
     }
 
     on tile[IFM_TILE]:
     {
-        spiffs_console(i_spiffs[0]);
+        spiffs_service(i_data[0], i_spiffs, 1);
     }
   }
 

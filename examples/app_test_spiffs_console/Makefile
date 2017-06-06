@@ -4,7 +4,8 @@
 #Possible SOMANET targets:
 # SOMANET-C22
 # SOMANET-C21-DX
-TARGET = SOMANET-C21-DX_G2
+# SOMANET-C21-DX_G2
+TARGET =
 
 # The APP_NAME variable determines the name of the final .xe file. It should
 # not include the .xe postfix. If left blank the name will default to
@@ -19,7 +20,11 @@ USED_MODULES = module_config_parser module_flash_service module_spiffs module_bo
 # XCC_XC_FLAGS, XCC_C_FLAGS, XCC_ASM_FLAGS, XCC_CPP_FLAGS
 # If the variable XCC_MAP_FLAGS is set it overrides the flags passed to
 # xcc for the final link (mapping) stage.
+ifeq ($(TARGET),SOMANET-C22)
+XCC_FLAGS = -Os -g  -lflash
+else
 XCC_FLAGS = -Os -g  -lquadflash -DXCORE200=1
+endif
 
 # The XCORE_ARM_PROJECT variable, if set to 1, configures this
 # project to create both xCORE and ARM binaries.

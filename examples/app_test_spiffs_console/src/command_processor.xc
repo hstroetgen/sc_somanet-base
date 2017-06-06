@@ -8,7 +8,11 @@
 #include <command_processor.h>
 #include <syscall.h>
 
+#ifndef XCORE200
+#define BUFFER_SIZE 5*1024
+#else
 #define BUFFER_SIZE 20*1024
+#endif
 
 #define MAX_FILENAME_SIZE    SPIFFS_MAX_FILENAME_SIZE
 #

@@ -5,6 +5,7 @@
  *      Author: w
  */
 
+#include <CORE_BOARD_REQUIRED>
 #include <xs1.h>
 #include <platform.h>
 #include <flash_service.h>
@@ -20,16 +21,6 @@
 #define MAX_SPIFFS_INTERFACES 2
 #define MAX_FLASH_DATA_INTERFACES 2
 
-//---------SPI flash definitions---------
-
-// Ports for QuadSPI access on explorerKIT.
-fl_QSPIPorts ports = {
-PORT_SQI_CS,
-PORT_SQI_SCLK,
-PORT_SQI_SIO,
-on tile[0]: XS1_CLKBLK_1
-};
-
 
 int main(void)
 {
@@ -39,17 +30,21 @@ int main(void)
 
   par
   {
-    on tile[0]:
+    on tile[COM_TILE]:
     {
-        flash_service(ports, i_boot, i_data, 1);
+#ifdef XCORE200
+        flash_service(p_qspi_flash, i_boot, i_data, 1);
+#else
+        flash_service(p_spi_flash, i_boot, i_data, 1);
+#endif
     }
 
-    on tile[1]:
+    on tile[APP_TILE]:
     {
         spiffs_service(i_data[0], i_spiffs, 1);
     }
 
-    on tile[1]:
+    on tile[IFM_TILE]:
     {
         spiffs_console(i_spiffs[0]);
     }

@@ -10,6 +10,8 @@
 
 #define BUFFER_SIZE 20*1024
 
+#define MAX_FILENAME_SIZE    SPIFFS_MAX_FILENAME_SIZE
+#
 void spiffs_console(client SPIFFSInterface i_spiffs)
 {
     unsigned char buf[BUFFER_SIZE];

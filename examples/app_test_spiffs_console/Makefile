@@ -4,7 +4,7 @@
 #Possible SOMANET targets:
 # SOMANET-C22
 # SOMANET-C21-DX
-TARGET = XCORE-200-EXPLORER
+TARGET = SOMANET-C21-DX_G2
 
 # The APP_NAME variable determines the name of the final .xe file. It should
 # not include the .xe postfix. If left blank the name will default to
@@ -12,7 +12,7 @@ TARGET = XCORE-200-EXPLORER
 APP_NAME = app_test_spiffs_console
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_config_parser module_flash_service module_spiffs
+USED_MODULES = module_config_parser module_flash_service module_spiffs module_board-support
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

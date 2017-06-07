@@ -9,10 +9,15 @@
 #ifndef SPIFFS_XC_WRAPPER_H_
 #define SPIFFS_XC_WRAPPER_H_
 
+#include <xccompat.h>
 
 void if_read_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf);
 void if_write_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size, unsigned char *buf);
 void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int addr, unsigned int size);
+
+#ifdef __XC__
+extern "C" {
+#endif
 
 void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data));
 
@@ -36,5 +41,8 @@ int iSPIFFS_info(unsigned int total[], unsigned int used[]);
 int iSPIFFS_gc(unsigned int size);
 int iSPIFFS_gc_quick(unsigned short max_free_pages);
 
+#ifdef __XC__
+}
+#endif
 
 #endif /* SPIFFS_XC_WRAPPER_H_ */

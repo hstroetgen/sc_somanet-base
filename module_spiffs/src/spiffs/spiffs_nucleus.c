@@ -123,6 +123,7 @@ s32_t spiffs_phys_cpy(
 // @param user_var_p            any pointer, passed to the callback visitor function
 // @param block_ix              reported block index where match was found
 // @param lu_entry              reported look up index where match was found
+#pragma stackfunction  200
 s32_t spiffs_obj_lu_find_entry_visitor(
     spiffs *fs,
     spiffs_block_ix starting_block,
@@ -225,6 +226,7 @@ s32_t spiffs_obj_lu_find_entry_visitor(
 }
 
 #if !SPIFFS_READ_ONLY
+#pragma stackfunction 50
 s32_t spiffs_erase_block(
     spiffs *fs,
     spiffs_block_ix bix) {
@@ -906,6 +908,7 @@ s32_t spiffs_page_delete(
 
 #if !SPIFFS_READ_ONLY
 // Create an object index header page with empty index and undefined length
+#pragma stackfunction 50
 s32_t spiffs_object_create(
     spiffs *fs,
     spiffs_obj_id obj_id,
@@ -1018,6 +1021,7 @@ s32_t spiffs_object_update_index_hdr(
 }
 #endif // !SPIFFS_READ_ONLY
 
+#pragma stackfunction 100
 void spiffs_cb_object_event(
     spiffs *fs,
     spiffs_page_object_ix *objix,
@@ -1673,6 +1677,7 @@ s32_t spiffs_object_find_object_index_header_by_name(
 
 #if !SPIFFS_READ_ONLY
 // Truncates object to new size. If new size is null, object may be removed totally
+#pragma stackfunction 50
 s32_t spiffs_object_truncate(
     spiffs_fd *fd,
     u32_t new_size,

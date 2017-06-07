@@ -8,7 +8,8 @@
 #ifndef SPIFFS_H_
 #define SPIFFS_H_
 
-#if defined(__cplusplus)
+#if defined(__XC__)
+#include <xccompat.h>
 extern "C" {
 #endif
 

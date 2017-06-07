@@ -472,6 +472,7 @@ static s32_t spiffs_lookup_check_v(spiffs *fs, spiffs_obj_id obj_id, spiffs_bloc
 
 // Scans all object look up. For each entry, corresponding page header is checked for validity.
 // If an object index header page is found, this is also checked
+#pragma stackfunction 50
 s32_t spiffs_lookup_consistency_check(spiffs *fs, u8_t check_all_objects) {
   (void)check_all_objects;
   s32_t res = SPIFFS_OK;
@@ -848,6 +849,7 @@ static s32_t spiffs_page_consistency_check_i(spiffs *fs) {
 }
 
 // Checks consistency amongst all pages and fixes irregularities
+#pragma stackfunction 50
 s32_t spiffs_page_consistency_check(spiffs *fs) {
   CHECK_CB(fs, SPIFFS_CHECK_PAGE, SPIFFS_CHECK_PROGRESS, 0, 0);
   s32_t res = spiffs_page_consistency_check_i(fs);
@@ -970,6 +972,7 @@ static s32_t spiffs_object_index_consistency_check_v(spiffs *fs, spiffs_obj_id o
 // Scans for index pages. When an index page is found, corresponding index header is searched for.
 // If no such page exists, the index page cannot be reached as no index header exists and must be
 // deleted.
+#pragma stackfunction 50
 s32_t spiffs_object_index_consistency_check(spiffs *fs) {
   s32_t res = SPIFFS_OK;
   // impl note:

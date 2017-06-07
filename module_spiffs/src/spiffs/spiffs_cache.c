@@ -117,6 +117,7 @@ void spiffs_cache_drop_page(spiffs *fs, spiffs_page_ix pix) {
 // ------------------------------
 
 // reads from spi flash or the cache
+#pragma stackfunction  100
 s32_t spiffs_phys_rd(
     spiffs *fs,
     u8_t op,
@@ -177,6 +178,7 @@ s32_t spiffs_phys_rd(
 }
 
 // writes to spi flash and/or the cache
+#pragma stackfunction 50
 s32_t spiffs_phys_wr(
     spiffs *fs,
     u8_t op,
@@ -243,6 +245,7 @@ spiffs_cache_page *spiffs_cache_page_get_by_fd(spiffs *fs, spiffs_fd *fd) {
 
 // allocates a new cache page and refers this to given fd - flushes an old cache
 // page if all cache is busy
+#pragma stackfunction 50
 spiffs_cache_page *spiffs_cache_page_allocate_by_fd(spiffs *fs, spiffs_fd *fd) {
   // before this function is called, it is ensured that there is no already existing
   // cache page with same object id
@@ -260,6 +263,7 @@ spiffs_cache_page *spiffs_cache_page_allocate_by_fd(spiffs *fs, spiffs_fd *fd) {
 }
 
 // unrefers all fds that this cache page refers to and releases the cache page
+#pragma stackfunction 50
 void spiffs_cache_fd_release(spiffs *fs, spiffs_cache_page *cp) {
   if (cp == 0) return;
   u32_t i;
@@ -278,6 +282,7 @@ void spiffs_cache_fd_release(spiffs *fs, spiffs_cache_page *cp) {
 #endif
 
 // initializes the cache
+#pragma stackfunction 50
 void spiffs_cache_init(spiffs *fs) {
   if (fs->cache == 0) return;
   u32_t sz = fs->cache_size;

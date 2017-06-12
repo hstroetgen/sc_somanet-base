@@ -3,6 +3,8 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
+#include <platform.h>
+
 #include <flash_service.h>
 #include <flash_boot.h>
 #include <flash_data.h>
@@ -38,6 +40,18 @@ void flash_service(fl_SPIPorts &SPI,
         printstr("Error: No flash interfaces provided.\n");
         return;
     }
+
+    write_sswitch_reg(get_local_tile_id(), 8, 1);
+
+    // read tile frequency
+    unsigned int app_tile_usec = USEC_STD;
+    unsigned ctrlReadData;
+    read_sswitch_reg(get_local_tile_id(), 8, ctrlReadData);
+       if(ctrlReadData == 1) {
+           app_tile_usec = USEC_FAST;
+       }
+
+    change_FlashDeviceSpec(app_tile_usec);
 
     printstr(">>   SOMANET FLASH SERVICE STARTING...\n");
 

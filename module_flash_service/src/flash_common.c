@@ -24,31 +24,40 @@ fl_QuadDeviceSpec dSpecs[MAX_FLASH_DEVICES];
 
 void change_FlashDeviceSpec(int usec)
 {
-    // List of QuadSPI devices
-    if (usec == USEC_STD)
+    static int previous_usec;
+
+    if (usec != previous_usec)
     {
-        fl_QuadDeviceSpec QuadDeviceSpecs[] = {
-            FL_QUADDEVICE_SPANSION_S25FL116K,
-            FL_QUADDEVICE_SPANSION_S25FL132K,
-            FL_QUADDEVICE_SPANSION_S25FL164K,
-            FL_QUADDEVICE_ISSI_IS25LQ080B,
-            FL_QUADDEVICE_ISSI_IS25LQ016B,
-            FL_QUADDEVICE_ISSI_IS25LQ032B
-        };
-        memcpy(dSpecs, QuadDeviceSpecs, sizeof(QuadDeviceSpecs));
-    }
-    else
-    if (usec == USEC_FAST)
-    {
-        fl_QuadDeviceSpec QuadDeviceSpecs[] = {
-            FL_QUADDEVICE_SPANSION_S25FL116K_250MHZ,
-            FL_QUADDEVICE_SPANSION_S25FL132K_250MHZ,
-            FL_QUADDEVICE_SPANSION_S25FL164K_250MHZ,
-            FL_QUADDEVICE_ISSI_IS25LQ080B_250MHZ,
-            FL_QUADDEVICE_ISSI_IS25LQ016B_250MHZ,
-            FL_QUADDEVICE_ISSI_IS25LQ032B_250MHZ
-        };
-        memcpy(dSpecs, QuadDeviceSpecs, sizeof(QuadDeviceSpecs));
+        // List of QuadSPI devices
+        if (usec == USEC_STD)
+        {
+            fl_QuadDeviceSpec QuadDeviceSpecs[] = {
+                FL_QUADDEVICE_SPANSION_S25FL116K,
+                FL_QUADDEVICE_SPANSION_S25FL132K,
+                FL_QUADDEVICE_SPANSION_S25FL164K,
+                FL_QUADDEVICE_ISSI_IS25LQ080B,
+                FL_QUADDEVICE_ISSI_IS25LQ016B,
+                FL_QUADDEVICE_ISSI_IS25LQ032B
+            };
+            memcpy(dSpecs, QuadDeviceSpecs, sizeof(QuadDeviceSpecs));
+            connect_to_flash();
+            previous_usec = usec;
+        }
+        else
+        if (usec == USEC_FAST)
+        {
+            fl_QuadDeviceSpec QuadDeviceSpecs[] = {
+                FL_QUADDEVICE_SPANSION_S25FL116K_250MHZ,
+                FL_QUADDEVICE_SPANSION_S25FL132K_250MHZ,
+                FL_QUADDEVICE_SPANSION_S25FL164K_250MHZ,
+                FL_QUADDEVICE_ISSI_IS25LQ080B_250MHZ,
+                FL_QUADDEVICE_ISSI_IS25LQ016B_250MHZ,
+                FL_QUADDEVICE_ISSI_IS25LQ032B_250MHZ
+            };
+            memcpy(dSpecs, QuadDeviceSpecs, sizeof(QuadDeviceSpecs));
+            connect_to_flash();
+            previous_usec = usec;
+        }
     }
 }
 #else

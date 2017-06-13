@@ -61,10 +61,11 @@ void change_FlashDeviceSpec(int usec)
     }
 }
 #else
+#define MAX_FLASH_DEVICES 25
 fl_SPIPorts *SPI_port;
 
 // List of SPI devices that are supported by default.
-fl_DeviceSpec dSpecs[] =
+fl_DeviceSpec dSpecs[MAX_FLASH_DEVICES] =
 {
     FL_DEVICE_ATMEL_AT25DF041A,
     FL_DEVICE_ST_M25PE10,

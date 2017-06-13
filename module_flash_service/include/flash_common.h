@@ -9,9 +9,9 @@
 #include <xccompat.h>
 
 #ifdef XCORE200
-#include <quadflash.h>
+#include <quadflashlib.h>
 #else
-#include <flash.h>
+#include <flashlib.h>
 #endif
 
 #define DATA_PAGES_PER_TYPE         4

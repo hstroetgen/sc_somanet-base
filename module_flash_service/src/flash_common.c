@@ -9,10 +9,7 @@
 
 
 #ifdef XCORE200
-#include <quadflash.h>
 #include <QuadSpecMacros250Mhz.h>
-#else
-#include <flash.h>
 #endif
 
 #include <print.h>

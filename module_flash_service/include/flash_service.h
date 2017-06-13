@@ -8,9 +8,9 @@
 #include "flash_common.h"
 
 #ifdef XCORE200
-#include <quadflash.h>
+#include <quadflashlib.h>
 #else
-#include <flash.h>
+#include <flashlib.h>
 #endif
 
 

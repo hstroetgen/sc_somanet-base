@@ -10,12 +10,6 @@
 #include <flash_data.h>
 #include <flash_common.h>
 
-#ifdef XCORE200
-#include <quadflashlib.h>
-#else
-#include <flashlib.h>
-#endif
-
 #include <print.h>
 #include <string.h>
 
@@ -54,7 +48,6 @@ void flash_service(fl_SPIPorts &SPI,
         printstr("Error: No flash interfaces provided.\n");
         return;
     }
-
 
     printstr(">>   SOMANET FLASH SERVICE STARTING...\n");
 

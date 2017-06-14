@@ -53,6 +53,7 @@ Quick how-to
 5. You should see this
 
 .. image:: app_test_xscope_resulting_screen.png
+	:width: 100%
 
 6. If you don’t see one of these windows, click on “Window/Show View”
 

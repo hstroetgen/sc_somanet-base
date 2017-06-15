@@ -100,10 +100,10 @@ fl_DeviceSpec dSpecs[MAX_FLASH_DEVICES] =
 /**
  * @brief Connect to the flash. Should be called before any accessing the flash memory.
  */
-void flash_init(fl_QSPIPorts *SPI)
+void flash_init(fl_QSPIPorts *SPI, int usec)
 {
     SPI_port = SPI;
-    connect_to_flash();
+    change_FlashDeviceSpec(usec);
 }
 #else
 /**

@@ -36,7 +36,7 @@
 #define USEC_FAST 250
 
 #ifdef XCORE200
-void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI));
+void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI), int usec);
 void change_FlashDeviceSpec(int usec);
 #else
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));

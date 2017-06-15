@@ -51,7 +51,11 @@ void flash_service(fl_SPIPorts &SPI,
 
     printstr(">>   SOMANET FLASH SERVICE STARTING...\n");
 
-    flash_init(SPI);
+    #ifdef XCORE200
+        flash_init(SPI, get_app_tile_usec());
+    #else
+        flash_init(SPI);
+    #endif
 
     //Send data ready notification to all clients
      for (int i = 0; i < n_data; i++)

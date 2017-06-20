@@ -15,7 +15,7 @@
 /**
  * @brief Maximum size of file name in bytes
  */
-#define SPIFFS_MAX_FILENAME_SIZE 16
+#define SPIFFS_MAX_FILENAME_SIZE 128
 
 /**
  * @brief Maximum value of file descriptor

@@ -205,7 +205,7 @@ int flash_find_images(void) {
 #endif
     // 0 if image found; 1, when not
     if (fl_getNextBootImage(&bootImageInfo)) {
-        return ERR_NO_UPGRADE_IMAGE;
+       return ERR_NO_UPGRADE_IMAGE;
     }
     return NO_ERROR;
 }
@@ -216,7 +216,7 @@ int flash_find_images(void) {
  */
 int upgrade_image_installed(void)
 {
-    int error = connect_to_flash();
+    int error;
 
     if (error)
         return ERR_CONNECT_FAILED;
@@ -225,7 +225,6 @@ int upgrade_image_installed(void)
 
     if (error)
     {
-        fl_disconnect();
         return error;
     }
 
@@ -236,7 +235,6 @@ int upgrade_image_installed(void)
 #ifdef DEBUG
         printstrln("Upgrade Image CRC CHECK FAILED!");
 #endif
-        fl_disconnect();
 
         return ERR_CRC_CHECK_FAILED;
     }
@@ -245,13 +243,6 @@ int upgrade_image_installed(void)
     printstrln("Upgrade Image CRC OK");
 #endif
 
-    // Disconnect from the flash
-    if (fl_disconnect()){
-        #ifdef DEBUG
-        printstr( "Could not disconnect from FLASH\n" );
-        #endif
-        return ERR_DISCONNECT_FAILED;
-    }
 
     /* Signal success */
     return 0;
@@ -284,10 +275,6 @@ int flash_write_boot_page(unsigned char page[], unsigned size)
     {
         if (image_size_rest > 0)
         {
-            error = connect_to_flash();
-            if (error) {
-                return ERR_CONNECT_FAILED;
-            }
 
             /* Check if we are still within the limits */
             if ((write_address + FLASH_PAGE_SIZE) >= write_limit_address)
@@ -328,14 +315,6 @@ int flash_write_boot_page(unsigned char page[], unsigned size)
             /* Increment write address */
             write_address += FLASH_PAGE_SIZE;
 
-            // Disconnect from the flash
-            error = fl_disconnect();
-            if (error){
-                #ifdef DEBUG
-                printstr( "Could not disconnect from FLASH\n" );
-                #endif
-                return ERR_DISCONNECT_FAILED;
-            }
             image_size_rest -= size;
         }
 
@@ -368,13 +347,6 @@ int flash_read_boot(unsigned char data[], unsigned size) {
 int flash_erase_image(void) {
     int found_image, error;
 
-    error = connect_to_flash();
-    if (error) {
-        #ifdef DEBUG
-        printstr("Error: Connect to flash during preparation\n");
-        #endif
-        return ERR_CONNECT_FAILED;
-    }
 
     // error should be 0 or 11. 11 equals No upgrade image found.
     error = flash_find_images();
@@ -421,15 +393,6 @@ int flash_prepare_boot_partition() {
     printstr("Prepare boot partition\n");
     #endif
 
-    // Connect to flash
-    error = connect_to_flash();
-    if (error) {
-        #ifdef DEBUG
-        printstr("Error: Connect to flash during preparation\n");
-        #endif
-        return ERR_CONNECT_FAILED;
-    }
-
     /* Get information about the factory image */
     fl_getFactoryImage(&bootImageInfo);
 
@@ -462,14 +425,6 @@ int flash_prepare_boot_partition() {
         printstrln("Area prepared!");
     #endif
 
-    // Disconnect from the flash
-    error = fl_disconnect();
-    if (error){
-        #ifdef DEBUG
-        printstr("Could not disconnect from FLASH\n");
-        #endif
-        return ERR_DISCONNECT_FAILED;
-    }
 
     return NO_ERROR;
 }
@@ -488,14 +443,6 @@ int flash_erase_boot_partition()
     printstr("Erase boot partition\n");
     #endif
 
-    // Connect to flash
-    error = connect_to_flash();
-    if (error) {
-        #ifdef DEBUG
-        printstr("Error: Connect to flash during preparation\n");
-        #endif
-        return ERR_CONNECT_FAILED;
-    }
 
     /* Get information about the factory image */
     fl_getFactoryImage(&bootImageInfo);
@@ -527,15 +474,6 @@ int flash_erase_boot_partition()
         printstrln("Deleted!");
     #endif
 
-
-    // Disconnect from the flash
-    error = fl_disconnect();
-    if (error){
-        #ifdef DEBUG
-        printstr("Could not disconnect from FLASH\n");
-        #endif
-        return ERR_DISCONNECT_FAILED;
-    }
 
     return NO_ERROR;
 }

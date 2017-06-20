@@ -216,12 +216,7 @@ int flash_find_images(void) {
  */
 int upgrade_image_installed(void)
 {
-    int error;
-
-    if (error)
-        return ERR_CONNECT_FAILED;
-
-    error = flash_find_images();
+    int error = flash_find_images();
 
     if (error)
     {

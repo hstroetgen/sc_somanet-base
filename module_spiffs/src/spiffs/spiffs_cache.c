@@ -29,6 +29,8 @@ static spiffs_cache_page *spiffs_cache_page_get(spiffs *fs, spiffs_page_ix pix) 
   return 0;
 }
 
+
+#pragma stackfunction  200
 // frees cached page
 static s32_t spiffs_cache_page_free(spiffs *fs, int ix, u8_t write_back) {
   s32_t res = SPIFFS_OK;

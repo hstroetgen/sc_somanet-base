@@ -1159,6 +1159,7 @@ s32_t spiffs_object_open_by_page(
 }
 
 #if !SPIFFS_READ_ONLY
+#pragma stackfunction  200
 // Append to object
 // keep current object index (header) page in fs->work buffer
 s32_t spiffs_object_append(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
@@ -1407,6 +1408,7 @@ s32_t spiffs_object_append(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
 #endif // !SPIFFS_READ_ONLY
 
 #if !SPIFFS_READ_ONLY
+#pragma stackfunction  200
 // Modify object
 // keep current object index (header) page in fs->work buffer
 s32_t spiffs_object_modify(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {

@@ -61,14 +61,14 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
 
     while (1) {
         select {
-                   case !isnull(i_spiffs) => i_spiffs[int i].open_file(char path[], unsigned path_length, unsigned short flags) -> unsigned short fd:
+                   case !isnull(i_spiffs) => i_spiffs[int i].open_file(char path[], unsigned path_length, unsigned short flags) -> short fd:
                        char buffer[SPIFFS_MAX_FILENAME_SIZE];
                        memcpy(buffer,path,path_length+1);
-#pragma stackcalls 200
+
                        fd = iSPIFFS_open(buffer, flags);
                    break;
                    case !isnull(i_spiffs) => i_spiffs[int i].close_file(unsigned short fd) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_close(fd);
                    break;
 
@@ -79,7 +79,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        for (int il = len; il > 0; il = il - SPIFFS_MAX_DATA_BUFFER_SIZE)
                        {
                            read_len = (il > SPIFFS_MAX_DATA_BUFFER_SIZE ? SPIFFS_MAX_DATA_BUFFER_SIZE : il);
-#pragma stackcalls 200
+
                            res = iSPIFFS_read(fd, buffer, read_len);
                            if (res < 0) break; else res = len;
                            memcpy(data + read_offset, buffer, read_len);
@@ -95,7 +95,7 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        {
                            write_len = (il > SPIFFS_MAX_DATA_BUFFER_SIZE ? SPIFFS_MAX_DATA_BUFFER_SIZE : il);
                            memcpy(buffer, data + write_offset, write_len);
-#pragma stackcalls 200
+
                            res = iSPIFFS_write(fd, buffer, write_len);
                            if (res < 0) break; else res = len;
                            write_offset += write_len;
@@ -103,29 +103,34 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].remove_file(unsigned short fd) -> int res:
-#pragma stackcalls 200
+
                         res = iSPIFFS_remove(fd);
                    break;
 
+                   case !isnull(i_spiffs) => i_spiffs[int i].get_file_size(unsigned short fd) -> int res:
+
+                        res = iSPIFFS_get_size(fd);
+                   break;
+
                    case !isnull(i_spiffs) => i_spiffs[int i].vis() -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_vis();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].ls() -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_ls();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].check() -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_check();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, char name[]) -> int res:
                            unsigned stat_buffer[sizeof(spiffs_stat)];
                            spiffs_stat s;
-#pragma stackcalls 200
+
                            res = iSPIFFS_status(fd, stat_buffer);
                            memcpy(&s, stat_buffer, sizeof(spiffs_stat));
                            obj_id = s.obj_id;
@@ -136,22 +141,22 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].unmount():
-#pragma stackcalls 200
+
                        iSPIFFS_unmount();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].format() -> int res:
-#pragma stackcalls 200
+
                         res = iSPIFFS_format();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].tell(unsigned short fd) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_tell(fd);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].seek(unsigned short fd, int offs, int whence) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_seek(fd, offs, whence);
                    break;
 
@@ -160,36 +165,36 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                        char new_buffer[SPIFFS_MAX_FILENAME_SIZE];
                        memcpy(old_buffer,old_path,old_path_length+1);
                        memcpy(new_buffer,new_path,new_path_length+1);
-#pragma stackcalls 200
+
                        res = iSPIFFS_rename(old_buffer, new_buffer);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].flush(unsigned short fd) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_flush(fd);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].errno() -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_errno();
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].fs_info(unsigned int &total, unsigned int &used) -> int res:
                           unsigned int buffer_total[1];
                           unsigned int buffer_used[1];
-#pragma stackcalls 200
+
                           res = iSPIFFS_info(buffer_total, buffer_used);
                           total = buffer_total[0];
                           used = buffer_used[0];
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].gc(unsigned int size) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_gc(size);
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].gc_quick(unsigned short max_free_pages) -> int res:
-#pragma stackcalls 200
+
                        res = iSPIFFS_gc_quick(max_free_pages);
                    break;
 

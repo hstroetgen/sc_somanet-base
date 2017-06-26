@@ -20,7 +20,7 @@
 /**
  * @brief Maximum value of file descriptor
  */
-#define SPIFFS_MAX_FILE_DESCRIPTOR 256
+#define SPIFFS_MAX_FILE_DESCRIPTOR 4
 
 /**
  * @brief Maximum data buffer size
@@ -44,6 +44,7 @@
 #define SPIFFS_O_RDWR                   SPIFFS_RDWR
 
 #define SPIFFS_EOF                      -10003
+#define SPIFFS_ERR_NOT_FOUND            -10002
 #define SPIFFS_ERR_FULL                 -10001
 
 #define SPIFFS_SEEK_SET                 (0)
@@ -72,7 +73,7 @@ interface SPIFFSInterface {
      *                      SPIFFS_O_WRONLY, SPIFFS_O_RDWR, SPIFFS_O_DIRECT, SPIFFS_O_EXCL
      * @returns the filehandle
      */
-    [[guarded]] unsigned short open_file(char path[], unsigned path_length, unsigned short flags);
+    [[guarded]] short open_file(char path[], unsigned path_length, unsigned short flags);
 
     /**
      * @brief Closes a filehandle. If there are pending write operations, these are finalized before closing.
@@ -129,6 +130,12 @@ interface SPIFFSInterface {
      * @param name             Name of file
      */
     [[guarded]] int status(unsigned short fd, unsigned short &obj_id, unsigned int &size, unsigned char &type, unsigned short &pix, char name[]);
+
+
+    /**
+    * @brief Gets file size by filehandle
+    */
+    [[guarded]] int get_file_size(unsigned short fd);
 
     /**
      * @brief Renames a file

@@ -62,7 +62,7 @@ static s32_t spiffs_page_index_check(spiffs *fs, spiffs_fd *fd, spiffs_page_ix p
 #endif // !SPIFFS_READ_ONLY
 
 #if !SPIFFS_CACHE
-
+#pragma stackfunction  300
 s32_t spiffs_phys_rd(
     spiffs *fs,
     u32_t addr,
@@ -71,6 +71,7 @@ s32_t spiffs_phys_rd(
   return SPIFFS_HAL_READ(fs, addr, len, dst);
 }
 
+#pragma stackfunction  300
 s32_t spiffs_phys_wr(
     spiffs *fs,
     u32_t addr,
@@ -320,7 +321,7 @@ s32_t spiffs_probe(
 }
 #endif // SPIFFS_USE_MAGIC && SPIFFS_USE_MAGIC_LENGTH && SPIFFS_SINGLETON==0
 
-
+#pragma stackfunction  200
 static s32_t spiffs_obj_lu_scan_v(
     spiffs *fs,
     spiffs_obj_id obj_id,
@@ -349,6 +350,7 @@ static s32_t spiffs_obj_lu_scan_v(
 // Scans thru all obj lu and counts free, deleted and used pages
 // Find the maximum block erase count
 // Checks magic if enabled
+#pragma stackfunction  200
 s32_t spiffs_obj_lu_scan(
     spiffs *fs) {
   s32_t res;
@@ -813,6 +815,7 @@ s32_t spiffs_page_allocate_data(
 #if !SPIFFS_READ_ONLY
 // Moves a page from src to a free page and finalizes it. Updates page index. Page data is given in param page.
 // If page data is null, provided header is used for metainfo and page data is physically copied.
+#pragma stackfunction 200
 s32_t spiffs_page_move(
     spiffs *fs,
     spiffs_file fh,
@@ -877,6 +880,7 @@ s32_t spiffs_page_move(
 
 #if !SPIFFS_READ_ONLY
 // Deletes a page and removes it from object lookup.
+#pragma stackfunction 200
 s32_t spiffs_page_delete(
     spiffs *fs,
     spiffs_page_ix pix) {
@@ -967,6 +971,7 @@ s32_t spiffs_object_create(
 // new_objix_hdr_data may be null, if so the object index header page is loaded
 // name may be null, if so name is not changed
 // size may be null, if so size is not changed
+#pragma stackfunction 200
 s32_t spiffs_object_update_index_hdr(
     spiffs *fs,
     spiffs_fd *fd,
@@ -1121,6 +1126,7 @@ s32_t spiffs_object_open_by_id(
 }
 
 // Open object by page index
+#pragma stackfunction 200
 s32_t spiffs_object_open_by_page(
     spiffs *fs,
     spiffs_page_ix pix,
@@ -1918,7 +1924,7 @@ s32_t spiffs_object_truncate(
   return res;
 } // spiffs_object_truncate
 #endif // !SPIFFS_READ_ONLY
-
+#pragma stackfunction 200
 s32_t spiffs_object_read(
     spiffs_fd *fd,
     u32_t offset,

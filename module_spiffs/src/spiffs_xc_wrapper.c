@@ -74,7 +74,7 @@ void spiffs_init(CLIENT_INTERFACE(FlashDataInterface, i_data))
 }
 
 
-unsigned short iSPIFFS_open(char path[], unsigned short flags)
+short iSPIFFS_open(char path[], unsigned short flags)
 {
     unsigned short fd = SPIFFS_open(&fs, path,  flags, 0);
     return fd;
@@ -168,6 +168,16 @@ int iSPIFFS_status(unsigned short fd, unsigned stat[])
     int res;
     res = SPIFFS_fstat(&fs, fd, (spiffs_stat *)stat);
     return res;
+}
+
+int iSPIFFS_get_size(unsigned short fd)
+{
+    int res;
+    spiffs_stat s;
+    res = SPIFFS_fstat(&fs, fd, &s);
+    if (res < 0) return res;
+    else
+      return s.size;
 }
 
 int iSPIFFS_flush(unsigned short fd)

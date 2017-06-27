@@ -58,7 +58,7 @@ typedef unsigned char u8_t;
 // Enables/disable memory read caching of nucleus file system operations.
 // If enabled, memory area must be provided for cache in SPIFFS_mount.
 #ifndef  SPIFFS_CACHE
-#define SPIFFS_CACHE                    1
+#define SPIFFS_CACHE                    0
 #endif
 #if SPIFFS_CACHE
 // Enables memory write caching for file descriptors in hydrogen
@@ -121,7 +121,7 @@ typedef unsigned char u8_t;
 // Lower value generates more read/writes. No meaning having it bigger
 // than logical page size.
 #ifndef SPIFFS_COPY_BUFFER_STACK
-#define SPIFFS_COPY_BUFFER_STACK        (256)
+#define SPIFFS_COPY_BUFFER_STACK        (64)
 #endif
 
 // Enable this to have an identifiable spiffs filesystem. This will look for
@@ -235,7 +235,7 @@ typedef unsigned char u8_t;
 // directly. If all available descriptors become opened, all cache memory is
 // lost.
 #ifndef SPIFFS_TEMPORAL_FD_CACHE
-#define SPIFFS_TEMPORAL_FD_CACHE              1
+#define SPIFFS_TEMPORAL_FD_CACHE              0
 #endif
 
 // Temporal file cache hit score. Each time a file is opened, all cached files
@@ -245,6 +245,7 @@ typedef unsigned char u8_t;
 // be between 1 (no gain for hitting a cached entry often) and 255.
 #ifndef SPIFFS_TEMPORAL_CACHE_HIT_SCORE
 #define SPIFFS_TEMPORAL_CACHE_HIT_SCORE       4
+
 #endif
 
 // Enable to be able to map object indices to memory.

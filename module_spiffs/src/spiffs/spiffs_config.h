@@ -58,7 +58,7 @@ typedef unsigned char u8_t;
 // Enables/disable memory read caching of nucleus file system operations.
 // If enabled, memory area must be provided for cache in SPIFFS_mount.
 #ifndef  SPIFFS_CACHE
-#define SPIFFS_CACHE                    0
+#define SPIFFS_CACHE                    1
 #endif
 #if SPIFFS_CACHE
 // Enables memory write caching for file descriptors in hydrogen
@@ -121,7 +121,7 @@ typedef unsigned char u8_t;
 // Lower value generates more read/writes. No meaning having it bigger
 // than logical page size.
 #ifndef SPIFFS_COPY_BUFFER_STACK
-#define SPIFFS_COPY_BUFFER_STACK        (64)
+#define SPIFFS_COPY_BUFFER_STACK        (256)
 #endif
 
 // Enable this to have an identifiable spiffs filesystem. This will look for

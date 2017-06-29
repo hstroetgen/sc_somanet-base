@@ -102,11 +102,13 @@
 #define WATCHDOG_TICK_PORT null
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 #define CPLD_SHARED_PORT null
+#define CPLD_FAULT_MONITOR null
 
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
     WATCHDOG_TICK_PORT,                 \
-    CPLD_SHARED_PORT			\
+    CPLD_SHARED_PORT,			\
+    CPLD_FAULT_MONITOR                  \
 }
 
 /* GPIO_PORTS */

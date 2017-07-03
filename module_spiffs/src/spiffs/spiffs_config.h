@@ -114,7 +114,7 @@ typedef unsigned char u8_t;
 // zero-termination character, meaning maximum string of characters
 // can at most be SPIFFS_OBJ_NAME_LEN - 1.
 #ifndef SPIFFS_OBJ_NAME_LEN
-#define SPIFFS_OBJ_NAME_LEN             (16)
+#define SPIFFS_OBJ_NAME_LEN             (128)
 #endif
 
 // Size of buffer allocated on stack used when copying data.

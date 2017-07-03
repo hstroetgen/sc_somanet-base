@@ -689,6 +689,14 @@ s32_t SPIFFS_set_file_callback_func(spiffs *fs, spiffs_file_callback cb_func);
  */
 s32_t SPIFFS_ls(spiffs *fs);
 
+/**
+ * Moves list of files in filesystem to array of spiffs_stat structs
+ * @param fs            the file system struct
+ * @param s             the file status struct
+ */
+s32_t SPIFFS_ls_struct(spiffs *fs, spiffs_stat *s);
+
+
 #if SPIFFS_IX_MAP
 
 /**

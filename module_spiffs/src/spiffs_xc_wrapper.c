@@ -169,6 +169,13 @@ int iSPIFFS_status(unsigned short fd, unsigned stat[])
     return res;
 }
 
+int iSPIFFS_ls_struct(unsigned flist[])
+{
+    int res;
+    res = SPIFFS_ls_struct(&fs, (spiffs_stat *)flist);
+    return res;
+}
+
 int iSPIFFS_get_size(unsigned short fd)
 {
     int res;

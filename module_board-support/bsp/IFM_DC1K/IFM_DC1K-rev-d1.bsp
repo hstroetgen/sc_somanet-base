@@ -27,7 +27,7 @@
      ADC_SCLK,                      \
      ADC_READY,                     \
      ADC_MUX,                       \
-     {0, 6, 1, 7, 2, 3, 4, 5, 10, 9, 8, 11} /* Mapping between adc channels and real analogue signals */ },\
+     {0, 10, 1, 11, 2, 3, 4, 5, 14, 13, 12, 15, 16, 17} /* Array including the indexes which are needed to relate each adc channel to a real analogue signal */ },\
      {1,-1, 50}                    \
 }
 

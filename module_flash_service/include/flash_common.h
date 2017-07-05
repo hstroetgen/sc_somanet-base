@@ -9,9 +9,9 @@
 #include <xccompat.h>
 
 #ifdef XCORE200
-#include <quadflash.h>
+#include <quadflashlib.h>
 #else
-#include <flash.h>
+#include <flashlib.h>
 #endif
 
 #define DATA_PAGES_PER_TYPE         4
@@ -30,9 +30,17 @@
 #define ERR_OUT_OF_LIMITS           19
 #define ERR_CRC_CHECK_FAILED        20
 
+//Standard ref. core clock frequency Mhz
+#define USEC_STD 100
+//Fast ref. core clock frequency Mhz
+#define USEC_FAST 250
+
 #ifdef XCORE200
-void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI));
+void flash_init(REFERENCE_PARAM(fl_QSPIPorts, SPI), int usec);
+void change_FlashDeviceSpec(int usec);
 #else
 void flash_init(REFERENCE_PARAM(fl_SPIPorts, SPI));
 #endif
 int connect_to_flash(void);
+
+

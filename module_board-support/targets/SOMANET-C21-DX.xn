@@ -66,7 +66,7 @@
             <LinkEndpoint NodeId="0" Link="XLF" />
             <LinkEndpoint NodeId="1" Link="XLG" />
         </Link>
-        <Link Encoding="2wire" Delays="4,4" Flags="XSCOPE">
+        <Link Encoding="2wire" Delays="6,6" Flags="XSCOPE">
             <LinkEndpoint NodeId="0" Link="X0LA" />
             <LinkEndpoint NodeId="2" Chanend="1" />
         </Link>

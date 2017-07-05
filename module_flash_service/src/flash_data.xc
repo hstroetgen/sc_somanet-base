@@ -16,22 +16,94 @@
 #include <string.h>
 
 
-
-
 int flash_data_init(unsigned partition_size) {
-    // TODO
+
     return 0;
 }
 
-int flash_write_data(char data[], unsigned size) {
-    // TODO
-    return 0;
+int flash_write_data(unsigned addr, unsigned size, unsigned char data[]) {
+
+    int result = 0;
+    int page_offset, page_len, page_num;
+    int data_offset = 0;
+    unsigned char page_buffer[FLASH_PAGE_SIZE];
+
+    do {
+         //calculate position and lenght for current page
+         page_offset = (addr % FLASH_PAGE_SIZE);
+         page_len = (size <= (FLASH_PAGE_SIZE - page_offset)) ? size : (FLASH_PAGE_SIZE - page_offset);
+         page_num = addr / FLASH_PAGE_SIZE;
+
+         //save previous data from page
+         if (result !=0 )
+         {
+                       printstrln( "Could not connect to FLASH" );
+                       return result;
+          }
+
+         result = fl_readDataPage(page_num, page_buffer);
+         if (result !=0 )
+         {
+              printstrln( "Could not read from FLASH" );
+              return result;
+         }
+
+         //copy new data to page buffer
+         memcpy(page_buffer + page_offset, data + data_offset, page_len);
+         result = fl_writeDataPage(page_num, page_buffer);
+
+         if (result !=0 )
+         {
+             printstrln( "Could not write to FLASH" );
+             return result;
+         }
+
+         data_offset += page_len;
+         addr += page_len;
+         size -= page_len;
+
+    }  while (size > 0);
+
+    return result;
 }
 
-int flash_read_data(char data[], unsigned page) {
+int flash_read_data(unsigned addr, unsigned size, unsigned char data[]) {
+
+    int result = 0;
+
     // Read from the data partition
+    result = fl_readData(addr, size, data);
+    if (result !=0 )
+    {
+        printstrln( "Could not read from FLASH" );
+        return result;
+    }
 
-    int result = fl_readDataPage(page, data);
+    return result;
+}
+
+
+int flash_erase_data(unsigned addr, unsigned size)
+{
+
+    int result = 0;
+    unsigned sec_num, sec_size;
+
+    //convert address to sector number
+    sec_num = addr / 0xFFF;
+    sec_size = size / 0xFFF;
+
+    //erase sectors
+    for (unsigned i = sec_num; i < sec_num + sec_size; i++)
+    {
+        result = fl_eraseDataSector(i);
+        if (result !=0 )
+        {
+           printstrln( "Could not erase FLASH sector" );
+           return result;
+        }
+    }
+
     return result;
 }
 
@@ -54,6 +126,7 @@ unsigned int encode_data_size(unsigned int n_bytes) {
 
 /**
  * @brief Decode the total size of stored configurations in the flash memory
+ *
  *
  * Used for decoding (and confirming the validity) of the number stored
  * inside the flash memory that contains the information about the total

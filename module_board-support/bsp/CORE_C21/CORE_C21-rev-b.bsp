@@ -13,8 +13,11 @@
 #include <xscope.h>
 
 /* Standard Tile definitions for demo/test apps */
-#define COM_TILE 0
-#define IFM_TILE 1
+#define COM_TILE 	0
+#define APP_TILE 	0
+#define APP_TILE_1  	0
+#define APP_TILE_2  	1
+#define IFM_TILE 	1
 
 /* CLOCKS */
 #define IFM_TILE_CLOCK_0 on tile[IFM_TILE]: XS1_CLKBLK_REF
@@ -43,7 +46,7 @@
 #define COM_PORT_4BIT_60_20_56_24 on tile[COM_TILE]: XS1_PORT_4D
 #define COM_PORT_4BIT_76_78_8_72 on tile[COM_TILE]: XS1_PORT_4E
 #define COM_PORT_4BIT_4_2_6_74 on tile[COM_TILE]: XS1_PORT_4F
-#define COM_PORT_16BIT_48_52_46_42_38_36_28_60_20_56_24_54_30 on tile[COM_TILE]: XS1_PORT_16A
+#define COM_PORT_16BIT_48_52_46_42_38_36_28_32_22_26_60_20_56_24_54_30 on tile[COM_TILE]: XS1_PORT_16A
 #define COM_PORT_16BIT_76_78_4_2_6_74_8_72_70_12_68_66_16_64_62_44 on tile[COM_TILE]: XS1_PORT_16B
 
 /* IFM PORTS */
@@ -76,7 +79,7 @@
 #define INTERNAL_PORT_8BIT_NOT_CONNECTED_1 on tile[COM_TILE]: XS1_PORT_8B
 #define INTERNAL_PORT_16BIT_NOT_CONNECTED_0 on tile[IFM_TILE]: XS1_PORT_16A
 
-fl_QSPIPorts ports = {
+fl_QSPIPorts p_qspi_flash = {
   PORT_SQI_CS,
   PORT_SQI_SCLK,
   PORT_SQI_SIO,

@@ -1,7 +1,7 @@
 /*
- * config.c
+ * config_parser.xc
  *
- * Read device configuration for the SDO transfers from CSV file.
+ * Read / write device configuration from / to CSV file via SPIFFS
  *
  * Dmytro Dotsenko <ddotsenko@synapticon.com>
  *

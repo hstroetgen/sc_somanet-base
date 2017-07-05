@@ -5,7 +5,7 @@
  *      Author: w
  */
 
-#include <CORE_BOARD_REQUIRED>
+#include <CORE_C21-DX_G2.bsp>
 #include <xs1.h>
 #include <platform.h>
 #include <flash_service.h>

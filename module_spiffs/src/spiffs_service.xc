@@ -35,7 +35,7 @@ void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int a
 }
 
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs)
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server i_spiffs[n_spiffs], unsigned n_spiffs)
 {
 
     select {

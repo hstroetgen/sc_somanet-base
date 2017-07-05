@@ -13,7 +13,7 @@ TARGET =
 APP_NAME = app_test_spiffs_console
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_config_parser module_flash_service module_spiffs module_board-support
+USED_MODULES = module_flash_service module_spiffs module_board-support
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:
@@ -21,9 +21,9 @@ USED_MODULES = module_config_parser module_flash_service module_spiffs module_bo
 # If the variable XCC_MAP_FLAGS is set it overrides the flags passed to
 # xcc for the final link (mapping) stage.
 ifeq ($(TARGET),SOMANET-C22)
-XCC_FLAGS = -Os -g  -lflash
+XCC_FLAGS = -O0 -g  -lflash
 else
-XCC_FLAGS = -Os -g  -lquadflash -DXCORE200=1
+XCC_FLAGS = -O0 -g  -lquadflash -DXCORE200=1
 endif
 
 # The XCORE_ARM_PROJECT variable, if set to 1, configures this

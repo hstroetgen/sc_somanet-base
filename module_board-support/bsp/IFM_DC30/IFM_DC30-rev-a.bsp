@@ -42,23 +42,18 @@
 #define HALL_PORT_2 IFM_PORT_4BIT_64_66_76_80
 
 //FixMe: add second hall port
-#define SOMANET_IFM_HALL_PORTS {    \
-    HALL_PORT                       \
-}
+#define SOMANET_IFM_ENCODER_1_PORT HALL_PORT
 
 /* ENCODER PORT */
 #define QEI_PORT IFM_PORT_4BIT_38_44_30_34
 #define QEI_PORT_2 IFM_PORT_4BIT_68_70_72_74
 
 //FixMe: add second qei port
-#define SOMANET_IFM_QEI_PORTS { \
-    QEI_PORT                    \
-}
+#define SOMANET_IFM_ENCODER_2_PORT QEI_PORT
 
 /* INPUT MODE SELECTION PORT */
-#define SOMANET_IFM_QEI_PORT_INPUT_MODE_SELECTION { \
-    null                                            \
-}
+#define SOMANET_IFM_ENCODER_PORT_INPUT_MODE_SELECTION     null
+#define SOMANET_IFM_ENCODER_PORT_INPUT_MODE_SELECTION_INV null
 
 /* PWM PORTS*/
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62

@@ -28,6 +28,7 @@ int iSPIFFS_write(unsigned short fd, unsigned char data[], unsigned int len);
 int iSPIFFS_remove(unsigned short fd);
 int iSPIFFS_vis(void);
 int iSPIFFS_ls(void);
+int iSPIFFS_ls_struct(unsigned flist[]);
 int iSPIFFS_check(void);
 int iSPIFFS_status(unsigned short fd, unsigned stat[]);
 int iSPIFFS_get_size(unsigned short fd);

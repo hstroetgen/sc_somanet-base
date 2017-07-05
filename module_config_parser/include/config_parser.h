@@ -1,7 +1,7 @@
 /*
- * config.h
+ * config_parser.h
  *
- * Read device configuration for the SDO transfers from CSV file.
+ * Read / write device configuration from / to CSV file via SPIFFS
  *
  * Dmytro Dotsenko <ddotsenko@synapticon.com>
  *
@@ -12,9 +12,24 @@
 
 #include <stdint.h>
 
+/**
+ * \brief Max length of one line in config file
+ */
 #define MAX_INPUT_LINE    255
+
+/**
+ * \brief Max length of one token in config file
+ */
 #define MAX_TOKEN_SIZE    15
+
+/**
+ * \brief Max nodes count in OD
+ */
 #define MAX_NODES_COUNT 3
+
+/**
+ * \brief Max parameters count in OD
+ */
 #define MAX_PARAMS_COUNT 160
 
 /**
@@ -35,11 +50,20 @@ typedef struct {
 /**
  * \brief Function to read configuration file and parse the content
  *
- * \i_spiffs       Client interface for SPIFFS service
- * \param path     Filename with full path of the file to process
- * \param params   Pointer to a \c SdoConfigParameter_t object
- * \return         0 if no error
+ * \i_spiffs          Client interface for SPIFFS service
+ * \param path        Filename with full path of the file to process
+ * \param parameter   Pointer to a \c ConfigParameter_t object
+ * \return            0 if no error
  */
 int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
+
+/**
+ * \brief Function to generate data from OD to configuration file in csv (text) format
+ *
+ * \i_spiffs       Client interface for SPIFFS service
+ * \param path     Filename with full path of the file to process
+ * \param params   Pointer to a \c ConfigParameter_t object
+ * \return         0 if no error
+ */
 int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
 

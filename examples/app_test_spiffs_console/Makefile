@@ -21,9 +21,9 @@ USED_MODULES = module_flash_service module_spiffs module_board-support
 # If the variable XCC_MAP_FLAGS is set it overrides the flags passed to
 # xcc for the final link (mapping) stage.
 ifeq ($(TARGET),SOMANET-C22)
-XCC_FLAGS = -O0 -g  -lflash
+XCC_FLAGS = -Os -g  -lflash
 else
-XCC_FLAGS = -O0 -g  -lquadflash -DXCORE200=1
+XCC_FLAGS = -Os -g  -lquadflash -DXCORE200=1
 endif
 
 # The XCORE_ARM_PROJECT variable, if set to 1, configures this

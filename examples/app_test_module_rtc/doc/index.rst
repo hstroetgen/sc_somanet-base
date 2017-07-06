@@ -24,12 +24,15 @@ Quick How-to
 3. :ref:`Set up your XMOS development tools <getting_started_xmos_dev_tools>`. 
 4. Download and :ref:`import in your workspace <getting_started_importing_library>` the SOMANET Motor Control Library and its dependencies.
 5. Open the **main.xc** within  the **app_test_module_rtc**. Include the :ref:`board-support file according to your device <somanet_board_support_module>`. Also set the :ref:`appropriate target in your Makefile <somanet_board_support_module>`.
+6. Change the I2C port mapping as per your SOMANET board by configuring following data structure.
 
-6. :ref:`Set the current time/date as parameter of rtc_communication interface <rtc> functions.
+.. doxygenstruct:: I2C_ports
+
+7. Set the current time/date as parameter of rtc_communication interface <rtc> functions.
 
 .. code-block:: c
 
-                /* Set date */                    // 6
+                                
                     rtc. set_Milli_Seconds(0);
                     rtc. set_Seconds(30);
                     rtc. set_Minutes(44);
@@ -39,7 +42,7 @@ Quick How-to
                     rtc.set_Month(1);
                     rtc.set_Century(21);
                     rtc. set_Year(17);
-in the main function:
+
                    int main(void)
                    {
                        interface i2c_master_if i2c[1];

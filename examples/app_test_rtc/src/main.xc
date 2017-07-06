@@ -1,13 +1,15 @@
+/* PLEASE REPLACE "CORE_BOARD_REQUIRED" WITH AN APPROPRIATE BOARD SUPPORT FILE FROM module_board-support */
+#include <CORE_BOARD_REQUIRED>
+
 /**
  * @file main.xc
  * @brief Demo application illustrates usage of module_rtc
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <CORE_C21-DX_G2.bsp>
-#include <xs1.h>
-#include "i2c.h"
 #include "rtc_config.h"
+#include "i2c.h"
+#include <xs1.h>
 #include <stdio.h>
 
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;

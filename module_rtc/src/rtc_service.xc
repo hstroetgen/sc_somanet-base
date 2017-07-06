@@ -1,9 +1,9 @@
-/*
- * main.xc
- *
- *  Created on: Jan 25, 2017
- *      Author: support@synapticon.com
+/**
+ * @file rtc_service.xc
+ * @brief Module provides a Service of M41T62LC6F Real Time Clock
+ * @author Synapticon GmbH <support@synapticon.com>
  */
+
 #include <xs1.h>
 #include "rtc_config.h"
 #include <stdio.h>

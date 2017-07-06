@@ -1,8 +1,7 @@
-/*
- * main.xc
- *
- *  Created on: Jan 25, 2017
- *      Author: support@synapticon.com
+/**
+ * @file main.xc
+ * @brief Demo application illustrates usage of module_rtc
+ * @author Synapticon GmbH <support@synapticon.com>
  */
 
 #include <CORE_C21-DX_G2.bsp>

@@ -1,4 +1,4 @@
-.. _app_test_module_rtc:
+.. _app_test_rtc:
 
 ================================
 App test Module RTC for C21 core
@@ -8,14 +8,14 @@ App test Module RTC for C21 core
     :backlinks: none
     :depth: 3
 
-The purpose of this app (app_test_module_rtc) is showing the use of the :ref:`M41T62LC6F Real Time Clock Module <module_rtc>` over a C2X core. For that, it implements a simple app that sets the current time and date (Hours, Minutes, Seconds, Millisenconds, Day of the week, date, month, year and century) using the rtc module. Afterwards, the current time/date can be read by sending a request to the module.
+The purpose of this app (app_test_rtc) is showing the use of the :ref:`M41T62LC6F Real Time Clock Module <module_rtc>` over a C2X core. For that, it implements a simple app that sets the current time and date (Hours, Minutes, Seconds, Millisenconds, Day of the week, date, month, year and century) using the rtc module. Afterwards, the current time/date can be read by sending a request to the module.
 
 * **Minimum Number of Cores**: 3
 * **Minimum Number of Tiles**: 1
 
 .. cssclass:: github
 
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/feature_rtc_c21_core/examples/app_test_module_rtc/>`_
+  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/feature_rtc_c21_core/examples/app_test_rtc/>`_
 
 .. important:: To clone the Somanet base component you can use the command
                
@@ -29,7 +29,7 @@ Quick How-to
 1. :ref:`Assemble your SOMANET device <assembling_somanet_node>`.
 2. Wire up your device. Check how at your specific :ref:`hardware documentation <hardware>`. Connect your power supply cable, and XTAG. Power up!
 3. :ref:`Set up your XMOS development tools <getting_started_xmos_dev_tools>`. 
-4. Open the **main.xc** within  the **app_test_module_rtc**. Include the :ref:`board-support file according to your device <somanet_board_support_module>`. Also set the :ref:`appropriate target in your Makefile <somanet_board_support_module>`.
+4. Open the **main.xc** within  the **app_test_rtc**. Include the :ref:`board-support file according to your device <somanet_board_support_module>`. Also set the :ref:`appropriate target in your Makefile <somanet_board_support_module>`.
 5. :ref:`import in your workspace <getting_started_importing_library>` the I2C XMOS library and its dependencies. The I2C library and its dependencies are used as submodules. You can update the submodules by the command specified above in the document.
 6. :ref:`import in your workspace <getting_started_importing_library>` the RTC module.
 7. Set the current time/date as parameter of rtc_communication interface <rtc> functions.

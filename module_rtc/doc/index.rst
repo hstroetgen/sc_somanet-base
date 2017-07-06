@@ -56,15 +56,15 @@ How to use
 	    uint8_t data = 0;
 	
 	    // Set date 
-	    rtc. set_Milli_Seconds(0);        // (00-99) 
-	    rtc. set_Seconds(30);             // (00-59) 
-	    rtc. set_Minutes(44);             // (00-59) 
-	    rtc. set_Hours(11);               // (00-23) 
-	    rtc. set_Day_of_week(2);          // (01-7) 
-	    rtc. set_Date(30);                // (01-31) 
+	    rtc.set_Milli_Seconds(0);        // (00-99) 
+	    rtc.set_Seconds(30);             // (00-59) 
+	    rtc.set_Minutes(44);             // (00-59) 
+	    rtc.set_Hours(11);               // (00-23) 
+	    rtc.set_Day_of_week(2);          // (01-7) 
+	    rtc.set_Date(30);                // (01-31) 
 	    rtc.set_Month(1);                 // (01-12) 
 	    rtc.set_Century(21);              // (21-23) 
-	    rtc. set_Year(17);                // (00-99) 
+	    rtc.set_Year(17);                // (00-99) 
 
     while (1)
     {

@@ -1,6 +1,6 @@
 /***************************
- * IFM Drive DC-1K
- * Rev. C4
+ * IFM GPIO-A
+ * Rev. A.3
  ***************************/
 
 #pragma once

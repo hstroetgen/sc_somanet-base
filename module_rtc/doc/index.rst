@@ -22,7 +22,7 @@ How to use
 
 .. important:: We assume that you are using :ref:`SOMANET Base <somanet_base>` and your app includes the required **board support** files for your SOMANET device.
 
-.. seealso:: You might find useful the :ref:`App test module rtc <app_test_module_rtc>`, which illustrates the use of this module.
+.. seealso:: You might find useful the :ref:`App test module rtc <app_test_rtc>`, which illustrates the use of this module.
 
 1. First, add the following modules and their dependencies to your app Makefile.
 

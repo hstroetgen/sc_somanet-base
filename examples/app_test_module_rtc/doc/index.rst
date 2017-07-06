@@ -37,15 +37,15 @@ Quick How-to
 .. code-block:: c
 
                                 
-                    rtc. set_Milli_Seconds(0);
-                    rtc. set_Seconds(30);
-                    rtc. set_Minutes(44);
-                    rtc. set_Hours(11);
-                    rtc. set_Day_of_week(2);
-                    rtc. set_Date(30);
+                    rtc.set_Milli_Seconds(0);
+                    rtc.set_Seconds(30);
+                    rtc.set_Minutes(44);
+                    rtc.set_Hours(11);
+                    rtc.set_Day_of_week(2);
+                    rtc.set_Date(30);
                     rtc.set_Month(1);
                     rtc.set_Century(21);
-                    rtc. set_Year(17);
+                    rtc.set_Year(17);
 
                    int main(void)
                    {

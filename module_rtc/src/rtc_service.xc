@@ -2,12 +2,10 @@
  * main.xc
  *
  *  Created on: Jan 25, 2017
- *      Author: rawia
+ *      Author: support@synapticon.com
  */
 #include <xs1.h>
-//#include "i2c.h"
 #include "rtc_config.h"
-//#include <CORE_C21-rev-b.bsp>
 #include <stdio.h>
 
 uint8_t RTC_read(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t reg, i2c_regop_res_t &result)
@@ -38,7 +36,6 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
     while (1) {
            select {
            case rtc.init(i2c_regop_res_t result):
-               //unsigned OF, OUT, OFIE, AFE, SQWE, RS0;
                unsigned ST = 1;
                uint8_t data = 0;
                printf("rtc starting ..\n");
@@ -50,7 +47,6 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                // Read ST
                data = RTC_read(i2c, Addr_Slave, Seconds, result);
                ST = (data >> 7) & 0x1;
-             //  printf("ST = 0x%lx\n", ST);
 
                // Write ST = 0
                RTC_write(i2c, Addr_Slave, Seconds, 0x0);
@@ -58,7 +54,7 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                // Read ST
                data = RTC_read(i2c, Addr_Slave, Seconds, result);
                ST = (data >> 7) & 0x1;
-             //  printf("ST = 0x%lx\n", ST);
+
                }
                if (ST == 0)
                {
@@ -95,14 +91,10 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                    data = (tens << 4) | units;
                    RTC_write(i2c, Addr_Slave, Year, data);
                break;
-//           case rtc.set_Century_Month(uint8_t data):
-//                    RTC_write(i2c, Addr_Slave, Century_Month, data);
-//                break;
            case rtc.set_Month(uint8_t data):
                     tens = data / 10;
                     units = data % 10;
                     data_month = (tens << 4) | units;
-                    //RTC_write(i2c, Addr_Slave, Century_Month, data);
                 break;
            case rtc.set_Century(uint8_t data):
                     data = ((data - 20) << 6) | data_month;

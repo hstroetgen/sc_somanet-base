@@ -4,15 +4,12 @@
  *  Created on: Jan 25, 2017
  *      Author: rawia
  */
-#include <xs1.h>
-#include "i2c.h"
-#include "rtc_config.h"
-#include <CORE_C21-rev-b.bsp>
-#include <stdio.h>
 
-// I2C interface ports
-port p_scl = on tile[0]: XS1_PORT_1C;
-port p_sda = on tile[0]: XS1_PORT_1A;
+#include <CORE_C21-DX_G2.bsp>
+#include "main.h"
+
+
+on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
 void RTC_run_test(client interface rtc_communication rtc)
 {
@@ -82,7 +79,7 @@ int main(void)
         on tile[COM_TILE] : {
                    par {
                        rtc_service(rtc, i2c[0]);
-                       i2c_master(i2c, 1, p_scl, p_sda, 10);
+                       i2c_master(i2c, 1, i2c_p.p_scl, i2c_p.p_sda, 10);
                        RTC_run_test(rtc);
                        }
                      }

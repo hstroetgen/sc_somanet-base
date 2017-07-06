@@ -3,7 +3,8 @@
 # or a valid argument for the --target option when compiling
 #TARGET = SOMANET-C21-DX
 #TARGET = SOMANET-C22
-TARGET = SOMANET-C21-DX-rev-b.xn
+#TARGET = SOMANET-C21-DX_G2
+TARGET = SOMANET-C21-DX_G2
 
 
 # The APP_NAME variable determines the name of the final .xe file. It should
@@ -12,7 +13,7 @@ TARGET = SOMANET-C21-DX-rev-b.xn
 APP_NAME = app_test_module_rtc
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = lib_i2c module_board-support module_rtc
+USED_MODULES = lib_i2c lib_logging lib_xassert module_board-support module_rtc
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

@@ -10,15 +10,6 @@
 #include "rtc_config.h"
 #include <stdio.h>
 
-/**
- * @brief Configuration structure of the I2C ports.
- */
-
-typedef struct {
-    port p_scl;     /**< I2C clock line */
-    port p_sda;     /**< I2C data line */
-}I2C_ports;
-
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
 void RTC_run_test(client interface rtc_communication rtc)

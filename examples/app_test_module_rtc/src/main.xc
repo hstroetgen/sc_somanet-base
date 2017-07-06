@@ -2,12 +2,23 @@
  * main.xc
  *
  *  Created on: Jan 25, 2017
- *      Author: rawia
+ *      Author: support@synapticon.com
  */
 
 #include <CORE_C21-DX_G2.bsp>
-#include "main.h"
+#include <xs1.h>
+#include "i2c.h"
+#include "rtc_config.h"
+#include <stdio.h>
 
+/**
+ * @brief Configuration structure of the I2C ports.
+ */
+
+typedef struct {
+    port p_scl;     /**< I2C clock line */
+    port p_sda;     /**< I2C data line */
+}I2C_ports;
 
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
@@ -18,15 +29,15 @@ void RTC_run_test(client interface rtc_communication rtc)
     uint8_t data = 0;
 
     /* Set date */
-    rtc. set_Milli_Seconds(0);        /* (00-99) */
-    rtc. set_Seconds(30);             /* (00-59) */
-    rtc. set_Minutes(44);             /* (00-59) */
-    rtc. set_Hours(11);               /* (00-23) */
-    rtc. set_Day_of_week(2);          /* (01-7) */
-    rtc. set_Date(30);                /* (01-31) */
+    rtc.set_Milli_Seconds(0);        /* (00-99) */
+    rtc.set_Seconds(30);             /* (00-59) */
+    rtc.set_Minutes(44);             /* (00-59) */
+    rtc.set_Hours(11);               /* (00-23) */
+    rtc.set_Day_of_week(2);          /* (01-7) */
+    rtc.set_Date(30);                /* (01-31) */
     rtc.set_Month(1);                 /* (01-12) */
     rtc.set_Century(21);              /* (21-23) */
-    rtc. set_Year(17);                /* (00-99) */
+    rtc.set_Year(17);                /* (00-99) */
 
     while (1)
     {
@@ -45,10 +56,6 @@ void RTC_run_test(client interface rtc_communication rtc)
         // read 10ths/100ths of seconds
         data = rtc.get_Milli_Seconds(result);
         printf(": %d", data);
-
-//        // read Day of week
-//        data = rtc.get_Day_of_week(result);
-//        printf(", Today is = %d", data);
 
         // read Date
         data = rtc.get_Date(result);

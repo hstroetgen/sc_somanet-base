@@ -20,15 +20,16 @@ The purpose of this app (app_test_module_rtc) is showing the use of the :ref:`M4
 Quick How-to
 ============
 1. :ref:`Assemble your SOMANET device <assembling_somanet_node>`.
-2. Wire up your device. Check how at your specific :ref:`hardware documentation <hardware>`. Connect your Hall sensor, motor phases, power supply cable, and XTAG. Power up!
+2. Wire up your device. Check how at your specific :ref:`hardware documentation <hardware>`. Connect your power supply cable, and XTAG. Power up!
 3. :ref:`Set up your XMOS development tools <getting_started_xmos_dev_tools>`. 
-4. Download and :ref:`import in your workspace <getting_started_importing_library>` the SOMANET Motor Control Library and its dependencies.
+4. Download and :ref:`import in your workspace <getting_started_importing_library>` the I2C XMOS library and its dependencies.
 5. Open the **main.xc** within  the **app_test_module_rtc**. Include the :ref:`board-support file according to your device <somanet_board_support_module>`. Also set the :ref:`appropriate target in your Makefile <somanet_board_support_module>`.
-6. Change the I2C port mapping as per your SOMANET board by configuring following data structure.
+6. :ref:`import in your workspace <getting_started_importing_library>` the RTC module.
+7. Change the I2C port mapping as per your SOMANET board by configuring following data structure.
 
 .. doxygenstruct:: I2C_ports
 
-7. Set the current time/date as parameter of rtc_communication interface <rtc> functions.
+8. Set the current time/date as parameter of rtc_communication interface <rtc> functions.
 
 .. code-block:: c
 

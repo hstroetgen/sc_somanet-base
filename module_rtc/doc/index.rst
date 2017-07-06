@@ -24,13 +24,13 @@ How to use
 
 .. seealso:: You might find useful the :ref:`App test module rtc <app_test_module_rtc>`, which illustrates the use of this module.
 
-1. First, add the following modules to your app Makefile.
+1. First, add the following modules and their dependencies to your app Makefile.
 
     ::
 
         USED_MODULES = module_rtc module_board-support lib_i2c
 
-  `Refer to i2c library and documentation <https://www.xmos.com/support/libraries/lib_i2c>`_
+  `Refer to i2c library for its dependencies and documentation <https://www.xmos.com/support/libraries/lib_i2c>`_
 
 2. Include the RTC Service header **rtc_config.h** in your app.
 

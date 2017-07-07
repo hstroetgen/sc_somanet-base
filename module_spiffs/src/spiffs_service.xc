@@ -35,7 +35,7 @@ void if_erase_flash(CLIENT_INTERFACE(FlashDataInterface, i_data), unsigned int a
 }
 
 
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server ?i_spiffs[n_spiffs], unsigned n_spiffs)
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server i_spiffs[n_spiffs], unsigned n_spiffs)
 {
 
     select {
@@ -120,6 +120,15 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
                    case !isnull(i_spiffs) => i_spiffs[int i].ls() -> int res:
 
                        res = iSPIFFS_ls();
+                   break;
+
+                   case !isnull(i_spiffs) => i_spiffs[int i].ls_struct(spiffs_stat s[]) -> int res:
+                       unsigned flist_buffer[SPIFFS_MAX_FILELIST_ITEMS * sizeof(spiffs_stat)];
+
+                       memset(flist_buffer, 0, sizeof(flist_buffer));
+                       res = iSPIFFS_ls_struct(flist_buffer);
+                       memcpy(s, flist_buffer, SPIFFS_MAX_FILELIST_ITEMS * sizeof(spiffs_stat));
+
                    break;
 
                    case !isnull(i_spiffs) => i_spiffs[int i].check() -> int res:

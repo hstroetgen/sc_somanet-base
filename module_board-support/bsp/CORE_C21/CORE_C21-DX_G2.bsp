@@ -108,3 +108,7 @@ fl_QuadDeviceSpec deviceSpecs[] =
         FL_QUADDEVICE_ISSI_IS25LQ032B,
 };
 
+#define SOMANET_I2C_PORTS {         \
+        XS1_PORT_1A,    \
+        XS1_PORT_1D             \
+}

@@ -14,6 +14,7 @@
 
 /**
  * @brief Maximum size of file name in bytes
+ * !Should be the same value as defined in SPIFFS_OBJ_NAME_LEN file spiffs_config.h!
  */
 #define SPIFFS_MAX_FILENAME_SIZE 128
 
@@ -21,6 +22,11 @@
  * @brief Maximum value of file descriptor
  */
 #define SPIFFS_MAX_FILE_DESCRIPTOR 4
+
+/**
+ * @brief Maximum value of itmes, which returns ls_struct() function
+ */
+#define SPIFFS_MAX_FILELIST_ITEMS 32
 
 /**
  * @brief Maximum data buffer size
@@ -114,6 +120,13 @@ interface SPIFFSInterface {
      * @brief Prints out a list of files in filesystem.
      */
     [[guarded]] int ls(void);
+
+
+    /**
+     * @brief Moves list of files in filesystem to array of spiffs_stat structs
+     * @param s  array of the file status structs
+     */
+    [[guarded]] int ls_struct(spiffs_stat s[]);
 
     /**
      * @brief Runs a consistency check on given filesystem.
@@ -236,6 +249,6 @@ interface SPIFFSInterface {
  * @param n_spiffs   Pattern variable for SPIFFS service
  *
  */
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server (&?i_spiffs)[n_spiffs], unsigned n_spiffs);
+void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server i_spiffs[n_spiffs], unsigned n_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

@@ -11,7 +11,6 @@
 #include <spiffs_xc_wrapper.h>
 
 #define LOG_PAGE_SIZE       256
-#define MAX_OPEN_FILES       16
 
 static u8_t spiffs_work_buf[LOG_PAGE_SIZE*2];
 static u8_t spiffs_fds[32*4];
@@ -167,6 +166,13 @@ int iSPIFFS_status(unsigned short fd, unsigned stat[])
 {
     int res;
     res = SPIFFS_fstat(&fs, fd, (spiffs_stat *)stat);
+    return res;
+}
+
+int iSPIFFS_ls_struct(unsigned flist[])
+{
+    int res;
+    res = SPIFFS_ls_struct(&fs, (spiffs_stat *)flist);
     return res;
 }
 

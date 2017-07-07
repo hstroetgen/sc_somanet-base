@@ -1,11 +1,12 @@
-/*
- * SPIFFS_test_project.xc
- *
- *  Created on: 27 ����. 2016 �.
- *      Author: w
+/* PLEASE REPLACE "CORE_BOARD_REQUIRED" WITH AN APPROPRIATE BOARD SUPPORT FILE FROM module_board-support */
+#include <CORE_BOARD_REQUIRED>
+
+/**
+ * @file main.xc
+ * @brief Demo application illustrates usage of module_rtc
+ * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <CORE_BOARD_REQUIRED>
 #include <xs1.h>
 #include <platform.h>
 #include <flash_service.h>

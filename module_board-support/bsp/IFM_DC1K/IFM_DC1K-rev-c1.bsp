@@ -28,7 +28,7 @@
      ADC_READY,                     \
      ADC_MUX,                       \
      {0, 10, 1, 11, 4, 5, 14, 15, 2, 3, 12, 13, 6, 16} /* Mapping between adc channels and real analogue signals */ },\
-     {-1, 1, 50}                    \
+     {0, -1, 1, 50}                    \
 }
 
 /* FET DRIVER A4935 control ports */

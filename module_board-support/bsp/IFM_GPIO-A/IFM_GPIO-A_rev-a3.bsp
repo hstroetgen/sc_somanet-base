@@ -33,7 +33,7 @@
      ADC_SCLK,                      \
      ADC_READY,                     \
      ADC_MUX},                      \
-     {1, -1, 50}                    \
+     {0, 1, -1, 50}                    \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -44,20 +44,18 @@
     null                                \
 }
 
-/* HALL SENSOR PORTS */
-#define HALL_PORT IFM_PORT_4BIT_38_44_30_34
+/* ENCODER 1 (HALL) SENSOR PORT */
+#define SOMANET_IFM_ENCODER_1_PORT IFM_PORT_4BIT_38_44_30_34
 
-#define SOMANET_IFM_HALL_PORTS {    \
-    HALL_PORT                       \
-}
+/* ENCODER 2 (QEI) SENSOR PORT */
+#define SOMANET_IFM_ENCODER_2_PORT IFM_PORT_4BIT_64_66_76_80
 
-/* ENCODER PORT */
-#define QEI_PORT IFM_PORT_4BIT_64_66_76_80
-#define QEI_PORT_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
+/* INPUT MODE SELECTION PORT */
+#define ENCODER_PORTS_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
 
-#define SOMANET_IFM_QEI_PORTS {                 \
-    QEI_PORT_INPUT_MODE_SELECTION,              \
-    QEI_PORT                                    \
+#define SOMANET_IFM_ENCODER_PORTS_INPUT_MODE_SELECTION { \
+    ENCODER_PORTS_INPUT_MODE_SELECTION,                  \
+    0                                                    \
 }
 
 /* PWM PORTS*/

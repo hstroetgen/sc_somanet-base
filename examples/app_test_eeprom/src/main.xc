@@ -25,7 +25,7 @@ on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
 void eeprom_comm(client interface i2c_master_if i2c)
 {
-    uint8_t data_send = 0xCB, data_rcv = 0x00;
+    uint8_t data_send = 0xEF, data_rcv = 0x00;
     uint8_t address_ptr[1] = {0x00};
     size_t no_bytes_sent=5;
     i2c_res_t res;
@@ -33,18 +33,21 @@ void eeprom_comm(client interface i2c_master_if i2c)
 
     for(int i = 0; i<DEVICE_SIZE; i++)
     {
-        // Write Operation
-        res_reg = i2c.write_reg(slave_address, address_ptr[0], data_send);
-        printf("The res_reg = %d\n", res_reg);
-
         address_ptr[0] = i;
 
+        // Write Operation
+        res_reg = i2c.write_reg(slave_address, address_ptr[0], data_send);
+//        printf("The res_reg = %d\n", res_reg);
+
+
+
         // Read operation
-        res = i2c.write(slave_address, address_ptr, 1, no_bytes_sent, 0);
-        printf("The res = %d and bytes sent = %d\n", res, no_bytes_sent);
+        while(res == 0)
+            res = i2c.write(slave_address, address_ptr, 1, no_bytes_sent, 0);
+//        printf("The res = %d and bytes sent = %d\n", res, no_bytes_sent);
         i2c.read(slave_address, &data_rcv, 1, 1);
         printf("The data recieved is : 0x%x\n", data_rcv);
-        data_rcv = 0;
+        data_rcv = 0;res = 0;
 //        if(data_rcv != data_send){printf("!!!!!!! ERROR : WRONG DATA RECIEVE !!!!!!!!\n");}
     }
 }

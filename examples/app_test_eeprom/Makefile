@@ -9,7 +9,7 @@ TARGET = SOMANET-C21-DX_G2
 APP_NAME = app_test_eeprom
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = lib_i2c module_board-support
+USED_MODULES = lib_i2c module_board-support module_eeprom
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:

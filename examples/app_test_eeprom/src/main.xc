@@ -9,7 +9,7 @@
  */
 
 #include<i2c.h>
-
+#include<eeprom.h>
 /**
  * @brief Configuration structure of the I2C ports.
  */
@@ -23,9 +23,10 @@ on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 #define slave_address   0x50    // 01010000
 #define DEVICE_SIZE 128         // 128 bytes
 
+#if 0
 void eeprom_comm(client interface i2c_master_if i2c)
 {
-    uint8_t data_send = 0xEF, data_rcv = 0x00;
+    uint8_t data_send = 0xFA, data_rcv = 0x00;
     uint8_t address_ptr[1] = {0x00};
     size_t no_bytes_sent=5;
     i2c_res_t res;
@@ -51,15 +52,28 @@ void eeprom_comm(client interface i2c_master_if i2c)
 //        if(data_rcv != data_send){printf("!!!!!!! ERROR : WRONG DATA RECIEVE !!!!!!!!\n");}
     }
 }
+#endif
+
+
+void eeprom_comm(client interface i_eeprom_communication i_eeprom)
+{
+    uint8_t data;
+    i_eeprom.write(0x00, 0xDA);
+    data = i_eeprom.read(0x00);
+    printf("The data is = 0x%x\n", data);
+
+}
 int main(void)
 {
     interface i2c_master_if i2c[1];
+    interface i_eeprom_communication i_eeprom;
     par {
         on tile[COM_TILE] : {
            par {
 
                    i2c_master(i2c, 1, i2c_p.p_scl, i2c_p.p_sda, 100);
-                   eeprom_comm(i2c[0]);
+                   eeprom_service(i_eeprom, i2c[0]);
+                   eeprom_comm(i_eeprom);
                 }
             }
        }

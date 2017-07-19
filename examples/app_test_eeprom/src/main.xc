@@ -7,8 +7,12 @@
  * @brief Demo application illustrates usage of module_eeprom
  * @author Synapticon GmbH <support@synapticon.com>
  */
-
-#include<i2c.h>
+#include <xs1.h>
+#include <xccompat.h>
+#include <inttypes.h>
+#include <platform.h>
+#include <xclib.h>
+#include<stdio.h>
 #include<eeprom.h>
 /**
  * @brief Configuration structure of the I2C ports.
@@ -58,11 +62,22 @@ void eeprom_comm(client interface i2c_master_if i2c)
 void eeprom_comm(client interface i_eeprom_communication i_eeprom)
 {
     uint8_t data;
-    i_eeprom.write(0x00, 0xDA);
-    data = i_eeprom.read(0x00);
-    printf("The data is = 0x%x\n", data);
+    uint8_t addr_w = 0x0F, data_send = 0xEF;
+    uint8_t addr_r = 0x0F;
+    uint8_t d_set[4] = {0x9E,0x02,0xE7, 0xFF};
+
+    // Normal Write Operation
+    i_eeprom.write(addr_w, data_send);
+    data = i_eeprom.read(addr_r);
+    printf("The data in normal write mode is = 0x%x\n", data);
+
+    // Page Write Operation
+    i_eeprom.page_write(addr_w, d_set, 4);
+    data = i_eeprom.read(addr_r);
+    printf("The data in page write mode is = 0x%x\n", data);
 
 }
+
 int main(void)
 {
     interface i2c_master_if i2c[1];

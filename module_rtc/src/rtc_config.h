@@ -121,6 +121,14 @@ interface rtc_communication {
     void    set_Century(uint8_t data);
 
     /**
+     * @brief Setter for SQWE bit.
+     *
+     * @param data SQWE bit value (0 or 1).
+     */
+
+    void    set_SQWE(uint8_t data);
+
+    /**
      * @brief Getter for Hours.
      *
      * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
@@ -209,6 +217,17 @@ interface rtc_communication {
      */
 
     unsigned get_Century(i2c_regop_res_t result);
+
+
+    /**
+     * @brief Getter for SQWE bit.
+     *
+     * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
+     *
+     * @return value of SQWE bit.
+     */
+
+    unsigned get_SQWE(i2c_regop_res_t result);
 };
 
 /**

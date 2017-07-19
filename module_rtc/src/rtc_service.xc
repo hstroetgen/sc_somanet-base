@@ -109,6 +109,15 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                      data = (tens << 4) | units;
                      RTC_write(i2c, Addr_Slave, Date, data);
                  break;
+           case rtc.set_SQWE(uint8_t data):
+                     i2c_regop_res_t result;
+                     uint8_t sqwe;
+                     /* Write enable bit to reg A */
+                     sqwe = RTC_read(i2c, Addr_Slave, Al_month, result);
+                     sqwe = sqwe & 0xbf;
+                     sqwe = sqwe | (data<<6);
+                     RTC_write(i2c, Addr_Slave, Al_month, sqwe);
+                 break;
            case rtc.get_Hours(i2c_regop_res_t result) -> unsigned data_actual:
                    // read Hours
                    data = RTC_read(i2c, Addr_Slave, Hours, result);
@@ -167,6 +176,10 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                    units = (data & 0xF);
                    tens = (data >> 4 ) & 0xF;
                    data_actual = (tens * 10) + units;
+                 break;
+           case rtc.get_SQWE(i2c_regop_res_t result) -> unsigned data_actual:
+                   data = RTC_read(i2c, Addr_Slave, Al_month, result);
+                   data_actual = (data >> 6) & 0xF;
                  break;
            default : break;
                     }

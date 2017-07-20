@@ -29,6 +29,7 @@
  */
 typedef enum
 {
+    RTC_SQW_FREQ_NONE = 0x00,           /**< RTC Square Wave Frequency None */
     RTC_SQW_FREQ_32KHZ = 0x10,          /**< RTC Square Wave Frequency 32 KHZ */
     RTC_SQW_FREQ_8KHZ = 0x20,           /**< RTC Square Wave Frequency 8 KHZ */
     RTC_SQW_FREQ_4KHZ = 0x30,           /**< RTC Square Wave Frequency 4 KHZ */

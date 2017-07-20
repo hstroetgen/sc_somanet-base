@@ -29,9 +29,20 @@ void RTC_write(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t 
           printf("I2C write reg failed\n");
       }
 }
+
+void RTC_set_SQWE(client interface i2c_master_if i2c, uint8_t data)
+{
+    i2c_regop_res_t result;
+    uint8_t sqwe;
+    /* Write enable bit to reg A */
+    sqwe = RTC_read(i2c, Addr_Slave, Al_month, result);
+    sqwe = sqwe & 0xbf;
+    sqwe = sqwe | (data<<6);
+    RTC_write(i2c, Addr_Slave, Al_month, sqwe);
+}
 void rtc_service(server interface rtc_communication rtc, client interface i2c_master_if i2c)
 {
-    unsigned units, tens, century, data_month, data = 0;
+    uint8_t units, tens, century, data_month, data = 0;
 
     while (1) {
            select {
@@ -115,13 +126,7 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                      RTC_write(i2c, Addr_Slave, Date, data);
                  break;
            case rtc.set_SQWE(uint8_t data):
-                     i2c_regop_res_t result;
-                     uint8_t sqwe;
-                     /* Write enable bit to reg A */
-                     sqwe = RTC_read(i2c, Addr_Slave, Al_month, result);
-                     sqwe = sqwe & 0xbf;
-                     sqwe = sqwe | (data<<6);
-                     RTC_write(i2c, Addr_Slave, Al_month, sqwe);
+                     RTC_set_SQWE(i2c, data);
                  break;
            case rtc.set_square_wave_frequency(RTC_SQW_FREQ data):
                      i2c_regop_res_t result;
@@ -130,6 +135,10 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                      day = day & 0x0F;
                      day = day | data;
                      RTC_write(i2c, Addr_Slave, Day, day);
+                     if(data == RTC_SQW_FREQ_NONE)
+                     {
+                         RTC_set_SQWE(i2c, 0);
+                     }
                      break;
            case rtc.get_Hours(i2c_regop_res_t result) -> unsigned data_actual:
                    // read Hours

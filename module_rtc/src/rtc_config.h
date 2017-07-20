@@ -153,7 +153,7 @@ interface rtc_communication {
     /**
      * @brief Setter for Square Wave output frequency.
      *
-     * @param data integer value corresponding to frequency (1 to 15).
+     * @param data variable of type RTC_SQW_FREQ.
      */
 
     void    set_SQW_Freq(RTC_SQW_FREQ data);
@@ -261,11 +261,11 @@ interface rtc_communication {
     unsigned get_SQWE(i2c_regop_res_t result);
 
     /**
-     * @brief Getter for integer value corresponding to square wave frequency.
+     * @brief Getter for square wave frequency value.
      *
      * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
      *
-     * @return value integer value corresponding to square wave frequency.
+     * @return value of type RTC_SQW_FREQ.
      */
 
     RTC_SQW_FREQ get_SQW_Freq(i2c_regop_res_t result);

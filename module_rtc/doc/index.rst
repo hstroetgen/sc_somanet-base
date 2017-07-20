@@ -125,6 +125,11 @@ How to use
 API
 ===
 
+Types
+-----
+
+.. doxygenenum:: RTC_SQW_FREQ
+
 Service
 --------
 

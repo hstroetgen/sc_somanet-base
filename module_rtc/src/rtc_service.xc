@@ -123,12 +123,12 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                      sqwe = sqwe | (data<<6);
                      RTC_write(i2c, Addr_Slave, Al_month, sqwe);
                  break;
-           case rtc.set_square_wave_frequency(uint8_t data):
+           case rtc.set_square_wave_frequency(RTC_SQW_FREQ data):
                      i2c_regop_res_t result;
                      uint8_t day;
                      day = RTC_read(i2c, Addr_Slave, Day, result);
-                     day = day & 0x0f;
-                     day = day | (data << 4);
+                     day = day & 0x0F;
+                     day = day | data;
                      RTC_write(i2c, Addr_Slave, Day, day);
                      break;
            case rtc.get_Hours(i2c_regop_res_t result) -> unsigned data_actual:
@@ -194,7 +194,7 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                    data = RTC_read(i2c, Addr_Slave, Al_month, result);
                    data_actual = (data >> 6) & 0xF;
                  break;
-           case rtc.get_square_wave_frequency(i2c_regop_res_t result) -> unsigned data_actual:
+           case rtc.get_square_wave_frequency(i2c_regop_res_t result) -> RTC_SQW_FREQ data_actual:
                    data = RTC_read(i2c, Addr_Slave, Day, result);
                    data_actual = (data >> 4) & 0x0F;
                  break;

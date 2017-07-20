@@ -24,6 +24,27 @@
 #define Flags                   0xF
 #define Addr_Slave              0x68  // (1101000)
 
+/**
+ * @brief RTC Square Wave Frequency types
+ */
+typedef enum
+{
+    RTC_SQW_FREQ_32KHZ = 0x10,          /**< RTC Square Wave Frequency 32 KHZ */
+    RTC_SQW_FREQ_8KHZ = 0x20,           /**< RTC Square Wave Frequency 8 KHZ */
+    RTC_SQW_FREQ_4KHZ = 0x30,           /**< RTC Square Wave Frequency 4 KHZ */
+    RTC_SQW_FREQ_2KHZ = 0x40,           /**< RTC Square Wave Frequency 2 KHZ */
+    RTC_SQW_FREQ_1KHZ = 0x50,           /**< RTC Square Wave Frequency 1 KHZ */
+    RTC_SQW_FREQ_512HZ = 0x60,          /**< RTC Square Wave Frequency 512 HZ */
+    RTC_SQW_FREQ_256HZ = 0x70,          /**< RTC Square Wave Frequency 256 HZ */
+    RTC_SQW_FREQ_128HZ = 0x80,          /**< RTC Square Wave Frequency 128 HZ */
+    RTC_SQW_FREQ_64HZ = 0x90,           /**< RTC Square Wave Frequency 64 HZ */
+    RTC_SQW_FREQ_32HZ = 0xA0,           /**< RTC Square Wave Frequency 32 HZ */
+    RTC_SQW_FREQ_16HZ = 0xB0,           /**< RTC Square Wave Frequency 16 HZ */
+    RTC_SQW_FREQ_8HZ = 0xC0,            /**< RTC Square Wave Frequency 8 HZ */
+    RTC_SQW_FREQ_4HZ = 0xD0,            /**< RTC Square Wave Frequency 4 HZ */
+    RTC_SQW_FREQ_2HZ = 0xE0,            /**< RTC Square Wave Frequency 2 HZ */
+    RTC_SQW_FREQ_1HZ = 0xF0             /**< RTC Square Wave Frequency 1 HZ */
+} RTC_SQW_FREQ;
 
 /**
  * @brief Configuration structure of the I2C ports.
@@ -134,7 +155,7 @@ interface rtc_communication {
      * @param data integer value corresponding to frequency (1 to 15).
      */
 
-    void    set_square_wave_frequency(uint8_t data);
+    void    set_square_wave_frequency(RTC_SQW_FREQ data);
 
 
     /**
@@ -246,7 +267,7 @@ interface rtc_communication {
      * @return value integer value corresponding to square wave frequency.
      */
 
-    unsigned get_square_wave_frequency(i2c_regop_res_t result);
+    RTC_SQW_FREQ get_square_wave_frequency(i2c_regop_res_t result);
 };
 
 /**

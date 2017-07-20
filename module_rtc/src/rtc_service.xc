@@ -125,24 +125,26 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                    RTC_write(i2c, Addr_Slave, Al_month, sqwe);
                  break;
            case rtc.set_SQW_Freq(RTC_SQW_FREQ data):
-                     i2c_regop_res_t result;
-                     uint8_t tmp;
+                   i2c_regop_res_t result;
+                   uint8_t tmp;
 
-                     if(data != RTC_SQW_FREQ_NONE)
-                     {
-                         tmp = RTC_read(i2c, Addr_Slave, Day, result);
-                         tmp = tmp & 0x0F;
-                         tmp = tmp | data;
-                         RTC_write(i2c, Addr_Slave, Day, tmp);
-                     }else{
-                         tmp = RTC_read(i2c, Addr_Slave, Day, result);
-                         tmp = tmp & 0x0F;
-                         RTC_write(i2c, Addr_Slave, Day, tmp);
-                         tmp = RTC_read(i2c, Addr_Slave, Al_month, result);
-                         tmp = tmp & 0xbf;
-                         RTC_write(i2c, Addr_Slave, Al_month, tmp);
-                     }
-                     break;
+                   if(data != RTC_SQW_FREQ_NONE)
+                   {
+                       tmp = RTC_read(i2c, Addr_Slave, Day, result);
+                       tmp = tmp & 0x0F;
+                       tmp = tmp | data;
+                       RTC_write(i2c, Addr_Slave, Day, tmp);
+                   }
+                   else
+                   {
+                       tmp = RTC_read(i2c, Addr_Slave, Day, result);
+                       tmp = tmp & 0x0F;
+                       RTC_write(i2c, Addr_Slave, Day, tmp);
+                       tmp = RTC_read(i2c, Addr_Slave, Al_month, result);
+                       tmp = tmp & 0xbf;
+                       RTC_write(i2c, Addr_Slave, Al_month, tmp);
+                   }
+                 break;
            case rtc.get_Hours(i2c_regop_res_t result) -> unsigned data_actual:
                    // read Hours
                    data = RTC_read(i2c, Addr_Slave, Hours, result);

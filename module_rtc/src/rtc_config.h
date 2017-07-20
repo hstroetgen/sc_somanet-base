@@ -156,7 +156,7 @@ interface rtc_communication {
      * @param data integer value corresponding to frequency (1 to 15).
      */
 
-    void    set_square_wave_frequency(RTC_SQW_FREQ data);
+    void    set_SQW_Freq(RTC_SQW_FREQ data);
 
 
     /**
@@ -268,7 +268,7 @@ interface rtc_communication {
      * @return value integer value corresponding to square wave frequency.
      */
 
-    RTC_SQW_FREQ get_square_wave_frequency(i2c_regop_res_t result);
+    RTC_SQW_FREQ get_SQW_Freq(i2c_regop_res_t result);
 };
 
 /**

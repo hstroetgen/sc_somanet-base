@@ -29,9 +29,10 @@ void RTC_write(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t 
           printf("I2C write reg failed\n");
       }
 }
+
 void rtc_service(server interface rtc_communication rtc, client interface i2c_master_if i2c)
 {
-    unsigned units, tens, century, data_month, data = 0;
+    uint8_t units, tens, century, data_month, data = 0;
 
     while (1) {
            select {
@@ -101,13 +102,48 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                     RTC_write(i2c, Addr_Slave, Century_Month, data);
                 break;
            case rtc.set_Day_of_week(uint8_t data):
-                     RTC_write(i2c, Addr_Slave, Day, data);
+                     i2c_regop_res_t result;
+                     uint8_t day;
+                     day = RTC_read(i2c, Addr_Slave, Day, result);
+                     day = day & 0xf8;
+                     day = day | (data & 0x07);
+                     RTC_write(i2c, Addr_Slave, Day, day);
                  break;
            case rtc.set_Date(uint8_t data):
                      tens = data / 10;
                      units = data % 10;
                      data = (tens << 4) | units;
                      RTC_write(i2c, Addr_Slave, Date, data);
+                 break;
+           case rtc.set_SQWE(uint8_t data):
+                   i2c_regop_res_t result;
+                   uint8_t sqwe;
+                   /* Write enable bit to reg A */
+                   sqwe = RTC_read(i2c, Addr_Slave, Al_month, result);
+                   sqwe = sqwe & 0xbf;
+                   sqwe = sqwe | (data<<6);
+                   RTC_write(i2c, Addr_Slave, Al_month, sqwe);
+                 break;
+           case rtc.set_SQW_Freq(RTC_SQW_FREQ data):
+                   i2c_regop_res_t result;
+                   uint8_t tmp;
+
+                   if(data != RTC_SQW_FREQ_NONE)
+                   {
+                       tmp = RTC_read(i2c, Addr_Slave, Day, result);
+                       tmp = tmp & 0x0F;
+                       tmp = tmp | data;
+                       RTC_write(i2c, Addr_Slave, Day, tmp);
+                   }
+                   else
+                   {
+                       tmp = RTC_read(i2c, Addr_Slave, Day, result);
+                       tmp = tmp & 0x0F;
+                       RTC_write(i2c, Addr_Slave, Day, tmp);
+                       tmp = RTC_read(i2c, Addr_Slave, Al_month, result);
+                       tmp = tmp & 0xbf;
+                       RTC_write(i2c, Addr_Slave, Al_month, tmp);
+                   }
                  break;
            case rtc.get_Hours(i2c_regop_res_t result) -> unsigned data_actual:
                    // read Hours
@@ -167,6 +203,14 @@ void rtc_service(server interface rtc_communication rtc, client interface i2c_ma
                    units = (data & 0xF);
                    tens = (data >> 4 ) & 0xF;
                    data_actual = (tens * 10) + units;
+                 break;
+           case rtc.get_SQWE(i2c_regop_res_t result) -> unsigned data_actual:
+                   data = RTC_read(i2c, Addr_Slave, Al_month, result);
+                   data_actual = (data >> 6) & 0xF;
+                 break;
+           case rtc.get_SQW_Freq(i2c_regop_res_t result) -> RTC_SQW_FREQ data_actual:
+                   data = RTC_read(i2c, Addr_Slave, Day, result);
+                   data_actual = (data >> 4) & 0x0F;
                  break;
            default : break;
                     }

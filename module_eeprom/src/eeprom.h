@@ -5,6 +5,7 @@
 #include<string.h>
 
 #define SLAVE_ADDRESS   0x50    // 01010000
+#define EEPROM_SIZE     128     // 128 bytes
 
 /**
  * @brief Interface type to communicate with EEPROM Service.
@@ -25,11 +26,13 @@ interface i_eeprom_communication {
     /**
      * @brief Read the data from particular address in EEPROM.
      *
-     * @param addr address in EEPROM to read data
+     * @param addr base address in EEPROM to read data
+     * @param no_of_bytes number of bytes to read sequentially from that base address
+     * @param data buffer to fill with data
      * @return data
      */
 
-    uint8_t    read(uint8_t addr);
+    void    read(uint8_t addr, unsigned int no_of_bytes, uint8_t data[]);
 
     /**
      * @brief Write the data using page write mode in EEPROM.

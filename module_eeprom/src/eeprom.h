@@ -26,7 +26,7 @@ interface i_eeprom_communication {
     /**
      * @brief Read the data from particular address in EEPROM.
      *
-     * @param addr base address in EEPROM to read data
+     * @param addr base address (7 bit address ranges 0x00 to 0x7F) in EEPROM to read data
      * @param no_of_bytes number of bytes to read from that base address
      * @param data buffer to fill with data
      */
@@ -36,7 +36,7 @@ interface i_eeprom_communication {
     /**
      * @brief Write the data using in EEPROM.
      *
-     * @param addr address in EEPROM to write data from
+     * @param addr address (7 bit address ranges 0x00 to 0x7F) in EEPROM to write data from
      * @param data set of data to be written
      * @param no_of_db number of data bytes to write from the set of data. (no_of_db = 1 for random write mode and 1 < no_of_db <= 8  for page write mode). The no_of_db should not be greater than 8.
      */

@@ -8,6 +8,16 @@
 #define EEPROM_SIZE     128     // 128 bytes
 
 /**
+ * @brief Configuration structure of the I2C ports.
+ */
+typedef struct {
+    port p_scl;     /**< I2C clock line */
+    port p_sda;     /**< I2C data line */
+}I2C_ports;
+
+
+
+/**
  * @brief Interface type to communicate with EEPROM Service.
  */
 

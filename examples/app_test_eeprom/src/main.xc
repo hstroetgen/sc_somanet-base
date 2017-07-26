@@ -14,68 +14,32 @@
 #include <xclib.h>
 #include<stdio.h>
 #include<eeprom.h>
-/**
- * @brief Configuration structure of the I2C ports.
- */
 
-typedef struct {
-    port p_scl;     /**< I2C clock line */
-    port p_sda;     /**< I2C data line */
-}I2C_ports;
 
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 #define slave_address   0x50    // 01010000
-#define DEVICE_SIZE 128         // 128 bytes
-
-#if 0
-void eeprom_comm(client interface i2c_master_if i2c)
-{
-    uint8_t data_send = 0xFA, data_rcv = 0x00;
-    uint8_t address_ptr[1] = {0x00};
-    size_t no_bytes_sent=5;
-    i2c_res_t res;
-    i2c_regop_res_t res_reg;
-
-    for(int i = 0; i<DEVICE_SIZE; i++)
-    {
-        address_ptr[0] = i;
-
-        // Write Operation
-        res_reg = i2c.write_reg(slave_address, address_ptr[0], data_send);
-//        printf("The res_reg = %d\n", res_reg);
-
-
-
-        // Read operation
-        while(res == 0)
-            res = i2c.write(slave_address, address_ptr, 1, no_bytes_sent, 0);
-//        printf("The res = %d and bytes sent = %d\n", res, no_bytes_sent);
-        i2c.read(slave_address, &data_rcv, 1, 1);
-        printf("The data recieved is : 0x%x\n", data_rcv);
-        data_rcv = 0;res = 0;
-//        if(data_rcv != data_send){printf("!!!!!!! ERROR : WRONG DATA RECIEVE !!!!!!!!\n");}
-    }
-}
-#endif
 
 
 void eeprom_comm(client interface i_eeprom_communication i_eeprom)
 {
-    uint8_t data;
-    uint8_t addr_w = 0x0F, data_send = 0xEF;
-    uint8_t addr_r = 0x0F;
-    uint8_t d_set[4] = {0x9E,0x02,0xE7, 0xFF};
-
-    // Normal Write Operation
-    i_eeprom.write(addr_w, data_send);
-    data = i_eeprom.read(addr_r);
-    printf("The data in normal write mode is = 0x%x\n", data);
-
-    // Page Write Operation
-    i_eeprom.page_write(addr_w, d_set, 4);
-    data = i_eeprom.read(addr_r);
-    printf("The data in page write mode is = 0x%x\n", data);
-
+    uint8_t data[8];
+    uint8_t addr = 0x08;
+    uint8_t d_set[8] = {0x97,0x31,0xA4, 0xB7, 0x2E,0x5B,0x97, 0xBC};
+    i_eeprom.write(addr, d_set, 8);
+    printf("### Random Read ###\n");
+    for(int i=0; i<8; i++)
+    {
+        i_eeprom.read(addr + i, 1, data);
+        printf("The data read from address 0x%x is = 0x%x\n", addr+i, data[0]);
+    }
+    printf("\n### Sequential Read ###\n");
+    addr = 0x00;
+    i_eeprom.write(addr, d_set, 8);
+    i_eeprom.read(addr, 8, data);
+    for(int i=0; i<8; i++)
+    {
+        printf("The data read from address 0x%x is = 0x%x\n", addr+i, data[i]);
+    }
 }
 
 int main(void)

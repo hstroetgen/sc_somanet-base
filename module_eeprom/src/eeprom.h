@@ -27,7 +27,7 @@ interface i_eeprom_communication {
      * @brief Read the data from particular address in EEPROM.
      *
      * @param addr base address (7 bit address ranges 0x00 to 0x7F) in EEPROM to read data
-     * @param no_of_bytes number of bytes to read from that base address
+     * @param no_of_bytes number of bytes to read from that base address (range: 1-128)
      * @param data buffer to fill with data
      */
 

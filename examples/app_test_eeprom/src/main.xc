@@ -8,16 +8,12 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 #include <xs1.h>
-#include <xccompat.h>
-#include <inttypes.h>
 #include <platform.h>
-#include <xclib.h>
 #include<stdio.h>
 #include<eeprom.h>
 
 
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
-#define slave_address   0x50    // 01010000
 
 
 void eeprom_comm(client interface i_eeprom_communication i_eeprom)

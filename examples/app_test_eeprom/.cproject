@@ -227,6 +227,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.xc.compiler.input.1921739299" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
@@ -582,6 +583,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.c.compiler.input.c.1824980364" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -942,6 +944,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_eeprom/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.41786706" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>

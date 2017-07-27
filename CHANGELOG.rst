@@ -1,5 +1,22 @@
 sc_somanet-base Change Log
 ==========================
+3.1.0
+-----
+  * Improve support for GPIO-A_rev-a2 module
+  * Improve support for SOMANET-C21-DX_G2 module
+  * Add support for DC1K rev.D1
+  * Add i2c, xassert, and logging XMOS libraries (as submodules)
+  * Add support for SPIFFS (SPI File System)
+  * Add support for RTC of SOMANET-C21-DX_G2 module
+
+
+3.0.2
+-----
+  * Fix SOMANET-C21-DX_G2 BSP and platform files
+
+3.0.1
+-----
+  * Fix issue with a not working Debug/Release build configuration for demo apps
 
 3.0.0
 -----

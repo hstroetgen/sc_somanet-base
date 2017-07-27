@@ -24,6 +24,28 @@
 #define Flags                   0xF
 #define Addr_Slave              0x68  // (1101000)
 
+/**
+ * @brief RTC Square Wave Frequency types
+ */
+typedef enum
+{
+    RTC_SQW_FREQ_NONE = 0x00,           /**< RTC Square Wave Frequency None */
+    RTC_SQW_FREQ_32KHZ = 0x10,          /**< RTC Square Wave Frequency 32 KHZ */
+    RTC_SQW_FREQ_8KHZ = 0x20,           /**< RTC Square Wave Frequency 8 KHZ */
+    RTC_SQW_FREQ_4KHZ = 0x30,           /**< RTC Square Wave Frequency 4 KHZ */
+    RTC_SQW_FREQ_2KHZ = 0x40,           /**< RTC Square Wave Frequency 2 KHZ */
+    RTC_SQW_FREQ_1KHZ = 0x50,           /**< RTC Square Wave Frequency 1 KHZ */
+    RTC_SQW_FREQ_512HZ = 0x60,          /**< RTC Square Wave Frequency 512 HZ */
+    RTC_SQW_FREQ_256HZ = 0x70,          /**< RTC Square Wave Frequency 256 HZ */
+    RTC_SQW_FREQ_128HZ = 0x80,          /**< RTC Square Wave Frequency 128 HZ */
+    RTC_SQW_FREQ_64HZ = 0x90,           /**< RTC Square Wave Frequency 64 HZ */
+    RTC_SQW_FREQ_32HZ = 0xA0,           /**< RTC Square Wave Frequency 32 HZ */
+    RTC_SQW_FREQ_16HZ = 0xB0,           /**< RTC Square Wave Frequency 16 HZ */
+    RTC_SQW_FREQ_8HZ = 0xC0,            /**< RTC Square Wave Frequency 8 HZ */
+    RTC_SQW_FREQ_4HZ = 0xD0,            /**< RTC Square Wave Frequency 4 HZ */
+    RTC_SQW_FREQ_2HZ = 0xE0,            /**< RTC Square Wave Frequency 2 HZ */
+    RTC_SQW_FREQ_1HZ = 0xF0             /**< RTC Square Wave Frequency 1 HZ */
+} RTC_SQW_FREQ;
 
 /**
  * @brief Configuration structure of the I2C ports.
@@ -121,6 +143,23 @@ interface rtc_communication {
     void    set_Century(uint8_t data);
 
     /**
+     * @brief Setter for SQWE bit.
+     *
+     * @param data SQWE bit value (0 or 1).
+     */
+
+    void    set_SQWE(uint8_t data);
+
+    /**
+     * @brief Setter for Square Wave output frequency.
+     *
+     * @param data variable of type RTC_SQW_FREQ.
+     */
+
+    void    set_SQW_Freq(RTC_SQW_FREQ data);
+
+
+    /**
      * @brief Getter for Hours.
      *
      * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
@@ -209,6 +248,27 @@ interface rtc_communication {
      */
 
     unsigned get_Century(i2c_regop_res_t result);
+
+
+    /**
+     * @brief Getter for SQWE bit.
+     *
+     * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
+     *
+     * @return value of SQWE bit.
+     */
+
+    unsigned get_SQWE(i2c_regop_res_t result);
+
+    /**
+     * @brief Getter for square wave frequency value.
+     *
+     * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
+     *
+     * @return value of type RTC_SQW_FREQ.
+     */
+
+    RTC_SQW_FREQ get_SQW_Freq(i2c_regop_res_t result);
 };
 
 /**

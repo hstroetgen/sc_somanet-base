@@ -13,3 +13,6 @@
 [submodule "lib_spi"]
 	path = lib_spi
 	url = https://github.com/xmos/lib_spi.git
+[submodule "lib_uart"]
+	path = lib_uart
+	url = https://github.com/xmos/lib_uart.git

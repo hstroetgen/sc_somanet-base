@@ -98,6 +98,18 @@ interface i_temperature_sensor_communication {
      */
 
     uint8_t    get_configuration();
+
+    /**
+      * @brief Enable shutdown mode for temperature sensor.
+      */
+
+     void    enable_shutdown_mode();
+
+     /**
+       * @brief Enable normal mode for temperature sensor.
+       */
+
+      void    enable_normal_mode();
 };
 
 

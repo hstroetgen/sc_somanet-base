@@ -21,11 +21,11 @@ void write_i2c_reg(client interface i2c_master_if i2c, uint8_t data[])
     i2c.write_reg(SLAVE_ADDRESS, data[0], data[1]);
 }
 
-void write_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, uint8_t data[])
+void write_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, uint8_t stop_bit, uint8_t data[])
 {
     size_t no_bytes_sent;
 
-    i2c.write(SLAVE_ADDRESS, data, no_of_bytes, no_bytes_sent, 0);
+    i2c.write(SLAVE_ADDRESS, data, no_of_bytes, no_bytes_sent, stop_bit);
 
 }
 
@@ -39,7 +39,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                        uint8_t reg_data[1] = {TEMP_REGISTER};
                        uint16_t tmp = 0;
                        float temp_value = 0.0;
-                       write_i2c(i2c, 1, reg_data);
+                       write_i2c(i2c, 1, 0, reg_data);
                        ret = read_i2c(i2c, 2, 1, temp_data);
                        if(ret == 1)
                        {
@@ -75,7 +75,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                case i_temperature_sensor.get_temperature_update_time() -> unsigned int time:
                    uint8_t temp_data[1] = {0};
                    uint8_t reg_data[1] = {TIDLE_REGISTER};
-                   write_i2c(i2c, 1, reg_data);
+                   write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
                    time = (temp_data[0] * 100);
                    break;
@@ -84,7 +84,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[2] = {0,0};
                    uint8_t reg_data[1] = {TOS_REGISTER};
                    uint16_t temp_value;
-                   write_i2c(i2c, 1, reg_data);
+                   write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 2, 1, temp_data);
                    temp_value = temp_data[0];
                    temp_value = (temp_value << 8) | temp_data[1];
@@ -96,7 +96,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                     uint8_t temp_data[2] = {0,0};
                     uint8_t reg_data[1] = {THYST_REGISTER};
                     uint16_t temp_value;
-                    write_i2c(i2c, 1, reg_data);
+                    write_i2c(i2c, 1, 0, reg_data);
                     ret = read_i2c(i2c, 2, 1, temp_data);
                     temp_value = temp_data[0];
                     temp_value = (temp_value << 8) | temp_data[1];
@@ -107,7 +107,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                case i_temperature_sensor.get_configuration() -> uint8_t value :
                    uint8_t reg_data[1] = {CONF_REGISTER};
                    uint8_t temp_data[1] = {0};
-                   write_i2c(i2c, 1, reg_data);
+                   write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
                    value = temp_data[0];
                    break;
@@ -127,7 +127,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    temp = temp << 7;
                    temp_data[1] = (temp & 0xFF00) >> 8;
                    temp_data[2] = temp & 0x00FF;
-                   write_i2c(i2c, 3, temp_data);
+                   write_i2c(i2c, 3, 1, temp_data);
                    break;
 
                case i_temperature_sensor.set_hysteresis_value(uint16_t temp):
@@ -136,14 +136,33 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                     temp = temp << 7;
                     temp_data[1] = (temp & 0xFF00) >> 8;
                     temp_data[2] = temp & 0x00FF;
-                    write_i2c(i2c, 3, temp_data);
+                    write_i2c(i2c, 3, 1, temp_data);
                     break;
 
                case i_temperature_sensor.set_configuration(uint8_t conf):
                    uint8_t temp_data[2] = {CONF_REGISTER,0};
                    temp_data[1] = conf;
-                   write_i2c(i2c, 2, temp_data);
+                   write_i2c(i2c, 2, 1, temp_data);
+                   break;
 
+               case i_temperature_sensor.enable_shutdown_mode():
+                   uint8_t reg_data[2] = {CONF_REGISTER,0};
+                   uint8_t temp_data[1] = {0};
+                   write_i2c(i2c, 1, 0, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   temp_data[0] = temp_data[0] | 0x01;
+                   reg_data[1] = temp_data[0];
+                   write_i2c(i2c, 2, 1, reg_data);
+                   break;
+
+               case i_temperature_sensor.enable_normal_mode():
+                   uint8_t reg_data[2] = {CONF_REGISTER,0};
+                   uint8_t temp_data[1] = {0};
+                   write_i2c(i2c, 1, 0, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   temp_data[0] = temp_data[0] & 0xFE;
+                   reg_data[1] = temp_data[0];
+                   write_i2c(i2c, 2, 1, reg_data);
                    break;
 
            }

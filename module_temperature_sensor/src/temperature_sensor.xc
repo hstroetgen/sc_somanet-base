@@ -72,14 +72,6 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                        }
                        break;
 
-
-               case i_temperature_sensor.set_temperature_update_time(unsigned int time_in_ms):
-                   uint8_t temp_data[2] = {TIDLE_REGISTER,0};
-                   unsigned int value = time_in_ms/100;
-                   temp_data[1] = value;
-                   write_i2c_reg(i2c, temp_data);
-                   break;
-
                case i_temperature_sensor.get_temperature_update_time() -> unsigned int time:
                    uint8_t temp_data[1] = {0};
                    uint8_t reg_data[1] = {TIDLE_REGISTER};
@@ -112,6 +104,23 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                     temperature = (float)(temp_value/2);
                     break;
 
+               case i_temperature_sensor.get_configuration() -> uint8_t value :
+                   uint8_t reg_data[1] = {CONF_REGISTER};
+                   uint8_t temp_data[1] = {0};
+                   write_i2c(i2c, 1, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   value = temp_data[0];
+                   break;
+
+
+               case i_temperature_sensor.set_temperature_update_time(unsigned int time_in_ms):
+                    uint8_t temp_data[2] = {TIDLE_REGISTER,0};
+                    unsigned int value = time_in_ms/100;
+                    temp_data[1] = value;
+                    write_i2c_reg(i2c, temp_data);
+                    break;
+
+
                case i_temperature_sensor.set_threshold_value(uint16_t temp):
                    uint8_t temp_data[3] = {TOS_REGISTER,0,0};
                    temp = temp * 2;
@@ -129,6 +138,14 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                     temp_data[2] = temp & 0x00FF;
                     write_i2c(i2c, 3, temp_data);
                     break;
+
+               case i_temperature_sensor.set_configuration(uint8_t conf):
+                   uint8_t temp_data[2] = {CONF_REGISTER,0};
+                   temp_data[1] = conf;
+                   write_i2c(i2c, 2, temp_data);
+
+                   break;
+
            }
 
     }

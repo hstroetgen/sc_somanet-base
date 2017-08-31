@@ -55,6 +55,13 @@ interface i_temperature_sensor_communication {
 
     void    set_hysteresis_value(uint16_t temp);
 
+    /**
+      * @brief Set the configuration for Temperature Sensor.
+      * @param configuration for temperature sensor.
+      */
+
+     void    set_configuration(uint8_t conf);
+
 
     /**
      * @brief Read the Temperature value.
@@ -84,6 +91,13 @@ interface i_temperature_sensor_communication {
      */
 
     float    get_hysteresis_value();
+
+    /**
+     * @brief Read the  Configuration register for temperature sensor.
+     * @return Configuration Register Value.
+     */
+
+    uint8_t    get_configuration();
 };
 
 

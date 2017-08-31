@@ -16,16 +16,10 @@ on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
 void temp_sensor_comm(client interface i_temperature_sensor_communication i_temperature)
 {
- //   uint8_t pointer_reg = 0x00;
- //   uint8_t temp_data[2] = {0,0}, buff[1] = {TEMP_REGISTER};
- //   uint16_t tmp = 0;
- //   size_t no_bytes_sent;
+
     float temp_value = 0.0;
     unsigned int value;
-//    i2c_regop_res_t ret;
-//    i2c_res_t res;
-//    i2c.write(SLAVE_ADDRESS, buff, 1, no_bytes_sent, 0);
-//    i2c.write_reg(SLAVE_ADDRESS, buff[0], 0x01);
+
     while(1)
     {
         value = i_temperature.get_temperature_update_time();
@@ -50,56 +44,19 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
 
         i_temperature.set_hysteresis_value(74);
         temp_value = i_temperature.get_hysteresis_value();
-        printf("The hysteresis value = %f\n\n", temp_value);
+        printf("The hysteresis value = %f\n", temp_value);
 
-#if 0
-   //     i2c.write(SLAVE_ADDRESS, buff, 1, no_bytes_sent, 0); //printf("No of bytes written = %d\n", no_bytes_sent);
-        res = i2c.read(SLAVE_ADDRESS, temp_data, 2, 1);
-        //printf("The return value after read is = %d\n", res);
-        printf("The temp digital data recieved = %x and %x\n", temp_data[0], temp_data[1]);
-        if((temp_data[0] & 0x80) == 0)
-        {
-            tmp = temp_data[0];
-            tmp = (tmp << 8) | temp_data[1];
-            printf("tmp = 0x%x\n", tmp);
-            tmp = (tmp >> 5);
-            temp_value = tmp * 0.125;
-            printf("The temp value = %f\n\n", temp_value);
-        }
+        value = i_temperature.get_configuration();
+        printf("The configuration value = %d\n\n", value);
 
-        else
-        {
-            tmp = temp_data[0];
-            tmp = (tmp << 8) | temp_data[1];
-            printf("tmp = 0x%x\n", tmp);
-            tmp = (tmp >> 5);
-            tmp = ~tmp + 1;
-            temp_value = tmp * 0.125;
-            printf("The temp value = %f\n\n", temp_value);
-        }
-#endif
+        i_temperature.set_configuration(0x01);
+        value = i_temperature.get_configuration();
+        printf("The configuration value = %d\n\n", value);
+
         delay_seconds(1);
-
 
     }
 
-//    if((temp_data[1] & 0x80) == 0)
- //   if(1)
- //   {
- //       tmp = temp_data[1];
- //     tmp = (tmp << 8) | temp_data[0];
- //     tmp = tmp >> 5;
- //       temp_value = tmp * 0.125;
-
- //   }
- //   else
-//    {
- //       tmp = temp_data[1];
-//        tmp = ((tmp << 8) | temp_data[0]);
-//        tmp = ~tmp;
-//        temp_value = -(tmp * 0.125);
-//        printf("The temperature is = %lf", temp_value);
-//    }
 }
 
 int main(void)

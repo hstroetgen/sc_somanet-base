@@ -1,0 +1,18 @@
+[submodule "lib_i2c"]
+	path = lib_i2c
+	url = https://github.com/xmos/lib_i2c.git
+[submodule "lib_xassert"]
+	path = lib_xassert
+	url = https://github.com/xmos/lib_xassert.git
+[submodule "lib_logging"]
+	path = lib_logging
+	url = https://github.com/xmos/lib_logging.git
+[submodule "lib_gpio"]
+	path = lib_gpio
+	url = https://github.com/xmos/lib_gpio.git
+[submodule "lib_spi"]
+	path = lib_spi
+	url = https://github.com/xmos/lib_spi.git
+[submodule "lib_uart"]
+	path = lib_uart
+	url = https://github.com/xmos/lib_uart.git

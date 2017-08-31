@@ -11,6 +11,7 @@
 *.out
 
 ## build files and bins
+.build/
 .build_Debug/
 .build_Release/
 bin/

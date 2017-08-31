@@ -26,8 +26,9 @@
      ADC_CLK_SRC,                   \
      ADC_SCLK,                      \
      ADC_READY,                     \
-     ADC_MUX},                      \
-     {-1, 1, 50}                    \
+     ADC_MUX,                       \
+     {0, 10, 1, 11, 4, 5, 14, 15, 2, 3, 12, 13, 6, 16} /* Mapping between adc channels and real analogue signals */ },\
+     {0, -1, 1, 50}                    \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -38,25 +39,18 @@
     null                                \
 }
 
-/* HALL SENSOR PORTS */
-#define HALL_PORT IFM_PORT_4BIT_38_44_30_34
+/* ENCODER 1 (HALL) SENSOR PORT */
+#define SOMANET_IFM_ENCODER_1_PORT IFM_PORT_4BIT_38_44_30_34
 
-#define SOMANET_IFM_HALL_PORTS {    \
-    HALL_PORT                       \
-}
+/* ENCODER 2 (QEI) SENSOR PORT */
+#define SOMANET_IFM_ENCODER_2_PORT IFM_PORT_4BIT_64_66_76_80
 
-/* ENCODER PORT */
-#define QEI_PORT IFM_PORT_4BIT_64_66_76_80
+/* INPUT MODE SELECTION PORT */
+#define ENCODER_PORTS_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
 
-#define SOMANET_IFM_QEI_PORTS {                 \
-    QEI_PORT                                    \
-}
-
-/* INPUT MODE SELECTION PORT */
-#define QEI_PORT_INPUT_MODE_SELECTION IFM_PORT_4BIT_68_70_72_74
-
-#define SOMANET_IFM_QEI_PORT_INPUT_MODE_SELECTION { \
-    QEI_PORT_INPUT_MODE_SELECTION                   \
+#define SOMANET_IFM_ENCODER_PORTS_INPUT_MODE_SELECTION { \
+    ENCODER_PORTS_INPUT_MODE_SELECTION,                  \
+    0                                                    \
 }
 
 /* PWM PORTS*/
@@ -103,11 +97,13 @@
 #define WATCHDOG_TICK_PORT null
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
 #define CPLD_SHARED_PORT null
+#define CPLD_FAULT_MONITOR null
 
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
     WATCHDOG_TICK_PORT,                 \
-    CPLD_SHARED_PORT			\
+    CPLD_SHARED_PORT,			\
+    CPLD_FAULT_MONITOR                  \
 }
 
 /* GPIO_PORTS */

@@ -33,7 +33,10 @@ Quick How-to
 5. :ref:`import in your workspace <getting_started_importing_library>` the I2C XMOS library and its dependencies. The I2C library and its dependencies are used as submodules. You can update the submodules by the command specified above in the document.
 6. :ref:`import in your workspace <getting_started_importing_library>` the Temperature Sensor module.
 7. Read and Write the data using i_temperature_sensor_communication interface functions.
-8. Build the application. The output from the compilation process will be visible on the console.
-9. The application when executed will read the temperature value and update configurations of Temperature Sensor and print it on the console.
+8. Update MONITOR_OS_PIN macro to enable or disable the OS Pin checking function.
+	#define MONITOR_OS_PIN  1		To Enable the OS Pin checking function and related code.
+	#define MONITOR_OS_PIN  0		To Disbale the OS Pin checking function and related code.
+9. Build the application. The output from the compilation process will be visible on the console.
+10. The application when executed will read the temperature value and update configurations of Temperature Sensor and print it on the console.
 
 .. seealso:: Did everything go well? If you need further support please check out our `forum <http://forum.synapticon.com/>`_.

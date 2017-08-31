@@ -105,11 +105,23 @@ interface i_temperature_sensor_communication {
 
      void    enable_shutdown_mode();
 
-     /**
-       * @brief Enable normal mode for temperature sensor.
-       */
+    /**
+      * @brief Enable normal mode for temperature sensor.
+      */
 
-      void    enable_normal_mode();
+     void    enable_normal_mode();
+
+    /**
+      * @brief Enable  OS comparator mode for temperature sensor.
+      */
+
+     void    enable_OS_comparator_mode();
+
+    /**
+      * @brief Enable  OS interrupt mode for temperature sensor.
+      */
+
+     void    enable_OS_interrupt_mode();
 };
 
 

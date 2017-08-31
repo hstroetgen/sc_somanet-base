@@ -165,6 +165,26 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    write_i2c(i2c, 2, 1, reg_data);
                    break;
 
+               case i_temperature_sensor.enable_OS_comparator_mode():
+                   uint8_t reg_data[2] = {CONF_REGISTER,0};
+                   uint8_t temp_data[1] = {0};
+                   write_i2c(i2c, 1, 0, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   temp_data[0] = temp_data[0] & 0xFD;
+                   reg_data[1] = temp_data[0];
+                   write_i2c(i2c, 2, 1, reg_data);
+                   break;
+
+               case i_temperature_sensor.enable_OS_interrupt_mode():
+                   uint8_t reg_data[2] = {CONF_REGISTER,0};
+                   uint8_t temp_data[1] = {0};
+                   write_i2c(i2c, 1, 0, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   temp_data[0] = temp_data[0] | 0x02;
+                   reg_data[1] = temp_data[0];
+                   write_i2c(i2c, 2, 1, reg_data);
+                   break;
+
            }
 
     }

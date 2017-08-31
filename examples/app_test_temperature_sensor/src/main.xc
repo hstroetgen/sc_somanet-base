@@ -59,6 +59,14 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
         value = i_temperature.get_configuration();
         printf("The configuration value = %d\n\n", value);
 
+        i_temperature.enable_OS_comparator_mode();
+        value = i_temperature.get_configuration();
+        printf("The configuration value = %d\n\n", value);
+
+        i_temperature.enable_OS_interrupt_mode();
+        value = i_temperature.get_configuration();
+        printf("The configuration value = %d\n\n", value);
+
         delay_seconds(1);
 
     }

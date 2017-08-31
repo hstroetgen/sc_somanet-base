@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <i2c.h>
 
-#define SLAVE_ADDRESS   0x4A        // 01001000 or 01001010
+#define SLAVE_ADDRESS   0x4A        // 01001010
 
 /**
  * @brief Configuration structure of the I2C ports.

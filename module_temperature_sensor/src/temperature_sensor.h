@@ -128,6 +128,11 @@ interface i_temperature_sensor_communication {
      void    enable_OS_interrupt_mode();
 };
 
-
+/**
+ * @brief Service to access PCT2075GVJ Temperature Sensor.
+ *
+ * @param i_temperture_sensor temperature sensor communication interface for the service.
+ * @param i2c_master_if communication interface with an I2C master component.
+ */
 void temperature_sensor_service(server interface i_temperature_sensor_communication i_temperture_sensor, client interface i2c_master_if i2c);
 #endif

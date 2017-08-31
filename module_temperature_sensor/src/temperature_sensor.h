@@ -48,6 +48,13 @@ interface i_temperature_sensor_communication {
 
     void    set_threshold_value(uint16_t temp);
 
+    /**
+     * @brief Set the hysteresis Temperature value for OS output pin.
+     * @param temperature in degree celsius.
+     */
+
+    void    set_hysteresis_value(uint16_t temp);
+
 
     /**
      * @brief Read the Temperature value.
@@ -70,6 +77,13 @@ interface i_temperature_sensor_communication {
      */
 
     float    get_threshold_value();
+
+    /**
+     * @brief Read the hysteresis Temperature value for OS output pin.
+     * @return temperature in degree celsius
+     */
+
+    float    get_hysteresis_value();
 };
 
 

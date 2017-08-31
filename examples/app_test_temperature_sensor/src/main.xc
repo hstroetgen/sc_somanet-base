@@ -34,16 +34,23 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
         temp_value = i_temperature.get_temperature();
         printf("The temperature value = %f\n", temp_value);
 
-        i_temperature.set_temperature_update_time(100);
+        i_temperature.set_temperature_update_time(200);
         value = i_temperature.get_temperature_update_time();
         printf("The time value = %d\n", value);
 
         temp_value = i_temperature.get_threshold_value();
-        printf("The threashold value = %f\n", temp_value);
+        printf("The threshold value = %f\n", temp_value);
 
         i_temperature.set_threshold_value(76);
         temp_value = i_temperature.get_threshold_value();
-        printf("The threashold value = %f\n\n", temp_value);
+        printf("The threshold value = %f\n", temp_value);
+
+        temp_value = i_temperature.get_hysteresis_value();
+        printf("The hysteresis value = %f\n", temp_value);
+
+        i_temperature.set_hysteresis_value(74);
+        temp_value = i_temperature.get_hysteresis_value();
+        printf("The hysteresis value = %f\n\n", temp_value);
 
 #if 0
    //     i2c.write(SLAVE_ADDRESS, buff, 1, no_bytes_sent, 0); //printf("No of bytes written = %d\n", no_bytes_sent);

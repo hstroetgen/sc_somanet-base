@@ -47,21 +47,21 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
         printf("The hysteresis value = %f\n", temp_value);
 
         value = i_temperature.get_configuration();
-        printf("The configuration value = %d\n\n", value);
+        printf("The configuration value = %d\n", value);
 
         i_temperature.set_configuration(0x01);
 
         i_temperature.enable_shutdown_mode();
         value = i_temperature.get_configuration();
-        printf("The configuration value = %d\n\n", value);
+        printf("The configuration value = %d\n", value);
 
         i_temperature.enable_normal_mode();
         value = i_temperature.get_configuration();
-        printf("The configuration value = %d\n\n", value);
+        printf("The configuration value = %d\n", value);
 
         i_temperature.enable_OS_comparator_mode();
         value = i_temperature.get_configuration();
-        printf("The configuration value = %d\n\n", value);
+        printf("The configuration value = %d\n", value);
 
         i_temperature.enable_OS_interrupt_mode();
         value = i_temperature.get_configuration();

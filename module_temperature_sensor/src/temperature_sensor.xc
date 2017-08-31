@@ -47,21 +47,17 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                            {
                                tmp = temp_data[0];
                                tmp = (tmp << 8) | temp_data[1];
-                     //          printf("tmp = 0x%x\n", tmp);
                                tmp = (tmp >> 5);
                                temp_value = tmp * 0.125;
-                     //        printf("The temp value = %f\n\n", temp_value);
                            }
 
                            else
                            {
                                tmp = temp_data[0];
                                tmp = (tmp << 8) | temp_data[1];
-                    //          printf("tmp = 0x%x\n", tmp);
                                tmp = (tmp >> 5);
                                tmp = ~tmp + 1;
                                temp_value = -(tmp * 0.125);
-                    //          printf("The temp value = %f\n\n", temp_value);
                            }
                            temp = temp_value;
                        }
@@ -77,6 +73,12 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t reg_data[1] = {TIDLE_REGISTER};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while reading temperature update time");
+                       time = 0;
+                       break;
+                   }
                    time = (temp_data[0] * 100);
                    break;
 
@@ -86,6 +88,12 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint16_t temp_value;
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 2, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while reading threshold temperature");
+                       temperature = 0.0;
+                       break;
+                   }
                    temp_value = temp_data[0];
                    temp_value = (temp_value << 8) | temp_data[1];
                    temp_value = temp_value >> 7;
@@ -98,6 +106,12 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                     uint16_t temp_value;
                     write_i2c(i2c, 1, 0, reg_data);
                     ret = read_i2c(i2c, 2, 1, temp_data);
+                    if(ret == -1)
+                    {
+                        printf("WARNING : NACK recieved from the device while reading hysteresis temperature");
+                        temperature = 0.0;
+                        break;
+                    }
                     temp_value = temp_data[0];
                     temp_value = (temp_value << 8) | temp_data[1];
                     temp_value = temp_value >> 7;
@@ -109,6 +123,12 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[1] = {0};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while reading configuration");
+                       value = 0;
+                       break;
+                   }
                    value = temp_data[0];
                    break;
 
@@ -150,6 +170,11 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[1] = {0};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while enabling shutdown mode");
+                       break;
+                   }
                    temp_data[0] = temp_data[0] | 0x01;
                    reg_data[1] = temp_data[0];
                    write_i2c(i2c, 2, 1, reg_data);
@@ -160,6 +185,11 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[1] = {0};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while enabling normal mode");
+                       break;
+                   }
                    temp_data[0] = temp_data[0] & 0xFE;
                    reg_data[1] = temp_data[0];
                    write_i2c(i2c, 2, 1, reg_data);
@@ -170,6 +200,11 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[1] = {0};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while enabling OS comparator mode");
+                       break;
+                   }
                    temp_data[0] = temp_data[0] & 0xFD;
                    reg_data[1] = temp_data[0];
                    write_i2c(i2c, 2, 1, reg_data);
@@ -180,6 +215,11 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    uint8_t temp_data[1] = {0};
                    write_i2c(i2c, 1, 0, reg_data);
                    ret = read_i2c(i2c, 1, 1, temp_data);
+                   if(ret == -1)
+                   {
+                       printf("WARNING : NACK recieved from the device while enabling OS interrupt mode");
+                       break;
+                   }
                    temp_data[0] = temp_data[0] | 0x02;
                    reg_data[1] = temp_data[0];
                    write_i2c(i2c, 2, 1, reg_data);

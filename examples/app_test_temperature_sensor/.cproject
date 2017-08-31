@@ -227,6 +227,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.xc.compiler.input.501254428" name="XC" superClass="com.xmos.cdt.xc.compiler.input"/>
 							</tool>
@@ -582,6 +583,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.c.compiler.input.c.1226834572" name="C" superClass="com.xmos.cdt.c.compiler.input.c"/>
 							</tool>
@@ -942,6 +944,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_xassert/lib_xassert}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/module_temperature_sensor/doc}&quot;"/>
 								</option>
 								<inputType id="com.xmos.cdt.cxx.compiler.input.cpp.1017437908" name="C++" superClass="com.xmos.cdt.cxx.compiler.input.cpp"/>
 							</tool>

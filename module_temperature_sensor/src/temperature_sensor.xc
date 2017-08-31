@@ -1,5 +1,5 @@
 /**
- * @file main.xc
+ * @file temperature_sensor.xc
  * @brief Module illustrates usage of temperature sensor PCT2075GVJ
  * @author Synapticon GmbH <support@synapticon.com>
  */

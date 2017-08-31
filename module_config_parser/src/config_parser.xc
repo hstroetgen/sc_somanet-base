@@ -84,7 +84,7 @@ static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
   param->value    = (uint32_t) parse_token(tokens->token[2 + node]);
 }
 
-#pragma stackfunction  50
+#pragma stackfunction  200
 int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs)
 {
 
@@ -111,9 +111,11 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
     if (c[0] == '#') {
       while (c[0] != '\n') {
          retval = i_spiffs.read(cfd, c, 1);
-         if ( retval < 0)
+         if (retval < 0)
+         {
              i_spiffs.close_file(cfd);
              return retval;
+         }
       }
     }
 

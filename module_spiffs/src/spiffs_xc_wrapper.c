@@ -42,8 +42,17 @@ static s32_t my_spiffs_erase(CLIENT_INTERFACE(FlashDataInterface, i_data), u32_t
 
 void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
 {
+
+#ifdef XS1
+    #define FLASH_PHYSICAL_SIZE     512000  //according to the datasheet
+    #define FLASH_BOOT_SECTOR_SIZE  0x20000 //sholud be defined using the xflash
+#else
+    #define FLASH_PHYSICAL_SIZE     2048000  //according to the datasheet
+    #define FLASH_BOOT_SECTOR_SIZE  0x90000 //sholud be defined using the xflash
+#endif
+
     spiffs_config cfg;
-    cfg.phys_size = 524288; // use only data part
+    cfg.phys_size = FLASH_PHYSICAL_SIZE - FLASH_BOOT_SECTOR_SIZE;
     cfg.phys_addr = 0; // start spiffs at start of spi flash
     cfg.phys_erase_block = 4096; // according to datasheet
     cfg.log_block_size = 65536; // let us not complicate things

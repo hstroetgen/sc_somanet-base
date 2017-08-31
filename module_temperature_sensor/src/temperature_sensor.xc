@@ -87,6 +87,27 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                    ret = read_i2c(i2c, 1, 1, temp_data);
                    time = (temp_data[0] * 100);
                    break;
+
+               case i_temperature_sensor.get_threshold_value() -> float temperature:
+                   uint8_t temp_data[2] = {0,0};
+                   uint8_t reg_data[1] = {TOS_REGISTER};
+                   uint16_t temp_value;
+                   write_i2c(i2c, 1, reg_data);
+                   ret = read_i2c(i2c, 2, 1, temp_data);
+                   temp_value = temp_data[0];
+                   temp_value = (temp_value << 8) | temp_data[1];
+                   temp_value = temp_value >> 7;
+                   temperature = (float)(temp_value/2);
+                   break;
+
+               case i_temperature_sensor.set_threshold_value(uint16_t temp):
+                   uint8_t temp_data[3] = {TOS_REGISTER,0,0};
+                   temp = temp * 2;
+                   temp = temp << 7;
+                   temp_data[1] = (temp & 0xFF00) >> 8;
+                   temp_data[2] = temp & 0x00FF;
+                   write_i2c(i2c, 3, temp_data);
+                   break;
            }
 
     }

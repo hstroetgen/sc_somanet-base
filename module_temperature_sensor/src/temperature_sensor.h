@@ -42,9 +42,17 @@ interface i_temperature_sensor_communication {
     void    set_temperature_update_time(unsigned int time_in_ms);
 
     /**
+     * @brief Set the threshold Temperature value for OS output pin.
+     * @param temperature in degree celsius.
+     */
+
+    void    set_threshold_value(uint16_t temp);
+
+
+    /**
      * @brief Read the Temperature value.
      *
-     * @return Temperature Value
+     * @return Temperature Value in degree celsius
      */
 
     float    get_temperature();
@@ -55,6 +63,13 @@ interface i_temperature_sensor_communication {
      */
 
     unsigned int    get_temperature_update_time();
+
+    /**
+     * @brief Read the threshold Temperature value for OS output pin.
+     * @return temperature in degree celsius
+     */
+
+    float    get_threshold_value();
 };
 
 

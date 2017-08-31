@@ -43,15 +43,21 @@ void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIF
     break;
     }
 
-    /* Init SPIFFS */
-
-    printstrln(">>   SPIFFS SERVICE STARTING...\n");
+    if (i_data.getDataPartitionSize() < FLASH_PAGE_SIZE)
+    {
+        printstr("SPIFFS Error: data partition size missing.\n");
+        return;
+    }
 
     if (isnull(i_spiffs))
     {
-        printstr("Error: No flash interfaces provided.\n");
+        printstr("SPIFFS Error: No flash interfaces provided.\n");
         return;
     }
+
+    /* Init SPIFFS */
+
+    printstrln(">>   SPIFFS SERVICE STARTING...\n");
 
     spiffs_init(i_data);
 

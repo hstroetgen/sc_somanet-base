@@ -16,18 +16,17 @@ unsigned int read_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, u
         return -1;
 }
 
-void write_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, int reg_mode, uint8_t data[])
+void write_i2c_reg(client interface i2c_master_if i2c, uint8_t data[])
+{
+    i2c.write_reg(SLAVE_ADDRESS, data[0], data[1]);
+}
+
+void write_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, uint8_t data[])
 {
     size_t no_bytes_sent;
-    if(reg_mode == 0)
-    {
-        i2c.write(SLAVE_ADDRESS, data, no_of_bytes, no_bytes_sent, 0);
-    }
-    else
-    {
-        i2c.write_reg(SLAVE_ADDRESS, data[0], data[1]);
-    }
-    //
+
+    i2c.write(SLAVE_ADDRESS, data, no_of_bytes, no_bytes_sent, 0);
+
 }
 
 void temperature_sensor_service(server interface i_temperature_sensor_communication i_temperature_sensor, client interface i2c_master_if i2c)
@@ -40,7 +39,7 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                        uint8_t reg_data[1] = {TEMP_REGISTER};
                        uint16_t tmp = 0;
                        float temp_value = 0.0;
-                       write_i2c(i2c, 1, 0, reg_data);
+                       write_i2c(i2c, 1, reg_data);
                        ret = read_i2c(i2c, 2, 1, temp_data);
                        if(ret == 1)
                        {
@@ -72,6 +71,22 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
                            temp = 0.0;
                        }
                        break;
+
+
+               case i_temperature_sensor.set_temperature_update_time(unsigned int time_in_ms):
+                   uint8_t temp_data[2] = {TIDLE_REGISTER,0};
+                   unsigned int value = time_in_ms/100;
+                   temp_data[1] = value;
+                   write_i2c_reg(i2c, temp_data);
+                   break;
+
+               case i_temperature_sensor.get_temperature_update_time() -> unsigned int time:
+                   uint8_t temp_data[1] = {0};
+                   uint8_t reg_data[1] = {TIDLE_REGISTER};
+                   write_i2c(i2c, 1, reg_data);
+                   ret = read_i2c(i2c, 1, 1, temp_data);
+                   time = (temp_data[0] * 100);
+                   break;
            }
 
     }

@@ -35,12 +35,26 @@ typedef enum
 interface i_temperature_sensor_communication {
 
     /**
+     * @brief Set the Temperature update time after which temperature sensor update temperature register.
+     * @param time_in_ms time in milliseconds
+     */
+
+    void    set_temperature_update_time(unsigned int time_in_ms);
+
+    /**
      * @brief Read the Temperature value.
      *
      * @return Temperature Value
      */
 
     float    get_temperature();
+
+    /**
+     * @brief Read the Temperature update time after which temperature sensor update temperature register.
+     * @return time in milliseconds
+     */
+
+    unsigned int    get_temperature_update_time();
 };
 
 

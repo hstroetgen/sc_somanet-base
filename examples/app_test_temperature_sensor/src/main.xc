@@ -16,19 +16,28 @@ on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 
 void temp_sensor_comm(client interface i_temperature_sensor_communication i_temperature)
 {
-    uint8_t pointer_reg = 0x00;
-    uint8_t temp_data[2] = {0,0}, buff[1] = {TEMP_REGISTER};
-    uint16_t tmp = 0;
-    size_t no_bytes_sent;
+ //   uint8_t pointer_reg = 0x00;
+ //   uint8_t temp_data[2] = {0,0}, buff[1] = {TEMP_REGISTER};
+ //   uint16_t tmp = 0;
+ //   size_t no_bytes_sent;
     float temp_value = 0.0;
-    i2c_regop_res_t ret;
-    i2c_res_t res;
+    unsigned int value;
+//    i2c_regop_res_t ret;
+//    i2c_res_t res;
 //    i2c.write(SLAVE_ADDRESS, buff, 1, no_bytes_sent, 0);
 //    i2c.write_reg(SLAVE_ADDRESS, buff[0], 0x01);
     while(1)
     {
+        value = i_temperature.get_temperature_update_time();
+        printf("The time value = %d\n", value);
+
         temp_value = i_temperature.get_temperature();
-        printf("The temp value = %f\n\n", temp_value);
+        printf("The temp value = %f\n", temp_value);
+
+        i_temperature.set_temperature_update_time(100);
+        value = i_temperature.get_temperature_update_time();
+        printf("The time value = %d\n\n", value);
+
 #if 0
    //     i2c.write(SLAVE_ADDRESS, buff, 1, no_bytes_sent, 0); //printf("No of bytes written = %d\n", no_bytes_sent);
         res = i2c.read(SLAVE_ADDRESS, temp_data, 2, 1);

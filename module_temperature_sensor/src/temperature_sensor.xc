@@ -6,7 +6,7 @@
 
 #include <temperature_sensor.h>
 
-unsigned int read_i2c(uint8_t no_of_bytes, uint8_t stop_bit, client interface i2c_master_if i2c, uint8_t data[])
+unsigned int read_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, uint8_t stop_bit, uint8_t data[])
 {
     i2c_res_t res;
     res = i2c.read(SLAVE_ADDRESS, data, no_of_bytes, stop_bit);
@@ -16,9 +16,18 @@ unsigned int read_i2c(uint8_t no_of_bytes, uint8_t stop_bit, client interface i2
         return -1;
 }
 
-void write_i2c()
+void write_i2c(client interface i2c_master_if i2c, uint8_t no_of_bytes, int reg_mode, uint8_t data[])
 {
-
+    size_t no_bytes_sent;
+    if(reg_mode == 0)
+    {
+        i2c.write(SLAVE_ADDRESS, data, no_of_bytes, no_bytes_sent, 0);
+    }
+    else
+    {
+        i2c.write_reg(SLAVE_ADDRESS, data[0], data[1]);
+    }
+    //
 }
 
 void temperature_sensor_service(server interface i_temperature_sensor_communication i_temperature_sensor, client interface i2c_master_if i2c)
@@ -27,10 +36,12 @@ void temperature_sensor_service(server interface i_temperature_sensor_communicat
     while (1) {
            select {
                case i_temperature_sensor.get_temperature() -> float temp:
-                       uint8_t temp_data[2];
+                       uint8_t temp_data[2] = {0,0};
+                       uint8_t reg_data[1] = {TEMP_REGISTER};
                        uint16_t tmp = 0;
                        float temp_value = 0.0;
-                       ret = read_i2c(2,1, i2c, temp_data);
+                       write_i2c(i2c, 1, 0, reg_data);
+                       ret = read_i2c(i2c, 2, 1, temp_data);
                        if(ret == 1)
                        {
                            if((temp_data[0] & 0x80) == 0)

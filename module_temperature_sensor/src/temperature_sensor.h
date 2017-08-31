@@ -18,13 +18,17 @@ typedef struct {
     port p_sda;     /**< I2C data line */
 }I2C_ports;
 
+
+/**
+ * @brief Types of Register in Temperature Sensor.
+ */
 typedef enum
 {
-    CONF_REGISTER = 0x01,
-    TEMP_REGISTER = 0x00,
-    TOS_REGISTER = 0x03,
-    THYST_REGISTER = 0x02,
-    TIDLE_REGISTER = 0x04
+    CONF_REGISTER = 0x01,       /**< Pointer Value of Configuration Register */
+    TEMP_REGISTER = 0x00,       /**< Pointer Value of Temperature Register */
+    TOS_REGISTER = 0x03,        /**< Pointer Value of Overtemperature shutdown threshold Register */
+    THYST_REGISTER = 0x02,      /**< Pointer Value of hysteresis Register */
+    TIDLE_REGISTER = 0x04       /**< Pointer Value of Tidle Register */
 
 }Temp_Registers;
 

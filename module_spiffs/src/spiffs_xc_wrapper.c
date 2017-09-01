@@ -45,7 +45,7 @@ void my_spiffs_mount(CLIENT_INTERFACE(FlashDataInterface, i_data))
 
 #ifdef XS1
     #define FLASH_PHYSICAL_SIZE     512000  //according to the datasheet
-    #define FLASH_BOOT_SECTOR_SIZE  0x20000 //sholud be defined using the xflash
+    #define FLASH_BOOT_SECTOR_SIZE  0x50000 //sholud be defined using the xflash
 #else
     #define FLASH_PHYSICAL_SIZE     2048000  //according to the datasheet
     #define FLASH_BOOT_SECTOR_SIZE  0x90000 //sholud be defined using the xflash

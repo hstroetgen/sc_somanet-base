@@ -24,9 +24,9 @@ How to use
 
 	::
 
-		USED_MODULES = module_board-support module_locks module_com-detect
+		USED_MODULES = module_board-support 
 
-    .. note:: Just module_board-support will be required. However, for simplicity, when using a library it is recommended to include always all the contained modules. 
+
 
 2. Include in your **main.xc** the board support packages that you might need in your hardware configuration. e.g.
 

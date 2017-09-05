@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <safestring.h>
 #include <syscall.h>
 #include <xccompat.h>
@@ -67,21 +68,47 @@ static int tokenize_inbuf(char *buf, size_t bufsize, struct _token_t *token)
   return 0;
 }
 
+union sdo_value {
+   uint32_t i;
+   float f;
+};
 
-
-static long parse_token(char *token_str)
+static uint32_t parse_token(char *token_str, uint8_t type)
 {
-  long value = strtol(token_str, NULL, 0);
+    unsafe {
+        char * unsafe str_end[1];
 
-  return value;
+        union sdo_value value;
+
+        value.i = (uint32_t)strtol(token_str, str_end, 0);
+
+        if (*(str_end[0]) == '.' && isdigit(*(str_end[0]+1))) {
+            // we found a dot, parse as float value
+            sscanf(token_str, "%f", &(value.f));
+            if (!type) { //object is int type, convert value
+                value.i = (uint32_t)value.f;
+            }
+        } else {
+            if (type) { //object is float type, convert value
+                value.f = (float)value.i;
+            }
+        }
+
+
+        return value.i;
+    }
 }
 
 static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
                                  size_t node)
 {
-  param->index    = (uint16_t) parse_token(tokens->token[0]);
-  param->subindex = (uint8_t)  parse_token(tokens->token[1]);
-  param->value    = (uint32_t) parse_token(tokens->token[2 + node]);
+  param->index    = (uint16_t) parse_token(tokens->token[0], 0);
+  param->subindex = (uint8_t)  parse_token(tokens->token[1], 0);
+  if (param->index >= 0x2010 && param->index <= 0x2012) {
+      param->value    = (uint32_t) parse_token(tokens->token[2 + node], 1);
+  } else {
+      param->value    = (uint32_t) parse_token(tokens->token[2 + node], 0);
+  }
 }
 
 #pragma stackfunction  50
@@ -182,14 +209,18 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
    for (size_t param = 0; param < parameter->param_count; param++) {
           uint16_t index = parameter->parameter[param][0].index;
           uint8_t subindex = parameter->parameter[param][0].subindex;
-          uint32_t value = parameter->parameter[param][0].value;
 
           safememset(line_buf, 0, sizeof(line_buf));
-          sprintf(line_buf, "0x%x,  %3d", index, subindex, value);
+          sprintf(line_buf, "0x%x,  %3d", index, subindex);
 
           for (size_t node = 0; node < parameter->node_count; node++) {
-              uint32_t value = parameter->parameter[param][node].value;
-              sprintf(line_buf + strlen(line_buf), ", %12d", value);
+              union sdo_value value;
+              value.i = parameter->parameter[param][node].value;
+              if (index >= 0x2010 && index <= 0x2012) {
+                  sprintf(line_buf + strlen(line_buf), ", %f", value.f);
+              } else {
+                  sprintf(line_buf + strlen(line_buf), ", %12d", value.i);
+              }
           }
           line_buf[strlen(line_buf)]='\n';
 

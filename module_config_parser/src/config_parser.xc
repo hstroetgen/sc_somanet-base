@@ -17,6 +17,7 @@
 #include <xccompat.h>
 #include <flash_service.h>
 #include <spiffs_service.h>
+#include <canod_datatypes.h>
 #include <config_parser.h>
 #include <print.h>
 
@@ -68,17 +69,13 @@ static int tokenize_inbuf(char *buf, size_t bufsize, struct _token_t *token)
   return 0;
 }
 
-union sdo_value {
-   uint32_t i;
-   float f;
-};
 
 static uint32_t parse_token(char *token_str, uint8_t type)
 {
     unsafe {
         char * unsafe str_end[1];
 
-        union sdo_value value;
+        union parser_sdo_value value;
 
         value.i = (uint32_t)strtol(token_str, str_end, 0);
 
@@ -100,11 +97,14 @@ static uint32_t parse_token(char *token_str, uint8_t type)
 }
 
 static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
-                                 size_t node)
+                                 size_t node, client interface i_co_communication i_canopen)
 {
   param->index    = (uint16_t) parse_token(tokens->token[0], 0);
   param->subindex = (uint8_t)  parse_token(tokens->token[1], 0);
-  if (param->index >= 0x2010 && param->index <= 0x2012) {
+
+  struct _sdoinfo_entry_description od_entry;
+  {od_entry, void} = i_canopen.od_get_entry_description(param->index, param->subindex);
+  if (od_entry.dataType == DEFTYPE_REAL32) {
       param->value    = (uint32_t) parse_token(tokens->token[2 + node], 1);
   } else {
       param->value    = (uint32_t) parse_token(tokens->token[2 + node], 0);
@@ -112,7 +112,7 @@ static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
 }
 
 #pragma stackfunction  50
-int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs)
+int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen)
 {
 
   int retval = 0;
@@ -149,7 +149,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
         inbuf[inbuf_length++] = '\0';
         if (tokenize_inbuf(inbuf, inbuf_length, &t) != 0) return -1;
         for (size_t node = 0; node < t.count - 2; node++) {
-            parse_token_for_node(&t, &parameter->parameter[param_count][node], node);
+            parse_token_for_node(&t, &parameter->parameter[param_count][node], node, i_canopen);
         }
 
         param_count++;
@@ -191,7 +191,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
 
 
 
-int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs)
+int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen)
 {
 
   int retval = 0;
@@ -214,9 +214,13 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
           sprintf(line_buf, "0x%x,  %3d", index, subindex);
 
           for (size_t node = 0; node < parameter->node_count; node++) {
-              union sdo_value value;
+              union parser_sdo_value value;
               value.i = parameter->parameter[param][node].value;
-              if (index >= 0x2010 && index <= 0x2012) {
+
+              struct _sdoinfo_entry_description od_entry;
+              {od_entry, void} = i_canopen.od_get_entry_description(index, subindex);
+
+              if (od_entry.dataType == DEFTYPE_REAL32) {
                   sprintf(line_buf + strlen(line_buf), ", %f", value.f);
               } else {
                   sprintf(line_buf + strlen(line_buf), ", %12d", value.i);

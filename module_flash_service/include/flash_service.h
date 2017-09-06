@@ -32,6 +32,15 @@
  */
 interface FlashDataInterface {
 
+
+    /**
+         * @brief               Returns the data partition size of the flash memory
+         *
+         * @returns             Data partition size
+         */
+
+    [[guarded]] int getDataPartitionSize();
+
     /**
          * @brief               Read data (whole page) from SPI flash
          * @param addr          Start address of data block

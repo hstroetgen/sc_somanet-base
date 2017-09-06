@@ -30,6 +30,8 @@ void RTC_run_test(client interface rtc_communication rtc)
     rtc.set_Month(1);                 /* (01-12) */
     rtc.set_Century(21);              /* (21-23) */
     rtc.set_Year(17);                /* (00-99) */
+    rtc.set_SQWE(1);                /* (0-1)  */
+    rtc.set_SQW_Freq(RTC_SQW_FREQ_4KHZ);
 
     while (1)
     {
@@ -65,7 +67,19 @@ void RTC_run_test(client interface rtc_communication rtc)
         data = rtc.get_Year(result);
         printf("%d\n", data);
 
+        // read SQWE bit
+        data = rtc.get_SQWE(result);
+        printf("SQWE bit = %d\n", data);
+
+        // read Square Wave Frequency
+        data = rtc.get_SQW_Freq(result);
+        printf("RTC square wave frequency = %d\n", data);
+
+        // read Day of week
+        data = rtc.get_Day_of_week(result);
+        printf("Day of Week = %d\n", data);
         delay_seconds(5);
+
     }
 
 }

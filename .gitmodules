@@ -7,3 +7,12 @@
 [submodule "lib_logging"]
 	path = lib_logging
 	url = https://github.com/xmos/lib_logging.git
+[submodule "lib_gpio"]
+	path = lib_gpio
+	url = https://github.com/xmos/lib_gpio.git
+[submodule "lib_spi"]
+	path = lib_spi
+	url = https://github.com/xmos/lib_spi.git
+[submodule "lib_uart"]
+	path = lib_uart
+	url = https://github.com/xmos/lib_uart.git

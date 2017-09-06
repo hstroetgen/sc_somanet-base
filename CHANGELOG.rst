@@ -1,5 +1,11 @@
 sc_somanet-base Change Log
 ==========================
+
+3.1.2
+-----
+  * Fix CSV file parser to handle floats (for PID settings)
+
+
 3.1.0
 -----
   * Improve support for GPIO-A_rev-a2 module
@@ -9,6 +15,10 @@ sc_somanet-base Change Log
   * Add support for SPIFFS (SPI File System)
   * Add support for RTC of SOMANET-C21-DX_G2 module
 
+
+3.0.3
+-----
+  * Minor software documentation fixes
 
 3.0.2
 -----

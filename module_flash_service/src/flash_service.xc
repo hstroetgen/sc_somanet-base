@@ -63,6 +63,16 @@ void flash_service(fl_SPIPorts &SPI,
 
     while (1) {
         select {
+
+            case !isnull(i_data) => i_data[int i].getDataPartitionSize() -> int size: {
+                #ifdef XCORE200
+                    change_FlashDeviceSpec(get_app_tile_usec());
+                #endif
+
+                size = fl_getDataPartitionSize();
+            }
+            break;
+
             case !isnull(i_data) => i_data[int i].get_configurations(int type, unsigned char buffer[], unsigned &n_bytes) -> int result: {
                 #ifdef XCORE200
                     change_FlashDeviceSpec(get_app_tile_usec());

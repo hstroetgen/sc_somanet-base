@@ -9,7 +9,7 @@
 
 #include <temperature_sensor.h>
 
-#define MONITOR_OS_PIN  0
+#define MONITOR_TEMPERATURE_ALARM  0
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
 on tile[0]: port os = XS1_PORT_4D;
 
@@ -20,7 +20,7 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
     float temp_value = 0.0;
     unsigned int value;
 
-#if MONITOR_OS_PIN == 1
+#if MONITOR_TEMPERATURE_ALARM == 1
         i_temperature.set_threshold_value(33);
         temp_value = i_temperature.get_threshold_value();
         printf("The threshold value = %f\n", temp_value);
@@ -34,7 +34,7 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
 
     while(1)
     {
-#if MONITOR_OS_PIN == 0
+#if MONITOR_TEMPERATURE_ALARM == 0
         value = i_temperature.get_temperature_update_time();
         printf("The time value = %d\n", value);
 
@@ -70,7 +70,7 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
         value = i_temperature.get_configuration();
         printf("The configuration value = %d\n\n", value);
 #endif
-#if MONITOR_OS_PIN == 1
+#if MONITOR_TEMPERATURE_ALARM == 1
         temp_value = i_temperature.get_temperature();
         printf("The temperature value = %f\n", temp_value);
 #endif
@@ -79,8 +79,8 @@ void temp_sensor_comm(client interface i_temperature_sensor_communication i_temp
     }
 
 }
-#if MONITOR_OS_PIN == 1
-void OS_pin_check()
+#if MONITOR_TEMPERATURE_ALARM == 1
+void alarm_pin_check()
 {
     uint8_t value;
     while(1)
@@ -91,7 +91,7 @@ void OS_pin_check()
             value = 1;
         else
             value = 0;
-        printf(" ################# The OS pin value = %d ################ \n", value);
+        printf(" ################# The Temperature Alarm  = %d ################ \n", value);
         delay_seconds(1);
     }
 
@@ -109,8 +109,8 @@ int main(void)
                    i2c_master(i2c, 1, i2c_p.p_scl, i2c_p.p_sda, 100);
                    temperature_sensor_service(i_temperature, i2c[0]);
                    temp_sensor_comm(i_temperature);
-#if MONITOR_OS_PIN == 1
-                   OS_pin_check();
+#if MONITOR_TEMPERATURE_ALARM == 1
+                   alarm_pin_check();
 #endif
 
                 }

@@ -10,6 +10,10 @@ sc_somanet-base Change Log
   * Add support for RTC of SOMANET-C21-DX_G2 module
 
 
+3.0.3
+-----
+  * Minor software documentation fixes
+
 3.0.2
 -----
   * Fix SOMANET-C21-DX_G2 BSP and platform files

@@ -11,7 +11,7 @@
 
 #define MONITOR_TEMPERATURE_ALARM  0
 on tile[0]: I2C_ports i2c_p = SOMANET_I2C_PORTS;
-on tile[0]: port os = XS1_PORT_4D;
+on tile[0]: port p_temperature_alarm = XS1_PORT_4D;
 
 
 void temp_sensor_comm(client interface i_temperature_sensor_communication i_temperature)
@@ -85,7 +85,7 @@ void alarm_pin_check()
     uint8_t value;
     while(1)
     {
-        os :> value;
+        p_temperature_alarm :> value;
         value = value & 0x04;
         if(value)
             value = 1;

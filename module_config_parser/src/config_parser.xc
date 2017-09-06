@@ -11,11 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <safestring.h>
 #include <syscall.h>
 #include <xccompat.h>
 #include <flash_service.h>
 #include <spiffs_service.h>
+#include <canod_datatypes.h>
 #include <config_parser.h>
 #include <print.h>
 
@@ -68,24 +70,41 @@ static int tokenize_inbuf(char *buf, size_t bufsize, struct _token_t *token)
 }
 
 
-
-static long parse_token(char *token_str)
+static uint32_t parse_token(char *token_str, uint8_t type)
 {
-  long value = strtol(token_str, NULL, 0);
+    union parser_sdo_value value;
 
-  return value;
+    unsafe {
+        char * unsafe str_end[1];
+
+        value.i = (uint32_t)strtol(token_str, str_end, 0);
+
+        if (type == DEFTYPE_REAL32) {
+            if (*(str_end[0]) == '.' && isdigit(*(str_end[0]+1))) { //try to parse a float
+                // we found a dot, parse as float value
+                sscanf(token_str, "%f", &(value.f));
+            } else { //object is float type but parsed value is int so convert value
+                value.f = (float)value.i;
+            }
+        }
+    }
+    return value.i;
 }
 
 static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
-                                 size_t node)
+                                 size_t node, client interface i_co_communication i_canopen)
 {
-  param->index    = (uint16_t) parse_token(tokens->token[0]);
-  param->subindex = (uint8_t)  parse_token(tokens->token[1]);
-  param->value    = (uint32_t) parse_token(tokens->token[2 + node]);
+  param->index    = (uint16_t) parse_token(tokens->token[0], DEFTYPE_INTEGER16);
+  param->subindex = (uint8_t)  parse_token(tokens->token[1], DEFTYPE_INTEGER8);
+
+  struct _sdoinfo_entry_description od_entry;
+  {od_entry, void} = i_canopen.od_get_entry_description(param->index, param->subindex);
+  param->value    = (uint32_t) parse_token(tokens->token[2 + node], od_entry.dataType);
 }
 
-#pragma stackfunction  200
-int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs)
+
+#pragma stackfunction  50
+int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen)
 {
 
   int retval = 0;
@@ -124,7 +143,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
         inbuf[inbuf_length++] = '\0';
         if (tokenize_inbuf(inbuf, inbuf_length, &t) != 0) return -1;
         for (size_t node = 0; node < t.count - 2; node++) {
-            parse_token_for_node(&t, &parameter->parameter[param_count][node], node);
+            parse_token_for_node(&t, &parameter->parameter[param_count][node], node, i_canopen);
         }
 
         param_count++;
@@ -166,7 +185,7 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
 
 
 
-int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs)
+int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen)
 {
 
   int retval = 0;
@@ -184,14 +203,26 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
    for (size_t param = 0; param < parameter->param_count; param++) {
           uint16_t index = parameter->parameter[param][0].index;
           uint8_t subindex = parameter->parameter[param][0].subindex;
-          uint32_t value = parameter->parameter[param][0].value;
 
           safememset(line_buf, 0, sizeof(line_buf));
-          sprintf(line_buf, "0x%x,  %3d", index, subindex, value);
+          sprintf(line_buf, "0x%x,  %3d", index, subindex);
 
           for (size_t node = 0; node < parameter->node_count; node++) {
-              uint32_t value = parameter->parameter[param][node].value;
-              sprintf(line_buf + strlen(line_buf), ", %12d", value);
+              union parser_sdo_value value;
+              value.i = parameter->parameter[param][node].value;
+
+              struct _sdoinfo_entry_description od_entry;
+              {od_entry, void} = i_canopen.od_get_entry_description(index, subindex);
+
+              if (od_entry.dataType == DEFTYPE_REAL32) {
+                  if (value.f == (int)value.f) { //value has no decimal, we can write it as an integer
+                      sprintf(line_buf + strlen(line_buf), ", %12d", (int)value.f);
+                  } else {
+                      sprintf(line_buf + strlen(line_buf), ", %12f", value.f);
+                  }
+              } else {
+                  sprintf(line_buf + strlen(line_buf), ", %12d", value.i);
+              }
           }
           line_buf[strlen(line_buf)]='\n';
 

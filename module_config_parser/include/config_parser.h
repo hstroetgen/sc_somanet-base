@@ -11,6 +11,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <co_interface.h>
 
 /**
  * \brief Max length of one line in config file
@@ -48,6 +49,14 @@ typedef struct {
 } ConfigParameter_t;
 
 /**
+ * \brief To convert uint32 value to float
+ */
+union parser_sdo_value {
+   uint32_t i;
+   float f;
+};
+
+/**
  * \brief Function to read configuration file and parse the content
  *
  * \i_spiffs          Client interface for SPIFFS service
@@ -55,7 +64,7 @@ typedef struct {
  * \param parameter   Pointer to a \c ConfigParameter_t object
  * \return            0 if no error
  */
-int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
+int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen);
 
 /**
  * \brief Function to generate data from OD to configuration file in csv (text) format
@@ -65,5 +74,5 @@ int read_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfac
  * \param params   Pointer to a \c ConfigParameter_t object
  * \return         0 if no error
  */
-int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs);
+int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterface i_spiffs, client interface i_co_communication i_canopen);
 

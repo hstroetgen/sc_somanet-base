@@ -1,5 +1,11 @@
 sc_somanet-base Change Log
 ==========================
+
+3.1.2
+-----
+  * Fix CSV file parser to handle floats (for PID settings)
+
+
 3.1.0
 -----
   * Improve support for GPIO-A_rev-a2 module

@@ -72,43 +72,34 @@ static int tokenize_inbuf(char *buf, size_t bufsize, struct _token_t *token)
 
 static uint32_t parse_token(char *token_str, uint8_t type)
 {
+    union parser_sdo_value value;
+
     unsafe {
         char * unsafe str_end[1];
 
-        union parser_sdo_value value;
-
         value.i = (uint32_t)strtol(token_str, str_end, 0);
 
-        if (*(str_end[0]) == '.' && isdigit(*(str_end[0]+1))) {
-            // we found a dot, parse as float value
-            sscanf(token_str, "%f", &(value.f));
-            if (!type) { //object is int type, convert value
-                value.i = (uint32_t)value.f;
-            }
-        } else {
-            if (type) { //object is float type, convert value
+        if (type == DEFTYPE_REAL32) {
+            if (*(str_end[0]) == '.' && isdigit(*(str_end[0]+1))) { //try to parse a float
+                // we found a dot, parse as float value
+                sscanf(token_str, "%f", &(value.f));
+            } else { //object is float type but parsed value is int so convert value
                 value.f = (float)value.i;
             }
         }
-
-
-        return value.i;
     }
+    return value.i;
 }
 
 static void parse_token_for_node(struct _token_t *tokens, Param_t *param,
                                  size_t node, client interface i_co_communication i_canopen)
 {
-  param->index    = (uint16_t) parse_token(tokens->token[0], 0);
-  param->subindex = (uint8_t)  parse_token(tokens->token[1], 0);
+  param->index    = (uint16_t) parse_token(tokens->token[0], DEFTYPE_INTEGER16);
+  param->subindex = (uint8_t)  parse_token(tokens->token[1], DEFTYPE_INTEGER8);
 
   struct _sdoinfo_entry_description od_entry;
   {od_entry, void} = i_canopen.od_get_entry_description(param->index, param->subindex);
-  if (od_entry.dataType == DEFTYPE_REAL32) {
-      param->value    = (uint32_t) parse_token(tokens->token[2 + node], 1);
-  } else {
-      param->value    = (uint32_t) parse_token(tokens->token[2 + node], 0);
-  }
+  param->value    = (uint32_t) parse_token(tokens->token[2 + node], od_entry.dataType);
 }
 
 
@@ -224,7 +215,11 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
               {od_entry, void} = i_canopen.od_get_entry_description(index, subindex);
 
               if (od_entry.dataType == DEFTYPE_REAL32) {
-                  sprintf(line_buf + strlen(line_buf), ", %f", value.f);
+                  if (value.f == (int)value.f) { //value has no decimal, we can write it as an integer
+                      sprintf(line_buf + strlen(line_buf), ", %12d", (int)value.f);
+                  } else {
+                      sprintf(line_buf + strlen(line_buf), ", %12f", value.f);
+                  }
               } else {
                   sprintf(line_buf + strlen(line_buf), ", %12d", value.i);
               }

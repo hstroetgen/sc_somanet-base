@@ -72,6 +72,23 @@
     PWM_DUMMY_PORT_TRIGGER                                              \
 }
 
+#define SOMANET_IFM_PWM_PORTS_GENERAL { \
+    GPWM_PORT_A_HIGH_SIDE,		\
+    GPWM_PORT_A_LOW_SIDE,		\
+    GPWM_PORT_B_HIGH_SIDE,		\
+    GPWM_PORT_B_LOW_SIDE,		\
+    GPWM_PORT_C_HIGH_SIDE,		\
+    GPWM_PORT_C_LOW_SIDE,		\
+    null,   	\
+    null,	    \
+    null,		\
+    null,		\
+    null,		\
+    null,		\
+    PWM_CLOCK_SRC,				\
+    PWM_DUMMY_PORT_TRIGGER		\
+}
+
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT null
 #define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 

@@ -59,6 +59,8 @@
 }
 
 /* PWM PORTS*/
+#define DEADTIME_NS           1500 /*nano-seconds*/
+
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
 #define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54

@@ -4,6 +4,8 @@ sc_somanet-base Change Log
 3.1.2
 -----
   * Fix CSV file parser to handle floats (for PID settings)
+  * SPIFFS - Added 2 flash sizes for 2 type of cores
+  * SPIFFS - Added checking of data partition size
 
 
 3.1.0

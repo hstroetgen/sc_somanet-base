@@ -4,16 +4,30 @@ sc_somanet-base Change Log
 3.1.2
 -----
   * Fix CSV file parser to handle floats (for PID settings)
+  * SPIFFS - Added 2 flash sizes for 2 type of cores
+  * SPIFFS - Added checking of data partition size
+  * Added temperature sensor support for Core C2X modules
+
+3.1.1
+-----
+  * Added support for SQWE bit update in RTC to enable or disable the Square Wave output (Core C2X)
+  * Added support for configuring the frequency of square wave output of Core C2X RTC
+  * Added EEPROM read and write support (Core C2X)
+  * Added XMOS libraries as submodules (now use $git submodule update --init --recursive):
+    * lib_gpio
+    * lib_spi
+    * lib_uart
+
 
 
 3.1.0
 -----
   * Improve support for GPIO-A_rev-a2 module
   * Improve support for SOMANET-C21-DX_G2 module
-  * Add support for DC1K rev.D1
-  * Add i2c, xassert, and logging XMOS libraries (as submodules)
-  * Add support for SPIFFS (SPI File System)
-  * Add support for RTC of SOMANET-C21-DX_G2 module
+  * Added support for DC1K rev.D1
+  * Added i2c, xassert, and logging XMOS libraries (as submodules)
+  * Added support for SPIFFS (SPI File System)
+  * Added support for RTC of SOMANET-C21-DX_G2 module
 
 
 3.0.3
@@ -31,11 +45,11 @@ sc_somanet-base Change Log
 3.0.0
 -----
 
-  * Add board support for DC1K-rev-c3, DC1K-rev-c4 and DC5K-rev-a3
-  * Add board support for CORE_C21-rev-b and CORE_C21-DX_G2
-  * Add initial support for IFM_DC30-rev-a
-  * Add initial support for GPIO-A_rev-a2 module
-  * Add BISS encoder and AMS encoder (SPI) ports to board support file of all IFM_DC boards
+  * Added board support for DC1K-rev-c3, DC1K-rev-c4 and DC5K-rev-a3
+  * Added board support for CORE_C21-rev-b and CORE_C21-DX_G2
+  * Added initial support for IFM_DC30-rev-a
+  * Added initial support for GPIO-A_rev-a2 module
+  * Added BISS encoder and AMS encoder (SPI) ports to board support file of all IFM_DC boards
   * New board support files (not compatible with older versions of SOMANET libs)
   * Added module locks
   * Added communication interface detection module

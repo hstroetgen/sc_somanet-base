@@ -9,9 +9,9 @@
 #include <platform.h>
 
 /* ADC */
-#define ADC_DATA_A  IFM_PORT_1BIT_16
+#define ADC_DATA_A IFM_PORT_1BIT_16
 #define ADC_DATA_B IFM_PORT_1BIT_40 
-#define ADC_SCLK  IFM_PORT_1BIT_42
+#define ADC_SCLK IFM_PORT_1BIT_42
 #define ADC_READY IFM_PORT_1BIT_4 
 #define ADC_MUX IFM_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IFM_TILE_CLOCK_1 
@@ -28,7 +28,7 @@
      ADC_READY,                     \
      ADC_MUX,                       \
      {0, 10, 1, 11, 4, 5, 14, 15, 2, 3, 12, 13, 6, 16} /* Mapping between adc channels and real analogue signals */ },\
-     {0, -1, 1, 50}                    \
+     {0, -1, 1, 50}                 \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -65,22 +65,6 @@
 #define PWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_24
 #define PWM_PORT_D_LOW_SIDE IFM_PORT_1BIT_32
 
-/* GENERAL PWM PORTS*/
-#define GPWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_28	/* XS1_PORT_1A in C21-DX_G2 */
-#define GPWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_32	/* XS1_PORT_1B in C21-DX_G2 */
-#define GPWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_40	/* XS1_PORT_1C in C21-DX_G2 */
-#define GPWM_PORT_D_HIGH_SIDE IFM_PORT_1BIT_42	/* XS1_PORT_1D in C21-DX_G2 */
-#define GPWM_PORT_E_HIGH_SIDE IFM_PORT_1BIT_2	/* XS1_PORT_1E in C21-DX_G2 */
-#define GPWM_PORT_F_HIGH_SIDE IFM_PORT_1BIT_6	/* XS1_PORT_1F in C21-DX_G2 */
-
-#define GPWM_PORT_A_LOW_SIDE IFM_PORT_1BIT_78	/* XS1_PORT_1I in C21-DX_G2 */
-#define GPWM_PORT_B_LOW_SIDE IFM_PORT_1BIT_22	/* XS1_PORT_1J in C21-DX_G2 */
-#define GPWM_PORT_C_LOW_SIDE IFM_PORT_1BIT_62	/* XS1_PORT_1K in C21-DX_G2 */
-#define GPWM_PORT_D_LOW_SIDE IFM_PORT_1BIT_56	/* XS1_PORT_1L in C21-DX_G2 */
-#define GPWM_PORT_E_LOW_SIDE IFM_PORT_1BIT_54	/* XS1_PORT_1M in C21-DX_G2 */
-#define GPWM_PORT_F_LOW_SIDE IFM_PORT_1BIT_24	/* XS1_PORT_1N in C21-DX_G2 */
-
-#define GPWM_PORT_SIGNAL     IFM_PORT_1BIT_4	/* XS1_PORT_1G in C21-DX_G2 */
 #define PWM_CLOCK_SRC IFM_TILE_CLOCK_4
 #define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
 
@@ -93,21 +77,21 @@
     PWM_DUMMY_PORT_TRIGGER                                              \
 }
 
-#define SOMANET_IFM_PWM_PORTS_GENERAL { \
-    GPWM_PORT_A_HIGH_SIDE,		\
-    GPWM_PORT_A_LOW_SIDE,		\
-    GPWM_PORT_B_HIGH_SIDE,		\
-    GPWM_PORT_B_LOW_SIDE,		\
-    GPWM_PORT_C_HIGH_SIDE,		\
-    GPWM_PORT_C_LOW_SIDE,		\
-    null,   	\
-    null,	    \
-    null,		\
-    null,		\
-    null,		\
-    null,		\
-    PWM_CLOCK_SRC,				\
-    PWM_DUMMY_PORT_TRIGGER		\
+#define SOMANET_IFM_PWM_PORTS_GENERAL {  \
+    PWM_PORT_A_HIGH_SIDE,                \
+    PWM_PORT_A_LOW_SIDE,                 \
+    PWM_PORT_B_HIGH_SIDE,                \
+    PWM_PORT_B_LOW_SIDE,                 \
+    PWM_PORT_C_HIGH_SIDE,                \
+    PWM_PORT_C_LOW_SIDE,                 \
+    PWM_PORT_D_HIGH_SIDE,                \
+    PWM_PORT_D_LOW_SIDE,                 \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    PWM_CLOCK_SRC,                       \
+    PWM_DUMMY_PORT_TRIGGER               \
 }
 
 /* LEDs, Watchdog */
@@ -119,7 +103,7 @@
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
     WATCHDOG_TICK_PORT,                 \
-    CPLD_SHARED_PORT,			        \
+    CPLD_SHARED_PORT,                   \
     CPLD_FAULT_MONITOR                  \
 }
 

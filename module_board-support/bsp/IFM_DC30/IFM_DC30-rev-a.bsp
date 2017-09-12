@@ -85,11 +85,11 @@
 
 #define SOMANET_IFM_PWM_PORTS_GENERAL {  \
     PWM_PORT_A_HIGH_SIDE,                \
-    PWM_PORT_A_LOW_SIDE,                 \
+    null,                                \
     PWM_PORT_B_HIGH_SIDE,                \
-    PWM_PORT_B_LOW_SIDE,                 \
+    null,                                \
     PWM_PORT_C_HIGH_SIDE,                \
-    PWM_PORT_C_LOW_SIDE,                 \
+    null,                                \
     null,                                \
     null,                                \
     null,                                \
@@ -102,13 +102,14 @@
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT IFM_PORT_1BIT_2
-//Warning! Enable port is single-bit
-#define WATCHDOG_EN_PORT IFM_PORT_1BIT_6
+#define WATCHDOG_EN_PORT null
+#define WATCHDOG_DIAG_EN_PORT IFM_PORT_1BIT_6
 #define CPLD_SHARED_PORT null
 #define CPLD_FAULT_MONITOR null
 
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
+    WATCHDOG_DIAG_EN_PORT,              \
     WATCHDOG_TICK_PORT,                 \
     CPLD_SHARED_PORT,                   \
     CPLD_FAULT_MONITOR                  \

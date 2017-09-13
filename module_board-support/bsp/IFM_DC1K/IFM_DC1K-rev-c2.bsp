@@ -28,7 +28,7 @@
      ADC_READY,                     \
      ADC_MUX,                       \
      {0, 10, 1, 11, 4, 5, 14, 15, 2, 3, 12, 13, 6, 16} /* Mapping between adc channels and real analogue signals */ },\
-     {0, -1, 1, 50}                    \
+     {0, -1, 1, 50}                 \
 }
 
 /* FET DRIVER A4935 control ports */
@@ -54,6 +54,8 @@
 }
 
 /* PWM PORTS*/
+#define DEADTIME_NS           1500 /*nano-seconds*/
+
 #define PWM_PORT_A_HIGH_SIDE IFM_PORT_1BIT_62
 #define PWM_PORT_B_HIGH_SIDE IFM_PORT_1BIT_26
 #define PWM_PORT_C_HIGH_SIDE IFM_PORT_1BIT_54
@@ -75,33 +77,35 @@
     PWM_DUMMY_PORT_TRIGGER                                              \
 }
 
-#define SOMANET_IFM_PWM_PORTS_GENERAL { \
-    PWM_PORT_A_HIGH_SIDE,		\
-    PWM_PORT_A_LOW_SIDE,		\
-    PWM_PORT_B_HIGH_SIDE,		\
-    PWM_PORT_B_LOW_SIDE,		\
-    PWM_PORT_C_HIGH_SIDE,		\
-    PWM_PORT_C_LOW_SIDE,		\
-    null,				\
-    null,				\
-    null,				\
-    null,				\
-    null,				\
-    null,				\
-    PWM_CLOCK_SRC,			\
-    PWM_DUMMY_PORT_TRIGGER		\
+#define SOMANET_IFM_PWM_PORTS_GENERAL {  \
+    PWM_PORT_A_HIGH_SIDE,                \
+    PWM_PORT_A_LOW_SIDE,                 \
+    PWM_PORT_B_HIGH_SIDE,                \
+    PWM_PORT_B_LOW_SIDE,                 \
+    PWM_PORT_C_HIGH_SIDE,                \
+    PWM_PORT_C_LOW_SIDE,                 \
+    PWM_PORT_D_HIGH_SIDE,                \
+    PWM_PORT_D_LOW_SIDE,                 \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    PWM_CLOCK_SRC,                       \
+    PWM_DUMMY_PORT_TRIGGER               \
 }
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT null
-#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50 
+#define WATCHDOG_EN_PORT IFM_PORT_4BIT_36_46_48_50
+#define WATCHDOG_DIAG_EN_PORT null
 #define CPLD_SHARED_PORT null
 #define CPLD_FAULT_MONITOR null
 
 #define SOMANET_IFM_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
+    WATCHDOG_DIAG_EN_PORT,              \
     WATCHDOG_TICK_PORT,                 \
-    CPLD_SHARED_PORT,			\
+    CPLD_SHARED_PORT,                   \
     CPLD_FAULT_MONITOR                  \
 }
 

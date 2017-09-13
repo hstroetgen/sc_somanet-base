@@ -4,6 +4,7 @@ sc_somanet-base Change Log
 -----
 
   * Implement new pwm structure with 15 kHz, and use 100 MHz ref_clk_frq
+  * Add support for DC30 in watchdog
 
 3.1.2
 -----

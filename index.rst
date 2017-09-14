@@ -36,7 +36,7 @@ SOMANET Base currently consists of the following modules:
 * `Locks Module <module_locks/doc/index.html>`_: Provides an API to use locks between concurrent software tasks. **For internal use only!**
 * `Reboot Module <module_reboot/doc/index.html>`_: Provides an API to reboot SOMANET chip. **For internal use only!**
 * `Flash Service Module <module_flash_service/doc/index.html>`_: Provides an API to access the internal flash of SOMANET SoCs. **Mostly intended for internal use**
-* `SPI Flash File System Module <module_spiffs/doc/index.html>`_: Implements File System on a data partision of flash memory. **For internal use only!**
+* `SPI Flash File System Module <module_spiffs/doc/index.html>`_: Implements File System on a data partision of flash memory. **Mostly intended for internal use**
 
 Examples
 --------

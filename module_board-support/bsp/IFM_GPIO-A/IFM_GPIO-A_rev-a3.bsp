@@ -89,12 +89,16 @@
     PWM_PORT_B_LOW_SIDE,                 \
     PWM_PORT_C_HIGH_SIDE,                \
     PWM_PORT_C_LOW_SIDE,                 \
+    null,                				 \
+    null,                 				 \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
     PWM_PORT_D_HIGH_SIDE,                \
     PWM_PORT_D_LOW_SIDE,                 \
-    null,                                \
-    null,                                \
-    null,                                \
-    null,                                \
+    null,                				 \
+    null,                 				 \    
     PWM_CLOCK_SRC,                       \
     PWM_DUMMY_PORT_TRIGGER               \
 }

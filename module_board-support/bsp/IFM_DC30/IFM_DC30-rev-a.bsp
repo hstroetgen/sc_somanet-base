@@ -85,17 +85,21 @@
 
 #define SOMANET_IFM_PWM_PORTS_GENERAL {  \
     PWM_PORT_A_HIGH_SIDE,                \
-    null,                                \
+    null,                 				 \
     PWM_PORT_B_HIGH_SIDE,                \
-    null,                                \
+    null,                 				 \
     PWM_PORT_C_HIGH_SIDE,                \
+    null,                 				 \
+    null,                				 \
+    null,                 				 \
     null,                                \
     null,                                \
     null,                                \
     null,                                \
     null,                                \
-    null,                                \
-    null,                                \
+    null,                 				 \
+    null,                				 \
+    null,                 				 \    
     PWM_CLOCK_SRC,                       \
     PWM_DUMMY_PORT_TRIGGER               \
 }

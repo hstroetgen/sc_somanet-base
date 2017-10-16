@@ -42,7 +42,7 @@ int main(void)
     interface i2c_master_if i2c[1];
     interface i_eeprom_communication i_eeprom;
     par {
-        on tile[COM_TILE] : {
+        on tile[IF1_TILE] : {
            par {
 
                    i2c_master(i2c, 1, i2c_p.p_scl, i2c_p.p_sda, 100);

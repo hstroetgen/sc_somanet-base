@@ -31,7 +31,7 @@ int main(void)
 
   par
   {
-    on tile[COM_TILE]:
+    on tile[IF1_TILE]:
     {
 #ifdef XCORE200
         flash_service(p_qspi_flash, i_boot, i_data, 1);

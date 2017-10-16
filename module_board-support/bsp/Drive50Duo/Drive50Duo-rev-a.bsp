@@ -15,12 +15,12 @@
 #define ADC_READY IF2_PORT_1BIT_4 
 #define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IF2_TILE_CLOCK_1 
-#define SOMANET_IF2_ADC	AD7265
+#define SOMANET_DRIVE_ADC	AD7265
 #define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           56 /*ratio between adc measured value and real dc-bus voltage*/
 #define TEMPERATURE_RATIO       20 /*ratio between adc measured value and temperature of temperature sensor on Drive board*/
 
-#define SOMANET_IF2_ADC_PORTS {     \
+#define SOMANET_DRIVE_ADC_PORTS {     \
     { null, null, null, null },     \
     { {ADC_DATA_A , ADC_DATA_B},    \
      ADC_CLK_SRC,                   \
@@ -31,7 +31,7 @@
 }
 
 /* FET DRIVER A4935 control ports */
-#define SOMANET_IF2_FET_DRIVER_PORTS {  \
+#define SOMANET_DRIVE_FET_DRIVER_PORTS {  \
     null,                               \
     null,                               \
     null,                               \
@@ -43,19 +43,19 @@
 #define HALL_PORT_2 IF2_PORT_4BIT_64_66_76_80
 
 //FixMe: add second hall port
-#define SOMANET_IF2_ENCODER_1_PORT HALL_PORT
+#define SOMANET_DRIVE_ENCODER_1_PORT HALL_PORT
 
 /* ENCODER PORT */
 #define QEI_PORT IF2_PORT_4BIT_38_44_30_34
 #define QEI_PORT_2 IF2_PORT_4BIT_68_70_72_74
 
 //FixMe: add second qei port
-#define SOMANET_IF2_ENCODER_2_PORT QEI_PORT
+#define SOMANET_DRIVE_ENCODER_2_PORT QEI_PORT
 
 /* INPUT MODE SELECTION PORT */
 #define ENCODER_PORTS_INPUT_MODE_SELECTION null
 
-#define SOMANET_IF2_ENCODER_PORTS_INPUT_MODE_SELECTION { \
+#define SOMANET_DRIVE_ENCODER_PORTS_INPUT_MODE_SELECTION { \
     ENCODER_PORTS_INPUT_MODE_SELECTION,                  \
     0                                                    \
 }
@@ -74,7 +74,7 @@
 #define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
 
 //FixMe: add second motor
-#define SOMANET_IF2_PWM_PORTS {                                             \
+#define SOMANET_DRIVE_PWM_PORTS {                                             \
     {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE},     \
     {null, null, null},                                                     \
     null,                                                                   \
@@ -83,7 +83,7 @@
     PWM_DUMMY_PORT_TRIGGER                                                  \
 }
 
-#define SOMANET_IF2_PWM_PORTS_GENERAL {  \
+#define SOMANET_DRIVE_PWM_PORTS_GENERAL {  \
     PWM_PORT_A_HIGH_SIDE,                \
     null,                 				 \
     PWM_PORT_B_HIGH_SIDE,                \
@@ -111,7 +111,7 @@
 #define CPLD_SHARED_PORT null
 #define CPLD_FAULT_MONITOR null
 
-#define SOMANET_IF2_WATCHDOG_PORTS {    \
+#define SOMANET_DRIVE_WATCHDOG_PORTS {    \
     WATCHDOG_EN_PORT,                   \
     WATCHDOG_DIAG_EN_PORT,              \
     WATCHDOG_TICK_PORT,                 \
@@ -120,17 +120,17 @@
 }
 
 /* GPIO_PORTS */
-#define SOMANET_IF2_GPIO_D0 IF2_PORT_1BIT_28
-#define SOMANET_IF2_GPIO_D1 IF2_PORT_1BIT_32
-#define SOMANET_IF2_GPIO_D2 IF2_PORT_1BIT_78
-#define SOMANET_IF2_GPIO_D3 IF2_PORT_1BIT_22
+#define SOMANET_DRIVE_GPIO_D0 IF2_PORT_1BIT_28
+#define SOMANET_DRIVE_GPIO_D1 IF2_PORT_1BIT_32
+#define SOMANET_DRIVE_GPIO_D2 IF2_PORT_1BIT_78
+#define SOMANET_DRIVE_GPIO_D3 IF2_PORT_1BIT_22
 
 /* SPI Ports */
 /*  MOSI = D3
     SCLK = D1
     MISO = D2
     Slave Select = D0 */
-#define SOMANET_IF2_SPI_PORTS {     \
+#define SOMANET_DRIVE_SPI_PORTS {     \
     {                               \
         IF2_TILE_CLOCK_2,           \
         IF2_TILE_CLOCK_3,           \

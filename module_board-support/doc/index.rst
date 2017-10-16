@@ -32,14 +32,14 @@ How to use
 
 	::
 
-		#include <CORE_C22-rev-a.bsp>
-		#include <IFM_DC100-rev-b.bsp>
+		#include <CoreC22.bsp>
+		#include <Drive100.bsp>
 
 3. Select your right target in your app Makefile. e.g.
 
 	::
 
-		TARGET = SOMANET-C22
+		TARGET = SOMANET-CoreC22
        
 
 Content
@@ -48,53 +48,27 @@ Content
 Target Files
 -------------
 
-Here the list of available targets supported by the module: 
+A list of target files can be found under the targets/ directory.
 
-* targets/**SOMANET-C22.xn**
-* targets/**SOMANET-C21-DX.xn**
-
-Select your target in your app **Makefile** accordingly:
+Set the appropriate `TARGET` in your app **Makefile**. It is not necessary to include the `.bsp` extension:
 
 ::
 
- TARGET = SOMANET-C22
+ TARGET = SOMANET-CoreC22
 
-or
-
-::
-
- TARGET = SOMANET-C21-DX
 
 Board Support Files
 -------------------
-Here the list of supported SOMANET boards and how to include their support files in your app:
 
-* CORE_C21/**CORE_C21-rev-a.bsp**
-* CORE_C22/**CORE_C22-rev-a.bsp**
+Supported SOMANET boards, including Core, Drive, and Com modules, can be found under the bsp/ directory.
 
-
-* IFM_DC100/**IFM_DC100-rev-b.bsp**
-* IFM_DC300/**IFM_DC300-rev-a.bsp**
-* IFM_DC1K/**IFM_DC1K-rev-c4.bsp**
-
-
-* COM_ECAT/**COM_ECAT-rev-a.bsp**
-* COM_ETHERNET/**COM_ETHERNET-rev-a.bsp**
-
-Add board support files (\*.bsp) in your app by just including them. e.g.
+Add board support files (\*.bsp) to your app by just including them. e.g.
 
 ::
 
-	#include <COM_ECAT-rev-a.bsp>
-	#include <CORE_C22-rev-a.bsp>
-	#include <IFM_DC100-rev-b.bsp>
-
-or
-
-::
-
-	#include <CORE_C21-rev-a.bsp>
-	#include <IFM_DC1K-rev-c4.bsp>
+	#include <ComEtherCAT-rev-a.bsp>
+	#include <CoreC21-rev-b.bsp>
+	#include <Drive100.bsp>
 
 
 .. note:: Have a look at our demo apps to see how to use the definitions within these files. 

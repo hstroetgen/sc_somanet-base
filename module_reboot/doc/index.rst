@@ -32,15 +32,15 @@ How to use
 
 	::
 
-		#include <CORE_C22-rev-a.bsp>
-		#include <IFM_DC100-rev-b.bsp>
+		#include <CoreC22.bsp>
+		#include <Drive100.bsp>
 		#include "reboot.h"
 
 3. Select the right target in your app Makefile. e.g.
 
 	::
 
-		TARGET = SOMANET-C22
+		TARGET = SOMANET-CoreC22
 
 4. In the COM Tile intantiate the reboot service and hand it the reboot interface as a parameter.
 
@@ -61,7 +61,7 @@ The following code snippet shows the full usage:
 		#include <xs1.h>
 		#include "platform.h"
 
-		#include "CORE_C22-rev-a.bsp"
+		#include "CoreC22.bsp"
 
 		#include "reboot.h"
 
@@ -85,7 +85,7 @@ The following code snippet shows the full usage:
 		              }
 		          }
 
-		          on tile[IFM_TILE]:
+		          on tile[IF2_TILE]:
 		          {
 		              par
 		              {

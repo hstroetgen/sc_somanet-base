@@ -1,5 +1,5 @@
 /***************************
- * IFM Drive DC-500
+ * Drive 500
  * Rev. A
  ***************************/
 
@@ -18,7 +18,7 @@
 #define SOMANET_IF2_ADC	AD7265
 #define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           56 /*ratio between adc measured value and real dc-bus voltage*/
-#define TEMPERATURE_RATIO       20 /*ratio between adc measured value and temperature of temperature sensor on IFM board*/
+#define TEMPERATURE_RATIO       20 /*ratio between adc measured value and temperature of temperature sensor on Drive board*/
 
 #define SOMANET_IF2_ADC_PORTS {     \
     { null, null, null, null },     \

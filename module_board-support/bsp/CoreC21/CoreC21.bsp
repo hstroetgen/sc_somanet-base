@@ -32,7 +32,7 @@
 #define IF2_TILE_CLOCK_4 on tile[IF2_TILE]: XS1_CLKBLK_4
 #define IF2_TILE_CLOCK_5 on tile[IF2_TILE]: XS1_CLKBLK_5
 
-/* IFM PORTS */
+/* IF2 PORTS */
 #define IF2_PORT_1BIT_2 on tile[IF2_TILE]: XS1_PORT_1E
 #define IF2_PORT_1BIT_4 on tile[IF2_TILE]: XS1_PORT_1G
 #define IF2_PORT_1BIT_6 on tile[IF2_TILE]: XS1_PORT_1F

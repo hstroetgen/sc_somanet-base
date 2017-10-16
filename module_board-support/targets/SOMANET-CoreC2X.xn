@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Network xmlns="http://www.xmos.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
   <Type>Board</Type>
-  <Name>SOMANET-C21-rev-b</Name>
+  <Name>SOMANET-CoreC2X</Name>
   <Declarations>
     <Declaration>tileref tile[2]</Declaration>
   </Declarations>
@@ -30,8 +30,8 @@
     </Node>
   </Nodes>
   <Links>
-    <Link Encoding="2wire" Delays="5clk" Flags="XSCOPE">
-      <LinkEndpoint NodeId="0" Link="XL5"/>
+    <Link Encoding="2wire" Delays="6clk" Flags="XSCOPE">
+      <LinkEndpoint NodeId="0" Link="XL3"/>
       <LinkEndpoint NodeId="1" Chanend="1"/>
     </Link>
   </Links>
@@ -40,6 +40,8 @@
       <Attribute Name="PORT_SQI_CS"      Value="PORT_SQI_CS"/>
       <Attribute Name="PORT_SQI_SCLK"    Value="PORT_SQI_SCLK"/>
       <Attribute Name="PORT_SQI_SIO"     Value="PORT_SQI_SIO"/>
+      <Attribute Name="QE_REGISTER" Value="quad_spi_qe_location_status_reg_0"/>
+      <Attribute Name="QE_BIT" Value="quad_spi_qe_bit_6"/>
     </Device>
   </ExternalDevices>
   <JTAGChain>

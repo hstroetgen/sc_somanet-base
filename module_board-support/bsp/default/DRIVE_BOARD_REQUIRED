@@ -1,0 +1,17 @@
+/*
+ *	IMPORTANT!!!
+ *
+ *  Your application must include a SOMANET Drive board support package. Please
+ *  go back to your main (e.g. main.xc) file and replace "DRIVE_BOARD_REQUIRED"
+ *  with a board support packages.
+ *
+ *  See the  sc_somanet-base/module_board-support/bsp/ directory for a list of
+ *  pre-defined options.
+ *
+ *  e.g. Drive1000-rev-d1.bsp
+ */
+
+#pragma once
+
+#error "No SOMANET Drive defined! Your application must include a SOMANET Drive board support package. Please go back to your main (e.g. main.xc) file and replace "DRIVE_BOARD_REQUIRED" with a board support packages. See the sc_somanet-base/module_board-support/bsp/ directory for a list of pre-defined options."
+

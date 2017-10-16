@@ -23,7 +23,7 @@
 #define CAN_BAUDRATE        CAN_BAUD_250K
 
 #define CAN_RESET_PIN       COM_PORT_4BIT_76_78_8_72
-#define CAN_CLK_BLK         IFM_TILE_CLOCK_1 //XS1_CLKBLK_2
+#define CAN_CLK_BLK         IF2_TILE_CLOCK_1 //XS1_CLKBLK_2
 #define CAN_IN_PORT         COM_PORT_1BIT_10
 #define CAN_OUT_PORT        COM_PORT_1BIT_40
 

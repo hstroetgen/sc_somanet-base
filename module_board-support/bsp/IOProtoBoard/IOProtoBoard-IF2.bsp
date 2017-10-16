@@ -9,7 +9,7 @@
 #include <platform.h>
 
 
-#define SOMANET_IFM_I2C_PORTS {		\
+#define SOMANET_IF2_I2C_PORTS {		\
 	XS1_PORT_1A,	\
 	XS1_PORT_1B,	\
 	XS1_PORT_1C,	\

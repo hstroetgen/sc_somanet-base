@@ -89,7 +89,7 @@ int main(void)
     interface rtc_communication rtc;
 
     par {
-        on tile[COM_TILE] : {
+        on tile[IF1_TILE] : {
                    par {
                        rtc_service(rtc, i2c[0]);
                        i2c_master(i2c, 1, i2c_p.p_scl, i2c_p.p_sda, 10);

@@ -1,0 +1,48 @@
+/***************************
+ * COM Serial
+ * Rev. A
+ ***************************/
+
+#pragma once
+
+#include <xs1.h>
+#include <platform.h>
+
+/* CAN Defines */
+//Possible CAN Baudrates:
+#define CAN_BAUD_1000K    2  //Do not change! //has issues
+#define CAN_BAUD_500K     4  //Do not change!
+#define CAN_BAUD_250K     8  //Do not change!
+#define CAN_BAUD_125K     16 //Do not change!
+
+#define CAN_PROP_SEG        8 /**< Bit timing: Propagation segment. */
+#define CAN_PHASE_SEG1      8 /**< Bit timing: Phase segment 1. */
+#define CAN_PHASE_SEG2      8 /**< Bit timing: Phase segment 2. */
+#define CAN_RJW             4 /**< Bit timing: Re-synchronization Jump Width. */
+#define CAN_NODE_STATE      ACTIVE_ERROR
+#define CAN_BAUDRATE        CAN_BAUD_250K
+
+#define CAN_RESET_PIN       COM_PORT_4BIT_76_78_8_72
+#define CAN_CLK_BLK         IF2_TILE_CLOCK_1 //XS1_CLKBLK_2
+#define CAN_IN_PORT         COM_PORT_1BIT_10
+#define CAN_OUT_PORT        COM_PORT_1BIT_40
+
+/* CAN Ports */
+#define SOMANET_SERIAL_CAN_PORTS { \
+    CAN_IN_PORT,    \
+    CAN_OUT_PORT,   \
+    CAN_PROP_SEG,   \
+    CAN_PHASE_SEG1, \
+    CAN_PHASE_SEG2, \
+    CAN_RJW,        \
+    CAN_NODE_STATE  \
+}
+    
+#define SOMANET_SERIAL_CAN_CLOCK { \
+    CAN_BAUDRATE,   \
+    CAN_CLK_BLK     \
+}
+
+#define SOMANET_SERIAL_CAN_RESET { \
+    CAN_RESET_PIN   \
+}

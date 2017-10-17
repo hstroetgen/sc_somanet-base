@@ -31,7 +31,7 @@ int main(void)
 
   par
   {
-    on tile[COM_TILE]:
+    on tile[IF1_TILE]:
     {
 #ifdef XCORE200
         flash_service(p_qspi_flash, i_boot, i_data, 1);
@@ -45,7 +45,7 @@ int main(void)
         spiffs_console(i_spiffs[0]);
     }
 
-    on tile[IFM_TILE]:
+    on tile[IF2_TILE]:
     {
         spiffs_service(i_data[0], i_spiffs, 1);
     }

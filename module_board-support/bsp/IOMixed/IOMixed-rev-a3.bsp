@@ -1,0 +1,157 @@
+/***************************
+ * IO Mixed
+ * Rev. A.3
+ ***************************/
+
+#pragma once
+
+#include <xs1.h>
+#include <platform.h>
+
+/* DAC */
+#define DAC_MOSI			IF2_PORT_1BIT_40
+#define DAC_SCK				IF2_PORT_1BIT_2
+#define DAC_CS				IF2_PORT_1BIT_4
+#define DAC_OUT_CONF		IF2_PORT_4BIT_64_66_76_80
+
+
+/* ADC */
+#define ADC_DATA_A  IF2_PORT_1BIT_24
+#define ADC_DATA_B IF2_PORT_1BIT_28 
+#define ADC_SCLK  IF2_PORT_1BIT_26
+#define ADC_READY IF2_PORT_1BIT_32 
+#define ADC_CNV	  IF2_PORT_1BIT_32
+#define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
+#define ADC_CLK_SRC IF2_TILE_CLOCK_1 
+#define SOMANET_DRIVE_ADC	AD7265
+#define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
+
+#define SOMANET_DRIVE_ADC_PORTS {     \
+    { null, null, null, null },     \
+    { {ADC_DATA_A , ADC_DATA_B},    \
+     ADC_CLK_SRC,                   \
+     ADC_SCLK,                      \
+     ADC_READY,                     \
+     ADC_MUX},                      \
+     {0, 1, -1, 50}                    \
+}
+
+/* FET DRIVER A4935 control ports */
+#define SOMANET_DRIVE_FET_DRIVER_PORTS {  \
+    null,                               \
+    null,                               \
+    null,                               \
+    null                                \
+}
+
+/* ENCODER 1 (HALL) SENSOR PORT */
+#define SOMANET_DRIVE_ENCODER_1_PORT IF2_PORT_4BIT_38_44_30_34
+
+/* ENCODER 2 (QEI) SENSOR PORT */
+#define SOMANET_DRIVE_ENCODER_2_PORT IF2_PORT_4BIT_64_66_76_80
+
+/* INPUT MODE SELECTION PORT */
+#define ENCODER_PORTS_INPUT_MODE_SELECTION IF2_PORT_4BIT_68_70_72_74
+
+#define SOMANET_DRIVE_ENCODER_PORTS_INPUT_MODE_SELECTION { \
+    ENCODER_PORTS_INPUT_MODE_SELECTION,                  \
+    0                                                    \
+}
+
+/* PWM PORTS*/
+#define DEADTIME_NS           1500 /*nano-seconds*/
+
+#define PWM_PORT_A_HIGH_SIDE IF2_PORT_1BIT_62
+#define PWM_PORT_B_HIGH_SIDE IF2_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE IF2_PORT_1BIT_54
+#define PWM_PORT_D_HIGH_SIDE IF2_PORT_1BIT_28
+#define PWM_PORT_A_LOW_SIDE IF2_PORT_1BIT_56
+#define PWM_PORT_B_LOW_SIDE IF2_PORT_1BIT_52
+#define PWM_PORT_C_LOW_SIDE IF2_PORT_1BIT_24
+#define PWM_PORT_D_LOW_SIDE IF2_PORT_1BIT_32
+
+#define PWM_CLOCK_SRC IF2_TILE_CLOCK_0
+#define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
+
+#define SOMANET_DRIVE_PWM_PORTS {                                         \
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE}, \
+    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},    \
+    PWM_PORT_D_HIGH_SIDE,                                               \
+    PWM_PORT_D_LOW_SIDE,                                                \
+    PWM_CLOCK_SRC,                                                      \
+    PWM_DUMMY_PORT_TRIGGER                                              \
+}
+
+#define SOMANET_DRIVE_PWM_PORTS_GENERAL {  \
+    PWM_PORT_A_HIGH_SIDE,                \
+    PWM_PORT_A_LOW_SIDE,                 \
+    PWM_PORT_B_HIGH_SIDE,                \
+    PWM_PORT_B_LOW_SIDE,                 \
+    PWM_PORT_C_HIGH_SIDE,                \
+    PWM_PORT_C_LOW_SIDE,                 \
+    null,                				 \
+    null,                 				 \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    PWM_PORT_D_HIGH_SIDE,                \
+    PWM_PORT_D_LOW_SIDE,                 \
+    null,                				 \
+    null,                 				 \    
+    PWM_CLOCK_SRC,                       \
+    PWM_DUMMY_PORT_TRIGGER               \
+}
+
+/* LEDs, Watchdog */
+#define WATCHDOG_TICK_PORT null
+#define WATCHDOG_EN_PORT IF2_PORT_4BIT_36_46_48_50 
+#define WATCHDOG_DIAG_EN_PORT null
+
+#define SOMANET_DRIVE_WATCHDOG_PORTS {    \
+    WATCHDOG_EN_PORT,                   \
+    WATCHDOG_DIAG_EN_PORT,              \
+    WATCHDOG_TICK_PORT                  \
+}
+
+/* GPIO_PORTS */
+#define SOMANET_DRIVE_GPIO_D0 IF2_PORT_1BIT_6
+#define SOMANET_DRIVE_GPIO_D1 IF2_PORT_1BIT_78
+#define SOMANET_DRIVE_GPIO_D2 IF2_PORT_1BIT_2
+#define SOMANET_DRIVE_GPIO_D3 IF2_PORT_1BIT_22
+
+/* AMS Absolute Position Sensor Ports */
+/*  MOSI = D3
+    SCLK = D1
+    MISO = D2
+    Slave Select = D0 */
+#define SOMANET_DRIVE_AMS_PORTS {     \
+    {                               \
+        IF2_TILE_CLOCK_2,           \
+        IF2_TILE_CLOCK_3,           \
+        SOMANET_DRIVE_GPIO_D3,        \
+        SOMANET_DRIVE_GPIO_D1,        \
+        SOMANET_DRIVE_GPIO_D2         \
+    },                              \
+    SOMANET_DRIVE_GPIO_D0             \
+}
+#define SOMANET_DRIVE_I2C_PORTS {		\
+	XS1_PORT_1K,	\
+	XS1_PORT_1L,	\
+	XS1_PORT_1M,	\
+	XS1_PORT_1P		\
+}
+#define SOMANET_SPI_MASTER_PORTS {	\
+	XS1_PORT_1J,	\
+	{XS1_PORT_1I},	\
+	XS1_PORT_1H,	\
+	XS1_PORT_1F		\
+}
+#define SOMANET_DAC_PORTS { \
+	    XS1_CLKBLK_1,	\
+        XS1_CLKBLK_2,	\
+        DAC_MOSI,		\
+        DAC_SCK,		\
+        DAC_CS,			\
+        DAC_OUT_CONF	\
+}

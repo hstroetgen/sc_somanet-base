@@ -1,18 +1,18 @@
 /*
  *	IMPORTANT!!!
  *
- *	Your Application requires a particular SOMANET COM Module configured.
+ *	Your Application requires a particular SOMANET Com module to be configured.
  *  Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED"
- *  with one of the flowing board support packages:
+ *  with a board support file.
  *  
- *    COM_ECAT-rev-a.bsp
- *    COM_ETHERNET-rev-a.bsp
+ *  See the sc_somanet-base/module_board-support/bsp/ directory for a list of
+ *  pre-defined options.
+ *
+ *  e.g. ComEtherCAT-rev-a.bsp
  *  
  */
 
 #pragma once
 
-#error "No SOMANET COM defined! Your Application has to include a SOMANET COM Module board support package. Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED" with one of the flowing board support packages: \
-COM_ECAT-rev-a.bsp      \
-COM_ETHERNET-rev-a.bsp  \
-"
+#error "No SOMANET Com defined! Your application requires a SOMANET Com module to be configured. Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED" with a board support file. See the sc_somanet-base/module_board-support/bsp/ directory for a list of pre-defined options."
+

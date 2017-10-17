@@ -1,5 +1,11 @@
 sc_somanet-base Change Log
 ==========================
+
+3.2.0
+-----
+
+  * Renamed board support packages and targets to reflect new product naming conventions
+
 3.1.3
 -----
 

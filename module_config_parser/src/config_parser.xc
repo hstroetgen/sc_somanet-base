@@ -218,7 +218,7 @@ int write_config(char path[], ConfigParameter_t *parameter, client SPIFFSInterfa
                   if (value.f == (int)value.f) { //value has no decimal, we can write it as an integer
                       sprintf(line_buf + strlen(line_buf), ", %12d", (int)value.f);
                   } else {
-                      sprintf(line_buf + strlen(line_buf), ", %12f", value.f);
+                      sprintf(line_buf + strlen(line_buf), ", %12.8f", value.f);
                   }
               } else {
                   sprintf(line_buf + strlen(line_buf), ", %12d", value.i);

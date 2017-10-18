@@ -31,7 +31,7 @@
 /**
  * \brief Max parameters count in OD
  */
-#define MAX_PARAMS_COUNT 160
+#define MAX_PARAMS_COUNT 185
 
 /**
  * \brief Structure describing a individual parameter

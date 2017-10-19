@@ -5,10 +5,7 @@ sc_somanet-base Change Log
 -----
 
   * Renamed board support packages and targets to reflect new product naming conventions
-
-3.1.3
------
-
+  * Fix bug in config parser when writing float, also cleanup config parser to only support one node (for local file)
   * Implement new pwm structure with 15 kHz, and use 100 MHz ref_clk_frq
   * Add support for DC30 in watchdog
 

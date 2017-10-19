@@ -24,11 +24,6 @@
 #define MAX_TOKEN_SIZE    15
 
 /**
- * \brief Max nodes count in OD
- */
-#define MAX_NODES_COUNT 3
-
-/**
  * \brief Max parameters count in OD
  */
 #define MAX_PARAMS_COUNT 185
@@ -43,9 +38,8 @@ typedef struct {
 } Param_t;
 
 typedef struct {
-  size_t node_count;       ///< Number of nodes in the config parameters file, this value needs to be checked against the real number of nodes on the bus
   size_t param_count;      ///< Number of configuration parameters, aka non commented lines in the config file
-  Param_t parameter[MAX_PARAMS_COUNT][MAX_NODES_COUNT];  ///< array of node_count x param_count of configuration parameters, for every node is a list of SdoParam_t objects.
+  Param_t parameter[MAX_PARAMS_COUNT];  ///< array of node_count x param_count of configuration parameters, for every node is a list of SdoParam_t objects.
 } ConfigParameter_t;
 
 /**

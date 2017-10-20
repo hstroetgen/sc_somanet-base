@@ -8,6 +8,7 @@ sc_somanet-base Change Log
   * Fix bug in config parser when writing float, also cleanup config parser to only support one node (for local file)
   * Implement new pwm structure with 15 kHz, and use 100 MHz ref_clk_frq
   * Add support for DC30 in watchdog
+  * Switch back qei_hall ports on Drive1000 rev d1 to match the schematics. (so on rev d1 encoder port 1 is on the corner of the board)
 
 3.1.2
 -----

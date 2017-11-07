@@ -60,23 +60,16 @@ typedef struct {
  * @brief Interface type to communicate with RTC Service.
  */
 
-interface rtc_communication {
 
-    /**
-     * @brief Initialization of M41T62LC6F rtc device.
-     *
-     * @param resultat i2c_regop_res_t structure from i2c library to report back on whether the read/write operation of the i2c was a success or not.
-     */
+void    rtc_init(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
-    void    init(i2c_regop_res_t result);
-
-    /**
+/**
      * @brief Setter for Hours.
      *
      * @param data Hours data (00-23).
      */
 
-    void    set_Hours(uint8_t data);
+void    rtc_set_Hours(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Minutes.
@@ -84,7 +77,7 @@ interface rtc_communication {
      * @param data Minutes data (00-59).
      */
 
-    void    set_Minutes(uint8_t data);
+void    rtc_set_Minutes(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Seconds.
@@ -92,7 +85,7 @@ interface rtc_communication {
      * @param data Seconds data (00-59).
      */
 
-    void    set_Seconds(uint8_t data);
+void    rtc_set_Seconds(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Milli Seconds.
@@ -100,7 +93,7 @@ interface rtc_communication {
      * @param data Milli Seconds data (00-99).
      */
 
-    void    set_Milli_Seconds(uint8_t data);
+void    rtc_set_Milli_Seconds(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Day of the week.
@@ -108,7 +101,7 @@ interface rtc_communication {
      * @param data Day of the week data (01-7).
      */
 
-    void    set_Day_of_week(uint8_t data);
+void    rtc_set_Day_of_week(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Date.
@@ -116,7 +109,7 @@ interface rtc_communication {
      * @param data Date data (01-31).
      */
 
-    void    set_Date(uint8_t data);
+void    rtc_set_Date(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Year.
@@ -124,7 +117,7 @@ interface rtc_communication {
      * @param data Year data (00-99).
      */
 
-    void    set_Year(uint8_t data);
+void    rtc_set_Year(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Month.
@@ -132,7 +125,7 @@ interface rtc_communication {
      * @param data Month data (01-12).
      */
 
-    void    set_Month(uint8_t data);
+uint8_t   rtc_set_Month(uint8_t data);
 
     /**
      * @brief Setter for Century.
@@ -140,7 +133,7 @@ interface rtc_communication {
      * @param data Century data (21-23).
      */
 
-    void    set_Century(uint8_t data);
+void    rtc_set_Century(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for SQWE bit.
@@ -148,7 +141,7 @@ interface rtc_communication {
      * @param data SQWE bit value (0 or 1).
      */
 
-    void    set_SQWE(uint8_t data);
+void    rtc_set_SQWE(client interface i2c_master_if i2c, uint8_t data);
 
     /**
      * @brief Setter for Square Wave output frequency.
@@ -156,7 +149,7 @@ interface rtc_communication {
      * @param data variable of type RTC_SQW_FREQ.
      */
 
-    void    set_SQW_Freq(RTC_SQW_FREQ data);
+void    rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data);
 
 
     /**
@@ -167,7 +160,7 @@ interface rtc_communication {
      * @return value of Hours
      */
 
-    unsigned get_Hours(i2c_regop_res_t result);
+unsigned get_Hours(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Minutes.
@@ -177,7 +170,7 @@ interface rtc_communication {
      * @return value of Minutes
      */
 
-    unsigned get_Minutes(i2c_regop_res_t result);
+unsigned get_Minutes(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Seconds.
@@ -187,7 +180,7 @@ interface rtc_communication {
      * @return value of Seconds
      */
 
-    unsigned get_Seconds(i2c_regop_res_t result);
+unsigned get_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Milli Seconds.
@@ -197,7 +190,7 @@ interface rtc_communication {
      * @return value of Milli Seconds
      */
 
-    unsigned get_Milli_Seconds(i2c_regop_res_t result);
+unsigned get_Milli_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Month.
@@ -207,7 +200,7 @@ interface rtc_communication {
      * @return value of Month
      */
 
-    unsigned get_Month(i2c_regop_res_t result);
+unsigned get_Month(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Day of the week.
@@ -217,7 +210,7 @@ interface rtc_communication {
      * @return value of Day of the week.
      */
 
-    unsigned get_Day_of_week(i2c_regop_res_t result);
+unsigned get_Day_of_week(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Date.
@@ -227,7 +220,7 @@ interface rtc_communication {
      * @return value of Date.
      */
 
-    unsigned get_Date(i2c_regop_res_t result);
+unsigned get_Date(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Year.
@@ -237,7 +230,7 @@ interface rtc_communication {
      * @return value of year.
      */
 
-    unsigned get_Year(i2c_regop_res_t result);
+unsigned get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Century.
@@ -247,7 +240,7 @@ interface rtc_communication {
      * @return value of Century.
      */
 
-    unsigned get_Century(i2c_regop_res_t result);
+unsigned get_Century(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
 
     /**
@@ -258,7 +251,7 @@ interface rtc_communication {
      * @return value of SQWE bit.
      */
 
-    unsigned get_SQWE(i2c_regop_res_t result);
+unsigned get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for square wave frequency value.
@@ -268,8 +261,7 @@ interface rtc_communication {
      * @return value of type RTC_SQW_FREQ.
      */
 
-    RTC_SQW_FREQ get_SQW_Freq(i2c_regop_res_t result);
-};
+RTC_SQW_FREQ get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
 /**
  * @brief Write an 8-bit register on a slave device using i2c library.
@@ -294,13 +286,5 @@ void RTC_write(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t 
 
 uint8_t RTC_read(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t reg, i2c_regop_res_t &result);
 
-/**
- * @brief Service to set and get time/date from M41T62LC6F Real Time Clock device.
- *
- * @param rtc rtc_communication communication interface for the RTC_service.
- * @param i2c_master_if communication interface with an I2C master component.
- */
-
-void rtc_service(server interface rtc_communication rtc, client interface i2c_master_if i2c);
 
 #endif /* RTC_CONFIG_H_ */

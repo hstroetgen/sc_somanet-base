@@ -125,7 +125,7 @@ void    rtc_set_Year(client interface i2c_master_if i2c, uint8_t data);
      * @param data Month data (01-12).
      */
 
-uint8_t   rtc_set_Month(uint8_t data);
+void   rtc_set_Month(uint8_t data);
 
     /**
      * @brief Setter for Century.
@@ -160,7 +160,7 @@ void    rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data);
      * @return value of Hours
      */
 
-unsigned get_Hours(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Hours(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Minutes.
@@ -170,7 +170,7 @@ unsigned get_Hours(client interface i2c_master_if i2c, i2c_regop_res_t result);
      * @return value of Minutes
      */
 
-unsigned get_Minutes(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Minutes(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Seconds.
@@ -180,7 +180,7 @@ unsigned get_Minutes(client interface i2c_master_if i2c, i2c_regop_res_t result)
      * @return value of Seconds
      */
 
-unsigned get_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Milli Seconds.
@@ -190,7 +190,7 @@ unsigned get_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result)
      * @return value of Milli Seconds
      */
 
-unsigned get_Milli_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Milli_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Month.
@@ -200,7 +200,7 @@ unsigned get_Milli_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t r
      * @return value of Month
      */
 
-unsigned get_Month(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Month(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Day of the week.
@@ -210,7 +210,7 @@ unsigned get_Month(client interface i2c_master_if i2c, i2c_regop_res_t result);
      * @return value of Day of the week.
      */
 
-unsigned get_Day_of_week(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Day_of_week(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Date.
@@ -220,7 +220,7 @@ unsigned get_Day_of_week(client interface i2c_master_if i2c, i2c_regop_res_t res
      * @return value of Date.
      */
 
-unsigned get_Date(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Date(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Year.
@@ -230,7 +230,7 @@ unsigned get_Date(client interface i2c_master_if i2c, i2c_regop_res_t result);
      * @return value of year.
      */
 
-unsigned get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for Century.
@@ -240,7 +240,7 @@ unsigned get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result);
      * @return value of Century.
      */
 
-unsigned get_Century(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_Century(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
 
     /**
@@ -251,7 +251,7 @@ unsigned get_Century(client interface i2c_master_if i2c, i2c_regop_res_t result)
      * @return value of SQWE bit.
      */
 
-unsigned get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result);
+unsigned rtc_get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
     /**
      * @brief Getter for square wave frequency value.
@@ -261,7 +261,7 @@ unsigned get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result);
      * @return value of type RTC_SQW_FREQ.
      */
 
-RTC_SQW_FREQ get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result);
+RTC_SQW_FREQ rtc_get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result);
 
 /**
  * @brief Write an 8-bit register on a slave device using i2c library.

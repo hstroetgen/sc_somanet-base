@@ -8,6 +8,8 @@
 #include "rtc.h"
 #include <stdio.h>
 
+uint8_t data_month = 1;
+
 uint8_t RTC_read(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t reg, i2c_regop_res_t &result)
 {
       uint8_t data = 0;
@@ -103,17 +105,17 @@ void rtc_set_Year(client interface i2c_master_if i2c, uint8_t data)
     RTC_write(i2c, Addr_Slave, Year, data);
 }
 
-uint8_t rtc_set_Month(uint8_t data)
+void rtc_set_Month(uint8_t data)
 {
     uint8_t units, tens = 0;
     tens = data / 10;
     units = data % 10;
-    return ((tens << 4) | units);
+    data_month = (tens << 4) | units;
 }
 
 void rtc_set_Century(client interface i2c_master_if i2c, uint8_t data)
 {
-    data = ((data - 20) << 6) | rtc_set_Month(data);
+    data = ((data - 20) << 6) | data_month;
     RTC_write(i2c, Addr_Slave, Century_Month, data);
 }
 
@@ -263,7 +265,7 @@ unsigned rtc_get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result
     return ((data >> 6) & 0xF);
 }
 
-unsigned rtc_get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result)
+RTC_SQW_FREQ rtc_get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result)
 {
     uint8_t data = 0;
     data = RTC_read(i2c, Addr_Slave, Day, result);

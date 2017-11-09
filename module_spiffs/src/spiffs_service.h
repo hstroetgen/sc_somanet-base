@@ -249,6 +249,6 @@ interface SPIFFSInterface {
  * @param n_spiffs   Pattern variable for SPIFFS service
  *
  */
-void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server i_spiffs[n_spiffs], unsigned n_spiffs);
+[[distributable]] void spiffs_service(CLIENT_INTERFACE(FlashDataInterface, i_data), interface SPIFFSInterface server i_spiffs[n_spiffs], unsigned n_spiffs);
 
 #endif /* SPIFFS_SERVICE_H_ */

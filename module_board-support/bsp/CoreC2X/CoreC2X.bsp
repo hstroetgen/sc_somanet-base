@@ -1,5 +1,5 @@
 /*****************
- * Core-C21-DX-G2
+ * Core-C2X
  * Rev. A
  *****************/
 
@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <xscope.h>
 
-#define CORE_C21_DX_G2
+#define CORE_C2X
 
 /* Standard Tile definitions for demo/test apps */
 #define IF1_TILE	0

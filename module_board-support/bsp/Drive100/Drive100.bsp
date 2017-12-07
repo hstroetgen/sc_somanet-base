@@ -96,7 +96,7 @@
     null,                                \
     null,                 				 \
     null,                				 \
-    null,                 				 \    
+    null,                 				 \
     PWM_CLOCK_SRC,                       \
     PWM_DUMMY_PORT_TRIGGER               \
 }

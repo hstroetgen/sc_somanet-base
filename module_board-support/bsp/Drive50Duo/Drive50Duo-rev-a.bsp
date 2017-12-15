@@ -2,7 +2,7 @@
  * Drive 50 Duo
  * Rev. A
  ***************************/
- 
+
 #pragma once
 
 #include <xs1.h>
@@ -10,11 +10,11 @@
 
 /* ADC */
 #define ADC_DATA_A IF2_PORT_1BIT_42
-#define ADC_DATA_B IF2_PORT_1BIT_40 
+#define ADC_DATA_B IF2_PORT_1BIT_40
 #define ADC_SCLK IF2_PORT_1BIT_16
-#define ADC_READY IF2_PORT_1BIT_4 
+#define ADC_READY IF2_PORT_1BIT_4
 #define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
-#define ADC_CLK_SRC IF2_TILE_CLOCK_1 
+#define ADC_CLK_SRC IF2_TILE_CLOCK_1
 #define SOMANET_DRIVE_ADC	AD7265
 #define CURRENT_RATIO           30 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           56 /*ratio between adc measured value and real dc-bus voltage*/
@@ -99,7 +99,7 @@
     null,                                \
     null,                 				 \
     null,                				 \
-    null,                 				 \    
+    null,                 				 \
     PWM_CLOCK_SRC,                       \
     PWM_DUMMY_PORT_TRIGGER               \
 }

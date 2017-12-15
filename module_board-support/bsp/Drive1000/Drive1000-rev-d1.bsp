@@ -10,11 +10,11 @@
 
 /* ADC */
 #define ADC_DATA_A IF2_PORT_1BIT_16
-#define ADC_DATA_B IF2_PORT_1BIT_40 
+#define ADC_DATA_B IF2_PORT_1BIT_40
 #define ADC_SCLK IF2_PORT_1BIT_42
-#define ADC_READY IF2_PORT_1BIT_4 
+#define ADC_READY IF2_PORT_1BIT_4
 #define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
-#define ADC_CLK_SRC IF2_TILE_CLOCK_1 
+#define ADC_CLK_SRC IF2_TILE_CLOCK_1
 #define SOMANET_DRIVE_ADC	AD7265
 #define CURRENT_RATIO           36 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           54 /*ratio between adc measured value and real dc-bus voltage*/
@@ -100,7 +100,7 @@
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT null
-#define WATCHDOG_EN_PORT null 
+#define WATCHDOG_EN_PORT null
 #define WATCHDOG_DIAG_EN_PORT null
 #define CPLD_SHARED_PORT IF2_PORT_4BIT_36_46_48_50
 #define CPLD_FAULT_MONITOR IF2_PORT_8BIT_HALF_12_14_18_60

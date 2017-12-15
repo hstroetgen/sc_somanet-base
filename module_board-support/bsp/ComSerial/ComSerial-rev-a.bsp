@@ -37,7 +37,7 @@
     CAN_RJW,        \
     CAN_NODE_STATE  \
 }
-    
+
 #define SOMANET_SERIAL_CAN_CLOCK { \
     CAN_BAUDRATE,   \
     CAN_CLK_BLK     \

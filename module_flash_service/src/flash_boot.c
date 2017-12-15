@@ -382,8 +382,6 @@ int flash_erase_image(void) {
  * @return 0, if no error occured.
  */
 int flash_prepare_boot_partition() {
-    int error = 0;
-
     #ifdef DEBUG
     printstr("Prepare boot partition\n");
     #endif
@@ -432,8 +430,6 @@ int flash_prepare_boot_partition() {
  */
 int flash_erase_boot_partition()
 {
-    int error = 0;
-
     #ifdef DEBUG
     printstr("Erase boot partition\n");
     #endif

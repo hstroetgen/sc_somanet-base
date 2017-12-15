@@ -15,8 +15,8 @@
 #define ADC_READY   IF2_PORT_1BIT_4     // port 1G on DC5K, which is IF2_PORT_1BIT_4 on C22
 #define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
                                          // port 4C on DC5K, which is  on C22
-#define ADC_CLK_SRC IF2_TILE_CLOCK_1   
-#define SOMANET_DRIVE_ADC	AD7265        
+#define ADC_CLK_SRC IF2_TILE_CLOCK_1
+#define SOMANET_DRIVE_ADC	AD7265
 
 #define SOMANET_DRIVE_ADC_PORTS {     \
     { null, null, null, null },     \
@@ -90,14 +90,14 @@
     null,                                \
     null,                 				 \
     null,                				 \
-    null,                 				 \    
+    null,                 				 \
     PWM_CLOCK_SRC,                       \
     PWM_DUMMY_PORT_TRIGGER               \
 }
 
 /* LEDs, Watchdog */
 #define WATCHDOG_TICK_PORT null
-#define WATCHDOG_EN_PORT IF2_PORT_4BIT_36_46_48_50 
+#define WATCHDOG_EN_PORT IF2_PORT_4BIT_36_46_48_50
 #define WATCHDOG_DIAG_EN_PORT null
 #define CPLD_SHARED_PORT null
 #define CPLD_FAULT_MONITOR null
@@ -121,14 +121,14 @@
 /*  MOSI = D3
     SCLK = D1
     MISO = D2
-    
+
 
     out buffered port:8 mosi; equivalent to SOMANET_DRIVE_GPIO_D3  equivalent to EXT_D.3  equivalen to pin 6 (green)
     out buffered port:8 sclk; equivalent to SOMANET_DRIVE_GPIO_D1  equivalent to EXT_D.1  equivalen to pin 3 (red)
     in buffered port:8 miso;  equivalent to SOMANET_DRIVE_GPIO_D2  equivalent to EXT_D.2  equivalen to pin 5 (yellow)
-    
+
     out port slave_select;    equivalent to SOMANET_DRIVE_GPIO_D0  equivalent to EXT_D.0  equivalen to pin 2 (brown)
-    
+
     GND                                                                                 equivalen to pin 4 (orange)
     VCC                                                                                 equivalen to pin 7 (blue)
 

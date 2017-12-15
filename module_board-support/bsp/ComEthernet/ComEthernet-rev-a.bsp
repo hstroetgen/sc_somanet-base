@@ -7,7 +7,7 @@
 
 #include <xs1.h>
 #include <platform.h>
- 
+
 /****************************************************************************/
 
 #define ETHERNET_DEFAULT_TILE_P1 tile[0]

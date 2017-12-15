@@ -26,7 +26,6 @@
 
 #ifdef XCORE200
 #define PLL_MASK 0x7FFFFFFF
-#warning PLL for XCORE 200
 #else
 #define PLL_MASK 0xFFFFFFFF
 #endif

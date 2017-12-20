@@ -22,7 +22,7 @@ sc_somanet-base Change Log
   * Added support for SQWE bit update in RTC to enable or disable the Square Wave output (Core C2X)
   * Added support for configuring the frequency of square wave output of Core C2X RTC
   * Added EEPROM read and write support (Core C2X)
-  * Added XMOS libraries as submodules (now use $git submodule update --init --recursive):
+  * Added XMOS libraries as submodules
     * lib_gpio
     * lib_spi
     * lib_uart

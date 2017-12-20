@@ -12,10 +12,6 @@ This module provides a Service of 24LC01BT-I/LT EEPROM module  which will provid
 
 The EEPROM Service should always be executed over a **COM Tile** so it can access the ports to your SOMANET COM device where the I2C ports are defined.
 
-.. cssclass:: github
-
-  `See Module on Repository <https://github.com/synapticon/sc_somanet-base/tree/develop/module_eeprom>`_
-
 How to use
 ==========
 

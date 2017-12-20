@@ -8,6 +8,3 @@ COM Board Recognition Demo
     :backlinks: none
     :depth: 3
 
-.. cssclass:: github
-
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/examples/app_test_com-detect>`_

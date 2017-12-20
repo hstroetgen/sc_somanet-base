@@ -7,14 +7,6 @@ SOMANET Base Utilities Component
 
 The SOMANET Base Software Component is a collection of necessary utilities and basic firmware for SOMANET programming. 
 
-.. cssclass:: downloadable-button 
-
-  `Download Component <https://github.com/synapticon/sc_somanet-base/archive/master.zip>`_
-
-.. cssclass:: github
-
-  `Visit Public Repository <https://github.com/synapticon/sc_somanet-base/>`_
-
 Modules
 -------
 

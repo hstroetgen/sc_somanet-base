@@ -11,9 +11,6 @@ While running, it should display a sinusoidal wave in xTIMEcomposer's xSCOPE tab
 
 This app was originally provided by XMOS as an `Application Note`_.
 
-.. cssclass:: github
-
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/examples/app_test_xscope>`_
 
 Hardware setup
 ===============

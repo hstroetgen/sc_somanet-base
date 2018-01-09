@@ -27,23 +27,24 @@
 /**
  * @brief RTC Square Wave Frequency types
  */
+
 typedef enum {
-    RTC_SQW_FREQ_NONE = 0x00,           /**< RTC Square Wave Frequency None */
-    RTC_SQW_FREQ_32KHZ = 0x10,          /**< RTC Square Wave Frequency 32 KHZ */
-    RTC_SQW_FREQ_8KHZ = 0x20,           /**< RTC Square Wave Frequency 8 KHZ */
-    RTC_SQW_FREQ_4KHZ = 0x30,           /**< RTC Square Wave Frequency 4 KHZ */
-    RTC_SQW_FREQ_2KHZ = 0x40,           /**< RTC Square Wave Frequency 2 KHZ */
-    RTC_SQW_FREQ_1KHZ = 0x50,           /**< RTC Square Wave Frequency 1 KHZ */
-    RTC_SQW_FREQ_512HZ = 0x60,          /**< RTC Square Wave Frequency 512 HZ */
-    RTC_SQW_FREQ_256HZ = 0x70,          /**< RTC Square Wave Frequency 256 HZ */
-    RTC_SQW_FREQ_128HZ = 0x80,          /**< RTC Square Wave Frequency 128 HZ */
-    RTC_SQW_FREQ_64HZ = 0x90,           /**< RTC Square Wave Frequency 64 HZ */
-    RTC_SQW_FREQ_32HZ = 0xA0,           /**< RTC Square Wave Frequency 32 HZ */
-    RTC_SQW_FREQ_16HZ = 0xB0,           /**< RTC Square Wave Frequency 16 HZ */
-    RTC_SQW_FREQ_8HZ = 0xC0,            /**< RTC Square Wave Frequency 8 HZ */
-    RTC_SQW_FREQ_4HZ = 0xD0,            /**< RTC Square Wave Frequency 4 HZ */
-    RTC_SQW_FREQ_2HZ = 0xE0,            /**< RTC Square Wave Frequency 2 HZ */
-    RTC_SQW_FREQ_1HZ = 0xF0             /**< RTC Square Wave Frequency 1 HZ */
+    RTC_SQW_FREQ_NONE = 0x0,           /**< RTC Square Wave Frequency None */
+    RTC_SQW_FREQ_32KHZ = 0x1,          /**< RTC Square Wave Frequency 32 KHZ */
+    RTC_SQW_FREQ_8KHZ = 0x2,           /**< RTC Square Wave Frequency 8 KHZ */
+    RTC_SQW_FREQ_4KHZ = 0x3,           /**< RTC Square Wave Frequency 4 KHZ */
+    RTC_SQW_FREQ_2KHZ = 0x4,           /**< RTC Square Wave Frequency 2 KHZ */
+    RTC_SQW_FREQ_1KHZ = 0x5,           /**< RTC Square Wave Frequency 1 KHZ */
+    RTC_SQW_FREQ_512HZ = 0x6,          /**< RTC Square Wave Frequency 512 HZ */
+    RTC_SQW_FREQ_256HZ = 0x7,          /**< RTC Square Wave Frequency 256 HZ */
+    RTC_SQW_FREQ_128HZ = 0x8,          /**< RTC Square Wave Frequency 128 HZ */
+    RTC_SQW_FREQ_64HZ = 0x9,           /**< RTC Square Wave Frequency 64 HZ */
+    RTC_SQW_FREQ_32HZ = 0xA,           /**< RTC Square Wave Frequency 32 HZ */
+    RTC_SQW_FREQ_16HZ = 0xB,           /**< RTC Square Wave Frequency 16 HZ */
+    RTC_SQW_FREQ_8HZ = 0xC,            /**< RTC Square Wave Frequency 8 HZ */
+    RTC_SQW_FREQ_4HZ = 0xD,            /**< RTC Square Wave Frequency 4 HZ */
+    RTC_SQW_FREQ_2HZ = 0xE,            /**< RTC Square Wave Frequency 2 HZ */
+    RTC_SQW_FREQ_1HZ = 0xF             /**< RTC Square Wave Frequency 1 HZ */
 } RTC_SQW_FREQ;
 
 /**

@@ -156,9 +156,12 @@ void rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data)
     if(data != RTC_SQW_FREQ_NONE) {
         tmp = RTC_read(i2c, ADDR_SLAVE, DAY, result);
         tmp = tmp & 0x0F;
-        tmp = tmp | data;
+
+        tmp = tmp | (data << 4);
         RTC_write(i2c, ADDR_SLAVE, DAY, tmp);
-    } else {
+    }
+    else
+    {
         tmp = RTC_read(i2c, ADDR_SLAVE, DAY, result);
         tmp = tmp & 0x0F;
         RTC_write(i2c, ADDR_SLAVE, DAY, tmp);
@@ -242,7 +245,7 @@ unsigned rtc_get_Century(client interface i2c_master_if i2c, i2c_regop_res_t res
     uint8_t data = 0;
     // read Century
     data = RTC_read(i2c, ADDR_SLAVE, CENTURY_MONTH, result);
-    return ((data >> 6) & 0x3);
+    return ((data >> 6) & 0x3) + 20;
 }
 
 unsigned rtc_get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result)

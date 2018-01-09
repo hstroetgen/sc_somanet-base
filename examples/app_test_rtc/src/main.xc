@@ -27,10 +27,10 @@ void RTC_run_test(client interface i2c_master_if i2c)
     rtc_set_Hours(i2c, 11);               /* (00-23) */
     rtc_set_Day_of_week(i2c, 2);          /* (01-7) */
     rtc_set_Date(i2c, 30);                /* (01-31) */
-    rtc_set_Month(1);                 /* (01-12) */
-    rtc_set_Century(i2c, 21);              /* (21-23) */
+    rtc_set_Month(1);                     /* (01-12) */
+    rtc_set_Century(i2c, 21);             /* (20-23) */
     rtc_set_Year(i2c, 17);                /* (00-99) */
-    rtc_set_SQWE(i2c, 1);                /* (0-1)  */
+    rtc_set_SQWE(i2c, 1);                 /* (0-1)  */
     rtc_set_SQW_Freq(i2c, RTC_SQW_FREQ_4KHZ);
 
     while (1)

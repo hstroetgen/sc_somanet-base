@@ -12,16 +12,15 @@ uint8_t data_month = 1;
 
 uint8_t RTC_read(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t reg, i2c_regop_res_t &result)
 {
-      uint8_t data = 0;
+    uint8_t data = 0;
 
-      data = i2c.read_reg(device_addr, reg, result);
-      if (result != I2C_REGOP_SUCCESS) {
-          printf("rtc read reg failed\n");
-          return -1;
-                                        }
-      else {
-            return data;
-            }
+    data = i2c.read_reg(device_addr, reg, result);
+    if (result != I2C_REGOP_SUCCESS) {
+        printf("rtc read reg failed\n");
+        return -1;
+    } else {
+        return data;
+    }
 }
 
 void RTC_write(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t reg, uint8_t data)
@@ -158,7 +157,7 @@ void rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data)
     {
         tmp = RTC_read(i2c, Addr_Slave, Day, result);
         tmp = tmp & 0x0F;
-        tmp = tmp | data;
+        tmp = tmp | (data << 4);
         RTC_write(i2c, Addr_Slave, Day, tmp);
     }
     else
@@ -246,7 +245,7 @@ unsigned rtc_get_Century(client interface i2c_master_if i2c, i2c_regop_res_t res
     uint8_t data = 0;
     // read Century
     data = RTC_read(i2c, Addr_Slave, Century_Month, result);
-    return ((data >> 6) & 0x3);
+    return ((data >> 6) & 0x3) + 20;
 }
 
 unsigned rtc_get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result)

@@ -12,12 +12,6 @@ This module provides a Service that can be triggered to force a SoC reset. When 
 This Service **must always be run on a COM Tile** since it resets every tile connected to the system in reverse order, while the tile to which flash is connected needs to be the last one that is reset.
 
 
-.. cssclass:: github
-
-  `See Module on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/module_reboot>`_
-
-
-
 How to use
 ==========
 

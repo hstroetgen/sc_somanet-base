@@ -4,8 +4,8 @@
  * @author Synapticon GmbH <support@synapticon.com>
  */
 
-#include <xs1.h>
 #include "rtc.h"
+#include <xs1.h>
 #include <stdio.h>
 
 uint8_t data_month = 1;
@@ -27,9 +27,9 @@ void RTC_write(client interface i2c_master_if i2c, uint8_t device_addr, uint8_t 
 {
     i2c_regop_res_t result;
     result = i2c.write_reg(device_addr, reg, data);
-      if (result != I2C_REGOP_SUCCESS) {
-          printf("I2C write reg failed\n");
-      }
+    if (result != I2C_REGOP_SUCCESS) {
+        printf("I2C write reg failed\n");
+    }
 }
 
 void rtc_init(client interface i2c_master_if i2c, i2c_regop_res_t result)
@@ -38,23 +38,23 @@ void rtc_init(client interface i2c_master_if i2c, i2c_regop_res_t result)
     uint8_t data = 0;
     printf("rtc starting ..\n");
     // Start power up
-    while (ST != 0){
+    while (ST != 0) {
         // Write ST = 1
-        RTC_write(i2c, Addr_Slave, Seconds, 0x80);
+        RTC_write(i2c, ADDR_SLAVE, SECONDS, 0x80);
 
         // Read ST
-        data = RTC_read(i2c, Addr_Slave, Seconds, result);
+        data = RTC_read(i2c, ADDR_SLAVE, SECONDS, result);
         ST = (data >> 7) & 0x1;
 
         // Write ST = 0
-        RTC_write(i2c, Addr_Slave, Seconds, 0x0);
+        RTC_write(i2c, ADDR_SLAVE, SECONDS, 0x0);
 
         // Read ST
-        data = RTC_read(i2c, Addr_Slave, Seconds, result);
+        data = RTC_read(i2c, ADDR_SLAVE, SECONDS, result);
         ST = (data >> 7) & 0x1;
     }
-    if (ST == 0)
-    {
+
+    if (ST == 0) {
         printf("RTC device ready\n");
     }
 }
@@ -65,7 +65,7 @@ void rtc_set_Hours(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, Hours, data);
+    RTC_write(i2c, ADDR_SLAVE, HOURS, data);
 }
 
 void rtc_set_Minutes(client interface i2c_master_if i2c, uint8_t data)
@@ -74,7 +74,7 @@ void rtc_set_Minutes(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, Minutes, data);
+    RTC_write(i2c, ADDR_SLAVE, MINUTES, data);
 }
 
 void rtc_set_Seconds(client interface i2c_master_if i2c, uint8_t data)
@@ -83,7 +83,7 @@ void rtc_set_Seconds(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, Seconds, data);
+    RTC_write(i2c, ADDR_SLAVE, SECONDS, data);
 }
 
 void rtc_set_Milli_Seconds(client interface i2c_master_if i2c, uint8_t data)
@@ -92,7 +92,7 @@ void rtc_set_Milli_Seconds(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, tens_hundreds_seconds, data);
+    RTC_write(i2c, ADDR_SLAVE, TENS_HUNDREDS_SECONDS, data);
 }
 
 void rtc_set_Year(client interface i2c_master_if i2c, uint8_t data)
@@ -101,7 +101,7 @@ void rtc_set_Year(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, Year, data);
+    RTC_write(i2c, ADDR_SLAVE, YEAR, data);
 }
 
 void rtc_set_Month(uint8_t data)
@@ -115,17 +115,17 @@ void rtc_set_Month(uint8_t data)
 void rtc_set_Century(client interface i2c_master_if i2c, uint8_t data)
 {
     data = ((data - 20) << 6) | data_month;
-    RTC_write(i2c, Addr_Slave, Century_Month, data);
+    RTC_write(i2c, ADDR_SLAVE, CENTURY_MONTH, data);
 }
 
 void rtc_set_Day_of_week(client interface i2c_master_if i2c, uint8_t data)
 {
     i2c_regop_res_t result;
     uint8_t day;
-    day = RTC_read(i2c, Addr_Slave, Day, result);
+    day = RTC_read(i2c, ADDR_SLAVE, DAY, result);
     day = day & 0xf8;
     day = day | (data & 0x07);
-    RTC_write(i2c, Addr_Slave, Day, day);
+    RTC_write(i2c, ADDR_SLAVE, DAY, day);
 }
 
 void rtc_set_Date(client interface i2c_master_if i2c, uint8_t data)
@@ -134,7 +134,7 @@ void rtc_set_Date(client interface i2c_master_if i2c, uint8_t data)
     tens = data / 10;
     units = data % 10;
     data = (tens << 4) | units;
-    RTC_write(i2c, Addr_Slave, Date, data);
+    RTC_write(i2c, ADDR_SLAVE, DATE, data);
 }
 
 void rtc_set_SQWE(client interface i2c_master_if i2c, uint8_t data)
@@ -142,10 +142,10 @@ void rtc_set_SQWE(client interface i2c_master_if i2c, uint8_t data)
     i2c_regop_res_t result;
     uint8_t sqwe;
     /* Write enable bit to reg A */
-    sqwe = RTC_read(i2c, Addr_Slave, Al_month, result);
+    sqwe = RTC_read(i2c, ADDR_SLAVE, AL_MONTH, result);
     sqwe = sqwe & 0xbf;
     sqwe = sqwe | (data<<6);
-    RTC_write(i2c, Addr_Slave, Al_month, sqwe);
+    RTC_write(i2c, ADDR_SLAVE, AL_MONTH, sqwe);
 }
 
 void rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data)
@@ -153,21 +153,21 @@ void rtc_set_SQW_Freq(client interface i2c_master_if i2c, RTC_SQW_FREQ data)
     i2c_regop_res_t result;
     uint8_t tmp;
 
-    if(data != RTC_SQW_FREQ_NONE)
-    {
-        tmp = RTC_read(i2c, Addr_Slave, Day, result);
+    if(data != RTC_SQW_FREQ_NONE) {
+        tmp = RTC_read(i2c, ADDR_SLAVE, DAY, result);
         tmp = tmp & 0x0F;
+
         tmp = tmp | (data << 4);
-        RTC_write(i2c, Addr_Slave, Day, tmp);
+        RTC_write(i2c, ADDR_SLAVE, DAY, tmp);
     }
     else
     {
-        tmp = RTC_read(i2c, Addr_Slave, Day, result);
+        tmp = RTC_read(i2c, ADDR_SLAVE, DAY, result);
         tmp = tmp & 0x0F;
-        RTC_write(i2c, Addr_Slave, Day, tmp);
-        tmp = RTC_read(i2c, Addr_Slave, Al_month, result);
+        RTC_write(i2c, ADDR_SLAVE, DAY, tmp);
+        tmp = RTC_read(i2c, ADDR_SLAVE, AL_MONTH, result);
         tmp = tmp & 0xbf;
-        RTC_write(i2c, Addr_Slave, Al_month, tmp);
+        RTC_write(i2c, ADDR_SLAVE, AL_MONTH, tmp);
     }
 }
 
@@ -175,7 +175,7 @@ unsigned rtc_get_Hours(client interface i2c_master_if i2c, i2c_regop_res_t resul
 {
     uint8_t units, tens, data = 0;
     // read Hours
-    data = RTC_read(i2c, Addr_Slave, Hours, result);
+    data = RTC_read(i2c, ADDR_SLAVE, HOURS, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x3;
     return ((tens * 10) + units);
@@ -185,7 +185,7 @@ unsigned rtc_get_Minutes(client interface i2c_master_if i2c, i2c_regop_res_t res
 {
     uint8_t units, tens, data = 0;
     //read Minutes
-    data = RTC_read(i2c, Addr_Slave, Minutes, result);
+    data = RTC_read(i2c, ADDR_SLAVE, MINUTES, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x7;
     return ((tens * 10) + units);
@@ -195,7 +195,7 @@ unsigned rtc_get_Seconds(client interface i2c_master_if i2c, i2c_regop_res_t res
 {
     uint8_t units, tens, data = 0;
     // read Seconds
-    data = RTC_read(i2c, Addr_Slave, Seconds, result);
+    data = RTC_read(i2c, ADDR_SLAVE, SECONDS, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x7;
     return ((tens * 10) + units);
@@ -205,7 +205,7 @@ unsigned rtc_get_Milli_Seconds(client interface i2c_master_if i2c, i2c_regop_res
 {
     uint8_t units, tens, data = 0;
     // read milliseconds
-    data = RTC_read(i2c, Addr_Slave, tens_hundreds_seconds, result);
+    data = RTC_read(i2c, ADDR_SLAVE, TENS_HUNDREDS_SECONDS, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x7;
     return ((tens * 10) + units);
@@ -215,7 +215,7 @@ unsigned rtc_get_Day_of_week(client interface i2c_master_if i2c, i2c_regop_res_t
 {
     uint8_t data = 0;
     // read Day
-    data = RTC_read(i2c, Addr_Slave, Day, result);
+    data = RTC_read(i2c, ADDR_SLAVE, DAY, result);
     return (data & 0x7);
 }
 
@@ -223,7 +223,7 @@ unsigned rtc_get_Date(client interface i2c_master_if i2c, i2c_regop_res_t result
 {
     uint8_t units, tens, data = 0;
     // read Date
-    data = RTC_read(i2c, Addr_Slave, Date, result);
+    data = RTC_read(i2c, ADDR_SLAVE, DATE, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x3;
     return ((tens * 10) + units);
@@ -233,7 +233,7 @@ unsigned rtc_get_Month(client interface i2c_master_if i2c, i2c_regop_res_t resul
 {
     uint8_t units, tens, century, data = 0;
     // read Month
-    data = RTC_read(i2c, Addr_Slave, Century_Month, result);
+    data = RTC_read(i2c, ADDR_SLAVE, CENTURY_MONTH, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0x1;
     century = (data >> 6) & 0x3;
@@ -244,14 +244,14 @@ unsigned rtc_get_Century(client interface i2c_master_if i2c, i2c_regop_res_t res
 {
     uint8_t data = 0;
     // read Century
-    data = RTC_read(i2c, Addr_Slave, Century_Month, result);
+    data = RTC_read(i2c, ADDR_SLAVE, CENTURY_MONTH, result);
     return ((data >> 6) & 0x3) + 20;
 }
 
 unsigned rtc_get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result)
 {
     uint8_t units, tens, data = 0;
-    data = RTC_read(i2c, Addr_Slave, Year, result);
+    data = RTC_read(i2c, ADDR_SLAVE, YEAR, result);
     units = (data & 0xF);
     tens = (data >> 4 ) & 0xF;
     return ((tens * 10) + units);
@@ -260,14 +260,14 @@ unsigned rtc_get_Year(client interface i2c_master_if i2c, i2c_regop_res_t result
 unsigned rtc_get_SQWE(client interface i2c_master_if i2c, i2c_regop_res_t result)
 {
     uint8_t data = 0;
-    data = RTC_read(i2c, Addr_Slave, Al_month, result);
+    data = RTC_read(i2c, ADDR_SLAVE, AL_MONTH, result);
     return ((data >> 6) & 0xF);
 }
 
 RTC_SQW_FREQ rtc_get_SQW_Freq(client interface i2c_master_if i2c, i2c_regop_res_t result)
 {
     uint8_t data = 0;
-    data = RTC_read(i2c, Addr_Slave, Day, result);
+    data = RTC_read(i2c, ADDR_SLAVE, DAY, result);
     return ((data >> 4) & 0x0F);
 }
 

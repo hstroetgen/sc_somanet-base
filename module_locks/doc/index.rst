@@ -13,10 +13,6 @@ Two types of locks are provided. Hardware locks are fast and power efficient but
 This module was originally obtained from `XMOS public repositories`_ and still
 today it is maintained by XMOS. 
 
-.. cssclass:: github
-
-  `See Module on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/master/module_locks>`_
-
 .. note:: This module is internally used by certain SOMANET Libraries. Its use is only recommended to advanced users. 
                 You will find a demo app for this module at `XMOS public repositories`_.
 

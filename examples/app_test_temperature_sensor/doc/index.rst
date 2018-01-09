@@ -13,16 +13,6 @@ The purpose of this app (app_test_temperature_sensor) is showing the use of the 
 * **Minimum Number of Cores**: 3
 * **Minimum Number of Tiles**: 1
 
-.. cssclass:: github
-
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/develop/examples/app_test_temperature_sensor/>`_
-
-.. important:: To clone the Somanet base component you can use the command
-               
-		"git clone --recursive <Path to repository>"
-               
-		To update the submodules use the command
-               "git submodule update --init"
 
 Quick How-to
 ============

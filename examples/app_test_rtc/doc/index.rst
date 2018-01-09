@@ -13,16 +13,6 @@ The purpose of this app (app_test_rtc) is showing the use of the :ref:`M41T62LC6
 * **Minimum Number of Cores**: 3
 * **Minimum Number of Tiles**: 1
 
-.. cssclass:: github
-
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/feature_rtc_c21_core/examples/app_test_rtc/>`_
-
-.. important:: To clone the Somanet base component you can use the command
-               
-		"git clone --recursive <Path to repository>"
-               
-		To update the submodules use the command
-               "git submodule update --init"
 
 Quick How-to
 ============

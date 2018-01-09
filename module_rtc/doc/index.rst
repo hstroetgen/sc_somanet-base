@@ -13,10 +13,6 @@ This module provides a Service of M41T62LC6F Real Time Clock which will set the 
 The RTC Service should always run over a **COM Tile** so it can access the ports to
 your SOMANET COM device where the i2c ports are defined.
 
-.. cssclass:: github
-
-  `See Module on Repository <https://github.com/synapticon/sc_somanet-base/tree/feature_rtc_c21_core/module_rtc>`_
-
 How to use
 ==========
 

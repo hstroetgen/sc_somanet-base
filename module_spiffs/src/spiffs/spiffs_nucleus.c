@@ -1599,7 +1599,7 @@ s32_t spiffs_object_modify(spiffs_fd *fd, u32_t offset, u8_t *data, u32_t len) {
     res2 = spiffs_page_index_check(fs, fd, cur_objix_pix, cur_objix_spix);
     SPIFFS_CHECK_RES(res2);
 
-    res2 = spiffs_page_move(fs, fd->file_nbr, (u16_t*)objix, fd->obj_id, 0, cur_objix_pix, &new_objix_pix);
+    res2 = spiffs_page_move(fs, fd->file_nbr, (u8_t*)objix, fd->obj_id, 0, cur_objix_pix, &new_objix_pix);
     SPIFFS_DBG("modify: store modified objix page, %04x:%04x, written %i\n", new_objix_pix, cur_objix_spix, written);
     fd->cursor_objix_pix = new_objix_pix;
     fd->cursor_objix_spix = cur_objix_spix;

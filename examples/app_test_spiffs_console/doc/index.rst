@@ -13,9 +13,6 @@ The purpose of this app (app_test_spiffs_console) is showing the use of the :ref
 * **Minimum Number of Cores**: 2
 * **Minimum Number of Tiles**: 2
 
-.. cssclass:: github
-
-  `See Application on Public Repository <https://github.com/synapticon/sc_somanet-base/tree/feature_spiffs/examples/app_test_spiffs_console/>`_
 
 Quick How-to
 ============

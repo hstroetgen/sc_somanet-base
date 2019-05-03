@@ -1,0 +1,192 @@
+/***************************
+ * Drive 1000
+ * Rev. E
+ ***************************/
+
+#pragma once
+
+#include <xs1.h>
+#include <platform.h>
+
+#define DRIVE_REV_E
+
+/*PROTECTION SET POINTS*/
+#define DRIVE_MAX_CURRENT           50000     /*maximum tolerable (peak) value of power switch currents in milliamps (a characteristics of selected Drive)*/
+
+#define PROTECTION_MAXIMUM_CURRENT  500000    /*maximum tolerable (peak) value of phase current in milliamps (under abnormal conditions).
+                                               *this value will be used in adc_service for software protection purposes. If selected value
+                                               *is higher than set-point of hardware protection, hardware protection will react earlier than 
+                                               *software protection, and as a result, hardware protection will be the main way of protection.
+                                               * 
+                                               *allowed range: [min: 0 milli-amp, max:500000 milli-amp] */
+
+#define PROTECTION_MINIMUM_VOLTAGE  0         /*minimum tolerable value of dc-bus voltave (under abnormal conditions).
+                                               *this value will be used in adc_service for software protection purposes. If selected value
+                                               *is lower than set-point of hardware protection, hardware protection will react earlier than 
+                                               *software protection, and as a result, hardware protection will be the main way of protection.
+                                               * 
+                                               *allowed range: [min:0 V, max:1000 V] */
+                                               
+#define PROTECTION_MAXIMUM_VOLTAGE  1000      /*maximum tolerable value of dc-bus voltage (under abnormal conditions).
+                                               *this value will be used in adc_service for software protection purposes. If selected value
+                                               *is higher than set-point of hardware protection, hardware protection will react earlier than 
+                                               *software protection, and as a result, hardware protection will be the main way of protection.
+                                               * 
+                                               *allowed range: [min:0 V, max:1000 V] */
+
+#define PROTECTION_MAXIMUM_TEMPERATURE 200    /*maximum tolerable value of board temperature (Degree Centigrade). In case software   
+                                               *this value will be used in adc_service for software protection purposes. If selected value
+                                               *is higher than set-point of hardware protection, hardware protection will react earlier than 
+                                               *software protection, and as a result, hardware protection will be the main way of protection.
+                                               * 
+                                               *allowed range: [min:0 Degree_Centigrade, max: 200 Degree_Centigrade]*/
+    
+#define WARNING_HIGH_TEMPERATURE    80        /*set point for sending a "HIGH_BOARD_TEMPERATURE" warning to the user.
+                                               *allowed range: [min:0 Degree_Centigrade, max: 200 Degree_Centigrade]*/
+
+
+/* ADC */
+#define ADC_DATA_A IF2_PORT_1BIT_16
+#define ADC_DATA_B IF2_PORT_1BIT_40
+#define ADC_SCLK IF2_PORT_1BIT_42
+#define ADC_READY IF2_PORT_1BIT_4
+#define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
+#define ADC_CLK_SRC IF2_TILE_CLOCK_1
+#define SOMANET_DRIVE_ADC   AD7265
+#define CURRENT_RATIO           33 /*ratio between current recieved in control core, and real phase current */
+#define VOLTAGE_RATIO           54 /*ratio between adc measured value and real dc-bus voltage*/
+#define TEMPERATURE_RATIO       20 /*ratio between adc measured value and temperature of temperature sensor on Drive board*/
+
+/*
+ * In general form, the output of a linear temperature sensor can be a line with a slope and an offset from reference point:
+ * temperature = a * adc_output + b
+ * in the mentioned formula, the constant "a" is defined as "TEMPERATURE_SLOPE" and 
+ * the constant "b" is defined as "TEMPERATURE_OFFSET". Depending on temperature sensor type, these constants can be different.
+ * the following 2 constants are calculated for MCP9701T-E/LT temperature sensor
+ */
+#define TEMPERATURE_SLOPE        63    /*increment of adc output units per each milli-degree centigrade */
+#define TEMPERATURE_OFFSET      -20512 /*temperature offset at 0 degree centigrade */
+
+#define SOMANET_DRIVE_ADC_PORTS {     \
+    { null, null, null, null },     \
+    { {ADC_DATA_A , ADC_DATA_B},    \
+     ADC_CLK_SRC,                   \
+     ADC_SCLK,                      \
+     ADC_READY,                     \
+     ADC_MUX,                       \
+     {0, 10, 1, 11, 2, 3, 4, 5, 14, 13, 12, 15, 16, 17} /* Mapping between adc channels and real analogue signals */ },\
+     {-1, 1, 1, 50}               \ //{1, 1, 0, 1, 50}               \
+}
+
+/* FET DRIVER A4935 control ports */
+#define SOMANET_DRIVE_FET_DRIVER_PORTS {  \
+    null,                               \
+    null,                               \
+    null,                               \
+    null                                \
+}
+
+/* ENCODER 1 (HALL) SENSOR PORT */
+#define SOMANET_DRIVE_ENCODER_1_PORT IF2_PORT_4BIT_38_44_30_34
+
+/* ENCODER 2 (QEI) SENSOR PORT */
+#define SOMANET_DRIVE_ENCODER_2_PORT IF2_PORT_4BIT_64_66_76_80
+
+/* INPUT MODE SELECTION PORT */
+#define ENCODER_PORTS_INPUT_MODE_SELECTION IF2_PORT_4BIT_68_70_72_74
+
+#define SOMANET_DRIVE_ENCODER_PORTS_INPUT_MODE_SELECTION { \
+    ENCODER_PORTS_INPUT_MODE_SELECTION,                  \
+    0                                                    \
+}
+
+/* PWM PORTS*/
+#define DEADTIME_NS           750 /*nano-seconds*/
+
+#define PWM_PORT_A_HIGH_SIDE IF2_PORT_1BIT_62
+#define PWM_PORT_B_HIGH_SIDE IF2_PORT_1BIT_26
+#define PWM_PORT_C_HIGH_SIDE IF2_PORT_1BIT_54
+#define PWM_PORT_D_HIGH_SIDE IF2_PORT_1BIT_28
+#define PWM_PORT_A_LOW_SIDE IF2_PORT_1BIT_56
+#define PWM_PORT_B_LOW_SIDE IF2_PORT_1BIT_52
+#define PWM_PORT_C_LOW_SIDE IF2_PORT_1BIT_24
+#define PWM_PORT_D_LOW_SIDE IF2_PORT_1BIT_32
+
+#define PWM_CLOCK_SRC IF2_TILE_CLOCK_4
+#define PWM_DUMMY_PORT_TRIGGER INTERNAL_PORT_16BIT_NOT_CONNECTED_0
+
+#define SOMANET_DRIVE_PWM_PORTS {                                         \
+    {PWM_PORT_A_HIGH_SIDE, PWM_PORT_B_HIGH_SIDE, PWM_PORT_C_HIGH_SIDE}, \
+    {PWM_PORT_A_LOW_SIDE, PWM_PORT_B_LOW_SIDE, PWM_PORT_C_LOW_SIDE},    \
+    PWM_PORT_D_HIGH_SIDE,                                               \
+    PWM_PORT_D_LOW_SIDE,                                                \
+    PWM_CLOCK_SRC,                                                      \
+    PWM_DUMMY_PORT_TRIGGER                                              \
+}
+
+#define SOMANET_DRIVE_PWM_PORTS_GENERAL {  \
+    PWM_PORT_A_HIGH_SIDE,                \
+    PWM_PORT_A_LOW_SIDE,                 \
+    PWM_PORT_B_HIGH_SIDE,                \
+    PWM_PORT_B_LOW_SIDE,                 \
+    PWM_PORT_C_HIGH_SIDE,                \
+    PWM_PORT_C_LOW_SIDE,                 \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    null,                                \
+    PWM_PORT_D_HIGH_SIDE,                \
+    PWM_PORT_D_LOW_SIDE,                 \
+    null,                                \
+    null,                                \
+    PWM_CLOCK_SRC,                       \
+    PWM_DUMMY_PORT_TRIGGER               \
+}
+
+/* LEDs, Watchdog */
+#define WATCHDOG_TICK_PORT null
+#define WATCHDOG_EN_PORT null
+#define WATCHDOG_DIAG_EN_PORT null
+#define CPLD_SHARED_PORT IF2_PORT_4BIT_36_46_48_50
+#define CPLD_FAULT_MONITOR IF2_PORT_8BIT_HALF_12_14_18_60
+
+#define SOMANET_DRIVE_WATCHDOG_PORTS {    \
+    WATCHDOG_EN_PORT,                   \
+    WATCHDOG_DIAG_EN_PORT,              \
+    WATCHDOG_TICK_PORT,                 \
+    CPLD_SHARED_PORT,                   \
+    CPLD_FAULT_MONITOR                  \
+}
+
+/* GPIO_PORTS */
+#define SOMANET_DRIVE_GPIO_D0 IF2_PORT_1BIT_6
+#define SOMANET_DRIVE_GPIO_D1 IF2_PORT_1BIT_78
+#define SOMANET_DRIVE_GPIO_D2 IF2_PORT_1BIT_22
+#define SOMANET_DRIVE_GPIO_D3 IF2_PORT_1BIT_2
+
+/* SPI Ports */
+/*  MOSI = D3
+    SCLK = D1
+    MISO = D2
+    Slave Select = D0 */
+#define SOMANET_DRIVE_SPI_PORTS {     \
+    {                               \
+        IF2_TILE_CLOCK_2,           \
+        IF2_TILE_CLOCK_3,           \
+        null,                       \
+        null,                       \
+        null                        \
+    },                              \
+    null                            \
+}
+
+/* Buffered QEI clock block */
+#define QEI_CLOCK_BLOCK IF2_TILE_CLOCK_5
+
+/* UART PORTS */
+#define SERIAL_PORTS {  \
+        null,           \
+        null            \
+}

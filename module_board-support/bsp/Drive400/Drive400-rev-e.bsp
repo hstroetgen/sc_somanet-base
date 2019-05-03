@@ -53,7 +53,7 @@
 #define ADC_MUX IF2_PORT_4BIT_20_58_10_8 // 4-bit port used to control multiplexor on ADC.
 #define ADC_CLK_SRC IF2_TILE_CLOCK_1
 #define SOMANET_DRIVE_ADC   AD7265
-#define CURRENT_RATIO           33 /*ratio between current recieved in control core, and real phase current */
+#define CURRENT_RATIO           83 /*ratio between current recieved in control core, and real phase current */
 #define VOLTAGE_RATIO           54 /*ratio between adc measured value and real dc-bus voltage*/
 #define TEMPERATURE_RATIO       20 /*ratio between adc measured value and temperature of temperature sensor on Drive board*/
 
